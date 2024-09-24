@@ -11,5 +11,3 @@ export enum PAGES {
   SEARCH = "search",
   LIBRARY = "library",
 }
-
-export const BOTTOM_NAV_OFFSET = 0;

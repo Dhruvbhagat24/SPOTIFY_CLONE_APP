@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
-import { BOTTOM_NAV_OFFSET, COLORS } from "@config";
+import { COLORS } from "@config";
 
 export const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     top: "auto",
-    height: 90 + BOTTOM_NAV_OFFSET,
-    paddingBottom: BOTTOM_NAV_OFFSET,
+    height: 90,
+    paddingBottom: 20,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
