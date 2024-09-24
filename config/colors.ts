@@ -4,4 +4,5 @@ export const COLORS = {
   PRIMARY: "#282828",
   SECONDARY: "#121212",
   TINT: "#1ed760",
+  NAV: "#191414",
 };

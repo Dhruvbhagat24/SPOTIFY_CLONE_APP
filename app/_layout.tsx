@@ -8,6 +8,7 @@ import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import "react-native-reanimated";
+import { BottomNavigation } from "../components/BottomNavigation";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -36,6 +37,7 @@ export default function RootLayout() {
           <Stack.Screen name="+not-found" />
         </Stack>
         <StatusBar style="light" />
+        <BottomNavigation />
       </GestureHandlerRootView>
     </SafeAreaProvider>
   );

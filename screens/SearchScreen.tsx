@@ -1,6 +1,13 @@
 import * as React from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export const SearchScreen = () => {
-  return <View></View>;
+  const { top: statusBarOffset } = useSafeAreaInsets();
+
+  return (
+    <View style={{ paddingTop: statusBarOffset, backgroundColor: "red" }}>
+      <Text>Search Screen</Text>
+    </View>
+  );
 };
