@@ -1,6 +1,6 @@
 import * as React from "react";
 import { View } from "react-native";
 
-export const HomeScreen = () => {
+export const YourLibraryScreen = () => {
   return <View></View>;
 };
