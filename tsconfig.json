@@ -4,6 +4,7 @@
     "strict": true,
     "paths": {
       "@assets/*": ["./assets/*"],
+      "@api": ["./api/index.ts"],
       "@components": ["./components/index.ts"],
       "@config": ["./config/index.ts"],
       "@context": ["./context/index.ts"],
