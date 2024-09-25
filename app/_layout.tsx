@@ -1,14 +1,9 @@
 import * as React from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { StyleSheet } from "react-native";
-
 import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
+
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import "react-native-reanimated";
-import { BottomNavigation } from "../components/BottomNavigation";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -30,19 +25,10 @@ export default function RootLayout() {
   }
 
   return (
-    <SafeAreaProvider>
-      <GestureHandlerRootView style={styles.gestureHandlerRootView}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-        <StatusBar style="light" />
-        <BottomNavigation />
-      </GestureHandlerRootView>
-    </SafeAreaProvider>
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="+not-found" />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    </Stack>
   );
 }
-
-const styles = StyleSheet.create({
-  gestureHandlerRootView: { flex: 1 },
-});
