@@ -1,16 +1,15 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "@config";
+import { COLORS, BOTTOM_NAVIGATION_HEIGHT } from "@config";
 
 export const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     top: "auto",
-    height: 90,
+    height: BOTTOM_NAVIGATION_HEIGHT,
     paddingBottom: 20,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    backgroundColor: COLORS.NAV,
   },
   pressable: {
     flexDirection: "column",
