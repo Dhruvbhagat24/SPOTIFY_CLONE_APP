@@ -4,6 +4,7 @@ export {
   PAGES,
   SEPARATOR,
   BOTTOM_NAVIGATION_HEIGHT,
+  ALBUM_HEADER_HEIGHT,
   ALBUM_IMAGE_SIZE_VARIANT,
 } from "./constants";
 export { COLORS } from "./colors";

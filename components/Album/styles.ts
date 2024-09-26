@@ -1,9 +1,39 @@
-import { COLORS } from "@config";
+import { ALBUM_HEADER_HEIGHT, BOTTOM_NAVIGATION_HEIGHT, COLORS } from "@config";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  container: {
+  albumHeader: {
+    ...StyleSheet.absoluteFillObject,
+    bottom: "auto",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    zIndex: 99,
+    backgroundColor: "green",
     paddingHorizontal: 16,
+    height: ALBUM_HEADER_HEIGHT,
+  },
+
+  goBackPressable: {
+    marginRight: "auto",
+  },
+  goBackIcon: {
+    fontSize: 32,
+    color: COLORS.WHITE,
+  },
+  albumHeaderText: {
+    color: COLORS.WHITE,
+    textAlign: "center",
+    fontFamily: "SF-Bold",
+    fontWeight: "bold",
+    fontSize: 15,
+    lineHeight: 15,
+    marginRight: "auto",
+    marginLeft: -24 + -16 / 2,
+  },
+
+  scrollView: {
+    paddingTop: ALBUM_HEADER_HEIGHT,
   },
   albumImageView: {
     ...StyleSheet.absoluteFillObject,
@@ -12,13 +42,24 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.7,
     shadowRadius: 20,
+    zIndex: 1,
   },
   albumImage: {
     marginTop: 30,
     marginHorizontal: "auto",
   },
+
   content: {
-    paddingHorizontal: 5,
+    zIndex: 1,
+  },
+  contentGradient: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 0,
+  },
+  albumInfo: {
+    zIndex: 2,
+    paddingHorizontal: 16,
+    paddingBottom: 14,
   },
   nameText: {
     color: COLORS.WHITE,
@@ -105,7 +146,8 @@ export const styles = StyleSheet.create({
     color: COLORS.LIGHT_GREY,
   },
   tracks: {
-    marginTop: 14,
+    paddingHorizontal: 16,
     gap: 6,
+    paddingBottom: BOTTOM_NAVIGATION_HEIGHT + ALBUM_HEADER_HEIGHT,
   },
 });

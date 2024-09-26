@@ -1,14 +1,15 @@
 import * as React from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useNavigation, useSegments } from "expo-router";
 import { translations } from "@data";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-import { PAGES } from "@config";
+import { BOTTOM_NAVIGATION_HEIGHT, PAGES } from "@config";
 
 import { styles } from "./styles";
+import { BackgroundGradient } from "../BackgroundGradient";
 
 export const BottomNavigation = () => {
   const navigation = useNavigation<AppNavigationProps>();
@@ -18,6 +19,11 @@ export const BottomNavigation = () => {
 
   return (
     <View style={styles.container}>
+      <BackgroundGradient
+        colors={["rgba(0, 0, 0, 0.85)", "rgba(0, 0, 0, 1)"]}
+        styles={{ ...StyleSheet.absoluteFillObject }}
+        height={BOTTOM_NAVIGATION_HEIGHT}
+      />
       <Pressable
         style={styles.pressable}
         onPress={() => navigation.navigate(PAGES.HOME)}
