@@ -4,12 +4,12 @@ import { Image, View } from "react-native";
 import { styles } from "./styles";
 
 export type AlbumBackgroundPropsType = {
-  uri: string;
+  url: string;
   darkness?: number;
 };
 
 export const AlbumBackground = ({
-  uri,
+  url,
   darkness = 0,
 }: AlbumBackgroundPropsType) => {
   return (
@@ -23,7 +23,7 @@ export const AlbumBackground = ({
       <Image
         blurRadius={100}
         style={styles.albumBackgroundBlurredImage}
-        source={{ uri }}
+        source={{ url }}
         resizeMode="cover"
       />
     </View>

@@ -8,7 +8,7 @@ const parseAlbumData = (data: AlbumModel) => ({
   album_type: data.album_type,
   name: data.name,
   images: data.images,
-  release_date: data.release_date.split("-")[0],
+  release_date: data.release_date,
   artists: data.artists.map((artist) => ({
     id: artist.id,
     name: artist.name,
