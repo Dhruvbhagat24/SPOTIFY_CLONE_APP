@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { AlbumModel } from "@models";
+import { Album } from "@components";
 
 import { checkSavedTracks, getAlbum } from "@api";
+import { AlbumModel } from "@models";
 import { ALBUM_ID } from "@data";
-import { Album } from "@components";
 
 export const AlbumScreen = () => {
   const [albumData, setAlbumData] = React.useState<AlbumModel | null>(null);

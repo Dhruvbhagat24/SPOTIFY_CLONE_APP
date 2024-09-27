@@ -1,0 +1,1 @@
+export { AlbumBackground } from "./AlbumBackground";
