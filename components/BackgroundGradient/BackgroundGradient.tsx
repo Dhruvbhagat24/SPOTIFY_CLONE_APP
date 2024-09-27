@@ -10,11 +10,16 @@ import {
 import { useApplicationDimensions } from "@hooks";
 
 import { styles as defaultStyles } from "./styles";
+import Animated from "react-native-reanimated";
 
 export type BackgroundGradientPropsType = {
   colors?: AnimatedProp<Color[]>;
   width?: number;
   height?: number;
+  startX?: number;
+  startY?: number;
+  endX?: number;
+  endY?: number;
   styles?: object;
 };
 
@@ -22,19 +27,24 @@ export const BackgroundGradient = ({
   colors = ["#2e335a", "#1c1b33"],
   width,
   height,
+  startX,
+  startY,
+  endX,
+  endY,
   styles = {},
 }: BackgroundGradientPropsType) => {
   const { width: appWidth, height: appHeight } = useApplicationDimensions();
+  const AnimatedCanvas = Animated.createAnimatedComponent(Canvas);
 
   return (
-    <Canvas style={[defaultStyles.backgroundCanvas, styles]}>
+    <AnimatedCanvas style={[defaultStyles.backgroundCanvas, styles]}>
       <Rect x={0} y={0} width={width || appWidth} height={height || appHeight}>
         <LinearGradient
-          start={vec(0, 0)}
-          end={vec(0, height || appHeight)}
+          start={vec(startX || 0, startY || 0)}
+          end={vec(endX || 0, endY || height || appHeight)}
           colors={colors}
         />
       </Rect>
-    </Canvas>
+    </AnimatedCanvas>
   );
 };

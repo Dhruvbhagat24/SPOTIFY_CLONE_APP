@@ -1,6 +1,5 @@
 import * as React from "react";
 
-// eslint-disable-next-line import/no-unresolved
 import { auth } from "@api";
 
 import { Pressable, Text, View } from "react-native";

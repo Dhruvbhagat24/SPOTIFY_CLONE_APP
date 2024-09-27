@@ -2,7 +2,6 @@ import * as React from "react";
 import { Redirect } from "expo-router";
 // import { LoginScreen } from "@screens";
 
-// // eslint-disable-next-line import/no-unresolved
 // import { auth } from "@api";
 
 export default function App() {

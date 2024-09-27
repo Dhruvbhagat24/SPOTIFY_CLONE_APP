@@ -1,13 +1,14 @@
 import * as React from "react";
-import { Image, Pressable, Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import Animated, {
   Extrapolation,
   interpolate,
-  useAnimatedScrollHandler,
+  useAnimatedRef,
   useAnimatedStyle,
-  useSharedValue,
+  useScrollViewOffset,
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Stack } from "expo-router";
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -15,12 +16,13 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Entypo from "@expo/vector-icons/Entypo";
 
 import { AlbumSong } from "../AlbumSong";
+import { BackgroundGradient } from "../BackgroundGradient";
 
 import { AlbumModel } from "@models";
-import { ALBUM_IMAGE_SIZE_VARIANT, COLORS, SEPARATOR } from "@config";
+import { useApplicationDimensions } from "@hooks";
+import { ALBUM_IMAGE_SIZE_VARIANT, SEPARATOR } from "@config";
 
 import { styles } from "./styles";
-import { BackgroundGradient } from "../BackgroundGradient";
 
 export type AlbumPropsType = {
   data: AlbumModel;
@@ -29,79 +31,113 @@ export type AlbumPropsType = {
 };
 
 export const Album = ({ data, isAlbumSaved, savedTracks }: AlbumPropsType) => {
+  const { width, height } = useApplicationDimensions();
+
   const { album_type, name, artists, release_date, images, tracks } = data;
   const isLiked = false; //TODO: to be removed and replaced with API separate  +call
   const { top: statusBarOffset } = useSafeAreaInsets();
+  const { width: imageWidth, height: imageHeight } =
+    images[ALBUM_IMAGE_SIZE_VARIANT];
 
-  const SCROLL_Y_PEAK = 500;
+  const scrollRef = useAnimatedRef<Animated.ScrollView>();
+  const scrollOffset = useScrollViewOffset(scrollRef);
 
-  const animatedPosition = useSharedValue(0);
-  const scrollHandler = useAnimatedScrollHandler((event) => {
-    animatedPosition.value = event.contentOffset.y;
-  });
   const animatedImageStyles = useAnimatedStyle(() => ({
     transform: [
       {
-        scale: interpolate(
-          animatedPosition.value,
-          [-SCROLL_Y_PEAK / 2.5, 0, SCROLL_Y_PEAK],
-          [1.275, 1, 0],
+        translateY: interpolate(
+          scrollOffset.value,
+          [-imageHeight, 0, imageHeight],
+          [-imageHeight / 2, 0, imageHeight / 1.5],
           Extrapolation.CLAMP
         ),
       },
       {
-        translateY: interpolate(
-          animatedPosition.value,
-          [-SCROLL_Y_PEAK, 0, SCROLL_Y_PEAK],
-          [-SCROLL_Y_PEAK / 2, 0, SCROLL_Y_PEAK],
+        scale: interpolate(
+          scrollOffset.value,
+          [-imageHeight / 2, 0, imageHeight * 2],
+          [1.25, 1, 0],
           Extrapolation.CLAMP
         ),
       },
     ],
     opacity: interpolate(
-      animatedPosition.value,
-      [0, SCROLL_Y_PEAK / 2],
+      scrollOffset.value,
+      [0, imageHeight / 1.5],
       [1, 0],
       Extrapolation.CLAMP
     ),
   }));
-  const AnimatedImage = Animated.createAnimatedComponent(Image);
+  const animatedHeaderStyles = useAnimatedStyle(() => ({
+    opacity: interpolate(
+      scrollOffset.value,
+      [0, imageHeight * 0.75, imageHeight],
+      [0, 0, 1],
+      Extrapolation.CLAMP
+    ),
+  }));
+  const animatedGradientOverlay = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateY: interpolate(
+          scrollOffset.value,
+          [0, imageHeight],
+          [0, -imageHeight],
+          Extrapolation.CLAMP
+        ),
+      },
+    ],
+  }));
 
   return (
-    <>
-      <View style={[styles.albumHeader, { paddingTop: statusBarOffset }]}>
-        <BackgroundGradient
-          colors={["#C33123" || COLORS.ALBUM_FALLBACK_GRADIENT, "#000000"]}
-          height={148}
+    <View style={{ width }}>
+      <BackgroundGradient
+        styles={{ zIndex: -10 }}
+        colors={["#C33123", "#000000"]}
+        startY={0}
+        endY={height * 2}
+      />
+      <BackgroundGradient
+        styles={[animatedGradientOverlay, { zIndex: -9 }]}
+        colors={["transparent", "rgba(0, 0, 0, 1)"]}
+        startY={imageHeight / 2}
+        endY={imageHeight + 70 + 90}
+        height={height}
+      />
+      <View style={styles.container}>
+        <Stack.Screen
+          options={{
+            headerTransparent: true,
+            headerBackground: () => (
+              <Animated.View style={[styles.albumHeader, animatedHeaderStyles]}>
+                <BackgroundGradient
+                  colors={["#C33123", "#000000", "#000000"]}
+                />
+              </Animated.View>
+            ),
+            headerLeft: () => (
+              <Pressable style={styles.albumHeaderGoBackPressable}>
+                <MaterialIcons
+                  style={styles.albumHeaderGoBackIcon}
+                  name="keyboard-arrow-left"
+                />
+              </Pressable>
+            ),
+            headerTitle: () => (
+              <Text style={styles.albumHeaderTitleText}>{name}</Text>
+            ),
+          }}
         />
-        <Pressable style={styles.goBackPressable}>
-          <MaterialIcons style={styles.goBackIcon} name="keyboard-arrow-left" />
-        </Pressable>
-        <Text style={styles.albumHeaderText}>{name}</Text>
-      </View>
-      <Animated.ScrollView
-        scrollEventThrottle={16}
-        style={styles.scrollView}
-        onScroll={scrollHandler}
-      >
-        <View
-          style={[
-            styles.content,
-            { paddingTop: images[ALBUM_IMAGE_SIZE_VARIANT].height + 50 },
-          ]}
+        <Animated.ScrollView
+          style={[styles.scrollView, { paddingTop: statusBarOffset }]}
+          scrollEventThrottle={16}
+          ref={scrollRef}
         >
-          <BackgroundGradient
-            styles={styles.contentGradient}
-            colors={["transparent", "#000000", "#000000", "#000000"]}
-          />
           <View style={styles.albumImageView}>
-            <AnimatedImage
+            <Animated.Image
               style={[
                 styles.albumImage,
-                {
-                  width: images[ALBUM_IMAGE_SIZE_VARIANT].width,
-                  height: images[ALBUM_IMAGE_SIZE_VARIANT].height,
-                },
+                { width: imageWidth, height: imageHeight },
                 animatedImageStyles,
               ]}
               source={{ uri: images[1].url }}
@@ -159,7 +195,7 @@ export const Album = ({ data, isAlbumSaved, savedTracks }: AlbumPropsType) => {
               </Pressable>
             </View>
           </View>
-          <View style={styles.tracks}>
+          <View style={styles.albumTracks}>
             {tracks.items.map((item, index) => (
               <AlbumSong
                 {...item}
@@ -169,8 +205,8 @@ export const Album = ({ data, isAlbumSaved, savedTracks }: AlbumPropsType) => {
               />
             ))}
           </View>
-        </View>
-      </Animated.ScrollView>
-    </>
+        </Animated.ScrollView>
+      </View>
+    </View>
   );
 };
