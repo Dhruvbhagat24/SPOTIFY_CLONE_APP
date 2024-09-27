@@ -48,9 +48,9 @@ export const AlbumScreen = () => {
 
   return (
     <Album
-      data={albumData as AlbumModel}
-      isAlbumSaved={isAlbumSaved as boolean}
-      savedTracks={savedTracks as boolean[]}
+      data={albumData}
+      isAlbumSaved={isAlbumSaved}
+      savedTracks={savedTracks}
     />
   );
 };

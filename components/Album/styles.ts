@@ -2,12 +2,21 @@ import { ALBUM_HEADER_HEIGHT, BOTTOM_NAVIGATION_HEIGHT, COLORS } from "@config";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  container: {},
-  albumHeader: {},
-  albumHeaderGoBackPressable: {},
-  albumHeaderGoBackIcon: {
+  albumGoBackPressable: {
+    ...StyleSheet.absoluteFillObject,
+    left: 6,
+    width: 32,
+    zIndex: 99,
+  },
+  albumGoBackIcon: {
     fontSize: 32,
     color: COLORS.WHITE,
+  },
+  albumHeaderContent: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
   albumHeaderTitleText: {
     color: COLORS.WHITE,
@@ -16,6 +25,7 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 15,
     lineHeight: 15,
+    marginBottom: 8,
   },
   scrollView: {},
 
