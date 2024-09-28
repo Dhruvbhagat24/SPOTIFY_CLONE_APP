@@ -6,14 +6,15 @@ import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { styles } from "./styles";
-import { TrackModel } from "@models";
 
 export type AlbumSongPropsType = {
+  name: string;
+  artists: { name: string }[];
   isTrackSaved: boolean;
   isPlaying: boolean;
-} & TrackModel;
+};
 
-export const AlbumSong = ({
+export const AlbumTrack = ({
   name,
   artists,
   isTrackSaved,

@@ -1,17 +1,17 @@
 import axios from "axios";
 import { AlbumModel } from "@models";
+import { AlbumResponseType } from "./types";
 import { auth } from "./auth";
 
-const parseAlbumData = (data: AlbumModel) => ({
+const parseAlbumData = (data: AlbumResponseType): AlbumModel => ({
   id: data.id,
   type: data.type,
-  album_type: data.album_type,
+  albumType: data.album_type,
   name: data.name,
   images: data.images,
-  release_date: data.release_date,
+  releaseDate: data.release_date,
   artists: data.artists.map((artist) => ({
     id: artist.id,
-    name: artist.name,
     type: artist.type,
   })),
   tracks: {
@@ -25,11 +25,9 @@ const parseAlbumData = (data: AlbumModel) => ({
       name: item.name,
       type: item.type,
       artists: item.artists.map((artist) => ({
-        id: artist.id,
         name: artist.name,
-        type: artist.type,
       })),
-      duration_ms: item.duration_ms,
+      durationMs: item.duration_ms,
       explicit: item.explicit,
     })),
   },
@@ -50,7 +48,7 @@ export const getAlbum = async (albumId: string): Promise<AlbumModel> => {
           Authorization: `Bearer ${token}`,
         },
       }
-    )) as { data: AlbumModel };
+    )) as { data: AlbumResponseType };
 
     return parseAlbumData(response.data);
   } catch (error) {

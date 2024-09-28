@@ -10,7 +10,17 @@ import Animated, {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 
-import { AlbumModel } from "@models";
+import { BackgroundGradient as BackgroundOverlay } from "../BackgroundGradient";
+import { AlbumBackground } from "./AlbumBackground";
+import { AlbumHeader } from "./AlbumHeader";
+import { AlbumCover } from "./AlbumCover";
+import { AlbumInfo } from "./AlbumInfo";
+import { AlbumTrack } from "./AlbumTrack";
+import { AlbumSummary } from "./AlbumSummary";
+import { AlbumArtists } from "./AlbumArtists";
+import { AlbumCopyrights } from "./AlbumCopyrights";
+
+import { AlbumModel, ArtistModel } from "@models";
 import { useApplicationDimensions } from "@hooks";
 import {
   ALBUM_IMAGE_SIZE_VARIANT,
@@ -18,28 +28,27 @@ import {
   SEPARATOR,
 } from "@config";
 
-import { BackgroundGradient as BackgroundOverlay } from "../BackgroundGradient";
-import { AlbumBackground } from "./AlbumBackground";
-import { AlbumHeader } from "./AlbumHeader";
-import { AlbumCover } from "./AlbumCover";
-import { AlbumInfo } from "./AlbumInfo";
-import { AlbumSong } from "./AlbumSong";
-
 import { styles } from "./styles";
 
 export type AlbumPropsType = {
-  data: AlbumModel;
+  album: AlbumModel;
+  artists: ArtistModel[];
   isAlbumSaved: boolean;
   savedTracks: boolean[];
 };
 
-export const Album = ({ data, isAlbumSaved, savedTracks }: AlbumPropsType) => {
+export const Album = ({
+  album,
+  artists,
+  isAlbumSaved,
+  savedTracks,
+}: AlbumPropsType) => {
   const { width, height } = useApplicationDimensions();
   const { top: statusBarOffset } = useSafeAreaInsets();
 
-  //TODO: to be removed and replaced with API separate + call
+  // TODO: to be removed and replaced with API separate + call
   const isLiked = false;
-  const { album_type, name, artists, release_date, images, tracks } = data;
+  const { albumType, name, releaseDate, images, tracks, copyrights } = album;
   const image = images[ALBUM_IMAGE_SIZE_VARIANT];
   const { height: imageHeight } = image;
 
@@ -97,21 +106,33 @@ export const Album = ({ data, isAlbumSaved, savedTracks }: AlbumPropsType) => {
         <AlbumInfo
           name={name}
           artists={artists.map((a) => a.name).join(` ${SEPARATOR} `)}
-          albumType={album_type}
-          releaseDate={release_date.split("-")[0]}
+          albumType={albumType}
+          releaseDate={releaseDate.split("-")[0]}
           isLiked={isLiked}
           isAlbumSaved={isAlbumSaved}
         />
         <View style={styles.albumTracks}>
           {tracks.items.map((item, index) => (
-            <AlbumSong
-              {...item}
+            <AlbumTrack
               key={index}
+              name={item.name}
+              artists={item.artists}
               isTrackSaved={savedTracks[index]}
-              isPlaying={false} //TODO: to be removed and replaced with handlePress logic on play
+              // TODO: to be removed and replaced with handlePress logic on play
+              isPlaying={false}
             />
           ))}
         </View>
+        <AlbumSummary
+          releaseDate={releaseDate}
+          totalTracks={tracks.total}
+          totalDuration={album.tracks.items.reduce(
+            (acc, { durationMs }) => acc + durationMs,
+            0
+          )}
+        />
+        <AlbumArtists artists={artists} />
+        <AlbumCopyrights copyrights={copyrights} />
       </Animated.ScrollView>
     </View>
   );

@@ -1,0 +1,1 @@
+export { AlbumCopyrights } from "./AlbumCopyrights";

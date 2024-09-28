@@ -1,36 +1,31 @@
-import { ArtistModel } from "./ArtistModel";
-import { TrackModel } from "./TrackModel";
-
-export type AlbumType = "album" | "single" | "compilation";
-
-export type AlbumImageModel = {
-  url: string;
-  height: number;
-  width: number;
-};
-
-export type AlbumCopyrightModel = {
-  text: string;
-  type: string;
-};
-
 export type AlbumModel = {
   id: string;
   type: "album";
-  album_type: AlbumType;
+  albumType: "album" | "single" | "compilation";
   name: string;
-  images: AlbumImageModel[];
-  artists: ArtistModel[];
-  release_date: string;
+  images: {
+    url: string;
+    height: number;
+    width: number;
+  }[];
+  artists: { type: "artist"; id: string }[];
+  releaseDate: string;
   tracks: {
     previous: string | null;
     next: string | null;
     limit: number;
     offset: number;
     total: number;
-    items: TrackModel[];
+    items: {
+      id: string;
+      type: "track";
+      name: string;
+      durationMs: number;
+      explicit: boolean;
+      artists: { name: string }[];
+    }[];
   };
-  copyrights: AlbumCopyrightModel[];
+  copyrights: { text: string; type: string }[];
   genres: string[];
   label: string;
   popularity: number;

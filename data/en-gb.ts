@@ -4,4 +4,7 @@ export const EN_GB = {
     search: "Search",
     library: "Your Library",
   },
+  album: {
+    tracks: "tracks",
+  },
 };
