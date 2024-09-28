@@ -12,7 +12,11 @@ import { Stack } from "expo-router";
 
 import { AlbumModel } from "@models";
 import { useApplicationDimensions } from "@hooks";
-import { ALBUM_IMAGE_SIZE_VARIANT, SEPARATOR } from "@config";
+import {
+  ALBUM_IMAGE_SIZE_VARIANT,
+  BOTTOM_NAVIGATION_HEIGHT,
+  SEPARATOR,
+} from "@config";
 
 import { BackgroundGradient as BackgroundOverlay } from "../BackgroundGradient";
 import { AlbumBackground } from "./AlbumBackground";
@@ -47,8 +51,8 @@ export const Album = ({ data, isAlbumSaved, savedTracks }: AlbumPropsType) => {
       {
         translateY: interpolate(
           scrollOffset.value,
-          [0, imageHeight],
-          [0, -imageHeight],
+          [0, imageHeight, imageHeight * 2, imageHeight * 2 + 1],
+          [0, -imageHeight, -imageHeight * 2, 0],
           Extrapolation.CLAMP
         ),
       },
@@ -65,6 +69,7 @@ export const Album = ({ data, isAlbumSaved, savedTracks }: AlbumPropsType) => {
         endY={imageHeight + 70 + 90}
         height={height}
       />
+
       <Stack.Screen
         options={{
           headerTransparent: true,
@@ -78,7 +83,10 @@ export const Album = ({ data, isAlbumSaved, savedTracks }: AlbumPropsType) => {
         }}
       />
       <Animated.ScrollView
-        style={{ paddingTop: statusBarOffset }}
+        style={{
+          paddingTop: statusBarOffset,
+          marginBottom: BOTTOM_NAVIGATION_HEIGHT,
+        }}
         scrollEventThrottle={16}
         ref={scrollRef}
       >

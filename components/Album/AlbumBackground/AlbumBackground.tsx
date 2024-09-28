@@ -23,7 +23,7 @@ export const AlbumBackground = ({
       <Image
         blurRadius={100}
         style={styles.albumBackgroundBlurredImage}
-        source={{ url }}
+        source={{ uri: url }}
         resizeMode="cover"
       />
     </View>
