@@ -1,7 +1,13 @@
 declare global {
   import { StackNavigationProp } from "@react-navigation/stack";
   type RootStackParamList = {
-    list: undefined;
+    home: undefined;
+    library: undefined;
+    search: undefined;
+    albums: undefined;
+    artists: undefined;
+    "albums/[albumId]": { albumId: string };
+    "artists/[artistId]": { artistId: string };
   };
 
   type AppNavigationProps = StackNavigationProp<RootStackParamList>;

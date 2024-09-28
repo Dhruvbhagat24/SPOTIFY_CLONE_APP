@@ -1,11 +1,10 @@
 import * as React from "react";
 import { Image, Pressable, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Link } from "expo-router";
-
-import { ArtistAlbumModel } from "@models";
+import { useRouter } from "expo-router";
 
 import { ALBUM_IMAGE_SIZE_VARIANT, SEPARATOR } from "@config";
+import { ArtistAlbumModel } from "@models";
 import { translations } from "@data";
 
 import { styles } from "./styles";
@@ -19,8 +18,9 @@ export type AlbumArtistAlbumsPropsType = {
 
 export const ArtistRecommendedAlbums = ({
   artistsAlbums,
-}: AlbumArtistAlbumsPropsType) =>
-  artistsAlbums.map(({ artist, albums }, index) => (
+}: AlbumArtistAlbumsPropsType) => {
+  const router = useRouter();
+  return artistsAlbums.map(({ artist, albums }, index) => (
     <View style={styles.container} key={index}>
       <View style={styles.header}>
         <Text numberOfLines={1} style={styles.headerTitleText}>
@@ -39,35 +39,38 @@ export const ArtistRecommendedAlbums = ({
         showsHorizontalScrollIndicator={false}
       >
         {albums.map((album, index) => (
-          <Link href={`/albums/${album.id}`} key={index}>
-            <View style={styles.album}>
-              <View style={styles.albumImageView}>
-                <Image
-                  style={styles.albumImage}
-                  source={{ uri: album.images[ALBUM_IMAGE_SIZE_VARIANT].url }}
-                />
-              </View>
-              <Text numberOfLines={1} style={styles.albumTitleText}>
-                {album.name}
-              </Text>
-              <View style={styles.albumSubtitleView}>
-                <Text numberOfLines={1} style={styles.albumYearText}>
-                  {album.releaseDate}
-                </Text>
-                <Text numberOfLines={1} style={styles.albumSubtitleSeparator}>
-                  {SEPARATOR}
-                </Text>
-                <Text numberOfLines={1} style={styles.albumTypeText}>
-                  {
-                    translations.album.artistRecommendedAlbums.albumType[
-                      album.albumType
-                    ]
-                  }
-                </Text>
-              </View>
+          <Pressable
+            onPress={() => router.push(`/albums/${album.id}`)}
+            style={styles.album}
+            key={index}
+          >
+            <View style={styles.albumImageView}>
+              <Image
+                style={styles.albumImage}
+                source={{ uri: album.images[ALBUM_IMAGE_SIZE_VARIANT].url }}
+              />
             </View>
-          </Link>
+            <Text numberOfLines={1} style={styles.albumTitleText}>
+              {album.name}
+            </Text>
+            <View style={styles.albumSubtitleView}>
+              <Text numberOfLines={1} style={styles.albumYearText}>
+                {album.releaseDate}
+              </Text>
+              <Text numberOfLines={1} style={styles.albumSubtitleSeparator}>
+                {SEPARATOR}
+              </Text>
+              <Text numberOfLines={1} style={styles.albumTypeText}>
+                {
+                  translations.album.artistRecommendedAlbums.albumType[
+                    album.albumType
+                  ]
+                }
+              </Text>
+            </View>
+          </Pressable>
         ))}
       </ScrollView>
     </View>
   ));
+};

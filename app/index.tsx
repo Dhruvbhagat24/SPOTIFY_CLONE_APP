@@ -20,14 +20,14 @@ export default function App() {
   // }, []);
 
   // if (!shouldShowLoginScreen) {
-  //   return <Redirect href="/(tabs)" />;
+  //   return <Redirect href="/home" />;
   // }
 
   // if (isLoggedIn) {
-  //   return <Redirect href="/(tabs)" />;
+  //   return <Redirect href="/home" />;
   // }
 
   // return <LoginScreen setIsLoggedIn={setIsLoggedIn} />;
 
-  return <Redirect href="/(tabs)" />;
+  return <Redirect href="/albums" />;
 }

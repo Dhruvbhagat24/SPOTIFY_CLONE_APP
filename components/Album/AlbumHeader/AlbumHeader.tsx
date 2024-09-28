@@ -6,8 +6,9 @@ import Animated, {
   SharedValue,
   useAnimatedStyle,
 } from "react-native-reanimated";
-import { AlbumBackground } from "../AlbumBackground";
+import { useNavigation } from "expo-router";
 
+import { AlbumBackground } from "../AlbumBackground";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import { ALBUM_HEADER_HEIGHT } from "@config";
@@ -28,6 +29,7 @@ export const AlbumHeader = ({
   image,
   animatedValue,
 }: AlbumHeaderPropsType) => {
+  const navigation = useNavigation<AppNavigationProps>();
   const { height, url } = image;
   const scrollYOnHeaderAppear = height + height * 0.05;
 
@@ -66,6 +68,7 @@ export const AlbumHeader = ({
           styles.albumHeaderGoBackPressable,
           { top: useSafeAreaInsets().top },
         ]}
+        onPress={() => navigation.goBack()}
       >
         <MaterialIcons
           style={styles.albumHeaderGoBackIcon}

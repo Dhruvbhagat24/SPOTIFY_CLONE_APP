@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Image, Text, View } from "react-native";
-import { Link } from "expo-router";
+import { Image, Pressable, Text, View } from "react-native";
+import { useRouter } from "expo-router";
 
 import { ArtistModel } from "@models";
 import { ALBUM_ARTIST_IMAGE_SIZE_VARIANT } from "@config";
@@ -11,9 +11,15 @@ export type AlbumArtistsPropsType = {
   artists: ArtistModel[];
 };
 
-export const AlbumArtists = ({ artists }: AlbumArtistsPropsType) =>
-  artists.map(({ id, images, name }) => (
-    <Link style={styles.link} href={`artists/${id}`} key={id}>
+export const AlbumArtists = ({ artists }: AlbumArtistsPropsType) => {
+  const router = useRouter();
+
+  return artists.map(({ id, images, name }) => (
+    <Pressable
+      style={styles.link}
+      onPress={() => router.push(`/artists/${id}`)}
+      key={id}
+    >
       <View style={styles.container}>
         <View
           style={[
@@ -32,5 +38,6 @@ export const AlbumArtists = ({ artists }: AlbumArtistsPropsType) =>
           <Text style={styles.text}>{name}</Text>
         </View>
       </View>
-    </Link>
+    </Pressable>
   ));
+};

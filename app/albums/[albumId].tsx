@@ -6,5 +6,5 @@ import { AlbumScreen } from "@screens";
 export default function Artist() {
   const local = useLocalSearchParams();
 
-  return <AlbumScreen albumId={local.id as string} />;
+  return <AlbumScreen albumId={local.albumId as string} />;
 }
