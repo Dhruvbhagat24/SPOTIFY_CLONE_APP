@@ -4,7 +4,7 @@ import { Text, View } from "react-native";
 import { COPYRIGHT_SIGN, SOUND_COPYRIGHT_SIGN } from "@config";
 import { styles } from "./styles";
 
-export type AlbumCopyrightPropsType = {
+export type AlbumCopyrightsPropsType = {
   copyrights: { text: string; type: string }[];
 };
 
@@ -24,11 +24,15 @@ const getDisplayText = (text: string, type: string) => {
   return text;
 };
 
-export const AlbumCopyrights = ({ copyrights }: AlbumCopyrightPropsType) => {
+export const AlbumCopyrights = ({ copyrights }: AlbumCopyrightsPropsType) => {
   return (
-    <View style={styles.view}>
+    <View style={styles.view} testID="copyright-view">
       {copyrights.map((copyright, index) => (
-        <Text style={styles.text} key={index}>
+        <Text
+          key={index}
+          style={styles.text}
+          testID={`copyright-text-${index}`}
+        >
           {getDisplayText(copyright.text, copyright.type)}
         </Text>
       ))}

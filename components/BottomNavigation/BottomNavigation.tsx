@@ -1,15 +1,15 @@
 import * as React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useNavigation, useSegments } from "expo-router";
-import { translations } from "@data";
 
+import { BackgroundGradient } from "../BackgroundGradient";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { BOTTOM_NAVIGATION_HEIGHT, PAGES } from "@config";
+import { translations } from "@data";
 
 import { styles } from "./styles";
-import { BackgroundGradient } from "../BackgroundGradient";
 
 export const BottomNavigation = () => {
   const navigation = useNavigation<AppNavigationProps>();
@@ -27,19 +27,24 @@ export const BottomNavigation = () => {
       <Pressable
         style={styles.pressable}
         onPress={() => navigation.navigate(PAGES.HOME)}
+        testID="home-pressable"
       >
         <AntDesign
           style={[styles.icon, isActive(PAGES.HOME) ? styles.active : {}]}
           name="home"
           size={22}
         />
-        <Text style={[styles.text, isActive(PAGES.HOME) ? styles.active : {}]}>
+        <Text
+          style={[styles.text, isActive(PAGES.HOME) ? styles.active : {}]}
+          testID="home-text"
+        >
           {translations.navigation[PAGES.HOME]}
         </Text>
       </Pressable>
       <Pressable
         style={styles.pressable}
         onPress={() => navigation.navigate(PAGES.SEARCH)}
+        testID="search-pressable"
       >
         <Ionicons
           style={[styles.icon, isActive(PAGES.SEARCH) ? styles.active : {}]}
@@ -48,6 +53,7 @@ export const BottomNavigation = () => {
         />
         <Text
           style={[styles.text, isActive(PAGES.SEARCH) ? styles.active : {}]}
+          testID="search-text"
         >
           {translations.navigation[PAGES.SEARCH]}
         </Text>
@@ -55,6 +61,7 @@ export const BottomNavigation = () => {
       <Pressable
         style={styles.pressable}
         onPress={() => navigation.navigate(PAGES.LIBRARY)}
+        testID="library-pressable"
       >
         <Ionicons
           style={[styles.icon, isActive(PAGES.LIBRARY) ? styles.active : {}]}
@@ -63,6 +70,7 @@ export const BottomNavigation = () => {
         />
         <Text
           style={[styles.text, isActive(PAGES.LIBRARY) ? styles.active : {}]}
+          testID="library-text"
         >
           {translations.navigation[PAGES.LIBRARY]}
         </Text>

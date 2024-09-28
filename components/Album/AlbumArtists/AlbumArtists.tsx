@@ -19,6 +19,7 @@ export const AlbumArtists = ({ artists }: AlbumArtistsPropsType) => {
       style={styles.link}
       onPress={() => router.push(`/artists/${id}`)}
       key={id}
+      testID={`artist-link-${id}`}
     >
       <View style={styles.container}>
         <View
@@ -30,12 +31,15 @@ export const AlbumArtists = ({ artists }: AlbumArtistsPropsType) => {
           ]}
         >
           <Image
+            testID="artist-image"
             style={styles.image}
             source={{ uri: images[ALBUM_ARTIST_IMAGE_SIZE_VARIANT].url }}
           />
         </View>
         <View>
-          <Text style={styles.text}>{name}</Text>
+          <Text testID="artist-name" style={styles.text}>
+            {name}
+          </Text>
         </View>
       </View>
     </Pressable>
