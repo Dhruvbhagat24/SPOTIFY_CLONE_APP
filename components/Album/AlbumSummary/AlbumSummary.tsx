@@ -5,29 +5,27 @@ import { Text, View } from "react-native";
 
 import { styles } from "./styles";
 
-export type AlbumTotalTracksPropsType = {
+export type AlbumSummaryPropsType = {
   releaseDate: string;
   totalTracks: number;
   totalDuration: number;
 };
 
-const getDisplayTime = (totalDuration: number) => {
-  if (totalDuration / 1000 < 60) {
-    return `${totalDuration / 1000}min`;
+export const getDisplayTime = (totalDuration: number) => {
+  if (totalDuration / 1000 > 60) {
+    return `${Math.floor(totalDuration / 1000 / 60)}h ${Math.ceil(
+      (totalDuration / 1000) % 60
+    )}min`;
   }
 
   if ((totalDuration / 1000) % 60 === 0) {
     return `${totalDuration / 1000 / 60}h`;
   }
 
-  if (totalDuration / 1000 > 60) {
-    return `${Math.floor(totalDuration / 1000 / 60)}h ${Math.ceil(
-      (totalDuration / 1000) % 60
-    )}min`;
-  }
+  return `${totalDuration / 1000}min`;
 };
 
-const getDisplayDate = (date: string) =>
+export const getDisplayDate = (date: string) =>
   new Date(date).toLocaleDateString("default", {
     month: "long",
     day: "2-digit",
@@ -38,15 +36,18 @@ export const AlbumSummary = ({
   releaseDate,
   totalTracks,
   totalDuration,
-}: AlbumTotalTracksPropsType) => (
-  <View style={styles.container}>
-    <Text style={styles.dateText}>{getDisplayDate(releaseDate)}</Text>
+}: AlbumSummaryPropsType) => (
+  <View style={styles.container} testID="album-summary">
+    <Text style={styles.dateText} testID="release-date-text">
+      {getDisplayDate(releaseDate)}
+    </Text>
     <View style={styles.totalView}>
       <Text
         style={styles.totalTracksText}
+        testID="total-tracks-text"
       >{`${totalTracks} ${translations.album.copyrights.tracks}`}</Text>
       <Text style={styles.separator}>{SEPARATOR}</Text>
-      <Text style={styles.totalDurationText}>
+      <Text style={styles.totalDurationText} testID="total-duration-text">
         {getDisplayTime(totalDuration)}
       </Text>
     </View>

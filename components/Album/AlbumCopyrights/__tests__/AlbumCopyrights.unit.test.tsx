@@ -3,7 +3,14 @@ import { render, RenderResult, within } from "@testing-library/react-native";
 import { AlbumCopyrights, AlbumCopyrightsPropsType } from "../AlbumCopyrights";
 import { COPYRIGHT_SIGN, SOUND_COPYRIGHT_SIGN } from "@config";
 
+enum TEST_IDS {
+  COPYRIGHT_VIEW = "copyright-view",
+  COPYRIGHT_TEXT_0 = "copyright-text-0",
+  COPYRIGHT_TEXT_1 = "copyright-text-1",
+}
+
 describe("AlbumCopyrights", () => {
+  let container: RenderResult;
   const defaultProps: AlbumCopyrightsPropsType = {
     copyrights: [
       {
@@ -16,7 +23,6 @@ describe("AlbumCopyrights", () => {
       },
     ],
   };
-  let container: RenderResult;
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -24,15 +30,15 @@ describe("AlbumCopyrights", () => {
 
   it("renders correctly", () => {
     container = render(<AlbumCopyrights {...defaultProps} />);
-    expect(container.getByTestId("copyright-view")).toBeTruthy();
+    expect(container.getByTestId(TEST_IDS.COPYRIGHT_VIEW)).toBeTruthy();
   });
 
   describe("UI", () => {
     it("displays all copyright texts without changing content", () => {
       container = render(<AlbumCopyrights {...defaultProps} />);
 
-      const firstText = container.getByTestId("copyright-text-0");
-      const secondText = container.getByTestId("copyright-text-1");
+      const firstText = container.getByTestId(TEST_IDS.COPYRIGHT_TEXT_0);
+      const secondText = container.getByTestId(TEST_IDS.COPYRIGHT_TEXT_1);
 
       expect(
         within(firstText).getByText(defaultProps.copyrights[0].text)
@@ -57,8 +63,8 @@ describe("AlbumCopyrights", () => {
       };
       container = render(<AlbumCopyrights {...props} />);
 
-      const firstText = container.getByTestId("copyright-text-0");
-      const secondText = container.getByTestId("copyright-text-1");
+      const firstText = container.getByTestId(TEST_IDS.COPYRIGHT_TEXT_0);
+      const secondText = container.getByTestId(TEST_IDS.COPYRIGHT_TEXT_1);
 
       expect(
         within(firstText).getByText(props.copyrights[0].text)
@@ -88,8 +94,8 @@ describe("AlbumCopyrights", () => {
       };
       container = render(<AlbumCopyrights {...props} />);
 
-      const firstText = container.getByTestId("copyright-text-0");
-      const secondText = container.getByTestId("copyright-text-1");
+      const firstText = container.getByTestId(TEST_IDS.COPYRIGHT_TEXT_0);
+      const secondText = container.getByTestId(TEST_IDS.COPYRIGHT_TEXT_1);
 
       expect(
         within(firstText).getByText(

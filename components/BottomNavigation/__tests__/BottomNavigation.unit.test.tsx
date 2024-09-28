@@ -11,9 +11,18 @@ jest.mock("expo-router", () => ({
   useSegments: jest.fn(),
 }));
 
+enum TEST_IDS {
+  HOME_PRESSABLE = "home-pressable",
+  HOME_TEXT = "home-text",
+  SEARCH_PRESSABLE = "search-pressable",
+  SEARCH_TEXT = "search-text",
+  LIBRARY_PRESSABLE = "library-pressable",
+  LIBRARY_TEXT = "library-text",
+}
+
 describe("BottomNavigation", () => {
-  const mockNavigate = jest.fn();
   let container: RenderResult;
+  const mockNavigate = jest.fn();
 
   beforeEach(() => {
     (useNavigation as jest.Mock).mockReturnValue({ navigate: mockNavigate });
@@ -26,26 +35,26 @@ describe("BottomNavigation", () => {
   });
 
   it("renders correctly", () => {
-    expect(container.getByTestId("home-text")).toBeTruthy();
-    expect(container.getByTestId("search-text")).toBeTruthy();
-    expect(container.getByTestId("library-text")).toBeTruthy();
+    expect(container.getByTestId(TEST_IDS.HOME_TEXT)).toBeTruthy();
+    expect(container.getByTestId(TEST_IDS.SEARCH_TEXT)).toBeTruthy();
+    expect(container.getByTestId(TEST_IDS.LIBRARY_TEXT)).toBeTruthy();
   });
 
   describe("Navigation - Press logic", () => {
     it("navigates to the home page when the home button is pressed", () => {
-      const homeButton = container.getByTestId("home-pressable");
+      const homeButton = container.getByTestId(TEST_IDS.HOME_PRESSABLE);
       fireEvent.press(homeButton);
       expect(mockNavigate).toHaveBeenCalledWith("home");
     });
 
     it("navigates to the search page when the search button is pressed", () => {
-      const searchButton = container.getByTestId("search-pressable");
+      const searchButton = container.getByTestId(TEST_IDS.SEARCH_PRESSABLE);
       fireEvent.press(searchButton);
       expect(mockNavigate).toHaveBeenCalledWith("search");
     });
 
     it("navigates to the library page when the library button is pressed", () => {
-      const libraryButton = container.getByTestId("library-pressable");
+      const libraryButton = container.getByTestId(TEST_IDS.LIBRARY_PRESSABLE);
       fireEvent.press(libraryButton);
       expect(mockNavigate).toHaveBeenCalledWith("library");
     });
@@ -56,12 +65,13 @@ describe("BottomNavigation", () => {
       (useSegments as jest.Mock).mockReturnValue(["", "home"]);
       container = render(<BottomNavigation />);
 
-      const homeTextActiveStyles =
-        container.getByTestId("home-text").props.style[1].color;
-      const libraryTextActiveStyles =
-        container.getByTestId("library-text").props.style[1].color;
-      const searchTextActiveStyles =
-        container.getByTestId("search-text").props.style[1].color;
+      const homeTextActiveStyles = container.getByTestId(TEST_IDS.HOME_TEXT)
+        .props.style[1].color;
+      const libraryTextActiveStyles = container.getByTestId(
+        TEST_IDS.LIBRARY_TEXT
+      ).props.style[1].color;
+      const searchTextActiveStyles = container.getByTestId(TEST_IDS.SEARCH_TEXT)
+        .props.style[1].color;
 
       expect(homeTextActiveStyles).toBe(COLORS.WHITE);
       expect(searchTextActiveStyles).toBe(undefined);
@@ -72,12 +82,13 @@ describe("BottomNavigation", () => {
       (useSegments as jest.Mock).mockReturnValue(["", "search"]);
       container = render(<BottomNavigation />);
 
-      const homeTextActiveStyles =
-        container.getByTestId("home-text").props.style[1].color;
-      const libraryTextActiveStyles =
-        container.getByTestId("library-text").props.style[1].color;
-      const searchTextActiveStyles =
-        container.getByTestId("search-text").props.style[1].color;
+      const homeTextActiveStyles = container.getByTestId(TEST_IDS.HOME_TEXT)
+        .props.style[1].color;
+      const libraryTextActiveStyles = container.getByTestId(
+        TEST_IDS.LIBRARY_TEXT
+      ).props.style[1].color;
+      const searchTextActiveStyles = container.getByTestId(TEST_IDS.SEARCH_TEXT)
+        .props.style[1].color;
 
       expect(searchTextActiveStyles).toBe(COLORS.WHITE);
       expect(homeTextActiveStyles).toBe(undefined);
@@ -88,12 +99,13 @@ describe("BottomNavigation", () => {
       (useSegments as jest.Mock).mockReturnValue(["", "library"]);
       container = render(<BottomNavigation />);
 
-      const homeTextActiveStyles =
-        container.getByTestId("home-text").props.style[1].color;
-      const libraryTextActiveStyles =
-        container.getByTestId("library-text").props.style[1].color;
-      const searchTextActiveStyles =
-        container.getByTestId("search-text").props.style[1].color;
+      const homeTextActiveStyles = container.getByTestId(TEST_IDS.HOME_TEXT)
+        .props.style[1].color;
+      const libraryTextActiveStyles = container.getByTestId(
+        TEST_IDS.LIBRARY_TEXT
+      ).props.style[1].color;
+      const searchTextActiveStyles = container.getByTestId(TEST_IDS.SEARCH_TEXT)
+        .props.style[1].color;
 
       expect(libraryTextActiveStyles).toBe(COLORS.WHITE);
       expect(searchTextActiveStyles).toBe(undefined);
