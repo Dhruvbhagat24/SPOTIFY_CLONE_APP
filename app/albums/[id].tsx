@@ -1,11 +1,10 @@
 import * as React from "react";
-import { Text } from "react-native";
 
 import { useLocalSearchParams } from "expo-router";
+import { AlbumScreen } from "@screens";
 
 export default function Artist() {
   const local = useLocalSearchParams();
-  console.log(local);
 
-  return <Text>{}</Text>;
+  return <AlbumScreen albumId={local.id as string} />;
 }

@@ -5,6 +5,24 @@ export const EN_GB = {
     library: "Your Library",
   },
   album: {
-    tracks: "tracks",
+    copyrights: {
+      tracks: "tracks",
+    },
+    albumInfo: {
+      albumType: {
+        album: "Album",
+        single: "Single",
+        compilation: "Compilation",
+      },
+    },
+    artistRecommendedAlbums: {
+      headerText: "More of: ",
+      pressableText: "Show all",
+      albumType: {
+        album: "Album",
+        single: "Single",
+        compilation: "Compilation",
+      },
+    },
   },
 };

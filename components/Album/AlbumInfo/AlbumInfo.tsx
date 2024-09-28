@@ -8,11 +8,12 @@ import { Pressable, Text, View } from "react-native";
 
 import { SEPARATOR } from "@config";
 import { styles } from "./styles";
+import { translations } from "@data";
 
 export type AlbumInfoPropsType = {
   name: string;
   artists: string;
-  albumType: string;
+  albumType: "album" | "single" | "compilation";
   releaseDate: string;
   isLiked: boolean;
   isAlbumSaved: boolean;
@@ -30,7 +31,9 @@ export const AlbumInfo = ({
     <Text style={styles.nameText}>{name}</Text>
     <Text style={styles.artistsText}>{artists}</Text>
     <View style={styles.albumTypeReleaseDateView}>
-      <Text style={styles.albumTypeReleaseDateText}>{albumType}</Text>
+      <Text style={styles.albumTypeReleaseDateText}>
+        {translations.album.albumInfo.albumType[albumType]}
+      </Text>
       <Text style={[styles.albumTypeReleaseDateText, styles.separator]}>
         {SEPARATOR}
       </Text>

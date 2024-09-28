@@ -1,6 +1,6 @@
 import axios from "axios";
 import { AlbumModel } from "@models";
-import { AlbumResponseType } from "./types";
+import { AlbumResponseType } from "@globalTypes";
 import { auth } from "./auth";
 
 const parseAlbumData = (data: AlbumResponseType): AlbumModel => ({
@@ -52,7 +52,7 @@ export const getAlbum = async (albumId: string): Promise<AlbumModel> => {
 
     return parseAlbumData(response.data);
   } catch (error) {
-    console.error(`Error fetching album data (ID: ${albumId})`, error);
+    console.error(`Error fetching album with an ID: ${albumId}`, error);
     throw error;
   }
 };

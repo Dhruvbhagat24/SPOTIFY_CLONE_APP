@@ -57,3 +57,13 @@ export type ArtistResponseType = {
     spotify: string;
   };
 };
+
+export type ArtistAlbumsResponseType = {
+  href: string;
+  limit: number;
+  next: string | null;
+  offset: number;
+  previous: string | null;
+  total: 888;
+  items: AlbumResponseType[];
+};

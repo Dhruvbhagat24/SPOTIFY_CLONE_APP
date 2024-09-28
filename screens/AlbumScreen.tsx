@@ -2,32 +2,57 @@ import * as React from "react";
 
 import { Album } from "@components";
 
-import { checkSavedTracks, getAlbum, getArtist } from "@api";
-import { AlbumModel } from "@models";
-import { ALBUM_ID } from "@data";
-import { ArtistModel } from "../models/ArtistModel";
+import { checkSavedTracks, getAlbum, getArtist, getArtistAlbums } from "@api";
+import { AlbumModel, ArtistAlbumModel } from "@models";
+import { FALLBACK_ALBUM_ID } from "@data";
+import { ArtistModel } from "../models/Album/ArtistModel";
+import { parseToArtist, parseToArtistAlbums } from "@utils";
 
-export const AlbumScreen = () => {
+export type AlbumScreenPropsType = {
+  albumId: string;
+};
+
+export const AlbumScreen = ({
+  albumId = FALLBACK_ALBUM_ID,
+}: AlbumScreenPropsType) => {
   const [albumData, setAlbumData] = React.useState<AlbumModel | null>(null);
   const [artistsData, setArtistsData] = React.useState<ArtistModel[] | null>(
     null
   );
+  const [artistsAlbumsData, setArtistsAlbums] = React.useState<
+    | {
+        artist: string;
+        albums: ArtistAlbumModel[];
+      }[]
+    | null
+  >(null);
   const [isAlbumSaved, setIsAlbumSaved] = React.useState<boolean | null>(null);
   const [savedTracks, setSavedTracks] = React.useState<boolean[] | null>(null);
 
   React.useEffect(() => {
     (async () => {
       try {
-        const album = await getAlbum(ALBUM_ID);
+        const album = await getAlbum(albumId);
         setAlbumData(album);
 
         const artists = await Promise.all(
-          album.artists.map(async ({ id }) => await getArtist(id))
+          album.artists.map(async ({ id }) =>
+            parseToArtist(await getArtist(id))
+          )
         );
         setArtistsData(artists);
 
+        const artistAlbums = (
+          await Promise.all(
+            artists.map(async ({ id }) =>
+              parseToArtistAlbums(await getArtistAlbums(id, "album"))
+            )
+          )
+        ).map((albums, i) => ({ artist: artists[i].name, albums: albums }));
+        setArtistsAlbums(artistAlbums);
+
         // TODO: get user-library-read access trough oAuth
-        // const savedAlbums = await checkSavedAlbums([ALBUM_ID]);
+        // const savedAlbums = await checkSavedAlbums([FALLBACK_ALBUM_ID]);
         const savedAlbums = [true];
         setIsAlbumSaved(savedAlbums[0]);
 
@@ -49,11 +74,12 @@ export const AlbumScreen = () => {
         console.error("Failed to get album data:", error);
       }
     })();
-  }, []);
+  }, [albumId]);
 
   if (
     albumData === null ||
     artistsData === null ||
+    artistsAlbumsData === null ||
     isAlbumSaved === null ||
     savedTracks === null
   ) {
@@ -64,6 +90,7 @@ export const AlbumScreen = () => {
     <Album
       album={albumData}
       artists={artistsData}
+      artistsAlbumsData={artistsAlbumsData}
       isAlbumSaved={isAlbumSaved}
       savedTracks={savedTracks}
     />

@@ -3,8 +3,9 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    paddingVertical: 20,
     paddingHorizontal: 16,
+    backgroundColor: COLORS.BLACK,
   },
   dateText: {
     fontSize: 13,

@@ -3,7 +3,8 @@ import { COLORS } from "@config";
 
 export const styles = StyleSheet.create({
   link: {
-    marginTop: 20,
+    paddingTop: 20,
+    backgroundColor: COLORS.BLACK,
   },
   container: {
     flexDirection: "row",

@@ -1,2 +1,1 @@
-export { AlbumModel } from "./AlbumModel";
-export { ArtistModel } from "./ArtistModel";
+export type { AlbumModel, ArtistModel, ArtistAlbumModel } from "./Album";

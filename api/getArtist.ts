@@ -1,19 +1,10 @@
 import axios from "axios";
-import { ArtistModel } from "@models";
-import { ArtistResponseType } from "./types";
 import { auth } from "./auth";
+import { ArtistResponseType } from "@globalTypes";
 
-const parseArtistData = (data: ArtistResponseType): ArtistModel => ({
-  type: data.type,
-  id: data.id,
-  followers: data.followers,
-  genres: data.genres,
-  images: data.images,
-  name: data.name,
-  popularity: 85,
-});
-
-export const getArtist = async (artistId: string): Promise<ArtistModel> => {
+export const getArtist = async (
+  artistId: string
+): Promise<ArtistResponseType> => {
   try {
     const { token } = await auth();
 
@@ -26,9 +17,9 @@ export const getArtist = async (artistId: string): Promise<ArtistModel> => {
       }
     )) as { data: ArtistResponseType };
 
-    return parseArtistData(response.data);
+    return response.data;
   } catch (error) {
-    console.error(`Error fetching artists data (ID: ${artistId})`, error);
+    console.error(`Error fetching artist with an ID: ${artistId}`, error);
     throw error;
   }
 };

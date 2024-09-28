@@ -18,9 +18,10 @@ import { AlbumInfo } from "./AlbumInfo";
 import { AlbumTrack } from "./AlbumTrack";
 import { AlbumSummary } from "./AlbumSummary";
 import { AlbumArtists } from "./AlbumArtists";
+import { ArtistRecommendedAlbums } from "./ArtistRecommendedAlbums";
 import { AlbumCopyrights } from "./AlbumCopyrights";
 
-import { AlbumModel, ArtistModel } from "@models";
+import { AlbumModel, ArtistAlbumModel, ArtistModel } from "@models";
 import { useApplicationDimensions } from "@hooks";
 import {
   ALBUM_IMAGE_SIZE_VARIANT,
@@ -33,6 +34,10 @@ import { styles } from "./styles";
 export type AlbumPropsType = {
   album: AlbumModel;
   artists: ArtistModel[];
+  artistsAlbumsData: {
+    artist: string;
+    albums: ArtistAlbumModel[];
+  }[];
   isAlbumSaved: boolean;
   savedTracks: boolean[];
 };
@@ -40,6 +45,7 @@ export type AlbumPropsType = {
 export const Album = ({
   album,
   artists,
+  artistsAlbumsData,
   isAlbumSaved,
   savedTracks,
 }: AlbumPropsType) => {
@@ -132,6 +138,7 @@ export const Album = ({
           )}
         />
         <AlbumArtists artists={artists} />
+        <ArtistRecommendedAlbums artistsAlbums={artistsAlbumsData} />
         <AlbumCopyrights copyrights={copyrights} />
       </Animated.ScrollView>
     </View>

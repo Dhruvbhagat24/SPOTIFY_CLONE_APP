@@ -44,7 +44,7 @@ export const AlbumSummary = ({
     <View style={styles.totalView}>
       <Text
         style={styles.totalTracksText}
-      >{`${totalTracks} ${translations.album.tracks}`}</Text>
+      >{`${totalTracks} ${translations.album.copyrights.tracks}`}</Text>
       <Text style={styles.separator}>{SEPARATOR}</Text>
       <Text style={styles.totalDurationText}>
         {getDisplayTime(totalDuration)}
