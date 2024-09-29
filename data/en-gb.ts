@@ -5,19 +5,19 @@ export const EN_GB = {
     library: 'Your Library',
   },
   album: {
+    type: {
+      album: 'Album',
+      single: 'Single',
+      compilation: 'Compilation',
+    },
+    slider: {
+      headerText: 'More of: ',
+      pressableText: 'Show all',
+    },
     copyrights: {
       tracks: 'tracks',
     },
     albumInfo: {
-      albumType: {
-        album: 'Album',
-        single: 'Single',
-        compilation: 'Compilation',
-      },
-    },
-    artistRecommendedAlbums: {
-      headerText: 'More of: ',
-      pressableText: 'Show all',
       albumType: {
         album: 'Album',
         single: 'Single',

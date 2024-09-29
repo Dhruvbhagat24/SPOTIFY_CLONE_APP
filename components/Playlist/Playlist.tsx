@@ -18,9 +18,9 @@ import { PlaylistInfo } from './PlaylistInfo';
 import { PlaylistTrack } from './PlaylistTrack';
 import { PlaylistSummary } from './PlaylistSummary';
 import { PlaylistArtists } from './PlaylistArtists';
-import { ArtistRecommendedAlbums } from './PlaylistRecommendedAlbums';
 import { PlaylistCopyrights } from './PlaylistCopyrights';
 
+import { translations } from '@data';
 import { PlaylistModel, ArtistAlbumModel, ArtistModel } from '@models';
 import { useApplicationDimensions } from '@hooks';
 import {
@@ -31,11 +31,12 @@ import {
 } from '@config';
 
 import { styles } from './styles';
+import { Slider } from '../Slider';
 
 export type PlaylistPropsType = {
   album: PlaylistModel;
   artists: ArtistModel[];
-  artistsAlbumsData: {
+  artistsAlbums: {
     artist: string;
     albums: ArtistAlbumModel[];
   }[];
@@ -46,7 +47,7 @@ export type PlaylistPropsType = {
 export const Playlist = ({
   album,
   artists,
-  artistsAlbumsData,
+  artistsAlbums,
   isAlbumSaved,
   savedTracks,
 }: PlaylistPropsType) => {
@@ -139,7 +140,17 @@ export const Playlist = ({
           )}
         />
         <PlaylistArtists artists={artists} />
-        <ArtistRecommendedAlbums artistsAlbums={artistsAlbumsData} />
+        {artistsAlbums.map(({ artist, albums }, index) => (
+          <Slider
+            key={index}
+            title={`${translations.album.slider.headerText} ${artist}`}
+            slides={albums}
+            size="medium"
+            shape="squareBorder"
+            withShowAll={true}
+          />
+        ))}
+
         <PlaylistCopyrights copyrights={copyrights} />
       </Animated.ScrollView>
     </View>

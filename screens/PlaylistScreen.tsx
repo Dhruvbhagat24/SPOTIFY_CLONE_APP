@@ -92,7 +92,7 @@ export const PlaylistScreen = ({
     <Playlist
       album={albumData}
       artists={artistsData}
-      artistsAlbumsData={artistsAlbumsData}
+      artistsAlbums={artistsAlbumsData}
       isAlbumSaved={isAlbumSaved}
       savedTracks={savedTracks}
     />

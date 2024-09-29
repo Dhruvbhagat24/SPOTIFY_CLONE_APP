@@ -62,7 +62,7 @@ describe('BottomNavigation', () => {
 
   describe('Active button - UI', () => {
     it('sets the home button active when pressed', () => {
-      (useSegments as jest.Mock).mockReturnValue(['', 'home']);
+      (useSegments as jest.Mock).mockReturnValue(['home']);
       container = render(<BottomNavigation />);
 
       const homeTextActiveStyles = container.getByTestId(TEST_IDS.HOME_TEXT)
@@ -79,7 +79,7 @@ describe('BottomNavigation', () => {
     });
 
     it('sets the search button active when pressed', () => {
-      (useSegments as jest.Mock).mockReturnValue(['', 'search']);
+      (useSegments as jest.Mock).mockReturnValue(['search']);
       container = render(<BottomNavigation />);
 
       const homeTextActiveStyles = container.getByTestId(TEST_IDS.HOME_TEXT)
@@ -96,7 +96,7 @@ describe('BottomNavigation', () => {
     });
 
     it('sets the home library active when pressed', () => {
-      (useSegments as jest.Mock).mockReturnValue(['', 'library']);
+      (useSegments as jest.Mock).mockReturnValue(['library']);
       container = render(<BottomNavigation />);
 
       const homeTextActiveStyles = container.getByTestId(TEST_IDS.HOME_TEXT)

@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
     color: COLORS.WHITE,
     letterSpacing: -1.2,
+    marginRight: 'auto',
   },
   headerPressable: {},
   headerPressableText: {
