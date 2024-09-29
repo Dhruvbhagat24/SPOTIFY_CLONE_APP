@@ -45,7 +45,9 @@ export const AlbumScreen = ({
         const artistAlbums = (
           await Promise.all(
             artists.map(async ({ id }) =>
-              parseToArtistAlbums(await getArtistAlbums(id, "album"))
+              parseToArtistAlbums(
+                await getArtistAlbums(id, "album,compilation", 10)
+              )
             )
           )
         ).map((albums, i) => ({ artist: artists[i].name, albums: albums }));
