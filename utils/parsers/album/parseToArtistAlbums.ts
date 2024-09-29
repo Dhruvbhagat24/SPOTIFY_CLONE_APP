@@ -1,4 +1,4 @@
-import { ArtistAlbumsResponseType } from '@globalTypes';
+import { ArtistAlbumsResponseType } from '@config';
 import { ArtistAlbumModel } from '@models';
 
 export const parseToArtistAlbums = (

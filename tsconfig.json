@@ -13,7 +13,6 @@
       "@models": ["./models/index.ts"],
       "@screens": ["./screens/index.ts"],
       "@services": ["./services/index.ts"],
-      "@globalTypes": ["./globalTypes.ts"],
       "@utils": ["./utils/index.ts"]
     }
   },

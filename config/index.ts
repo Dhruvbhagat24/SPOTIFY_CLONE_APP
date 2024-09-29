@@ -11,3 +11,8 @@ export {
   COPYRIGHT_SIGN,
 } from './constants';
 export { COLORS } from './colors';
+export type {
+  AlbumResponseType,
+  ArtistResponseType,
+  ArtistAlbumsResponseType,
+} from './types';

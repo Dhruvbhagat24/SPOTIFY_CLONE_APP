@@ -1,20 +1,20 @@
 module.exports = {
   expo: {
-    name: "spotify-clone",
-    slug: "spotify-clone",
-    version: "1.0.0",
-    orientation: "portrait",
-    icon: "./assets/icon.png",
-    scheme: "acme",
-    plugins: ["expo-router"],
+    name: 'spotify-clone',
+    slug: 'spotify-clone',
+    version: '1.0.0',
+    orientation: 'portrait',
+    icon: './assets/icon.png',
+    scheme: 'acme',
+    plugins: ['expo-router'],
     splash: {
-      image: "./assets/splash.png",
-      resizeMode: "contain",
-      backgroundColor: "#ffffff",
+      image: './assets/splash.png',
+      resizeMode: 'contain',
+      backgroundColor: '#ffffff',
     },
     web: {
-      bundler: "metro",
-      favicon: "./assets/favicon.png",
+      bundler: 'metro',
+      favicon: './assets/favicon.png',
     },
     experiments: {
       typedRoutes: true,
@@ -22,11 +22,15 @@ module.exports = {
     extra: {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
+      tokenKey: process.env.TOKEN_KEY,
+      expirationKey: process.env.EXPIRATION_KEY,
+      authorizationEndpoint: process.env.AUTHORIZATION_ENDPOINT,
+      tokenEndpoint: process.env.TOKEN_ENDPOINT,
       router: {
         origin: false,
       },
       eas: {
-        projectId: "33b0281a-b127-47fe-ab16-e94caf272493",
+        projectId: '33b0281a-b127-47fe-ab16-e94caf272493',
       },
     },
   },

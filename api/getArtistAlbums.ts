@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ArtistAlbumsResponseType } from '@globalTypes';
+import { ArtistAlbumsResponseType } from '@config';
 import { auth } from './auth';
 
 export const getArtistAlbums = async (

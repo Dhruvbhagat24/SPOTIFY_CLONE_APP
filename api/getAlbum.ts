@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { PlaylistModel } from '@models';
-import { AlbumResponseType } from '@globalTypes';
+import { AlbumResponseType } from '@config';
 import { auth } from './auth';
 
 const parseAlbumData = (data: AlbumResponseType): PlaylistModel => ({
