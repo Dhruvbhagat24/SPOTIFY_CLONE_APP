@@ -1,8 +1,8 @@
-import Constants from "expo-constants";
-import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import Constants from 'expo-constants';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { getSessionToken } from "./getSessionToken";
+import { getSessionToken } from './getSessionToken';
 
 export const auth = async (): Promise<{
   token: string | null;
@@ -22,15 +22,15 @@ export const auth = async (): Promise<{
     const { clientID, clientSecret } = Constants.expoConfig.extra;
 
     const response = await axios.post(
-      "https://accounts.spotify.com/api/token",
+      'https://accounts.spotify.com/api/token',
       new URLSearchParams({
-        grant_type: "client_credentials",
+        grant_type: 'client_credentials',
         client_id: clientID,
         client_secret: clientSecret,
       }),
       {
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
       }
     );
@@ -38,18 +38,18 @@ export const auth = async (): Promise<{
     const newToken = response.data.access_token;
 
     if (!newToken) {
-      throw new Error("Failed to authenticate with Spotify.");
+      throw new Error('Failed to authenticate with Spotify.');
     }
 
     const date = new Date();
     date.setHours(date.getHours() + 1);
 
-    await AsyncStorage.setItem("session_token", newToken);
-    await AsyncStorage.setItem("session_token_expiration", date.toString());
+    await AsyncStorage.setItem('session_token', newToken);
+    await AsyncStorage.setItem('session_token_expiration', date.toString());
 
     return { token: newToken, tokenExpiration: date.toString() };
   } catch (error) {
-    console.error("Error authenticating with Spotify:", error);
+    console.error('Error authenticating with Spotify:', error);
     return { token: null, tokenExpiration: null };
   }
 };

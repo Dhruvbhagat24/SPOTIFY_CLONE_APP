@@ -1,12 +1,12 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Album } from "@components";
+import { Album } from '@components';
 
-import { checkSavedTracks, getAlbum, getArtist, getArtistAlbums } from "@api";
-import { AlbumModel, ArtistAlbumModel } from "@models";
-import { FALLBACK_ALBUM_ID } from "@data";
-import { ArtistModel } from "../models/Album/ArtistModel";
-import { parseToArtist, parseToArtistAlbums } from "@utils";
+import { checkSavedTracks, getAlbum, getArtist, getArtistAlbums } from '@api';
+import { AlbumModel, ArtistAlbumModel } from '@models';
+import { FALLBACK_ALBUM_ID } from '@data';
+import { ArtistModel } from '../models/Album/ArtistModel';
+import { parseToArtist, parseToArtistAlbums } from '@utils';
 
 export type AlbumScreenPropsType = {
   albumId: string;
@@ -46,7 +46,7 @@ export const AlbumScreen = ({
           await Promise.all(
             artists.map(async ({ id }) =>
               parseToArtistAlbums(
-                await getArtistAlbums(id, "album,compilation", 10)
+                await getArtistAlbums(id, 'album,compilation', 10)
               )
             )
           )
@@ -73,7 +73,7 @@ export const AlbumScreen = ({
         setAlbumData(null);
         setIsAlbumSaved(null);
         setSavedTracks(null);
-        console.error("Failed to get album data:", error);
+        console.error('Failed to get album data:', error);
       }
     })();
   }, [albumId]);

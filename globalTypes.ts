@@ -6,12 +6,12 @@ type ImageType = {
 
 export type AlbumResponseType = {
   id: string;
-  type: "album";
-  album_type: "album" | "single" | "compilation";
+  type: 'album';
+  album_type: 'album' | 'single' | 'compilation';
   name: string;
   images: ImageType[];
   artists: {
-    type: "artist";
+    type: 'artist';
     id: string;
   }[];
   release_date: string;
@@ -23,7 +23,7 @@ export type AlbumResponseType = {
     total: number;
     items: {
       id: string;
-      type: "track";
+      type: 'track';
       name: string;
       duration_ms: number;
       explicit: boolean;
@@ -38,7 +38,7 @@ export type AlbumResponseType = {
 
 export type ArtistResponseType = {
   id: string;
-  type: "artist";
+  type: 'artist';
   uri: string;
   name: string;
   images: {

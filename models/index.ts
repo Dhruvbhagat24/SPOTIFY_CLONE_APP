@@ -1,1 +1,6 @@
-export type { AlbumModel, ArtistModel, ArtistAlbumModel } from "./Album";
+export type {
+  AlbumModel,
+  ArtistModel,
+  ArtistAlbumModel,
+  AlbumLinkModel,
+} from './Album';

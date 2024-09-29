@@ -1,13 +1,13 @@
-import * as React from "react";
-import { Image, Pressable, Text, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
-import { useRouter } from "expo-router";
+import * as React from 'react';
+import { Image, Pressable, Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { useRouter } from 'expo-router';
 
-import { ALBUM_IMAGE_SIZE_VARIANT, SEPARATOR } from "@config";
-import { ArtistAlbumModel } from "@models";
-import { translations } from "@data";
+import { ALBUM_IMAGE_SIZE_VARIANT, SEPARATOR } from '@config';
+import { ArtistAlbumModel } from '@models';
+import { translations } from '@data';
 
-import { styles } from "./styles";
+import { styles } from './styles';
 
 export type ArtistRecommendedAlbumsPropsType = {
   artistsAlbums: {

@@ -1,5 +1,5 @@
 export type ArtistModel = {
-  type: "artist";
+  type: 'artist';
   id: string;
   name: string;
   followers: { href: string | null; total: number };

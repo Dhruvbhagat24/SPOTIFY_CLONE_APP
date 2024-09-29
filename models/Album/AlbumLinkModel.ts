@@ -1,4 +1,4 @@
-export type ArtistAlbumModel = {
+export type AlbumLinkModel = {
   type: 'album';
   albumType: 'album' | 'single' | 'compilation';
   id: string;

@@ -1,25 +1,25 @@
-import * as React from "react";
-import { render, RenderResult, within } from "@testing-library/react-native";
-import { AlbumCopyrights, AlbumCopyrightsPropsType } from "../AlbumCopyrights";
-import { COPYRIGHT_SIGN, SOUND_COPYRIGHT_SIGN } from "@config";
+import * as React from 'react';
+import { render, RenderResult, within } from '@testing-library/react-native';
+import { AlbumCopyrights, AlbumCopyrightsPropsType } from '../AlbumCopyrights';
+import { COPYRIGHT_SIGN, SOUND_COPYRIGHT_SIGN } from '@config';
 
 enum TEST_IDS {
-  COPYRIGHT_VIEW = "copyright-view",
-  COPYRIGHT_TEXT_0 = "copyright-text-0",
-  COPYRIGHT_TEXT_1 = "copyright-text-1",
+  COPYRIGHT_VIEW = 'copyright-view',
+  COPYRIGHT_TEXT_0 = 'copyright-text-0',
+  COPYRIGHT_TEXT_1 = 'copyright-text-1',
 }
 
-describe("AlbumCopyrights", () => {
+describe('AlbumCopyrights', () => {
   let container: RenderResult;
   const defaultProps: AlbumCopyrightsPropsType = {
     copyrights: [
       {
         text: `${SOUND_COPYRIGHT_SIGN} copyright mock 1`,
-        type: "P",
+        type: 'P',
       },
       {
         text: `${COPYRIGHT_SIGN} copyright mock 2`,
-        type: "C",
+        type: 'C',
       },
     ],
   };
@@ -28,13 +28,13 @@ describe("AlbumCopyrights", () => {
     jest.clearAllMocks();
   });
 
-  it("renders correctly", () => {
+  it('renders correctly', () => {
     container = render(<AlbumCopyrights {...defaultProps} />);
     expect(container.getByTestId(TEST_IDS.COPYRIGHT_VIEW)).toBeTruthy();
   });
 
-  describe("UI", () => {
-    it("displays all copyright texts without changing content", () => {
+  describe('UI', () => {
+    it('displays all copyright texts without changing content', () => {
       container = render(<AlbumCopyrights {...defaultProps} />);
 
       const firstText = container.getByTestId(TEST_IDS.COPYRIGHT_TEXT_0);
@@ -48,16 +48,16 @@ describe("AlbumCopyrights", () => {
       ).toBeTruthy();
     });
 
-    it("displays all copyright texts and adds the missing C type copyright sign", () => {
+    it('displays all copyright texts and adds the missing C type copyright sign', () => {
       const props = {
         copyrights: [
           {
             text: `${SOUND_COPYRIGHT_SIGN} copyright mock 1`,
-            type: "P",
+            type: 'P',
           },
           {
-            text: "copyright mock 2",
-            type: "C",
+            text: 'copyright mock 2',
+            type: 'C',
           },
         ],
       };
@@ -79,16 +79,16 @@ describe("AlbumCopyrights", () => {
       ).toBeTruthy();
     });
 
-    it("displays all copyright texts and adds the missing P type copyright sign", () => {
+    it('displays all copyright texts and adds the missing P type copyright sign', () => {
       const props = {
         copyrights: [
           {
-            text: "copyright mock 1",
-            type: "P",
+            text: 'copyright mock 1',
+            type: 'P',
           },
           {
             text: `${COPYRIGHT_SIGN} copyright mock 2`,
-            type: "C",
+            type: 'C',
           },
         ],
       };

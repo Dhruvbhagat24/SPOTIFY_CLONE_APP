@@ -1,11 +1,11 @@
-import * as React from "react";
-import { Image, Pressable, Text, View } from "react-native";
-import { useRouter } from "expo-router";
+import * as React from 'react';
+import { Image, Pressable, Text, View } from 'react-native';
+import { useRouter } from 'expo-router';
 
-import { ArtistModel } from "@models";
-import { ALBUM_ARTIST_IMAGE_SIZE_VARIANT } from "@config";
+import { ArtistModel } from '@models';
+import { ALBUM_ARTIST_IMAGE_SIZE_VARIANT } from '@config';
 
-import { styles } from "./styles";
+import { styles } from './styles';
 
 export type AlbumArtistsPropsType = {
   artists: ArtistModel[];

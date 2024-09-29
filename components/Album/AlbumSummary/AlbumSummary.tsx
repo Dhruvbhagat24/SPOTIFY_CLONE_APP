@@ -1,9 +1,9 @@
-import { SEPARATOR } from "@config";
-import { translations } from "@data";
-import * as React from "react";
-import { Text, View } from "react-native";
+import { SEPARATOR } from '@config';
+import { translations } from '@data';
+import * as React from 'react';
+import { Text, View } from 'react-native';
 
-import { styles } from "./styles";
+import { styles } from './styles';
 
 export type AlbumSummaryPropsType = {
   releaseDate: string;
@@ -26,10 +26,10 @@ export const getDisplayTime = (totalDuration: number) => {
 };
 
 export const getDisplayDate = (date: string) =>
-  new Date(date).toLocaleDateString("default", {
-    month: "long",
-    day: "2-digit",
-    year: "numeric",
+  new Date(date).toLocaleDateString('default', {
+    month: 'long',
+    day: '2-digit',
+    year: 'numeric',
   });
 
 export const AlbumSummary = ({

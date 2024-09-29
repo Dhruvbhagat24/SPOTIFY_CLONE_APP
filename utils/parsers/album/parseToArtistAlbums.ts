@@ -1,5 +1,5 @@
-import { ArtistAlbumsResponseType } from "@globalTypes";
-import { ArtistAlbumModel } from "@models";
+import { ArtistAlbumsResponseType } from '@globalTypes';
+import { ArtistAlbumModel } from '@models';
 
 export const parseToArtistAlbums = (
   data: ArtistAlbumsResponseType
@@ -9,6 +9,6 @@ export const parseToArtistAlbums = (
     albumType: item.album_type,
     id: item.id,
     name: item.name,
-    releaseDate: item.release_date.split("-")[0],
+    releaseDate: item.release_date.split('-')[0],
     images: item.images,
   }));

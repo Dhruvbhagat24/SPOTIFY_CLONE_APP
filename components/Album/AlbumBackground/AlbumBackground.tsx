@@ -1,7 +1,7 @@
-import * as React from "react";
-import { Image, View as Overlay, View } from "react-native";
+import * as React from 'react';
+import { Image, View as Overlay, View } from 'react-native';
 
-import { styles } from "./styles";
+import { styles } from './styles';
 
 export type AlbumBackgroundPropsType = {
   url: string;

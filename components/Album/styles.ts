@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { COLORS } from "@config";
+import { StyleSheet } from 'react-native';
+import { COLORS } from '@config';
 
 export const styles = StyleSheet.create({
   albumGradientOverlay: {

@@ -1,4 +1,4 @@
-import { ScaledSize, StatusBar, useWindowDimensions } from "react-native";
+import { ScaledSize, StatusBar, useWindowDimensions } from 'react-native';
 
 export const useApplicationDimensions = (): ScaledSize => {
   const { width, height, scale, fontScale } = useWindowDimensions();

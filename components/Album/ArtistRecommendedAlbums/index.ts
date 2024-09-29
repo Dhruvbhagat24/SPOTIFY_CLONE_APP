@@ -1,1 +1,1 @@
-export { ArtistRecommendedAlbums } from "./ArtistRecommendedAlbums";
+export { ArtistRecommendedAlbums } from './ArtistRecommendedAlbums';

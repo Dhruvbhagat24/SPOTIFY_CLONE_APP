@@ -1,23 +1,23 @@
-import { COLORS } from "@config";
-import { StyleSheet } from "react-native";
+import { COLORS } from '@config';
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
     height: 58,
     paddingVertical: 8,
     paddingHorizontal: 5,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   content: {
-    marginRight: "auto",
+    marginRight: 'auto',
   },
 
   nameView: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     maxWidth: 280,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   isPlayingIcon: {
     marginRight: 6,
@@ -26,8 +26,8 @@ export const styles = StyleSheet.create({
   },
   nameText: {
     color: COLORS.WHITE,
-    textAlign: "center",
-    fontFamily: "SF-Regular",
+    textAlign: 'center',
+    fontFamily: 'SF-Regular',
     fontSize: 17,
   },
   nameTextActive: {
@@ -35,8 +35,8 @@ export const styles = StyleSheet.create({
   },
 
   artistNameView: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 2,
   },
   isTrackSavedView: {
@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
     height: 13,
     borderRadius: 13,
     backgroundColor: COLORS.TINT,
-    position: "relative",
+    position: 'relative',
     marginRight: 6,
   },
   isTrackSavedIcon: {
@@ -56,8 +56,8 @@ export const styles = StyleSheet.create({
   },
   artistNameText: {
     color: COLORS.LIGHT_GREY,
-    textAlign: "center",
-    fontFamily: "SF-Regular",
+    textAlign: 'center',
+    fontFamily: 'SF-Regular',
     fontSize: 14,
   },
 

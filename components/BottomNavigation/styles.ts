@@ -1,15 +1,15 @@
-import { StyleSheet } from "react-native";
-import { COLORS, BOTTOM_NAVIGATION_HEIGHT } from "@config";
+import { StyleSheet } from 'react-native';
+import { COLORS, BOTTOM_NAVIGATION_HEIGHT } from '@config';
 
 export const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
-    top: "auto",
+    top: 'auto',
     height: BOTTOM_NAVIGATION_HEIGHT,
     paddingBottom: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
     elevation: 20,
     shadowColor: COLORS.BLACK,
     shadowOffset: { width: 0, height: -10 },
@@ -17,8 +17,8 @@ export const styles = StyleSheet.create({
     shadowRadius: 20,
   },
   pressable: {
-    flexDirection: "column",
-    alignItems: "center",
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   icon: {
     color: COLORS.GREY,
@@ -27,8 +27,8 @@ export const styles = StyleSheet.create({
     color: COLORS.GREY,
     fontSize: 13,
     lineHeight: 13,
-    textAlign: "center",
-    fontFamily: "SF-Regular",
+    textAlign: 'center',
+    fontFamily: 'SF-Regular',
     marginTop: 5,
   },
   active: {

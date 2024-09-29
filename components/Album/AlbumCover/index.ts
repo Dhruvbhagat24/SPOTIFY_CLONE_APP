@@ -1,1 +1,1 @@
-export { AlbumCover } from "./AlbumCover";
+export { AlbumCover } from './AlbumCover';

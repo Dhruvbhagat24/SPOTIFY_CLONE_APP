@@ -1,7 +1,7 @@
-import axios from "axios";
-import { AlbumModel } from "@models";
-import { AlbumResponseType } from "@globalTypes";
-import { auth } from "./auth";
+import axios from 'axios';
+import { AlbumModel } from '@models';
+import { AlbumResponseType } from '@globalTypes';
+import { auth } from './auth';
 
 const parseAlbumData = (data: AlbumResponseType): AlbumModel => ({
   id: data.id,

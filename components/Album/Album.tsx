@@ -1,35 +1,35 @@
-import * as React from "react";
-import { View } from "react-native";
+import * as React from 'react';
+import { View } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
   useAnimatedRef,
   useAnimatedStyle,
   useScrollViewOffset,
-} from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Stack } from "expo-router";
+} from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Stack } from 'expo-router';
 
-import { BackgroundGradient as BackgroundOverlay } from "../BackgroundGradient";
-import { AlbumBackground } from "./AlbumBackground";
-import { AlbumHeader } from "./AlbumHeader";
-import { AlbumCover } from "./AlbumCover";
-import { AlbumInfo } from "./AlbumInfo";
-import { AlbumTrack } from "./AlbumTrack";
-import { AlbumSummary } from "./AlbumSummary";
-import { AlbumArtists } from "./AlbumArtists";
-import { ArtistRecommendedAlbums } from "./ArtistRecommendedAlbums";
-import { AlbumCopyrights } from "./AlbumCopyrights";
+import { BackgroundGradient as BackgroundOverlay } from '../BackgroundGradient';
+import { AlbumBackground } from './AlbumBackground';
+import { AlbumHeader } from './AlbumHeader';
+import { AlbumCover } from './AlbumCover';
+import { AlbumInfo } from './AlbumInfo';
+import { AlbumTrack } from './AlbumTrack';
+import { AlbumSummary } from './AlbumSummary';
+import { AlbumArtists } from './AlbumArtists';
+import { ArtistRecommendedAlbums } from './ArtistRecommendedAlbums';
+import { AlbumCopyrights } from './AlbumCopyrights';
 
-import { AlbumModel, ArtistAlbumModel, ArtistModel } from "@models";
-import { useApplicationDimensions } from "@hooks";
+import { AlbumModel, ArtistAlbumModel, ArtistModel } from '@models';
+import { useApplicationDimensions } from '@hooks';
 import {
   ALBUM_IMAGE_SIZE_VARIANT,
   BOTTOM_NAVIGATION_HEIGHT,
   SEPARATOR,
-} from "@config";
+} from '@config';
 
-import { styles } from "./styles";
+import { styles } from './styles';
 
 export type AlbumPropsType = {
   album: AlbumModel;
@@ -79,7 +79,7 @@ export const Album = ({
       <AlbumBackground url={image.url} darkness={0.2} />
       <BackgroundOverlay
         styles={[animatedGradientOverlay, styles.albumGradientOverlay]}
-        colors={["transparent", "rgba(0, 0, 0, 1)"]}
+        colors={['transparent', 'rgba(0, 0, 0, 1)']}
         startY={imageHeight / 2}
         endY={imageHeight + 70 + 90}
         height={height}
@@ -113,7 +113,7 @@ export const Album = ({
           name={name}
           artists={artists.map((a) => a.name).join(` ${SEPARATOR} `)}
           albumType={albumType}
-          releaseDate={releaseDate.split("-")[0]}
+          releaseDate={releaseDate.split('-')[0]}
           isLiked={isLiked}
           isAlbumSaved={isAlbumSaved}
         />

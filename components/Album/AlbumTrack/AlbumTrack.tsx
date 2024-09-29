@@ -1,11 +1,11 @@
-import * as React from "react";
-import { Pressable, Text, View } from "react-native";
+import * as React from 'react';
+import { Pressable, Text, View } from 'react-native';
 
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import Entypo from "@expo/vector-icons/Entypo";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import Entypo from '@expo/vector-icons/Entypo';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { styles } from "./styles";
+import { styles } from './styles';
 
 export type AlbumSongPropsType = {
   name: string;
@@ -45,7 +45,7 @@ export const AlbumTrack = ({
             </View>
           )}
           <Text style={styles.artistNameText}>
-            {artists.map((a) => a.name).join(", ")}
+            {artists.map((a) => a.name).join(', ')}
           </Text>
         </View>
       </View>

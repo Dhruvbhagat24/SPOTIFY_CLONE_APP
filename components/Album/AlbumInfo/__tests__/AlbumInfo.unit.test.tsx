@@ -1,6 +1,6 @@
-describe("AlbumInfo", () => {
+describe('AlbumInfo', () => {
   // TODO
-  it.skip("THIS WAITS FOR PLAY BUTTON TO BE IMPLEMENTED", () => {
+  it.skip('THIS WAITS FOR PLAY BUTTON TO BE IMPLEMENTED', () => {
     expect(jest.fn()).toBe(jest.fn());
   });
 });

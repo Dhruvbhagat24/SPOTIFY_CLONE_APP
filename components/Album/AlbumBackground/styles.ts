@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   albumBackground: {
@@ -7,8 +7,8 @@ export const styles = StyleSheet.create({
   },
   albumBackgroundBlurredImage: {
     zIndex: -4,
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
   albumBackgroundDarkOverlay: {
     ...StyleSheet.absoluteFillObject,

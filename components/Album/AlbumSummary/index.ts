@@ -1,1 +1,1 @@
-export { AlbumSummary } from "./AlbumSummary";
+export { AlbumSummary } from './AlbumSummary';

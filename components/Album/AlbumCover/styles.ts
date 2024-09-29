@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { COLORS } from "@config";
+import { StyleSheet } from 'react-native';
+import { COLORS } from '@config';
 
 export const styles = StyleSheet.create({
   albumImageView: {
@@ -11,6 +11,6 @@ export const styles = StyleSheet.create({
   },
   albumImage: {
     marginTop: 30,
-    marginHorizontal: "auto",
+    marginHorizontal: 'auto',
   },
 });

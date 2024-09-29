@@ -1,5 +1,5 @@
-import axios from "axios";
-import { auth } from "./auth";
+import axios from 'axios';
+import { auth } from './auth';
 
 export const checkSavedTracks = async (
   albumIds: string[]
@@ -8,10 +8,10 @@ export const checkSavedTracks = async (
     const { token } = await auth();
 
     if (albumIds.length > 50) {
-      throw new Error("Cannot check more than 50 album IDs at once.");
+      throw new Error('Cannot check more than 50 album IDs at once.');
     }
 
-    const encodedIds = encodeURIComponent(albumIds.join(","));
+    const encodedIds = encodeURIComponent(albumIds.join(','));
 
     const response = (await axios.get(
       `https://api.spotify.com/v1/me/tracks/contains?ids=${encodedIds}`,
@@ -24,7 +24,7 @@ export const checkSavedTracks = async (
 
     return response.data;
   } catch (error) {
-    console.error("Error fetching saved tracks data:", error);
+    console.error('Error fetching saved tracks data:', error);
     throw error;
   }
 };

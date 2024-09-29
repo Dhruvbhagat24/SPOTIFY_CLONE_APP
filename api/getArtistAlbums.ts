@@ -1,10 +1,10 @@
-import axios from "axios";
-import { ArtistAlbumsResponseType } from "@globalTypes";
-import { auth } from "./auth";
+import axios from 'axios';
+import { ArtistAlbumsResponseType } from '@globalTypes';
+import { auth } from './auth';
 
 export const getArtistAlbums = async (
   artistId: string,
-  includeGroups: string = "album,single,appears_on,compilation",
+  includeGroups: string = 'album,single,appears_on,compilation',
   limit: number = 6,
   offset: number = 0
 ): Promise<ArtistAlbumsResponseType> => {

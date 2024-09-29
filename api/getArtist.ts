@@ -1,6 +1,6 @@
-import axios from "axios";
-import { auth } from "./auth";
-import { ArtistResponseType } from "@globalTypes";
+import axios from 'axios';
+import { auth } from './auth';
+import { ArtistResponseType } from '@globalTypes';
 
 export const getArtist = async (
   artistId: string

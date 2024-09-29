@@ -1,5 +1,5 @@
-import { COLORS } from "@config";
-import { StyleSheet } from "react-native";
+import { COLORS } from '@config';
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   albumHeaderGoBackPressable: {
@@ -17,16 +17,16 @@ export const styles = StyleSheet.create({
     zIndex: -1,
   },
   albumHeaderContent: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
   albumHeaderTitleText: {
     color: COLORS.WHITE,
-    textAlign: "center",
-    fontFamily: "SF-Bold",
-    fontWeight: "bold",
+    textAlign: 'center',
+    fontFamily: 'SF-Bold',
+    fontWeight: 'bold',
     fontSize: 15,
     lineHeight: 15,
     marginBottom: 8,

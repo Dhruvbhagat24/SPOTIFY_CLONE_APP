@@ -1,1 +1,1 @@
-export { AlbumCopyrights } from "./AlbumCopyrights";
+export { AlbumCopyrights } from './AlbumCopyrights';

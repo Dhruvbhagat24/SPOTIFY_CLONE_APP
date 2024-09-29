@@ -1,5 +1,5 @@
-import { ArtistResponseType } from "@globalTypes";
-import { ArtistModel } from "@models";
+import { ArtistResponseType } from '@globalTypes';
+import { ArtistModel } from '@models';
 
 export const parseToArtist = (data: ArtistResponseType): ArtistModel => ({
   type: data.type,

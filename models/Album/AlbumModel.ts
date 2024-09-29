@@ -1,14 +1,14 @@
 export type AlbumModel = {
   id: string;
-  type: "album";
-  albumType: "album" | "single" | "compilation";
+  type: 'album';
+  albumType: 'album' | 'single' | 'compilation';
   name: string;
   images: {
     url: string;
     height: number;
     width: number;
   }[];
-  artists: { type: "artist"; id: string }[];
+  artists: { type: 'artist'; id: string }[];
   releaseDate: string;
   tracks: {
     previous: string | null;
@@ -18,7 +18,7 @@ export type AlbumModel = {
     total: number;
     items: {
       id: string;
-      type: "track";
+      type: 'track';
       name: string;
       durationMs: number;
       explicit: boolean;

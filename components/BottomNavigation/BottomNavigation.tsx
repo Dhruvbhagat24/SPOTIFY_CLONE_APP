@@ -1,15 +1,15 @@
-import * as React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import { useNavigation, useSegments } from "expo-router";
+import * as React from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useNavigation, useSegments } from 'expo-router';
 
-import { BackgroundGradient } from "../BackgroundGradient";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { BackgroundGradient } from '../BackgroundGradient';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { BOTTOM_NAVIGATION_HEIGHT, PAGES } from "@config";
-import { translations } from "@data";
+import { BOTTOM_NAVIGATION_HEIGHT, PAGES } from '@config';
+import { translations } from '@data';
 
-import { styles } from "./styles";
+import { styles } from './styles';
 
 export const BottomNavigation = () => {
   const navigation = useNavigation<AppNavigationProps>();
@@ -20,7 +20,7 @@ export const BottomNavigation = () => {
   return (
     <View style={styles.container}>
       <BackgroundGradient
-        colors={["rgba(0, 0, 0, 0.85)", "rgba(0, 0, 0, 1)"]}
+        colors={['rgba(0, 0, 0, 0.85)', 'rgba(0, 0, 0, 1)']}
         styles={{ ...StyleSheet.absoluteFillObject }}
         height={BOTTOM_NAVIGATION_HEIGHT}
       />

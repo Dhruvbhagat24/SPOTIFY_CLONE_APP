@@ -1,4 +1,4 @@
-export { AlbumScreen } from "./AlbumScreen";
-export { HomeScreen } from "./HomeScreen";
-export { SearchScreen } from "./SearchScreen";
-export { LibraryScreen } from "./LibraryScreen";
+export { AlbumScreen } from './AlbumScreen';
+export { HomeScreen } from './HomeScreen';
+export { SearchScreen } from './SearchScreen';
+export { LibraryScreen } from './LibraryScreen';

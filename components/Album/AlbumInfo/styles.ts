@@ -1,5 +1,5 @@
-import { COLORS } from "@config";
-import { StyleSheet } from "react-native";
+import { COLORS } from '@config';
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   albumInfo: {
@@ -9,51 +9,51 @@ export const styles = StyleSheet.create({
   },
   nameText: {
     color: COLORS.WHITE,
-    textAlign: "center",
-    fontFamily: "SF-Bold",
-    fontWeight: "bold",
+    textAlign: 'center',
+    fontFamily: 'SF-Bold',
+    fontWeight: 'bold',
     fontSize: 25,
     lineHeight: 25,
-    marginRight: "auto",
+    marginRight: 'auto',
   },
   artistsText: {
     color: COLORS.WHITE,
-    textAlign: "center",
-    fontFamily: "SF-Bold",
-    fontWeight: "bold",
+    textAlign: 'center',
+    fontFamily: 'SF-Bold',
+    fontWeight: 'bold',
     fontSize: 14,
     lineHeight: 14,
     marginTop: 13,
-    marginRight: "auto",
+    marginRight: 'auto',
   },
 
   albumTypeReleaseDateView: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   albumTypeReleaseDateText: {
     color: COLORS.LIGHT_GREY,
-    textAlign: "center",
-    fontFamily: "SF-Regular",
+    textAlign: 'center',
+    fontFamily: 'SF-Regular',
     fontSize: 13,
     lineHeight: 13,
     marginTop: 9,
-    textTransform: "capitalize",
+    textTransform: 'capitalize',
   },
   separator: {
     fontSize: 13,
-    fontFamily: "SF-Bold",
-    fontWeight: "900",
+    fontFamily: 'SF-Bold',
+    fontWeight: '900',
     marginHorizontal: 4,
   },
   releaseDateText: {
-    marginRight: "auto",
+    marginRight: 'auto',
   },
   pressablesView: {
     maxWidth: 120,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginTop: 13,
   },
   likeIcon: {
@@ -64,14 +64,14 @@ export const styles = StyleSheet.create({
     color: COLORS.TINT,
   },
   isAlbumSavedContainer: {
-    marginHorizontal: "auto",
-    alignItems: "center",
-    justifyContent: "center",
+    marginHorizontal: 'auto',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: 21,
     height: 21,
     borderRadius: 13,
     borderWidth: 1.5,
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     borderColor: COLORS.LIGHT_GREY,
   },
   isAlbumSavedIcon: {

@@ -1,1 +1,1 @@
-export { useApplicationDimensions } from "./useApplicationDimensions";
+export { useApplicationDimensions } from './useApplicationDimensions';

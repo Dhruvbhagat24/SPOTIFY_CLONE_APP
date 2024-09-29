@@ -2,18 +2,18 @@ import {
   Entypo,
   FontAwesome,
   MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import * as React from "react";
-import { Pressable, Text, View } from "react-native";
+} from '@expo/vector-icons';
+import * as React from 'react';
+import { Pressable, Text, View } from 'react-native';
 
-import { SEPARATOR } from "@config";
-import { styles } from "./styles";
-import { translations } from "@data";
+import { SEPARATOR } from '@config';
+import { styles } from './styles';
+import { translations } from '@data';
 
 export type AlbumInfoPropsType = {
   name: string;
   artists: string;
-  albumType: "album" | "single" | "compilation";
+  albumType: 'album' | 'single' | 'compilation';
   releaseDate: string;
   isLiked: boolean;
   isAlbumSaved: boolean;
@@ -46,7 +46,7 @@ export const AlbumInfo = ({
       <Pressable>
         <FontAwesome
           style={[styles.likeIcon, isLiked ? styles.likeIconActive : {}]}
-          name={isLiked ? "heart" : "heart-o"}
+          name={isLiked ? 'heart' : 'heart-o'}
         />
       </Pressable>
 

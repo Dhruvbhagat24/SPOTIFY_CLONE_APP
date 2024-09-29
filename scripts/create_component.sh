@@ -16,11 +16,11 @@ export const ${FILENAME} = ({}: ${FILENAME}PropsType) => {
 };
 EOL
 
-cat >./components/$FILENAME/index.tsx <<EOL
+cat >./components/$FILENAME/index.ts <<EOL
 export { $FILENAME } from './$FILENAME'
 EOL
 
-cat >./components/$FILENAME/styles.tsx << EOL
+cat >./components/$FILENAME/styles.ts << EOL
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({

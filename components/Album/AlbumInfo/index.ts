@@ -1,1 +1,1 @@
-export { AlbumInfo } from "./AlbumInfo";
+export { AlbumInfo } from './AlbumInfo';

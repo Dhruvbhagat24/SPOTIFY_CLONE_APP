@@ -1,4 +1,4 @@
-export { IMAGES } from "./images";
+export { IMAGES } from './images';
 export {
   PLATFORMS,
   PAGES,
@@ -9,5 +9,5 @@ export {
   ALBUM_ARTIST_IMAGE_SIZE_VARIANT,
   SOUND_COPYRIGHT_SIGN,
   COPYRIGHT_SIGN,
-} from "./constants";
-export { COLORS } from "./colors";
+} from './constants';
+export { COLORS } from './colors';

@@ -1,1 +1,1 @@
-export { AlbumTrack } from "./AlbumTrack";
+export { AlbumTrack } from './AlbumTrack';

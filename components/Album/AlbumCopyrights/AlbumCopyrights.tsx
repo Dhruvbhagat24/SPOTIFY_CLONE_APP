@@ -1,8 +1,8 @@
-import * as React from "react";
-import { Text, View } from "react-native";
+import * as React from 'react';
+import { Text, View } from 'react-native';
 
-import { COPYRIGHT_SIGN, SOUND_COPYRIGHT_SIGN } from "@config";
-import { styles } from "./styles";
+import { COPYRIGHT_SIGN, SOUND_COPYRIGHT_SIGN } from '@config';
+import { styles } from './styles';
 
 export type AlbumCopyrightsPropsType = {
   copyrights: { text: string; type: string }[];
@@ -13,11 +13,11 @@ const getDisplayText = (text: string, type: string) => {
     return text;
   }
 
-  if (type === "P") {
+  if (type === 'P') {
     return `${SOUND_COPYRIGHT_SIGN} ${text}`;
   }
 
-  if (type === "C") {
+  if (type === 'C') {
     return `${COPYRIGHT_SIGN} ${text}`;
   }
 

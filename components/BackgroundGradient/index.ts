@@ -1,1 +1,1 @@
-export { BackgroundGradient } from "./BackgroundGradient";
+export { BackgroundGradient } from './BackgroundGradient';

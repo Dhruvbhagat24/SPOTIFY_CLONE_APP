@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   AnimatedProp,
   Canvas,
@@ -6,11 +6,11 @@ import {
   LinearGradient,
   Rect,
   vec,
-} from "@shopify/react-native-skia";
-import Animated from "react-native-reanimated";
+} from '@shopify/react-native-skia';
+import Animated from 'react-native-reanimated';
 
-import { useApplicationDimensions } from "@hooks";
-import { styles as defaultStyles } from "./styles";
+import { useApplicationDimensions } from '@hooks';
+import { styles as defaultStyles } from './styles';
 
 export type BackgroundGradientPropsType = {
   colors?: AnimatedProp<Color[]>;
@@ -24,7 +24,7 @@ export type BackgroundGradientPropsType = {
 };
 
 export const BackgroundGradient = ({
-  colors = ["#2e335a", "#1c1b33"],
+  colors = ['#2e335a', '#1c1b33'],
   width,
   height,
   startX,
