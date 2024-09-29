@@ -1,18 +1,18 @@
-import { Pressable } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Pressable, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, {
   Extrapolation,
   interpolate,
   SharedValue,
   useAnimatedStyle,
-} from "react-native-reanimated";
-import { useNavigation } from "expo-router";
+} from 'react-native-reanimated';
+import { useNavigation } from 'expo-router';
 
-import { AlbumBackground } from "../AlbumBackground";
-import { MaterialIcons } from "@expo/vector-icons";
+import { AlbumBackground } from '../AlbumBackground';
+import { MaterialIcons } from '@expo/vector-icons';
 
-import { ALBUM_HEADER_HEIGHT } from "@config";
-import { styles } from "./styles";
+import { ALBUM_HEADER_HEIGHT } from '@config';
+import { styles } from './styles';
 
 export type AlbumHeaderPropsType = {
   headerTitle: string;
@@ -62,13 +62,14 @@ export const AlbumHeader = ({
   }));
 
   return (
-    <>
+    <View testID="header">
       <Pressable
         style={[
           styles.albumHeaderGoBackPressable,
           { top: useSafeAreaInsets().top },
         ]}
         onPress={() => navigation.goBack()}
+        testID="header-go-back-pressable"
       >
         <MaterialIcons
           style={styles.albumHeaderGoBackIcon}
@@ -86,10 +87,11 @@ export const AlbumHeader = ({
         <AlbumBackground url={url} darkness={0.4} />
         <Animated.Text
           style={[animatedHeaderTextStyles, styles.albumHeaderTitleText]}
+          testID="header-title-text"
         >
           {headerTitle}
         </Animated.Text>
       </Animated.View>
-    </>
+    </View>
   );
 };

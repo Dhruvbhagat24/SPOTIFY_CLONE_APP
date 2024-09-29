@@ -1,13 +1,13 @@
-import * as React from "react";
-import { View } from "react-native";
+import * as React from 'react';
+import { View } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
   SharedValue,
   useAnimatedStyle,
-} from "react-native-reanimated";
+} from 'react-native-reanimated';
 
-import { styles } from "./styles";
+import { styles } from './styles';
 
 export type AlbumCoverPropsType = {
   image: {
@@ -48,11 +48,12 @@ export const AlbumCover = ({ image, animatedValue }: AlbumCoverPropsType) => {
   }));
 
   return (
-    <View style={styles.albumImageView}>
+    <View style={styles.albumImageView} testID="album-cover">
       <Animated.Image
         style={[styles.albumImage, { width, height }, animatedImageStyles]}
         source={{ uri: url }}
         resizeMode="cover"
+        testID="album-cover-image"
       />
     </View>
   );
