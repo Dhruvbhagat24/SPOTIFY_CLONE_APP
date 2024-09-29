@@ -1,1 +1,0 @@
-export { AlbumSummary } from './AlbumSummary';

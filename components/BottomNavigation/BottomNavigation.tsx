@@ -6,8 +6,9 @@ import { BackgroundGradient } from '../BackgroundGradient';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { BOTTOM_NAVIGATION_HEIGHT, PAGES } from '@config';
+import { BOTTOM_NAVIGATION_HEIGHT, COLORS, PAGES } from '@config';
 import { translations } from '@data';
+import { hexToRGB } from '@utils';
 
 import { styles } from './styles';
 
@@ -20,7 +21,7 @@ export const BottomNavigation = () => {
   return (
     <View style={styles.container}>
       <BackgroundGradient
-        colors={['rgba(0, 0, 0, 0.85)', 'rgba(0, 0, 0, 1)']}
+        colors={[hexToRGB(COLORS.PRIMARY, 0.85), COLORS.PRIMARY]}
         styles={{ ...StyleSheet.absoluteFillObject }}
         height={BOTTOM_NAVIGATION_HEIGHT}
       />

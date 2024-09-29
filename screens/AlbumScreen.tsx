@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Album } from '@components';
+import { Playlist } from '@components';
 
 import { checkSavedTracks, getAlbum, getArtist, getArtistAlbums } from '@api';
 import { AlbumModel, ArtistAlbumModel } from '@models';
@@ -89,7 +89,7 @@ export const AlbumScreen = ({
   }
 
   return (
-    <Album
+    <Playlist
       album={albumData}
       artists={artistsData}
       artistsAlbumsData={artistsAlbumsData}

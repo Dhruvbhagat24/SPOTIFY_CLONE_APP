@@ -1,0 +1,1 @@
+export { ArtistRecommendedAlbums } from './PlaylistRecommendedAlbums';

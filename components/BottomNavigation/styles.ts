@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     elevation: 20,
-    shadowColor: COLORS.BLACK,
+    shadowColor: COLORS.PRIMARY,
     shadowOffset: { width: 0, height: -10 },
     shadowOpacity: 0.7,
     shadowRadius: 20,
