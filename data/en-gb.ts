@@ -1,5 +1,5 @@
 export const EN_GB = {
-  navigation: {
+  router: {
     home: 'Home',
     search: 'Search',
     library: 'Your Library',

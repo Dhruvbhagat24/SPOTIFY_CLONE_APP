@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNavigation, useSegments } from 'expo-router';
+import { useRouter, useSegments } from 'expo-router';
 import { render, fireEvent, RenderResult } from '@testing-library/react-native';
 import { BottomNavigation } from '../BottomNavigation';
 import { COLORS } from '@config';
@@ -7,7 +7,7 @@ import { COLORS } from '@config';
 jest.mock('../../BackgroundGradient');
 
 jest.mock('expo-router', () => ({
-  useNavigation: jest.fn(),
+  useRouter: jest.fn(),
   useSegments: jest.fn(),
 }));
 
@@ -22,10 +22,10 @@ enum TEST_IDS {
 
 describe('BottomNavigation', () => {
   let container: RenderResult;
-  const mockNavigate = jest.fn();
+  const mockReplace = jest.fn();
 
   beforeEach(() => {
-    (useNavigation as jest.Mock).mockReturnValue({ navigate: mockNavigate });
+    (useRouter as jest.Mock).mockReturnValue({ replace: mockReplace });
     (useSegments as jest.Mock).mockReturnValue(['', 'home']);
     container = render(<BottomNavigation />);
   });
@@ -41,22 +41,22 @@ describe('BottomNavigation', () => {
   });
 
   describe('Navigation - Press logic', () => {
-    it('navigates to the home page when the home button is pressed', () => {
+    it('replaces to the home page when the home button is pressed', () => {
       const homeButton = container.getByTestId(TEST_IDS.HOME_PRESSABLE);
       fireEvent.press(homeButton);
-      expect(mockNavigate).toHaveBeenCalledWith('home');
+      expect(mockReplace).toHaveBeenCalledWith('home');
     });
 
-    it('navigates to the search page when the search button is pressed', () => {
+    it('replaces to the search page when the search button is pressed', () => {
       const searchButton = container.getByTestId(TEST_IDS.SEARCH_PRESSABLE);
       fireEvent.press(searchButton);
-      expect(mockNavigate).toHaveBeenCalledWith('search');
+      expect(mockReplace).toHaveBeenCalledWith('search');
     });
 
-    it('navigates to the library page when the library button is pressed', () => {
+    it('replaces to the library page when the library button is pressed', () => {
       const libraryButton = container.getByTestId(TEST_IDS.LIBRARY_PRESSABLE);
       fireEvent.press(libraryButton);
-      expect(mockNavigate).toHaveBeenCalledWith('library');
+      expect(mockReplace).toHaveBeenCalledWith('library');
     });
   });
 

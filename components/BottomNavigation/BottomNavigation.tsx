@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { useNavigation, useSegments } from 'expo-router';
+import { useRouter, useSegments } from 'expo-router';
 
 import { BackgroundGradient } from '../BackgroundGradient';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -13,10 +13,10 @@ import { hexToRGB } from '@utils';
 import { styles } from './styles';
 
 export const BottomNavigation = () => {
-  const navigation = useNavigation<AppNavigationProps>();
+  const router = useRouter();
   const segments: string[] = useSegments();
 
-  const isActive = (pageType: PAGES): boolean => segments[1] === pageType;
+  const isActive = (pageType: PAGES): boolean => segments[0] === pageType;
 
   return (
     <View style={styles.container}>
@@ -27,7 +27,7 @@ export const BottomNavigation = () => {
       />
       <Pressable
         style={styles.pressable}
-        onPress={() => navigation.navigate(PAGES.HOME)}
+        onPress={() => router.replace(PAGES.HOME)}
         testID="home-pressable"
       >
         <AntDesign
@@ -39,12 +39,12 @@ export const BottomNavigation = () => {
           style={[styles.text, isActive(PAGES.HOME) ? styles.active : {}]}
           testID="home-text"
         >
-          {translations.navigation[PAGES.HOME]}
+          {translations.router[PAGES.HOME]}
         </Text>
       </Pressable>
       <Pressable
         style={styles.pressable}
-        onPress={() => navigation.navigate(PAGES.SEARCH)}
+        onPress={() => router.replace(PAGES.SEARCH)}
         testID="search-pressable"
       >
         <Ionicons
@@ -56,12 +56,12 @@ export const BottomNavigation = () => {
           style={[styles.text, isActive(PAGES.SEARCH) ? styles.active : {}]}
           testID="search-text"
         >
-          {translations.navigation[PAGES.SEARCH]}
+          {translations.router[PAGES.SEARCH]}
         </Text>
       </Pressable>
       <Pressable
         style={styles.pressable}
-        onPress={() => navigation.navigate(PAGES.LIBRARY)}
+        onPress={() => router.replace(PAGES.LIBRARY)}
         testID="library-pressable"
       >
         <Ionicons
@@ -73,7 +73,7 @@ export const BottomNavigation = () => {
           style={[styles.text, isActive(PAGES.LIBRARY) ? styles.active : {}]}
           testID="library-text"
         >
-          {translations.navigation[PAGES.LIBRARY]}
+          {translations.router[PAGES.LIBRARY]}
         </Text>
       </Pressable>
     </View>
