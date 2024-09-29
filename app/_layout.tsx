@@ -36,12 +36,30 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <GestureHandlerRootView style={styles.gestureHandlerRootView}>
         <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="home" options={{ headerShown: false }} />
-          <Stack.Screen name="search" options={{ headerShown: false }} />
-          <Stack.Screen name="library" options={{ headerShown: false }} />
-          <Stack.Screen name="albums" options={{ headerShown: false }} />
-          <Stack.Screen name="artists" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="index"
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+          />
+          <Stack.Screen
+            name="home"
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+          />
+          <Stack.Screen
+            name="search"
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+          />
+          <Stack.Screen
+            name="library"
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+          />
+          <Stack.Screen
+            name="albums"
+            options={{ headerShown: false, animation: 'default' }}
+          />
+          <Stack.Screen
+            name="artists"
+            options={{ headerShown: false, animation: 'default' }}
+          />
           <Stack.Screen name="+not-found" />
         </Stack>
         <StatusBar style="light" />
