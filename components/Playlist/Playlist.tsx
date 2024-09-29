@@ -21,7 +21,7 @@ import { PlaylistArtists } from './PlaylistArtists';
 import { ArtistRecommendedAlbums } from './PlaylistRecommendedAlbums';
 import { PlaylistCopyrights } from './PlaylistCopyrights';
 
-import { AlbumModel, ArtistAlbumModel, ArtistModel } from '@models';
+import { PlaylistModel, ArtistAlbumModel, ArtistModel } from '@models';
 import { useApplicationDimensions } from '@hooks';
 import {
   ALBUM_IMAGE_SIZE_VARIANT,
@@ -33,7 +33,7 @@ import {
 import { styles } from './styles';
 
 export type PlaylistPropsType = {
-  album: AlbumModel;
+  album: PlaylistModel;
   artists: ArtistModel[];
   artistsAlbumsData: {
     artist: string;

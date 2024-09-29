@@ -1,6 +1,6 @@
 export type {
-  AlbumModel,
   ArtistModel,
   ArtistAlbumModel,
-  AlbumLinkModel,
+  PlaylistModel,
+  AlbumModel,
 } from './Album';

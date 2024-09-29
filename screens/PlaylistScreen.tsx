@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Playlist } from '@components';
 
 import { checkSavedTracks, getAlbum, getArtist, getArtistAlbums } from '@api';
-import { AlbumModel, ArtistAlbumModel } from '@models';
+import { PlaylistModel, ArtistAlbumModel } from '@models';
 import { FALLBACK_ALBUM_ID } from '@data';
 import { ArtistModel } from '../models/Album/ArtistModel';
 import { parseToArtist, parseToArtistAlbums } from '@utils';
@@ -12,10 +12,10 @@ export type AlbumScreenPropsType = {
   albumId: string;
 };
 
-export const AlbumScreen = ({
+export const PlaylistScreen = ({
   albumId = FALLBACK_ALBUM_ID,
 }: AlbumScreenPropsType) => {
-  const [albumData, setAlbumData] = React.useState<AlbumModel | null>(null);
+  const [albumData, setAlbumData] = React.useState<PlaylistModel | null>(null);
   const [artistsData, setArtistsData] = React.useState<ArtistModel[] | null>(
     null
   );

@@ -1,4 +1,4 @@
-export type { AlbumModel } from './AlbumModel';
+export type { PlaylistModel } from './PlaylistModel';
 export type { ArtistModel } from './ArtistModel';
 export type { ArtistAlbumModel } from './ArtistAlbumModel';
-export type { AlbumLinkModel } from './AlbumLinkModel';
+export type { AlbumModel } from './AlbumModel';

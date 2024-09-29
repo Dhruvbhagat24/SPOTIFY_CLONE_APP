@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { AlbumModel } from '@models';
+import { PlaylistModel } from '@models';
 import { AlbumResponseType } from '@globalTypes';
 import { auth } from './auth';
 
-const parseAlbumData = (data: AlbumResponseType): AlbumModel => ({
+const parseAlbumData = (data: AlbumResponseType): PlaylistModel => ({
   id: data.id,
   type: data.type,
   albumType: data.album_type,
@@ -37,7 +37,7 @@ const parseAlbumData = (data: AlbumResponseType): AlbumModel => ({
   popularity: data.popularity,
 });
 
-export const getAlbum = async (albumId: string): Promise<AlbumModel> => {
+export const getAlbum = async (albumId: string): Promise<PlaylistModel> => {
   try {
     const { token } = await auth();
 
