@@ -16,5 +16,12 @@
       "@utils": ["./utils/index.ts"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "@typings/index.d.ts",
+    "@typings/global.d.ts",
+    "expo-env.d.ts"
+  ]
 }

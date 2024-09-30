@@ -56,14 +56,32 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 13,
   },
-  likeIcon: {
-    fontSize: 20,
+  saveContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 13,
+    width: 26,
+    height: 26,
+    borderWidth: 1,
+    borderColor: COLORS.LIGHTER_GREY,
+    backgroundColor: 'transparent',
+  },
+  saveContainerActive: {
+    backgroundColor: COLORS.TINT,
+    borderColor: COLORS.TINT,
+  },
+  saveIcon: {
+    left: 0.5,
+    fontSize: 16,
+    fontWeight: '900',
     color: COLORS.LIGHT_GREY,
   },
-  likeIconActive: {
-    color: COLORS.TINT,
+  saveIconActive: {
+    fontSize: 16,
+    fontWeight: '900',
+    color: COLORS.PRIMARY,
   },
-  isPlaylistSavedContainer: {
+  isDownloadedContainer: {
     marginHorizontal: 'auto',
     alignItems: 'center',
     justifyContent: 'center',
@@ -74,17 +92,17 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderColor: COLORS.LIGHT_GREY,
   },
-  isPlaylistSavedIcon: {
+  isDownloadedContainerActive: {
     fontSize: 12,
     top: 0.5,
     left: 0.5,
     color: COLORS.LIGHT_GREY,
   },
-  isPlaylistSavedContainerActive: {
+  isDownloadedIcon: {
     backgroundColor: COLORS.TINT,
     borderColor: COLORS.TINT,
   },
-  isPlaylistSavedIconActive: {
+  isDownloadedIconActive: {
     color: COLORS.PRIMARY,
   },
   moreIcon: {

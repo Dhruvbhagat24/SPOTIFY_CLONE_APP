@@ -1,4 +1,4 @@
-export { IMAGES } from './images';
+export { type IconType } from './images';
 export {
   PLATFORMS,
   PAGES,
@@ -11,8 +11,10 @@ export {
   COPYRIGHT_SIGN,
 } from './constants';
 export { COLORS } from './colors';
-export type {
-  AlbumResponseType,
-  ArtistResponseType,
-  ArtistAlbumsResponseType,
+export {
+  type ExpoConfigType,
+  type AlbumResponseType,
+  type ArtistResponseType,
+  type ArtistAlbumsResponseType,
+  AuthResponse,
 } from './types';

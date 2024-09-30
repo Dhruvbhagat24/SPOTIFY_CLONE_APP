@@ -7,19 +7,18 @@ import {
   ResponseType,
 } from 'expo-auth-session';
 import Constants from 'expo-constants';
+import { useRouter } from 'expo-router';
 
 import { setToken } from '@api';
-import { COLORS } from '@config';
+import { AuthResponse, COLORS, ExpoConfigType } from '@config';
 
 export const LoginScreen = () => {
+  const router = useRouter();
   const { top: statusBarOffset } = useSafeAreaInsets();
 
-  if (!Constants.expoConfig || !Constants.expoConfig.extra) {
-    return null;
-  }
-
-  const { clientID, authorizationEndpoint, tokenEndpoint } =
-    Constants.expoConfig.extra;
+  const { clientID, authorizationEndpoint, tokenEndpoint } = (
+    Constants.expoConfig as ExpoConfigType
+  ).extra;
 
   const [request, response, promptAsync] = useAuthRequest(
     {
@@ -39,7 +38,19 @@ export const LoginScreen = () => {
       const { access_token, expires_in } = response.params;
       setToken(access_token, expires_in);
     }
-  }, [response, Constants, Constants.expoConfig, Constants.expoConfig.extra]);
+  }, [response]);
+
+  const handlePress = async () => {
+    try {
+      const response = await promptAsync();
+
+      if (response.type === AuthResponse.SUCCESS) {
+        router.replace('/home');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <View
@@ -51,7 +62,7 @@ export const LoginScreen = () => {
     >
       <Button
         title="Log in with Spotify"
-        onPress={() => promptAsync()}
+        onPress={handlePress}
         disabled={!request}
       />
     </View>

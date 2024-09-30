@@ -15,7 +15,7 @@ export default function App() {
   }, [token]);
 
   if (token) {
-    return <Redirect href="/home" />;
+    return <Redirect href="/albums" />;
   }
 
   return <LoginScreen />;

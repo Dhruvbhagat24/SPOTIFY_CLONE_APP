@@ -1,22 +1,20 @@
-import {
-  Entypo,
-  FontAwesome,
-  MaterialCommunityIcons,
-} from '@expo/vector-icons';
 import * as React from 'react';
 import { Pressable, Text, View } from 'react-native';
+import { Entypo } from '@expo/vector-icons';
 
 import { SEPARATOR } from '@config';
-import { styles } from './styles';
 import { translations } from '@data';
+
+import { AnimatedPressable } from '../../AnimatedPressable';
+import { styles } from './styles';
 
 export type PlaylistInfoPropsType = {
   name: string;
   artists: string;
   albumType: 'album' | 'single' | 'compilation';
   releaseDate: string;
-  isLiked: boolean;
-  isPlaylistSaved: boolean;
+  isDownloaded: boolean;
+  isSaved: boolean;
 };
 
 export const PlaylistInfo = ({
@@ -24,8 +22,8 @@ export const PlaylistInfo = ({
   artists,
   albumType,
   releaseDate,
-  isLiked,
-  isPlaylistSaved,
+  isDownloaded,
+  isSaved,
 }: PlaylistInfoPropsType) => (
   <View style={styles.albumInfo}>
     <Text style={styles.nameText}>{name}</Text>
@@ -43,28 +41,16 @@ export const PlaylistInfo = ({
     </View>
 
     <View style={styles.pressablesView}>
-      <Pressable>
-        <FontAwesome
-          style={[styles.likeIcon, isLiked ? styles.likeIconActive : {}]}
-          name={isLiked ? 'heart' : 'heart-o'}
-        />
-      </Pressable>
-
-      <Pressable
-        style={[
-          styles.isPlaylistSavedContainer,
-          isPlaylistSaved ? styles.isPlaylistSavedContainerActive : {},
-        ]}
-      >
-        <MaterialCommunityIcons
-          style={[
-            styles.isPlaylistSavedIcon,
-            isPlaylistSaved ? styles.isPlaylistSavedIconActive : {},
-          ]}
-          name="arrow-down-bold"
-        />
-      </Pressable>
-
+      <AnimatedPressable
+        defaultIcon="plus"
+        activeIcon="check"
+        isActive={isSaved}
+      />
+      <AnimatedPressable
+        defaultIcon="arrow-down"
+        activeIcon="arrow-down"
+        isActive={isDownloaded}
+      />
       <Pressable>
         <Entypo style={styles.moreIcon} name="dots-three-horizontal" />
       </Pressable>

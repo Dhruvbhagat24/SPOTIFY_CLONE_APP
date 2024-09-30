@@ -55,7 +55,7 @@ export const Playlist = ({
   const { top: statusBarOffset } = useSafeAreaInsets();
 
   // TODO: to be removed and replaced with API separate + call
-  const isLiked = false;
+  const isDownloaded = false;
   const { albumType, name, releaseDate, images, tracks, copyrights } = album;
   const image = images[ALBUM_IMAGE_SIZE_VARIANT];
   const { height: imageHeight } = image;
@@ -116,8 +116,8 @@ export const Playlist = ({
           artists={artists.map((a) => a.name).join(` ${SEPARATOR} `)}
           albumType={albumType}
           releaseDate={releaseDate.split('-')[0]}
-          isLiked={isLiked}
-          isPlaylistSaved={isAlbumSaved}
+          isDownloaded={isDownloaded}
+          isSaved={isAlbumSaved}
         />
         <View style={styles.albumTracks}>
           {tracks.items.map((item, index) => (

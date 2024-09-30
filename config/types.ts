@@ -1,3 +1,16 @@
+export type ExpoConfigType = {
+  extra: { [key: string]: string };
+};
+
+export enum AuthResponse {
+  CANCEL = 'cancel',
+  DISMISS = 'dismiss',
+  OPENED = 'opened',
+  LOCKED = 'locked',
+  ERROR = 'error',
+  SUCCESS = 'success',
+}
+
 type ImageType = {
   url: string;
   height: number;
