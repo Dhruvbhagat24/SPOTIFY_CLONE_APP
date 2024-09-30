@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { auth } from './auth';
+import { getToken } from './getToken';
 
 export const checkSavedTracks = async (
   albumIds: string[]
 ): Promise<boolean[]> => {
   try {
-    const { token } = await auth();
+    const token = await getToken();
 
     if (albumIds.length > 50) {
       throw new Error('Cannot check more than 50 album IDs at once.');

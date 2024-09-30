@@ -2,7 +2,13 @@ import * as React from 'react';
 
 import { Playlist } from '@components';
 
-import { checkSavedTracks, getAlbum, getArtist, getArtistAlbums } from '@api';
+import {
+  checkSavedAlbums,
+  checkSavedTracks,
+  getAlbum,
+  getArtist,
+  getArtistAlbums,
+} from '@api';
 import { PlaylistModel, ArtistAlbumModel } from '@models';
 import { FALLBACK_ALBUM_ID } from '@data';
 import { ArtistModel } from '../models/Album/ArtistModel';
@@ -53,9 +59,7 @@ export const PlaylistScreen = ({
         ).map((albums, i) => ({ artist: artists[i].name, albums: albums }));
         setArtistsAlbums(artistAlbums);
 
-        // TODO: get user-library-read access trough oAuth
-        // const savedAlbums = await checkSavedAlbums([FALLBACK_ALBUM_ID]);
-        const savedAlbums = [true];
+        const savedAlbums = await checkSavedAlbums([albumId]);
         setIsAlbumSaved(savedAlbums[0]);
 
         const tracks = album.tracks.items;
