@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Album } from '../Album';
-import { YourLibraryHeader } from './PlaylistHeader';
+import { YourLibraryHeader } from './YourLibraryHeader';
 
 import { useApplicationDimensions } from '@hooks';
 import { SavedAlbumModel, UserProfileModel } from '@models';
