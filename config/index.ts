@@ -2,6 +2,8 @@ export { type IconType } from './images';
 export {
   PLATFORMS,
   PAGES,
+  SIZES,
+  SHAPES,
   SEPARATOR,
   BOTTOM_NAVIGATION_HEIGHT,
   ALBUM_HEADER_HEIGHT,
@@ -19,7 +21,5 @@ export {
   type AlbumsResponseType,
   type SavedAlbumsResponseType,
   AlbumTypes,
-  SizeTypes,
-  ShapeTypes,
   AuthResponse,
 } from './types';

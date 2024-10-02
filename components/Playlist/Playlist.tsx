@@ -28,7 +28,8 @@ import {
   BOTTOM_NAVIGATION_HEIGHT,
   COLORS,
   SEPARATOR,
-  SizeTypes,
+  SHAPES,
+  SIZES,
 } from '@config';
 
 import { styles } from './styles';
@@ -146,8 +147,8 @@ export const Playlist = ({
             key={index}
             title={`${translations.album.slider.headerText} ${artist}`}
             slides={albums}
-            size={SizeTypes.MEDIUM}
-            shape="squareBorder"
+            size={SIZES.MEDIUM}
+            shape={SHAPES.SQUARE_BORDER}
             withShowAll={true}
           />
         ))}

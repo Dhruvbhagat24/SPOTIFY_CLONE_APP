@@ -10,7 +10,8 @@ import {
   AlbumTypes,
   BOTTOM_NAVIGATION_HEIGHT,
   SEPARATOR,
-  SizeTypes,
+  SHAPES,
+  SIZES,
 } from '@config';
 import { translations } from '@data';
 
@@ -33,8 +34,8 @@ export const YourLibrary = ({ savedAlbums }: YourLibraryPropsType) => {
           <Album
             key={id}
             id={id}
-            shape="square"
-            size={SizeTypes.SMALL}
+            shape={SHAPES.SQUARE}
+            size={SIZES.SMALL}
             title={name}
             subtitle={
               albumType === AlbumTypes.ALBUM

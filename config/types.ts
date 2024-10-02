@@ -17,19 +17,6 @@ export enum AlbumTypes {
   COMPILATION = 'compilation',
 }
 
-export enum SizeTypes {
-  BIG = 152,
-  MEDIUM = 140,
-  SMALL = 120,
-  VER_SMALL = 100,
-}
-
-export enum ShapeTypes {
-  SQUARE = 'square',
-  SQUARE_BORDER = 'squareBorder',
-  CIRCLE = 'circle',
-}
-
 type ImageType = {
   url: string;
   height: number;

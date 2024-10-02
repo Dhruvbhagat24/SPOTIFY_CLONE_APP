@@ -12,6 +12,19 @@ export enum PAGES {
   LIBRARY = 'library',
 }
 
+export enum SIZES {
+  BIG = 152,
+  MEDIUM = 140,
+  SMALL = 120,
+  VER_SMALL = 100,
+}
+
+export enum SHAPES {
+  SQUARE = 0,
+  SQUARE_BORDER = 4,
+  CIRCLE = 100,
+}
+
 export const SEPARATOR = '\u2022';
 export const SOUND_COPYRIGHT_SIGN = '\u2117';
 export const COPYRIGHT_SIGN = '\u00A9';

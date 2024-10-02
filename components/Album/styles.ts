@@ -1,21 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, ShapeTypes, SizeTypes } from '@config';
+import { COLORS, SHAPES, SIZES } from '@config';
 
-const getBorderRadius = (shape: string) => {
-  if (shape === ShapeTypes.SQUARE) {
-    return 0;
-  }
-  if (shape === ShapeTypes.SQUARE_BORDER) {
-    return 4;
-  }
-  if (shape === ShapeTypes.CIRCLE) {
-    return 100;
-  }
-
-  return 0;
-};
-
-export const styling = (size: SizeTypes, shape: string) =>
+export const styling = (size: SIZES, shape: SHAPES) =>
   StyleSheet.create({
     album: {
       width: size,
@@ -26,7 +12,7 @@ export const styling = (size: SizeTypes, shape: string) =>
       position: 'relative',
       width: size,
       height: size,
-      borderRadius: getBorderRadius(shape),
+      borderRadius: shape,
     },
     albumImage: {
       ...StyleSheet.absoluteFillObject,
