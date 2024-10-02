@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Playlist } from '@components';
-
 import {
   checkSavedAlbums,
   checkSavedTracks,
@@ -9,9 +8,8 @@ import {
   getArtist,
   getArtistAlbums,
 } from '@api';
-import { PlaylistModel, AlbumModel } from '@models';
+import { PlaylistModel, AlbumModel, ArtistModel } from '@models';
 import { FALLBACK_ALBUM_ID } from '@data';
-import { ArtistModel } from '../models/Album/ArtistModel';
 import { parseToArtist, parseToAlbums, parseToPlaylist } from '@utils';
 
 export type AlbumScreenPropsType = {

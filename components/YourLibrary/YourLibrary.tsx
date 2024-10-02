@@ -11,6 +11,7 @@ import { SavedAlbumModel, UserProfileModel } from '@models';
 import {
   AlbumTypes,
   BOTTOM_NAVIGATION_HEIGHT,
+  CATEGORIES,
   SEPARATOR,
   SHAPES,
   SIZES,
@@ -31,12 +32,21 @@ export const YourLibrary = ({
   const { width, height } = useApplicationDimensions();
   const { top: statusBarOffset } = useSafeAreaInsets();
 
+  const categories = [
+    CATEGORIES.PLAYLISTS,
+    CATEGORIES.PODCASTS,
+    CATEGORIES.ALBUMS,
+    CATEGORIES.ARTISTS,
+    CATEGORIES.DOWNLOADED,
+  ];
+
   return (
     <View style={{ width, height }}>
       <YourLibraryHeader
         imageURL={userProfile.imageURL}
         headerTitle={translations.router.library}
-        categories={['playlists', 'podcasts', 'albums', 'artist', 'downloaded']}
+        // TODO: investigate if categories should be fetch or can be static - if static move to constants
+        categories={categories}
       />
       <ScrollView
         style={[
@@ -58,7 +68,7 @@ export const YourLibrary = ({
               subtitle={
                 albumType === AlbumTypes.ALBUM
                   ? artists
-                  : `${translations.playlist.type[albumType]} ${SEPARATOR} ${artists}`
+                  : `${translations.type[albumType]} ${SEPARATOR} ${artists}`
               }
               imageURL={imageURL}
             />

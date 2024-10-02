@@ -4,12 +4,21 @@ export const EN_GB = {
     search: 'Search',
     library: 'Your Library',
   },
+  type: {
+    album: 'Album',
+    albums: 'Albums',
+    artist: 'Artist',
+    artists: 'Artists',
+    compilation: 'Compilation',
+    downloaded: 'Downloaded',
+    playlist: 'Playlist',
+    playlists: 'Playlists',
+    podcast: 'Podcast',
+    podcasts: 'Podcasts',
+    single: 'Single',
+    singles: 'Singles',
+  },
   playlist: {
-    type: {
-      album: 'Album',
-      single: 'Single',
-      compilation: 'Compilation',
-    },
     slider: {
       headerText: 'More of: ',
       pressableText: 'Show all',
@@ -18,5 +27,4 @@ export const EN_GB = {
       tracks: 'tracks',
     },
   },
-  library: {},
 };

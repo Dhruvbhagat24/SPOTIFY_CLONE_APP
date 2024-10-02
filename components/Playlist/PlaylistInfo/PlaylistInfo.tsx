@@ -30,7 +30,7 @@ export const PlaylistInfo = ({
     <Text style={styles.artistsText}>{artists}</Text>
     <View style={styles.albumTypeReleaseDateView}>
       <Text style={styles.albumTypeReleaseDateText}>
-        {translations.playlist.type[albumType]}
+        {translations.type[albumType]}
       </Text>
       <Text style={[styles.albumTypeReleaseDateText, styles.separator]}>
         {SEPARATOR}

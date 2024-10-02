@@ -149,7 +149,7 @@ describe('Slider', () => {
 //           ).toBeTruthy();
 //           expect(
 //             within(albumType).getByText(
-//               translations.playlist.type[expected.albumType]
+//               translations.type[expected.albumType]
 //             )
 //           ).toBeTruthy();
 //         });

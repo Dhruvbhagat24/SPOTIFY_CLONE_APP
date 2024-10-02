@@ -63,7 +63,7 @@ export const Slider = ({
               shape={shape}
               size={size}
               title={name}
-              subtitle={`${releaseDate} ${SEPARATOR} ${translations.playlist.type[albumType]}`}
+              subtitle={`${releaseDate} ${SEPARATOR} ${translations.type[albumType]}`}
               imageURL={imageURL}
             />
           ))}

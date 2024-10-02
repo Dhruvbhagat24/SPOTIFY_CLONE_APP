@@ -22,7 +22,16 @@ export enum SIZES {
 export enum SHAPES {
   SQUARE = 0,
   SQUARE_BORDER = 4,
-  CIRCLE = 100,
+  OVAL = 20,
+  CIRCLE = 9999,
+}
+
+export enum CATEGORIES {
+  PLAYLISTS = 'playlists',
+  PODCASTS = 'podcasts',
+  ALBUMS = 'albums',
+  ARTISTS = 'artists',
+  DOWNLOADED = 'downloaded',
 }
 
 export const SEPARATOR = '\u2022';
