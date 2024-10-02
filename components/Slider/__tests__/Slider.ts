@@ -113,8 +113,8 @@ describe('Slider', () => {
 //       );
 
 //       const expectedValues = defaultProps.artistsAlbums.map(({ artist }) => ({
-//         headerTitleText: `${translations.album.slider.headerText} ${artist}`,
-//         headerPressableText: translations.album.slider.pressableText,
+//         headerTitleText: `${translations.playlist.slider.headerText} ${artist}`,
+//         headerPressableText: translations.playlist.slider.pressableText,
 //       }));
 
 //       expectedValues.forEach((expectedValue, i) => {
@@ -157,7 +157,7 @@ describe('Slider', () => {
 //           ).toBeTruthy();
 //           expect(
 //             within(albumType).getByText(
-//               translations.album.type[expected.albumType]
+//               translations.playlist.type[expected.albumType]
 //             )
 //           ).toBeTruthy();
 //         });

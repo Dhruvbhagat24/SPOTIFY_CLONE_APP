@@ -27,7 +27,7 @@ export const BottomNavigation = () => {
       />
       <Pressable
         style={styles.pressable}
-        onPress={() => router.replace(PAGES.HOME)}
+        onPress={() => router.replace(`/${PAGES.HOME}`)}
         testID="home-pressable"
       >
         <AntDesign
@@ -44,7 +44,7 @@ export const BottomNavigation = () => {
       </Pressable>
       <Pressable
         style={styles.pressable}
-        onPress={() => router.replace(PAGES.SEARCH)}
+        onPress={() => router.replace(`/${PAGES.SEARCH}`)}
         testID="search-pressable"
       >
         <Ionicons
@@ -61,7 +61,7 @@ export const BottomNavigation = () => {
       </Pressable>
       <Pressable
         style={styles.pressable}
-        onPress={() => router.replace(PAGES.LIBRARY)}
+        onPress={() => router.replace(`/${PAGES.LIBRARY}`)}
         testID="library-pressable"
       >
         <Ionicons

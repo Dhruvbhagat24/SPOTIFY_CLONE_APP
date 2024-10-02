@@ -45,7 +45,7 @@ export const PlaylistSummary = ({
       <Text
         style={styles.totalTracksText}
         testID="total-tracks-text"
-      >{`${totalTracks} ${translations.album.copyrights.tracks}`}</Text>
+      >{`${totalTracks} ${translations.playlist.copyrights.tracks}`}</Text>
       <Text style={styles.separator}>{SEPARATOR}</Text>
       <Text style={styles.totalDurationText} testID="total-duration-text">
         {getDisplayTime(totalDuration)}

@@ -23,7 +23,12 @@ export const LoginScreen = () => {
   const [request, response, promptAsync] = useAuthRequest(
     {
       clientId: clientID as string,
-      scopes: ['user-library-read', 'playlist-read-private'],
+      scopes: [
+        'user-library-read',
+        'user-read-private',
+        'user-read-email',
+        'playlist-read-private',
+      ],
       responseType: ResponseType.Token,
       redirectUri: makeRedirectUri(),
     },

@@ -44,7 +44,7 @@ export const Slider = ({
               style={styles.headerPressableText}
               testID="header-pressable-text"
             >
-              {translations.album.slider.pressableText}
+              {translations.playlist.slider.pressableText}
             </Text>
           </Pressable>
         )}
@@ -63,7 +63,7 @@ export const Slider = ({
               shape={shape}
               size={size}
               title={name}
-              subtitle={`${releaseDate} ${SEPARATOR} ${translations.album.type[albumType]}`}
+              subtitle={`${releaseDate} ${SEPARATOR} ${translations.playlist.type[albumType]}`}
               imageUrl={images[ALBUM_IMAGE_SIZE_VARIANT].url}
             />
           ))}

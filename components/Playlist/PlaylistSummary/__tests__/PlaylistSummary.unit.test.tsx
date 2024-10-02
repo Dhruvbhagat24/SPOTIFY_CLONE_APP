@@ -45,7 +45,7 @@ describe('PlaylistSummary', () => {
 
     it('displays properly formatted total tracks text', () => {
       const totalTracksText = container.getByTestId(TEST_IDS.TOTAL_TRACKS_TEXT);
-      const expectedResult = `${defaultProps.totalTracks} ${translations.album.copyrights.tracks}`;
+      const expectedResult = `${defaultProps.totalTracks} ${translations.playlist.copyrights.tracks}`;
 
       expect(within(totalTracksText).getByText(expectedResult)).toBeTruthy();
     });

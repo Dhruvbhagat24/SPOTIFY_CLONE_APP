@@ -4,7 +4,7 @@ export const EN_GB = {
     search: 'Search',
     library: 'Your Library',
   },
-  album: {
+  playlist: {
     type: {
       album: 'Album',
       single: 'Single',
@@ -17,12 +17,6 @@ export const EN_GB = {
     copyrights: {
       tracks: 'tracks',
     },
-    albumInfo: {
-      albumType: {
-        album: 'Album',
-        single: 'Single',
-        compilation: 'Compilation',
-      },
-    },
   },
+  library: {},
 };
