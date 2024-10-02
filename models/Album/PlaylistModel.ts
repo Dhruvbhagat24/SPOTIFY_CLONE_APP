@@ -3,18 +3,10 @@ export type PlaylistModel = {
   type: 'album';
   albumType: 'album' | 'single' | 'compilation';
   name: string;
-  images: {
-    url: string;
-    height: number;
-    width: number;
-  }[];
+  imageURL: string;
   artists: { type: 'artist'; id: string }[];
   releaseDate: string;
   tracks: {
-    previous: string | null;
-    next: string | null;
-    limit: number;
-    offset: number;
     total: number;
     items: {
       id: string;

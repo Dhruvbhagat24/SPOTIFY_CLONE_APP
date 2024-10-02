@@ -8,35 +8,31 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { styles } from './styles';
+import { PLAYLIST_IMAGE_SIZE } from '@config';
 
 export type PlaylistCoverPropsType = {
-  image: {
-    width: number;
-    height: number;
-    url: string;
-  };
+  imageURL: string;
   animatedValue: SharedValue<number>;
 };
 
 export const PlaylistCover = ({
-  image,
+  imageURL,
   animatedValue,
 }: PlaylistCoverPropsType) => {
-  const { width, height, url } = image;
   const animatedImageStyles = useAnimatedStyle(() => ({
     transform: [
       {
         translateY: interpolate(
           animatedValue.value,
-          [-height, 0, height],
-          [-height / 2, 0, height / 1.5],
+          [-PLAYLIST_IMAGE_SIZE, 0, PLAYLIST_IMAGE_SIZE],
+          [-PLAYLIST_IMAGE_SIZE / 2, 0, PLAYLIST_IMAGE_SIZE / 1.5],
           Extrapolation.CLAMP
         ),
       },
       {
         scale: interpolate(
           animatedValue.value,
-          [-height / 2, 0, height * 2],
+          [-PLAYLIST_IMAGE_SIZE / 2, 0, PLAYLIST_IMAGE_SIZE * 2],
           [1.25, 1, 0],
           Extrapolation.CLAMP
         ),
@@ -44,7 +40,7 @@ export const PlaylistCover = ({
     ],
     opacity: interpolate(
       animatedValue.value,
-      [0, height / 1.5],
+      [0, PLAYLIST_IMAGE_SIZE / 1.5],
       [1, 0],
       Extrapolation.CLAMP
     ),
@@ -53,8 +49,12 @@ export const PlaylistCover = ({
   return (
     <View style={styles.albumImageView} testID="album-cover">
       <Animated.Image
-        style={[styles.albumImage, { width, height }, animatedImageStyles]}
-        source={{ uri: url }}
+        style={[
+          styles.albumImage,
+          { width: PLAYLIST_IMAGE_SIZE, height: PLAYLIST_IMAGE_SIZE },
+          animatedImageStyles,
+        ]}
+        source={{ uri: imageURL }}
         resizeMode="cover"
         testID="album-cover-image"
       />

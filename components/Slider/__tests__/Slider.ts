@@ -66,11 +66,7 @@ describe('Slider', () => {
 //             name: 'Album title 1 mock',
 //             releaseDate: '2023-10-21',
 //             albumType: 'album',
-//             images: [
-//               { url: 'url 1', width: 1, height: 1 },
-//               { url: 'url 2', width: 2, height: 2 },
-//               { url: 'url 3', width: 3, height: 3 },
-//             ],
+//             imageURL: 'url 1',
 //           },
 //           {
 //             type: 'album',
@@ -78,11 +74,7 @@ describe('Slider', () => {
 //             name: 'Album title 2 mock',
 //             releaseDate: '2013-09-14',
 //             albumType: 'album',
-//             images: [
-//               { url: 'url 1', width: 1, height: 1 },
-//               { url: 'url 2', width: 2, height: 2 },
-//               { url: 'url 3', width: 3, height: 3 },
-//             ],
+//             imageURL: 'url 2',
 //           },
 //         ],
 //       },
@@ -150,7 +142,7 @@ describe('Slider', () => {
 //           const expected =
 //             defaultProps.artistsAlbums[artistIndex].albums[albumIndex];
 
-//           expect(image.props.source.uri).toEqual(expected.images[1].url);
+//           expect(image.props.source.uri).toEqual(expected.imageURL);
 //           expect(within(title).getByText(expected.name)).toBeTruthy();
 //           expect(
 //             within(releaseDate).getByText(expected.releaseDate)

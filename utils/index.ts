@@ -1,5 +1,6 @@
 export {
   parseToAlbums,
+  parseToPlaylist,
   parseToArtist,
   parseToSavedAlbums,
   parseToUserProfile,

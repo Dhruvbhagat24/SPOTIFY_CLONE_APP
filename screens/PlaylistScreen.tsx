@@ -12,7 +12,7 @@ import {
 import { PlaylistModel, AlbumModel } from '@models';
 import { FALLBACK_ALBUM_ID } from '@data';
 import { ArtistModel } from '../models/Album/ArtistModel';
-import { parseToArtist, parseToAlbums } from '@utils';
+import { parseToArtist, parseToAlbums, parseToPlaylist } from '@utils';
 
 export type AlbumScreenPropsType = {
   albumId: string;
@@ -38,7 +38,7 @@ export const PlaylistScreen = ({
   React.useEffect(() => {
     (async () => {
       try {
-        const album = await getAlbum(albumId);
+        const album = parseToPlaylist(await getAlbum(albumId));
         setAlbumData(album);
 
         const artists = await Promise.all(
@@ -60,14 +60,14 @@ export const PlaylistScreen = ({
         const savedAlbums = await checkSavedAlbums([albumId]);
         setIsAlbumSaved(savedAlbums[0]);
 
-        const tracks = album.tracks.items;
+        const tracksArr = album.tracks.items;
 
         if (savedAlbums[0]) {
-          setSavedTracks([...Array(tracks.length).fill(true)]);
+          setSavedTracks([...Array(tracksArr.length).fill(true)]);
           return;
         }
 
-        const trackIdsArr = tracks.map((track) => track.id);
+        const trackIdsArr = tracksArr.map((track) => track.id);
         const savedTracksArr = await checkSavedTracks(trackIdsArr);
 
         setSavedTracks(savedTracksArr);

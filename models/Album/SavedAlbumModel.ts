@@ -4,9 +4,5 @@ export type SavedAlbumModel = {
   id: string;
   name: string;
   artists: string;
-  image: {
-    url: string;
-    height: number;
-    width: number;
-  };
+  imageURL: string;
 };

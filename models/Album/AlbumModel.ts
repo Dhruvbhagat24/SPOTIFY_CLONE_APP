@@ -4,9 +4,5 @@ export type AlbumModel = {
   id: string;
   name: string;
   releaseDate: string;
-  images: {
-    url: string;
-    height: number;
-    width: number;
-  }[];
+  imageURL: string;
 };

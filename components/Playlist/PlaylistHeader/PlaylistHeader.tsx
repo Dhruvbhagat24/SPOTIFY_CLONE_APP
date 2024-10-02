@@ -11,32 +11,28 @@ import { useNavigation } from 'expo-router';
 import { PlaylistBackground } from '../PlaylistBackground';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { ALBUM_HEADER_HEIGHT } from '@config';
+import { ALBUM_HEADER_HEIGHT, PLAYLIST_IMAGE_SIZE } from '@config';
 import { styles } from './styles';
 
 export type PlaylistHeaderPropsType = {
   headerTitle: string;
-  image: {
-    width: number;
-    height: number;
-    url: string;
-  };
+  imageURL: string;
   animatedValue: SharedValue<number>;
 };
 
 export const PlaylistHeader = ({
   headerTitle,
-  image,
+  imageURL,
   animatedValue,
 }: PlaylistHeaderPropsType) => {
   const navigation = useNavigation<AppNavigationProps>();
-  const { height, url } = image;
-  const scrollYOnHeaderAppear = height + height * 0.05;
+  const scrollYOnHeaderAppear =
+    PLAYLIST_IMAGE_SIZE + PLAYLIST_IMAGE_SIZE * 0.05;
 
   const animatedHeaderStyles = useAnimatedStyle(() => ({
     opacity: interpolate(
       animatedValue.value,
-      [0, height * 0.75, scrollYOnHeaderAppear],
+      [0, PLAYLIST_IMAGE_SIZE * 0.75, scrollYOnHeaderAppear],
       [0, 0, 1],
       Extrapolation.CLAMP
     ),
@@ -84,7 +80,7 @@ export const PlaylistHeader = ({
           styles.albumHeaderContent,
         ]}
       >
-        <PlaylistBackground url={url} darkness={0.4} />
+        <PlaylistBackground url={imageURL} darkness={0.4} />
         <Animated.Text
           style={[animatedHeaderTextStyles, styles.albumHeaderTitleText]}
           testID="header-title-text"

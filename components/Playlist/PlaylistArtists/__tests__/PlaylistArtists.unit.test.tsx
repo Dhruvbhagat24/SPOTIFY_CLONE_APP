@@ -30,11 +30,7 @@ describe('PlaylistArtists', () => {
         name: 'Artist Name 2 mock',
         followers: { href: 'Url mock', total: 12 },
         genres: ['genre1', 'genre2'],
-        images: [
-          { url: 'url 1', width: 1, height: 1 },
-          { url: 'url 2', width: 2, height: 2 },
-          { url: 'url 3', width: 3, height: 3 },
-        ],
+        imageURL: 'url 1',
         popularity: 78,
       },
       {
@@ -43,11 +39,7 @@ describe('PlaylistArtists', () => {
         name: 'Artist Name 2 mock',
         followers: { href: 'Url mock', total: 25 },
         genres: ['genre1', 'genre2'],
-        images: [
-          { url: 'url 1', width: 1, height: 1 },
-          { url: 'url 2', width: 2, height: 2 },
-          { url: 'url 3', width: 3, height: 3 },
-        ],
+        imageURL: 'url 1',
         popularity: 24,
       },
     ],
@@ -88,8 +80,9 @@ describe('PlaylistArtists', () => {
       const Images = container.getAllByTestId(TEST_IDS.ARTIST_IMAGE);
 
       Images.forEach((Image, i) => {
-        const currentImageProp = defaultProps.artists[i].images[2];
-        expect(Image.props.source.uri).toEqual(currentImageProp.url);
+        expect(Image.props.source.uri).toEqual(
+          defaultProps.artists[i].imageURL
+        );
       });
     });
 

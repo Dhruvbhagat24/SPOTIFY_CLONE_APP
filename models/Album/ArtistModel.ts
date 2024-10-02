@@ -4,10 +4,6 @@ export type ArtistModel = {
   name: string;
   followers: { href: string | null; total: number };
   genres: string[];
-  images: {
-    url: string;
-    height: number;
-    width: number;
-  }[];
+  imageURL: string;
   popularity: number;
 };

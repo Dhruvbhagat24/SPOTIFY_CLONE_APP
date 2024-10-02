@@ -48,7 +48,7 @@ export const YourLibrary = ({
         ]}
       >
         <View style={styles.container}>
-          {savedAlbums.map(({ id, name, artists, albumType, image }) => (
+          {savedAlbums.map(({ id, name, artists, albumType, imageURL }) => (
             <Album
               key={id}
               id={id}
@@ -60,7 +60,7 @@ export const YourLibrary = ({
                   ? artists
                   : `${translations.playlist.type[albumType]} ${SEPARATOR} ${artists}`
               }
-              imageUrl={image.url}
+              imageURL={imageURL}
             />
           ))}
         </View>

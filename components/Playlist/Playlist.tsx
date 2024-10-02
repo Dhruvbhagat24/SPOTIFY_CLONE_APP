@@ -24,7 +24,6 @@ import { translations } from '@data';
 import { PlaylistModel, AlbumModel, ArtistModel } from '@models';
 import { useApplicationDimensions } from '@hooks';
 import {
-  ALBUM_IMAGE_SIZE_VARIANT,
   BOTTOM_NAVIGATION_HEIGHT,
   COLORS,
   SEPARATOR,
@@ -58,9 +57,9 @@ export const Playlist = ({
 
   // TODO: to be removed and replaced with API separate + call
   const isDownloaded = false;
-  const { albumType, name, releaseDate, images, tracks, copyrights } = album;
-  const image = images[ALBUM_IMAGE_SIZE_VARIANT];
-  const { height: imageHeight } = image;
+  const { albumType, name, releaseDate, imageURL, tracks, copyrights } = album;
+
+  const imageHeight = 300;
 
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
@@ -80,7 +79,7 @@ export const Playlist = ({
 
   return (
     <View style={{ width }}>
-      <PlaylistBackground url={image.url} darkness={0.2} />
+      <PlaylistBackground url={imageURL} darkness={0.2} />
       <BackgroundOverlay
         styles={[animatedGradientOverlay, styles.albumGradientOverlay]}
         colors={['transparent', COLORS.PRIMARY]}
@@ -95,7 +94,7 @@ export const Playlist = ({
           headerBackground: () => (
             <PlaylistHeader
               headerTitle={name}
-              image={image}
+              imageURL={imageURL}
               animatedValue={scrollOffset}
             />
           ),
@@ -109,10 +108,7 @@ export const Playlist = ({
         scrollEventThrottle={16}
         ref={scrollRef}
       >
-        <PlaylistCover
-          image={images[ALBUM_IMAGE_SIZE_VARIANT]}
-          animatedValue={scrollOffset}
-        />
+        <PlaylistCover imageURL={imageURL} animatedValue={scrollOffset} />
         <PlaylistInfo
           name={name}
           artists={artists.map((a) => a.name).join(` ${SEPARATOR} `)}
@@ -136,7 +132,7 @@ export const Playlist = ({
         <PlaylistSummary
           releaseDate={releaseDate}
           totalTracks={tracks.total}
-          totalDuration={album.tracks.items.reduce(
+          totalDuration={tracks.items.reduce(
             (acc, { durationMs }) => acc + durationMs,
             0
           )}

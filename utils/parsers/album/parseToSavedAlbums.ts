@@ -12,6 +12,6 @@ export const parseToSavedAlbums = (
     albumType: album.album_type,
     id: album.id,
     name: album.name,
-    image: album.images[LIBRARY_ALBUM_IMAGE_SIZE_VARIANT],
+    imageURL: album.images[LIBRARY_ALBUM_IMAGE_SIZE_VARIANT].url,
     artists: album.artists.map((artist) => artist.name).join(', '),
   }));

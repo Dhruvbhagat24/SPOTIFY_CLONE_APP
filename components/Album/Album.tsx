@@ -7,7 +7,7 @@ import { styling } from './styles';
 
 export type AlbumPropsType = {
   id: string;
-  imageUrl: string;
+  imageURL: string;
   title?: string;
   subtitle?: string;
   size?: SIZES;
@@ -18,7 +18,7 @@ export const Album = ({
   id,
   title,
   subtitle,
-  imageUrl,
+  imageURL,
   size = SIZES.BIG,
   shape = SHAPES.SQUARE,
 }: AlbumPropsType) => {
@@ -34,7 +34,7 @@ export const Album = ({
         <Image
           testID="album-image"
           style={styles.albumImage}
-          source={{ uri: imageUrl }}
+          source={{ uri: imageURL }}
         />
       </View>
       {title && (

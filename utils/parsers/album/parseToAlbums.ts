@@ -1,4 +1,4 @@
-import { AlbumsResponseType } from '@config';
+import { ALBUM_IMAGE_SIZE_VARIANT, AlbumsResponseType } from '@config';
 import { AlbumModel } from '@models';
 
 export const parseToAlbums = (data: AlbumsResponseType): AlbumModel[] =>
@@ -8,5 +8,5 @@ export const parseToAlbums = (data: AlbumsResponseType): AlbumModel[] =>
     id: item.id,
     name: item.name,
     releaseDate: item.release_date.split('-')[0],
-    images: item.images,
+    imageURL: item.images[ALBUM_IMAGE_SIZE_VARIANT].url,
   }));
