@@ -11,6 +11,25 @@ export enum AuthResponse {
   SUCCESS = 'success',
 }
 
+export enum AlbumTypes {
+  ALBUM = 'album',
+  SINGLE = 'single',
+  COMPILATION = 'compilation',
+}
+
+export enum SizeTypes {
+  BIG = 152,
+  MEDIUM = 140,
+  SMALL = 120,
+  VER_SMALL = 100,
+}
+
+export enum ShapeTypes {
+  SQUARE = 'square',
+  SQUARE_BORDER = 'squareBorder',
+  CIRCLE = 'circle',
+}
+
 type ImageType = {
   url: string;
   height: number;
@@ -25,6 +44,7 @@ export type AlbumResponseType = {
   images: ImageType[];
   artists: {
     type: 'artist';
+    name: string;
     id: string;
   }[];
   release_date: string;
@@ -71,7 +91,7 @@ export type ArtistResponseType = {
   };
 };
 
-export type ArtistAlbumsResponseType = {
+export type AlbumsResponseType = {
   href: string;
   limit: number;
   next: string | null;
@@ -79,4 +99,14 @@ export type ArtistAlbumsResponseType = {
   previous: string | null;
   total: 888;
   items: AlbumResponseType[];
+};
+
+export type SavedAlbumsResponseType = {
+  href: string;
+  limit: number;
+  next: string | null;
+  offset: number;
+  previous: string | null;
+  total: 888;
+  items: { album: AlbumResponseType }[];
 };

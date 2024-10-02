@@ -32,6 +32,11 @@ export const styles = StyleSheet.create({
   scrollView: {
     paddingVertical: 4,
   },
+  scrollViewContainer: {
+    flexDirection: 'row',
+    gap: 16,
+    marginHorizontal: 16,
+  },
   album: {
     padding: 8,
   },

@@ -7,6 +7,7 @@ export {
   ALBUM_HEADER_HEIGHT,
   ALBUM_IMAGE_SIZE_VARIANT,
   ALBUM_ARTIST_IMAGE_SIZE_VARIANT,
+  LIBRARY_ALBUM_IMAGE_SIZE_VARIANT,
   SOUND_COPYRIGHT_SIGN,
   COPYRIGHT_SIGN,
 } from './constants';
@@ -15,6 +16,10 @@ export {
   type ExpoConfigType,
   type AlbumResponseType,
   type ArtistResponseType,
-  type ArtistAlbumsResponseType,
+  type AlbumsResponseType,
+  type SavedAlbumsResponseType,
+  AlbumTypes,
+  SizeTypes,
+  ShapeTypes,
   AuthResponse,
 } from './types';

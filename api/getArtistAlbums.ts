@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { ArtistAlbumsResponseType } from '@config';
 import { auth } from './auth';
+import { AlbumsResponseType } from '@config';
 
 export const getArtistAlbums = async (
   artistId: string,
   includeGroups: string = 'album,single,appears_on,compilation',
   limit: number = 6,
   offset: number = 0
-): Promise<ArtistAlbumsResponseType> => {
+): Promise<AlbumsResponseType> => {
   try {
     const { token } = await auth();
 
@@ -23,7 +23,7 @@ export const getArtistAlbums = async (
           Authorization: `Bearer ${token}`,
         },
       }
-    )) as { data: ArtistAlbumsResponseType };
+    )) as { data: AlbumsResponseType };
 
     return response.data;
   } catch (error) {

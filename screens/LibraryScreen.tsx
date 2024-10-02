@@ -1,21 +1,30 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { COLORS } from '@config';
+import { YourLibrary } from '@components';
+import { SavedAlbumModel } from '@models';
+import { getSavedAlbums } from '@api';
+import { parseToSavedAlbums } from '@utils';
 
 export const LibraryScreen = () => {
-  const { top: statusBarOffset } = useSafeAreaInsets();
+  const [savedAlbumsData, setSavedAlbumsData] = React.useState<
+    SavedAlbumModel[] | null
+  >(null);
 
-  return (
-    <View
-      style={{
-        paddingTop: statusBarOffset,
-        backgroundColor: COLORS.PRIMARY,
-        height: '100%',
-      }}
-    >
-      <Text>Library Screen</Text>
-    </View>
-  );
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const savedAlbums = parseToSavedAlbums(await getSavedAlbums(50, 0));
+        setSavedAlbumsData(savedAlbums);
+      } catch (error) {
+        setSavedAlbumsData(null);
+        console.error('Failed to get saved albums data:', error);
+      }
+    })();
+  }, []);
+
+  if (savedAlbumsData === null) {
+    return null;
+  }
+
+  return <YourLibrary savedAlbums={savedAlbumsData} />;
 };

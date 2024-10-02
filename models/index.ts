@@ -1,6 +1,6 @@
 export type {
   ArtistModel,
-  ArtistAlbumModel,
+  SavedAlbumModel,
   PlaylistModel,
   AlbumModel,
 } from './Album';

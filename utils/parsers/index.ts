@@ -1,1 +1,1 @@
-export { parseToArtistAlbums, parseToArtist } from './album';
+export { parseToAlbums, parseToArtist, parseToSavedAlbums } from './album';

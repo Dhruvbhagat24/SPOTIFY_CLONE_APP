@@ -1,9 +1,7 @@
-import { ArtistAlbumsResponseType } from '@config';
-import { ArtistAlbumModel } from '@models';
+import { AlbumsResponseType } from '@config';
+import { AlbumModel } from '@models';
 
-export const parseToArtistAlbums = (
-  data: ArtistAlbumsResponseType
-): ArtistAlbumModel[] =>
+export const parseToAlbums = (data: AlbumsResponseType): AlbumModel[] =>
   data.items.map((item) => ({
     type: item.type,
     albumType: item.album_type,

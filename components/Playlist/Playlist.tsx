@@ -21,13 +21,14 @@ import { PlaylistArtists } from './PlaylistArtists';
 import { PlaylistCopyrights } from './PlaylistCopyrights';
 
 import { translations } from '@data';
-import { PlaylistModel, ArtistAlbumModel, ArtistModel } from '@models';
+import { PlaylistModel, AlbumModel, ArtistModel } from '@models';
 import { useApplicationDimensions } from '@hooks';
 import {
   ALBUM_IMAGE_SIZE_VARIANT,
   BOTTOM_NAVIGATION_HEIGHT,
   COLORS,
   SEPARATOR,
+  SizeTypes,
 } from '@config';
 
 import { styles } from './styles';
@@ -38,7 +39,7 @@ export type PlaylistPropsType = {
   artists: ArtistModel[];
   artistsAlbums: {
     artist: string;
-    albums: ArtistAlbumModel[];
+    albums: AlbumModel[];
   }[];
   isAlbumSaved: boolean;
   savedTracks: boolean[];
@@ -145,7 +146,7 @@ export const Playlist = ({
             key={index}
             title={`${translations.album.slider.headerText} ${artist}`}
             slides={albums}
-            size="medium"
+            size={SizeTypes.MEDIUM}
             shape="squareBorder"
             withShowAll={true}
           />

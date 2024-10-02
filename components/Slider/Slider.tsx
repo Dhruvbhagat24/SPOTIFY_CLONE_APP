@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Album } from '../Album';
 
 import { translations } from '@data';
-import { ALBUM_IMAGE_SIZE_VARIANT, SEPARATOR } from '@config';
+import { ALBUM_IMAGE_SIZE_VARIANT, SEPARATOR, SizeTypes } from '@config';
 import { AlbumModel } from '@models';
 
 import { styles } from './styles';
@@ -14,7 +14,7 @@ import { styles } from './styles';
 export type SliderPropsType = {
   title: string;
   slides: AlbumModel[];
-  size?: 'small' | 'medium' | 'big';
+  size?: SizeTypes;
   shape?: 'square' | 'squareBorder' | 'circle';
   withShowAll: boolean;
 };
@@ -22,7 +22,7 @@ export type SliderPropsType = {
 export const Slider = ({
   title,
   slides,
-  size = 'big',
+  size = SizeTypes.BIG,
   shape = 'square',
   withShowAll = false,
 }: SliderPropsType) => {
@@ -55,17 +55,19 @@ export const Slider = ({
         showsHorizontalScrollIndicator={false}
         testID="albums-scroll-view"
       >
-        {slides.map(({ id, name, releaseDate, albumType, images }) => (
-          <Album
-            key={id}
-            id={id}
-            shape={shape}
-            size={size}
-            title={name}
-            subtitle={`${releaseDate} ${SEPARATOR} ${translations.album.type[albumType]}`}
-            imageUrl={images[ALBUM_IMAGE_SIZE_VARIANT].url}
-          />
-        ))}
+        <View style={styles.scrollViewContainer}>
+          {slides.map(({ id, name, releaseDate, albumType, images }) => (
+            <Album
+              key={id}
+              id={id}
+              shape={shape}
+              size={size}
+              title={name}
+              subtitle={`${releaseDate} ${SEPARATOR} ${translations.album.type[albumType]}`}
+              imageUrl={images[ALBUM_IMAGE_SIZE_VARIANT].url}
+            />
+          ))}
+        </View>
       </ScrollView>
     </View>
   );
