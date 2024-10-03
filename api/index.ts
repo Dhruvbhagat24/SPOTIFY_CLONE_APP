@@ -7,6 +7,7 @@ export { getArtistAlbums } from './getArtistAlbums';
 
 export { getSavedAlbums } from './getSavedAlbums';
 export { getUserProfile } from './getUserProfile';
+export { getUserFollowedArtists } from './getUserFollowedArtists';
 
 export { checkSavedTracks } from './checkSavedTracks';
 export { checkSavedAlbums } from './checkSavedAlbums';

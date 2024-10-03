@@ -1,4 +1,5 @@
-import { COLORS, SHAPES } from '@config';
+import { COLORS, Shapes } from '@config';
+import { hexToRGB } from '@utils';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -23,7 +24,8 @@ export const styles = StyleSheet.create({
     width: 35,
     height: 35,
     overflow: 'hidden',
-    borderRadius: SHAPES.CIRCLE,
+    borderRadius: Shapes.CIRCLE,
+    backgroundColor: hexToRGB(COLORS.PRIMARY, 0.3),
   },
   profileImage: {
     width: '100%',
@@ -53,14 +55,5 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 10,
     paddingHorizontal: 16,
-  },
-  category: {
-    backgroundColor: COLORS.SECONDARY,
-    paddingVertical: 8,
-    paddingHorizontal: 14,
-    borderRadius: SHAPES.CIRCLE,
-  },
-  categoryText: {
-    color: COLORS.WHITE,
   },
 });

@@ -27,6 +27,7 @@ export const LoginScreen = () => {
         'user-library-read',
         'user-read-private',
         'user-read-email',
+        'user-follow-read',
         'playlist-read-private',
       ],
       responseType: ResponseType.Token,

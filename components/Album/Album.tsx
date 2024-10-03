@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useRouter } from 'expo-router';
 import { Image, Pressable, Text, View } from 'react-native';
 
-import { SHAPES, SIZES } from '@config';
+import { Shapes, Sizes } from '@config';
 import { styling } from './styles';
 
 export type AlbumPropsType = {
@@ -10,8 +10,8 @@ export type AlbumPropsType = {
   imageURL: string;
   title?: string;
   subtitle?: string;
-  size?: SIZES;
-  shape?: SHAPES;
+  size?: Sizes;
+  shape?: Shapes;
 };
 
 export const Album = ({
@@ -19,8 +19,8 @@ export const Album = ({
   title,
   subtitle,
   imageURL,
-  size = SIZES.BIG,
-  shape = SHAPES.SQUARE,
+  size = Sizes.BIG,
+  shape = Shapes.SQUARE,
 }: AlbumPropsType) => {
   const router = useRouter();
   const styles = styling(size, shape);

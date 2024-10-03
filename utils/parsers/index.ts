@@ -1,7 +1,3 @@
-export {
-  parseToAlbums,
-  parseToPlaylist,
-  parseToArtist,
-  parseToSavedAlbums,
-} from './album';
-export { parseToUserProfile } from './user';
+export { parseToAlbums, parseToPlaylist, parseToSavedAlbums } from './album';
+export { parseToArtist } from './artist';
+export { parseToUserProfile, parseToUserFollowedArtists } from './user';

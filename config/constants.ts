@@ -6,27 +6,27 @@ export enum PLATFORMS {
   WEB = 'web',
 }
 
-export enum PAGES {
+export enum Pages {
   HOME = 'home',
   SEARCH = 'search',
   LIBRARY = 'library',
 }
 
-export enum SIZES {
+export enum Sizes {
   BIG = 152,
   MEDIUM = 140,
   SMALL = 120,
   VER_SMALL = 100,
 }
 
-export enum SHAPES {
+export enum Shapes {
   SQUARE = 0,
   SQUARE_BORDER = 4,
   OVAL = 20,
   CIRCLE = 9999,
 }
 
-export enum CATEGORIES {
+export enum Categories {
   PLAYLISTS = 'playlists',
   PODCASTS = 'podcasts',
   ALBUMS = 'albums',

@@ -1,4 +1,4 @@
-import { COLORS, SHAPES } from '@config';
+import { COLORS, Shapes } from '@config';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
   saveContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: SHAPES.CIRCLE,
+    borderRadius: Shapes.CIRCLE,
     width: 26,
     height: 26,
     borderWidth: 1,
@@ -87,7 +87,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 21,
     height: 21,
-    borderRadius: SHAPES.CIRCLE,
+    borderRadius: Shapes.CIRCLE,
     borderWidth: 1.5,
     backgroundColor: 'transparent',
     borderColor: COLORS.LIGHT_GREY,

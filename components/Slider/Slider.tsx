@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Album } from '../Album';
 
 import { translations } from '@data';
-import { SEPARATOR, SHAPES, SIZES } from '@config';
+import { SEPARATOR, Shapes, Sizes } from '@config';
 import { AlbumModel } from '@models';
 
 import { styles } from './styles';
@@ -14,16 +14,16 @@ import { styles } from './styles';
 export type SliderPropsType = {
   title: string;
   slides: AlbumModel[];
-  size?: SIZES;
-  shape?: SHAPES;
+  size?: Sizes;
+  shape?: Shapes;
   withShowAll: boolean;
 };
 
 export const Slider = ({
   title,
   slides,
-  size = SIZES.BIG,
-  shape = SHAPES.SQUARE,
+  size = Sizes.BIG,
+  shape = Shapes.SQUARE,
   withShowAll = false,
 }: SliderPropsType) => {
   // const router = useRouter();

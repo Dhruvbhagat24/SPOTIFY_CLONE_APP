@@ -1,8 +1,3 @@
-export type {
-  ArtistModel,
-  SavedAlbumModel,
-  PlaylistModel,
-  AlbumModel,
-} from './Album';
-
+export type { SavedAlbumModel, PlaylistModel, AlbumModel } from './Album';
+export type { ArtistModel } from './Artist';
 export type { UserProfileModel } from './User';

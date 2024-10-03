@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, SHAPES, SIZES } from '@config';
+import { COLORS, Shapes, Sizes } from '@config';
 
-export const styling = (size: SIZES, shape: SHAPES) =>
+export const styling = (size: Sizes, shape: Shapes) =>
   StyleSheet.create({
     album: {
       width: size,

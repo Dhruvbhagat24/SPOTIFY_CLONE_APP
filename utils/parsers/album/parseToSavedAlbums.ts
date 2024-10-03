@@ -5,13 +5,17 @@ import {
 import { SavedAlbumModel } from '@models';
 
 export const parseToSavedAlbums = (
-  data: SavedAlbumsResponseType
+  data: SavedAlbumsResponseType[]
 ): SavedAlbumModel[] =>
-  data.items.map(({ album }) => ({
-    type: album.type,
-    albumType: album.album_type,
-    id: album.id,
-    name: album.name,
-    imageURL: album.images[LIBRARY_ALBUM_IMAGE_SIZE_VARIANT].url,
-    artists: album.artists.map((artist) => artist.name).join(', '),
-  }));
+  data
+    .map((chunk) =>
+      chunk.items.map(({ album }) => ({
+        type: album.type,
+        albumType: album.album_type,
+        id: album.id,
+        name: album.name,
+        imageURL: album.images[LIBRARY_ALBUM_IMAGE_SIZE_VARIANT].url,
+        artists: album.artists.map((artist) => artist.name).join(', '),
+      }))
+    )
+    .reduce((prev, next) => prev.concat(next));

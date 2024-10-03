@@ -20,5 +20,4 @@ export type PlaylistModel = {
   copyrights: { text: string; type: string }[];
   genres: string[];
   label: string;
-  popularity: number;
 };

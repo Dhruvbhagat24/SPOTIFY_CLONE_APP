@@ -1,10 +1,10 @@
 export { type IconType } from './images';
 export {
   PLATFORMS,
-  PAGES,
-  SIZES,
-  SHAPES,
-  CATEGORIES,
+  Pages,
+  Sizes,
+  Shapes,
+  Categories,
   SEPARATOR,
   BOTTOM_NAVIGATION_HEIGHT,
   ALBUM_HEADER_HEIGHT,
@@ -25,6 +25,7 @@ export {
   type AlbumsResponseType,
   type SavedAlbumsResponseType,
   type UserProfileResponseType,
+  type UserFollowedArtistsResponseType,
   AlbumTypes,
   AuthResponse,
 } from './types';

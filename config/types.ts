@@ -53,7 +53,6 @@ export type AlbumResponseType = {
   copyrights: { text: string; type: string }[];
   genres: string[];
   label: string;
-  popularity: number;
 };
 
 export type ArtistResponseType = {
@@ -67,7 +66,6 @@ export type ArtistResponseType = {
     width: number;
   }[];
   genres: string[];
-  popularity: number;
   followers: {
     href: string | null;
     total: number;
@@ -123,4 +121,36 @@ export type UserProfileResponseType = {
   product: string;
   type: string;
   uri: string;
+};
+
+export type UserFollowedArtistsResponseType = {
+  artists: {
+    href: string;
+    limit: 1;
+    next: string;
+    cursors: {
+      after: string;
+    };
+    total: number;
+    items: [
+      {
+        external_urls: string;
+        followers: {
+          href: string | null;
+          total: number;
+        };
+        genres: string[];
+        href: string | null;
+        id: string;
+        images: {
+          url: string;
+          height: number;
+          width: number;
+        }[];
+        name: string;
+        type: 'artist';
+        uri: string;
+      },
+    ];
+  };
 };

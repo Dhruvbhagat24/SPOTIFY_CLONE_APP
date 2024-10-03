@@ -1,4 +1,4 @@
-import { COLORS, SHAPES } from '@config';
+import { COLORS, Shapes } from '@config';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
   isTrackSavedView: {
     width: 13,
     height: 13,
-    borderRadius: SHAPES.CIRCLE,
+    borderRadius: Shapes.CIRCLE,
     backgroundColor: COLORS.TINT,
     position: 'relative',
     marginRight: 6,

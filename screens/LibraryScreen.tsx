@@ -1,38 +1,19 @@
 import * as React from 'react';
+import { View } from 'react-native';
 
-import { YourLibrary } from '@components';
-import { SavedAlbumModel, UserProfileModel } from '@models';
-import { getSavedAlbums, getUserProfile } from '@api';
-import { parseToSavedAlbums, parseToUserProfile } from '@utils';
+import { FollowedArtists, LibraryHeader, SavedAlbums } from '@components';
+import { useApplicationDimensions } from '@hooks';
+import { Categories } from '@config';
 
 export const LibraryScreen = () => {
-  const [savedAlbumsData, setSavedAlbumsData] = React.useState<
-    SavedAlbumModel[] | null
-  >(null);
-  const [userProfileData, setUserProfileData] =
-    React.useState<UserProfileModel | null>(null);
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        const [savedAlbums, userProfile] = await Promise.all([
-          getSavedAlbums(50, 0),
-          getUserProfile(),
-        ]);
-        setUserProfileData(parseToUserProfile(userProfile));
-        setSavedAlbumsData(parseToSavedAlbums(savedAlbums));
-      } catch (error) {
-        setSavedAlbumsData(null);
-        console.error('Failed to get saved albums data:', error);
-      }
-    })();
-  }, []);
-
-  if (savedAlbumsData === null || userProfileData === null) {
-    return null;
-  }
+  const { width, height } = useApplicationDimensions();
+  const [category, setCategory] = React.useState<Categories>(Categories.ALBUMS);
 
   return (
-    <YourLibrary savedAlbums={savedAlbumsData} userProfile={userProfileData} />
+    <View style={{ width, height }}>
+      <LibraryHeader category={category} setCategory={setCategory} />
+      {category === Categories.ALBUMS && <SavedAlbums />}
+      {category === Categories.ARTISTS && <FollowedArtists />}
+    </View>
   );
 };

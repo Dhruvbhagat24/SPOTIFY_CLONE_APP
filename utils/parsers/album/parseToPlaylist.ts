@@ -28,5 +28,4 @@ export const parseToPlaylist = (data: AlbumResponseType): PlaylistModel => ({
   copyrights: data.copyrights,
   genres: data.genres,
   label: data.label,
-  popularity: data.popularity,
 });

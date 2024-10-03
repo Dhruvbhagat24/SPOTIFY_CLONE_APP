@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, SHAPES } from '@config';
+import { COLORS, Shapes } from '@config';
 
 export const styles = StyleSheet.create({
   link: {
@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     width: 50,
     height: 50,
     overflow: 'hidden',
-    borderRadius: SHAPES.CIRCLE,
+    borderRadius: Shapes.CIRCLE,
   },
   image: {
     ...StyleSheet.absoluteFillObject,
