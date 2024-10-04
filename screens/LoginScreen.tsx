@@ -41,8 +41,8 @@ export const LoginScreen = () => {
 
   React.useEffect(() => {
     if (response?.type === 'success') {
-      const { access_token, expires_in } = response.params;
-      setToken(access_token, expires_in);
+      const { access_token, refresh_token, expires_in } = response.params;
+      setToken(access_token, refresh_token, expires_in);
     }
   }, [response]);
 
@@ -50,9 +50,11 @@ export const LoginScreen = () => {
     try {
       const response = await promptAsync();
 
-      if (response.type === AuthResponse.SUCCESS) {
-        router.replace('/home');
+      if (response.type !== AuthResponse.SUCCESS) {
+        return;
       }
+
+      router.replace('/home');
     } catch (e) {
       console.log(e);
     }

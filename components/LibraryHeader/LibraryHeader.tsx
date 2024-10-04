@@ -3,6 +3,7 @@ import { Image, Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import { CategoryPressable } from './CategoryPressable';
 import * as Icons from '@expo/vector-icons';
 
 import { UserProfileModel } from '@models';
@@ -12,21 +13,11 @@ import { getUserProfile } from '@api';
 import { parseToUserProfile } from '@utils';
 
 import { styles } from './styles';
-import { CategoryPressable } from './CategoryPressable';
 
-export type LibraryHeaderPropsType = {
-  category: Categories;
-  setCategory: (category: Categories) => void;
-};
-
-export const LibraryHeader = ({
-  category,
-  setCategory,
-}: LibraryHeaderPropsType) => {
+export const LibraryHeader = () => {
   const [data, setData] = React.useState<UserProfileModel | null>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [isError, setIsError] = React.useState<boolean>(false);
-
   const { top: statusBarOffset } = useSafeAreaInsets();
 
   React.useEffect(() => {
@@ -88,9 +79,8 @@ export const LibraryHeader = ({
           {Object.values(Categories).map((currentCategory) => (
             <CategoryPressable
               key={currentCategory}
+              id={currentCategory}
               text={translations.type[currentCategory]}
-              isActive={category === currentCategory}
-              handlePress={() => setCategory(currentCategory)}
             />
           ))}
         </View>

@@ -15,7 +15,7 @@ export default function App() {
   }, [token]);
 
   if (token) {
-    return <Redirect href="/library" />;
+    return <Redirect href={{ pathname: '/library', params: {} }} />;
   }
 
   return <LoginScreen />;

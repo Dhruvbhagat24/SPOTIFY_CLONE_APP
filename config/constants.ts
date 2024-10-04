@@ -27,10 +27,10 @@ export enum Shapes {
 }
 
 export enum Categories {
-  PLAYLISTS = 'playlists',
-  PODCASTS = 'podcasts',
-  ALBUMS = 'albums',
-  ARTISTS = 'artists',
+  SAVED_PLAYLISTS = 'saved-playlists',
+  SAVED_PODCASTS = 'saved-podcasts',
+  SAVED_ALBUMS = 'saved-albums',
+  FOLLOWED_ARTISTS = 'followed-artists',
   DOWNLOADED = 'downloaded',
 }
 

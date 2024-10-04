@@ -23,6 +23,7 @@ module.exports = {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
       tokenKey: process.env.TOKEN_KEY,
+      refreshTokenKey: process.env.REFRESH_TOKEN_KEY,
       expirationKey: process.env.EXPIRATION_KEY,
       authorizationEndpoint: process.env.AUTHORIZATION_ENDPOINT,
       tokenEndpoint: process.env.TOKEN_ENDPOINT,
