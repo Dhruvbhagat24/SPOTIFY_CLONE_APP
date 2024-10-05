@@ -32,7 +32,7 @@ const refreshAccessToken = async (refreshToken: string) => {
   }
 };
 
-export const getToken = async (): Promise<string | null> => {
+export const getSessionToken = async (): Promise<string | null> => {
   if (!Constants.expoConfig || !Constants.expoConfig.extra) {
     return null;
   }

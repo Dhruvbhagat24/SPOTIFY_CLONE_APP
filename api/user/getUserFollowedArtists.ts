@@ -1,14 +1,16 @@
 import axios from 'axios';
-import { getToken } from './getToken';
+import { getSessionToken } from './getSessionToken';
+import { ArtistModel } from '@models';
 import { UserFollowedArtistsResponseType } from '@config';
+import { parseToUserFollowedArtists } from '@utils';
 
 export const getUserFollowedArtists = async (
   after: string = '',
   numberOfCalls: number = 0
-): Promise<UserFollowedArtistsResponseType[]> => {
+): Promise<ArtistModel[]> => {
   try {
     const maxAllowedLimit = 50;
-    const token = await getToken();
+    const token = await getSessionToken();
 
     const response = (await axios.get(
       'https://api.spotify.com/v1/me/following',
@@ -26,22 +28,22 @@ export const getUserFollowedArtists = async (
       data: UserFollowedArtistsResponseType;
     };
 
-    const result = [response.data];
     const { total } = response.data.artists;
     const numberOfMaxCalls = Math.ceil(total / maxAllowedLimit) - 1;
+    const result = parseToUserFollowedArtists(response.data.artists.items);
 
     if (total / maxAllowedLimit <= 1 || numberOfCalls >= numberOfMaxCalls) {
       return result;
     }
 
     numberOfCalls++;
-    return [
-      ...result,
-      ...(await getUserFollowedArtists(
-        response.data.artists.cursors.after,
-        numberOfCalls
-      )),
-    ];
+
+    const next = await getUserFollowedArtists(
+      response.data.artists.cursors.after,
+      numberOfCalls
+    );
+
+    return [...result, ...next];
   } catch (error) {
     console.error(`Error followed artists of currently logged in user`, error);
     throw error;

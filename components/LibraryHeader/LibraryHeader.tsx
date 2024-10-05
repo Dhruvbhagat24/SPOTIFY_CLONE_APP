@@ -10,7 +10,6 @@ import { UserProfileModel } from '@models';
 import { Categories, LIBRARY_HEADER_HEIGHT } from '@config';
 import { translations } from '@data';
 import { getUserProfile } from '@api';
-import { parseToUserProfile } from '@utils';
 
 import { styles } from './styles';
 
@@ -25,7 +24,7 @@ export const LibraryHeader = () => {
       try {
         setIsLoading(true);
         const userProfile = await getUserProfile();
-        setData(parseToUserProfile(userProfile));
+        setData(userProfile);
         setIsError(false);
       } catch (error) {
         setIsError(true);

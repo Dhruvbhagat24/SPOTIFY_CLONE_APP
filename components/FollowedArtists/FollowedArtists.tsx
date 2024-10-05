@@ -8,7 +8,6 @@ import { Album } from '../Album';
 import { ArtistModel } from '@models';
 import { BOTTOM_NAVIGATION_HEIGHT, Shapes, Sizes } from '@config';
 import { getUserFollowedArtists } from '@api';
-import { parseToUserFollowedArtists } from '@utils';
 
 import { styles } from './styles';
 
@@ -22,7 +21,7 @@ export const FollowedArtists = () => {
       try {
         setIsLoading(true);
         const followedArtists = await getUserFollowedArtists();
-        setData(parseToUserFollowedArtists(followedArtists));
+        setData(followedArtists);
         setIsError(false);
       } catch (error) {
         setIsError(true);

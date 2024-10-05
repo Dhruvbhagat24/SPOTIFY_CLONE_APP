@@ -10,7 +10,6 @@ import {
 } from '@api';
 import { PlaylistModel, AlbumModel, ArtistModel } from '@models';
 import { FALLBACK_ALBUM_ID } from '@data';
-import { parseToArtist, parseToAlbums, parseToPlaylist } from '@utils';
 
 export type AlbumScreenPropsType = {
   albumId: string;
@@ -36,20 +35,19 @@ export const PlaylistScreen = ({
   React.useEffect(() => {
     (async () => {
       try {
-        const album = parseToPlaylist(await getAlbum(albumId));
+        const album = await getAlbum(albumId);
         setAlbumData(album);
 
         const artists = await Promise.all(
-          album.artists.map(async ({ id }) =>
-            parseToArtist(await getArtist(id))
-          )
+          album.artists.map(async ({ id }) => await getArtist(id))
         );
         setArtistsData(artists);
 
         const artistAlbums = (
           await Promise.all(
-            artists.map(async ({ id }) =>
-              parseToAlbums(await getArtistAlbums(id, 'album,compilation', 10))
+            artists.map(
+              async ({ id }) =>
+                await getArtistAlbums(id, 'album,compilation', 10)
             )
           )
         ).map((albums, i) => ({ artist: artists[i].name, albums: albums }));

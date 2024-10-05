@@ -16,7 +16,6 @@ import {
 import { translations } from '@data';
 
 import { styles } from './styles';
-import { parseToSavedAlbums } from '@utils';
 import { getSavedAlbums } from '@api';
 
 export const SavedAlbums = () => {
@@ -29,7 +28,7 @@ export const SavedAlbums = () => {
       try {
         setIsLoading(true);
         const savedAlbums = await getSavedAlbums();
-        setData(parseToSavedAlbums(savedAlbums));
+        setData(savedAlbums);
         setIsError(false);
       } catch (error) {
         setIsError(true);

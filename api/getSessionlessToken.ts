@@ -2,14 +2,29 @@ import Constants from 'expo-constants';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { getSessionToken } from './getSessionToken';
-
-export const auth = async (): Promise<{
+const getSessionTokenFromAsynceStorage = async (): Promise<{
   token: string | null;
   tokenExpiration: string | null;
 }> => {
   try {
-    const { token, tokenExpiration } = await getSessionToken();
+    const token = await AsyncStorage.getItem('sessionless_token');
+    const tokenExpiration = await AsyncStorage.getItem(
+      'sessionless_token_expiration'
+    );
+
+    return { token, tokenExpiration };
+  } catch (error) {
+    console.log(error);
+    return { token: null, tokenExpiration: null };
+  }
+};
+
+export const getSessionlessToken = async (): Promise<{
+  token: string | null;
+  tokenExpiration: string | null;
+}> => {
+  try {
+    const { token, tokenExpiration } = await getSessionTokenFromAsynceStorage();
 
     if (token && tokenExpiration && new Date(tokenExpiration) >= new Date()) {
       return { token, tokenExpiration };
@@ -44,8 +59,8 @@ export const auth = async (): Promise<{
     const date = new Date();
     date.setHours(date.getHours() + 1);
 
-    await AsyncStorage.setItem('session_token', newToken);
-    await AsyncStorage.setItem('session_token_expiration', date.toString());
+    await AsyncStorage.setItem('sessionless_token', newToken);
+    await AsyncStorage.setItem('sessionless_token_expiration', date.toString());
 
     return { token: newToken, tokenExpiration: date.toString() };
   } catch (error) {

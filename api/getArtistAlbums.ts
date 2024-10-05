@@ -1,15 +1,17 @@
 import axios from 'axios';
-import { auth } from './auth';
+import { getSessionlessToken } from './getSessionlessToken';
 import { AlbumsResponseType } from '@config';
+import { parseToAlbums } from '@utils';
+import { AlbumModel } from '@models';
 
 export const getArtistAlbums = async (
   artistId: string,
   includeGroups: string = 'album,single,appears_on,compilation',
   limit: number = 6,
   offset: number = 0
-): Promise<AlbumsResponseType> => {
+): Promise<AlbumModel[]> => {
   try {
-    const { token } = await auth();
+    const { token } = await getSessionlessToken();
 
     const response = (await axios.get(
       `https://api.spotify.com/v1/artists/${artistId}/albums`,
@@ -25,7 +27,7 @@ export const getArtistAlbums = async (
       }
     )) as { data: AlbumsResponseType };
 
-    return response.data;
+    return parseToAlbums(response.data);
   } catch (error) {
     console.error(
       `Error fetching albums of artist with an ID: ${artistId}`,

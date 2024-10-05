@@ -132,25 +132,6 @@ export type UserFollowedArtistsResponseType = {
       after: string;
     };
     total: number;
-    items: [
-      {
-        external_urls: string;
-        followers: {
-          href: string | null;
-          total: number;
-        };
-        genres: string[];
-        href: string | null;
-        id: string;
-        images: {
-          url: string;
-          height: number;
-          width: number;
-        }[];
-        name: string;
-        type: 'artist';
-        uri: string;
-      },
-    ];
+    items: ArtistResponseType[];
   };
 };
