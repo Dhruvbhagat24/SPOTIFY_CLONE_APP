@@ -1,10 +1,13 @@
 import axios from 'axios';
-import { getSessionToken } from './getSessionToken';
+
 import { ArtistModel } from '@models';
 import { UserFollowedArtistsResponseType } from '@config';
 import { parseToUserFollowedArtists } from '@utils';
 
-export const getUserFollowedArtists = async (
+import { getSessionToken } from './getSessionToken';
+import { asyncStorageMiddleware } from './asyncStorageMiddleware';
+
+export const fetchUserFollowedArtists = async (
   after: string = '',
   numberOfCalls: number = 0
 ): Promise<ArtistModel[]> => {
@@ -38,7 +41,7 @@ export const getUserFollowedArtists = async (
 
     numberOfCalls++;
 
-    const next = await getUserFollowedArtists(
+    const next = await fetchUserFollowedArtists(
       response.data.artists.cursors.after,
       numberOfCalls
     );
@@ -49,3 +52,9 @@ export const getUserFollowedArtists = async (
     throw error;
   }
 };
+
+export const getUserFollowedArtists = async () =>
+  await asyncStorageMiddleware<ArtistModel[]>(
+    'user_followed_artists',
+    fetchUserFollowedArtists
+  );

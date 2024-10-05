@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { getSessionlessToken } from './getSessionlessToken';
+
+import { AlbumModel } from '@models';
 import { AlbumsResponseType } from '@config';
 import { parseToAlbums } from '@utils';
-import { AlbumModel } from '@models';
+
+import { getSessionlessToken } from './getSessionlessToken';
 
 export const getArtistAlbums = async (
   artistId: string,

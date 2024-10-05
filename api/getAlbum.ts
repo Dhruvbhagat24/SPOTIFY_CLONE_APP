@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { getSessionlessToken } from './getSessionlessToken';
-import { AlbumResponseType } from '@config';
+
 import { PlaylistModel } from '@models';
+import { AlbumResponseType } from '@config';
 import { parseToPlaylist } from '@utils';
+
+import { getSessionlessToken } from './getSessionlessToken';
 
 export const getAlbum = async (albumId: string): Promise<PlaylistModel> => {
   try {

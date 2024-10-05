@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { getSessionlessToken } from './getSessionlessToken';
-import { ArtistResponseType } from '@config';
+
 import { ArtistModel } from '@models';
+import { ArtistResponseType } from '@config';
 import { parseToArtist } from '@utils';
+
+import { getSessionlessToken } from './getSessionlessToken';
 
 export const getArtist = async (artistId: string): Promise<ArtistModel> => {
   try {
