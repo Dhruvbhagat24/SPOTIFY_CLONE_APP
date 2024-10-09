@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { Button, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   makeRedirectUri,
   useAuthRequest,
@@ -10,11 +8,11 @@ import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
 
 import { setToken } from '@api';
-import { AuthResponse, COLORS, ExpoConfigType } from '@config';
+import { AuthResponse, ExpoConfigType } from '@config';
+import { Login } from '@components';
 
 export const LoginScreen = () => {
   const router = useRouter();
-  const { top: statusBarOffset } = useSafeAreaInsets();
 
   const { clientID, authorizationEndpoint, tokenEndpoint } = (
     Constants.expoConfig as ExpoConfigType
@@ -60,19 +58,5 @@ export const LoginScreen = () => {
     }
   };
 
-  return (
-    <View
-      style={{
-        paddingTop: statusBarOffset,
-        backgroundColor: COLORS.PRIMARY,
-        height: '100%',
-      }}
-    >
-      <Button
-        title="Log in with Spotify"
-        onPress={handlePress}
-        disabled={!request}
-      />
-    </View>
-  );
+  return <Login handlePress={handlePress} isPressableDisabled={!request} />;
 };

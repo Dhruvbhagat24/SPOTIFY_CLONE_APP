@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -13,10 +13,10 @@ import {
   Shapes,
   Sizes,
 } from '@config';
+import { getSavedAlbums } from '@api';
 import { translations } from '@data';
 
 import { styles } from './styles';
-import { getSavedAlbums } from '@api';
 
 export const SavedAlbums = () => {
   const [data, setData] = React.useState<SavedAlbumModel[] | null>(null);
@@ -29,6 +29,10 @@ export const SavedAlbums = () => {
         setIsLoading(true);
         const savedAlbums = await getSavedAlbums();
         setData(savedAlbums);
+
+        await Promise.all(
+          savedAlbums.map((album) => Image.prefetch(album.imageURL))
+        );
         setIsError(false);
       } catch (error) {
         setIsError(true);
@@ -51,8 +55,6 @@ export const SavedAlbums = () => {
       ]}
     >
       <View style={styles.container}>
-        {isLoading && <Text>Loading</Text>}
-        {isError && <Text>Error</Text>}
         {!isLoading &&
           !isError &&
           data &&

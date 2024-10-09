@@ -16,6 +16,10 @@ export const BottomNavigation = () => {
   const router = useRouter();
   const segments: string[] = useSegments();
 
+  if (!segments.length) {
+    return null;
+  }
+
   const isActive = (pageType: Pages): boolean => segments[0] === pageType;
 
   return (

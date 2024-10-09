@@ -7,10 +7,6 @@ export default function Layout() {
     <LibraryScreen>
       <Stack screenOptions={{ headerShown: false, headerShadowVisible: false }}>
         <Stack.Screen
-          name="index"
-          options={{ headerShown: false, animation: 'fade' }}
-        />
-        <Stack.Screen
           name="saved-playlists"
           options={{ headerShown: false, animation: 'fade' }}
         />
