@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useRouter } from 'expo-router';
-import { Image, Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
+import { Image } from 'expo-image';
 
 import { Shapes, Sizes } from '@config';
 import { styling } from './styles';

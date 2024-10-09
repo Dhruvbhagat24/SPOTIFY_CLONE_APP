@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -23,9 +23,6 @@ export const FollowedArtists = () => {
         const followedArtists = await getUserFollowedArtists();
         setData(followedArtists);
 
-        await Promise.all(
-          followedArtists.map((artist) => Image.prefetch(artist.imageURL))
-        );
         setIsError(false);
       } catch (error) {
         setIsError(true);

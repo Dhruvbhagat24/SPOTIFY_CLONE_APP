@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -30,9 +30,6 @@ export const SavedAlbums = () => {
         const savedAlbums = await getSavedAlbums();
         setData(savedAlbums);
 
-        await Promise.all(
-          savedAlbums.map((album) => Image.prefetch(album.imageURL))
-        );
         setIsError(false);
       } catch (error) {
         setIsError(true);

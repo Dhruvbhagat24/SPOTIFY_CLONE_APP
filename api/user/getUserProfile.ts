@@ -4,9 +4,10 @@ import { UserProfileModel } from '@models';
 import { UserProfileResponseType } from '@config';
 import { parseToUserProfile } from '@utils';
 
+import { fileSystemMiddleware } from './fileSystemMiddleware';
 import { getSessionToken } from './getSessionToken';
 
-export const getUserProfile = async (): Promise<UserProfileModel> => {
+export const fetchUserProfile = async (): Promise<UserProfileModel> => {
   try {
     const token = await getSessionToken();
     const response = (await axios.get('https://api.spotify.com/v1/me', {
@@ -24,3 +25,9 @@ export const getUserProfile = async (): Promise<UserProfileModel> => {
     throw error;
   }
 };
+
+export const getUserProfile = async () =>
+  await fileSystemMiddleware<UserProfileModel>(
+    'user_profile',
+    fetchUserProfile
+  );

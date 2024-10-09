@@ -5,8 +5,9 @@ import { UserFollowedArtistsResponseType } from '@config';
 import { parseToUserFollowedArtists } from '@utils';
 
 import { getSessionToken } from './getSessionToken';
+import { fileSystemMiddleware } from './fileSystemMiddleware';
 
-export const getUserFollowedArtists = async (
+export const fetchUserFollowedArtists = async (
   after: string = '',
   numberOfCalls: number = 0
 ): Promise<ArtistModel[]> => {
@@ -40,7 +41,7 @@ export const getUserFollowedArtists = async (
 
     numberOfCalls++;
 
-    const next = await getUserFollowedArtists(
+    const next = await fetchUserFollowedArtists(
       response.data.artists.cursors.after,
       numberOfCalls
     );
@@ -51,3 +52,9 @@ export const getUserFollowedArtists = async (
     throw error;
   }
 };
+
+export const getUserFollowedArtists = async () =>
+  await fileSystemMiddleware<ArtistModel[]>(
+    'user_followed_artists',
+    fetchUserFollowedArtists
+  );

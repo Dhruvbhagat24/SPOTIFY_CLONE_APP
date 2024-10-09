@@ -5,8 +5,9 @@ import { parseToSavedAlbums } from '@utils';
 import { SavedAlbumModel } from '@models';
 
 import { getSessionToken } from './getSessionToken';
+import { fileSystemMiddleware } from './fileSystemMiddleware';
 
-export const getSavedAlbums = async (
+const fetchSavedAlbums = async (
   offset: number = 0,
   numberOfCalls: number = 0
 ): Promise<SavedAlbumModel[]> => {
@@ -33,7 +34,7 @@ export const getSavedAlbums = async (
 
     numberOfCalls++;
     offset += maxAllowedLimit;
-    const next = await getSavedAlbums(offset, numberOfCalls);
+    const next = await fetchSavedAlbums(offset, numberOfCalls);
 
     return [...result, ...next];
   } catch (error) {
@@ -44,3 +45,9 @@ export const getSavedAlbums = async (
     throw error;
   }
 };
+
+export const getSavedAlbums = async () =>
+  await fileSystemMiddleware<SavedAlbumModel[]>(
+    'user_saved_albums',
+    fetchSavedAlbums
+  );

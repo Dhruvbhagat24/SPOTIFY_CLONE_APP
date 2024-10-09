@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Image, Pressable, Text, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Pressable, Text, View } from 'react-native';
+import { Image } from 'expo-image';
 import { ScrollView } from 'react-native-gesture-handler';
+
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { CategoryPressable } from './CategoryPressable';
 import * as Icons from '@expo/vector-icons';
