@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { FollowedArtistsScreen } from '@screens';
+import { SavedPodcastsScreen } from '@screens';
 
 export default function SavedPodcasts() {
-  return <FollowedArtistsScreen />;
+  return <SavedPodcastsScreen />;
 }

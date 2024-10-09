@@ -1,9 +1,12 @@
-import { AlbumResponseType, LIBRARY_ALBUM_IMAGE_SIZE_VARIANT } from '@config';
+import {
+  LIBRARY_ALBUM_IMAGE_SIZE_VARIANT,
+  SavedAlbumsResponseType,
+} from '@config';
 import { SavedAlbumModel } from '@models';
 
 export const parseToSavedAlbums = (
   data: {
-    album: AlbumResponseType;
+    album: SavedAlbumsResponseType['items'][0]['album'];
   }[]
 ): SavedAlbumModel[] =>
   data.map(({ album }) => ({

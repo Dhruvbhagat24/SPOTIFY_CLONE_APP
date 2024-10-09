@@ -44,7 +44,7 @@ export const Slider = ({
               style={styles.headerPressableText}
               testID="header-pressable-text"
             >
-              {translations.playlist.slider.pressableText}
+              {translations.showAll}
             </Text>
           </Pressable>
         )}

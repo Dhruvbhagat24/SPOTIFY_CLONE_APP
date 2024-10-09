@@ -105,8 +105,8 @@ describe('Slider', () => {
 //       );
 
 //       const expectedValues = defaultProps.artistsAlbums.map(({ artist }) => ({
-//         headerTitleText: `${translations.playlist.slider.headerText} ${artist}`,
-//         headerPressableText: translations.playlist.slider.pressableText,
+//         headerTitleText: `${translations.moreOf} ${artist}`,
+//         headerPressableText: translations.showAll,
 //       }));
 
 //       expectedValues.forEach((expectedValue, i) => {

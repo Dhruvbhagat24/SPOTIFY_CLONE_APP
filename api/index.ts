@@ -9,6 +9,7 @@ export {
   getUserProfile,
   getUserFollowedArtists,
   getSavedAlbums,
+  getSavedShows,
   checkSavedAlbums,
   checkSavedTracks,
 } from './user';

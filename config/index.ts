@@ -24,6 +24,8 @@ export {
   type ArtistResponseType,
   type AlbumsResponseType,
   type SavedAlbumsResponseType,
+  type EpisodeResponseType,
+  type SavedEpisodesResponseType,
   type UserProfileResponseType,
   type UserFollowedArtistsResponseType,
   AlbumTypes,

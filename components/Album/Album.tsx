@@ -40,14 +40,18 @@ export const Album = ({
       </View>
       {title && (
         <Text
-          numberOfLines={1}
+          numberOfLines={2}
           style={styles.albumTitleText}
           testID="album-title"
         >
           {title}
         </Text>
       )}
-      {subtitle && <Text style={styles.albumSubtitleText}>{subtitle}</Text>}
+      {subtitle && (
+        <Text numberOfLines={1} style={styles.albumSubtitleText}>
+          {subtitle}
+        </Text>
+      )}
     </Pressable>
   );
 };

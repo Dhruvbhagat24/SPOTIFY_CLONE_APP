@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 
 import { styles } from './styles';
+import { getDisplayDate } from '@utils';
 
 export type PlaylistSummaryPropsType = {
   releaseDate: string;
@@ -25,13 +26,6 @@ export const getDisplayTime = (totalDuration: number) => {
   return `${totalDuration / 1000}min`;
 };
 
-export const getDisplayDate = (date: string) =>
-  new Date(date).toLocaleDateString('default', {
-    month: 'long',
-    day: '2-digit',
-    year: 'numeric',
-  });
-
 export const PlaylistSummary = ({
   releaseDate,
   totalTracks,
@@ -45,7 +39,7 @@ export const PlaylistSummary = ({
       <Text
         style={styles.totalTracksText}
         testID="total-tracks-text"
-      >{`${totalTracks} ${translations.playlist.copyrights.tracks}`}</Text>
+      >{`${totalTracks} ${translations.tracks}`}</Text>
       <Text style={styles.separator}>{SEPARATOR}</Text>
       <Text style={styles.totalDurationText} testID="total-duration-text">
         {getDisplayTime(totalDuration)}

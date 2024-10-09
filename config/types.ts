@@ -82,7 +82,7 @@ export type AlbumsResponseType = {
   next: string | null;
   offset: number;
   previous: string | null;
-  total: 888;
+  total: number;
   items: AlbumResponseType[];
 };
 
@@ -92,8 +92,71 @@ export type SavedAlbumsResponseType = {
   next: string | null;
   offset: number;
   previous: string | null;
-  total: 888;
-  items: { album: AlbumResponseType }[];
+  total: number;
+  items: {
+    album: {
+      id: AlbumResponseType['id'];
+      type: AlbumResponseType['type'];
+      name: AlbumResponseType['name'];
+      artists: AlbumResponseType['artists'];
+      album_type: AlbumResponseType['album_type'];
+      images: AlbumResponseType['images'];
+    };
+  }[];
+};
+
+export type ShowResponseType = {
+  type: 'show';
+  id: string;
+  name: string;
+  publisher: string;
+  description: string;
+  images: {
+    url: string;
+    width: number;
+    height: number;
+  }[];
+  total_episodes: number;
+};
+
+export type EpisodeResponseType = {
+  type: 'episode';
+  id: string;
+  name: string;
+  description: string;
+  images: {
+    url: string;
+    width: number;
+    height: number;
+  }[];
+  duration_ms: number;
+  release_date: string;
+  show: ShowResponseType;
+};
+
+export type SavedEpisodesResponseType = {
+  href: string;
+  limit: number;
+  next: string | null;
+  offset: number;
+  previous: string | null;
+  total: number;
+  items: {
+    added_at: string;
+    episode: {
+      id: AlbumResponseType['id'];
+      type: EpisodeResponseType['type'];
+      name: EpisodeResponseType['name'];
+      images: EpisodeResponseType['images'];
+      release_date: EpisodeResponseType['release_date'];
+      show: {
+        id: ShowResponseType['id'];
+        type: ShowResponseType['type'];
+        name: ShowResponseType['name'];
+        images: ShowResponseType['images'];
+      };
+    };
+  }[];
 };
 
 export type UserProfileResponseType = {

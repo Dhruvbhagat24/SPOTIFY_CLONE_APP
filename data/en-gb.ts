@@ -22,13 +22,9 @@ export const EN_GB = {
     single: 'Single',
     singles: 'Singles',
   },
-  playlist: {
-    slider: {
-      headerText: 'More of: ',
-      pressableText: 'Show all',
-    },
-    copyrights: {
-      tracks: 'tracks',
-    },
-  },
+  moreOf: 'More of: ',
+  updated: 'Updated: ',
+  released: 'Released: ',
+  showAll: 'Show all',
+  tracks: 'tracks',
 };

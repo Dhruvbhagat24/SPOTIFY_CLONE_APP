@@ -141,7 +141,7 @@ export const Playlist = ({
         {artistsAlbums.map(({ artist, albums }, index) => (
           <Slider
             key={index}
-            title={`${translations.playlist.slider.headerText} ${artist}`}
+            title={`${translations.moreOf} ${artist}`}
             slides={albums}
             size={Sizes.MEDIUM}
             shape={Shapes.SQUARE_BORDER}
