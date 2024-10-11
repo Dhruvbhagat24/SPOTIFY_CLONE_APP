@@ -14,10 +14,17 @@ export type PlaylistArtistsPropsType = {
 export const PlaylistArtists = ({ artists }: PlaylistArtistsPropsType) => {
   const router = useRouter();
 
+  const handlePress = React.useCallback(
+    (albumId: string) => {
+      router.push(`/albums/${albumId}`);
+    },
+    [router]
+  );
+
   return artists.map(({ id, imageURL, name }) => (
     <Pressable
       style={styles.link}
-      onPress={() => router.push(`/artists/${id}`)}
+      onPress={() => handlePress(`/artists/${id}`)}
       key={id}
       testID={`artist-link-${id}`}
     >

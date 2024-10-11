@@ -27,11 +27,12 @@ export enum Shapes {
 }
 
 export enum Categories {
-  SAVED_PLAYLISTS = 'saved-playlists',
-  SAVED_PODCASTS = 'saved-podcasts',
-  SAVED_ALBUMS = 'saved-albums',
-  FOLLOWED_ARTISTS = 'followed-artists',
+  SAVED_PLAYLISTS = 'playlist',
+  SAVED_PODCASTS = 'show',
+  SAVED_ALBUMS = 'album',
+  FOLLOWED_ARTISTS = 'artist',
   DOWNLOADED = 'downloaded',
+  ALL = 'all',
 }
 
 export const SEPARATOR = '\u2022';

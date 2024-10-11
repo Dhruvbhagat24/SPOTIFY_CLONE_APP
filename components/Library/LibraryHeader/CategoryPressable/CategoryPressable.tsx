@@ -6,21 +6,22 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { useRouter, useSegments } from 'expo-router';
 
-import { Categories, COLORS } from '@config';
+import { COLORS } from '@config';
 
 import { styles } from './styles';
 
 export type CategoryPressablePropsType = {
-  id: Categories;
   text: string;
+  isActive: boolean;
+  handlePress: () => void;
 };
 
-export const CategoryPressable = ({ id, text }: CategoryPressablePropsType) => {
-  const router = useRouter();
-  const segments: string[] = useSegments();
-  const isActive = id === segments[1];
+export const CategoryPressable = ({
+  text,
+  isActive,
+  handlePress,
+}: CategoryPressablePropsType) => {
   const progress = useSharedValue(isActive ? 1 : 0);
 
   React.useEffect(() => {
@@ -49,7 +50,7 @@ export const CategoryPressable = ({ id, text }: CategoryPressablePropsType) => {
   return (
     <AnimatedPressable
       style={[styles.category, animatedPressableStyles]}
-      onPress={() => router.replace(`/library/${id}`)}
+      onPress={handlePress}
     >
       <AnimatedText style={[styles.categoryText, animatedTextStyles]}>
         {text}

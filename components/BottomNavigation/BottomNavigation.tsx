@@ -16,6 +16,13 @@ export const BottomNavigation = () => {
   const router = useRouter();
   const segments: string[] = useSegments();
 
+  const handlePress = React.useCallback(
+    (albumId: string) => {
+      router.push(`/albums/${albumId}`);
+    },
+    [router]
+  );
+
   if (!segments.length) {
     return null;
   }
@@ -31,7 +38,7 @@ export const BottomNavigation = () => {
       />
       <Pressable
         style={styles.pressable}
-        onPress={() => router.replace(`/${Pages.HOME}`)}
+        onPress={() => handlePress(Pages.HOME)}
         testID="home-pressable"
       >
         <AntDesign
@@ -48,7 +55,7 @@ export const BottomNavigation = () => {
       </Pressable>
       <Pressable
         style={styles.pressable}
-        onPress={() => router.replace(`/${Pages.SEARCH}`)}
+        onPress={() => handlePress(Pages.SEARCH)}
         testID="search-pressable"
       >
         <Ionicons
@@ -65,7 +72,7 @@ export const BottomNavigation = () => {
       </Pressable>
       <Pressable
         style={styles.pressable}
-        onPress={() => router.replace(`/${Pages.LIBRARY}`)}
+        onPress={() => handlePress(Pages.LIBRARY)}
         testID="library-pressable"
       >
         <Ionicons

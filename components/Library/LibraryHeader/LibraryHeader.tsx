@@ -15,7 +15,15 @@ import { getUserProfile } from '@api';
 
 import { styles } from './styles';
 
-export const LibraryHeader = () => {
+export type LibraryHeaderPropsType = {
+  category: Categories | '';
+  handleCategoryChange: (newCategory: Categories) => void;
+};
+
+export const LibraryHeader = ({
+  category,
+  handleCategoryChange,
+}: LibraryHeaderPropsType) => {
   const [data, setData] = React.useState<UserProfileModel | null>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [isError, setIsError] = React.useState<boolean>(false);
@@ -77,13 +85,16 @@ export const LibraryHeader = () => {
         showsHorizontalScrollIndicator={false}
       >
         <View style={styles.scrollViewContainer}>
-          {Object.values(Categories).map((currentCategory) => (
-            <CategoryPressable
-              key={currentCategory}
-              id={currentCategory}
-              text={translations.type[currentCategory]}
-            />
-          ))}
+          {Object.values(Categories)
+            .filter((c) => c !== Categories.ALL)
+            .map((currentCategory) => (
+              <CategoryPressable
+                key={currentCategory}
+                isActive={currentCategory === category}
+                handlePress={() => handleCategoryChange(currentCategory)}
+                text={translations.libraryCategories[currentCategory]}
+              />
+            ))}
         </View>
       </ScrollView>
     </View>

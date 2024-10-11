@@ -7,5 +7,8 @@ export {
   parseToSavedShows,
   parseToUserProfile,
   parseToUserFollowedArtists,
+  parseFromFollowedArtistsToLibraryItem,
+  parseFromSavedAlbumsToLibraryItem,
+  parseFromSavedShowsToLibraryItem,
 } from './parsers';
 export { hexToRGB, getDisplayDate } from './common';

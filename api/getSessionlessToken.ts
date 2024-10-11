@@ -14,7 +14,7 @@ const getSessionTokenFromAsynceStorage = async (): Promise<{
 
     return { token, tokenExpiration };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return { token: null, tokenExpiration: null };
   }
 };

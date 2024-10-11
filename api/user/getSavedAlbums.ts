@@ -1,16 +1,16 @@
 import axios from 'axios';
 
 import { SavedAlbumsResponseType } from '@config';
-import { parseToSavedAlbums } from '@utils';
-import { SavedAlbumModel } from '@models';
+import { parseFromSavedAlbumsToLibraryItem } from '@utils';
+import { LibraryItemModel } from '@models';
 
 import { getSessionToken } from './getSessionToken';
 import { fileSystemMiddleware } from './fileSystemMiddleware';
 
-const fetchSavedAlbums = async (
+export const fetchSavedAlbums = async (
   offset: number = 0,
   numberOfCalls: number = 0
-): Promise<SavedAlbumModel[]> => {
+): Promise<LibraryItemModel[]> => {
   try {
     const maxAllowedLimit = 50;
     const token = await getSessionToken();
@@ -27,7 +27,7 @@ const fetchSavedAlbums = async (
 
     const { total } = response.data;
     const numberOfMaxCalls = Math.ceil(total / maxAllowedLimit) - 1;
-    const result = parseToSavedAlbums(response.data.items);
+    const result = parseFromSavedAlbumsToLibraryItem(response.data.items);
     if (total / maxAllowedLimit <= 1 || numberOfCalls >= numberOfMaxCalls) {
       return result;
     }
@@ -47,7 +47,7 @@ const fetchSavedAlbums = async (
 };
 
 export const getSavedAlbums = async () =>
-  await fileSystemMiddleware<SavedAlbumModel[]>(
+  await fileSystemMiddleware<LibraryItemModel[]>(
     'user_saved_albums',
     fetchSavedAlbums
   );

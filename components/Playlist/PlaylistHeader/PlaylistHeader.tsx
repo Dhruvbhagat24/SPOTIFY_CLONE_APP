@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, {
@@ -57,6 +58,10 @@ export const PlaylistHeader = ({
     ],
   }));
 
+  const handlePress = React.useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
+
   return (
     <View testID="header">
       <Pressable
@@ -64,7 +69,7 @@ export const PlaylistHeader = ({
           styles.albumHeaderGoBackPressable,
           { top: useSafeAreaInsets().top },
         ]}
-        onPress={() => navigation.goBack()}
+        onPress={handlePress}
         testID="header-go-back-pressable"
       >
         <MaterialIcons

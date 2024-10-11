@@ -7,13 +7,13 @@ export const fileSystemMiddleware = async <T>(
   const fileUri = `${FileSystem.documentDirectory}${filename}.json`;
 
   try {
-    const savedAlbums = (await FileSystem.readAsStringAsync(fileUri)) || '';
+    const fileContent = (await FileSystem.readAsStringAsync(fileUri)) || '';
 
-    if (!savedAlbums) {
+    if (!fileContent) {
       throw new Error(`Error while reading the file: ${fileUri}`);
     }
 
-    return JSON.parse(savedAlbums);
+    return JSON.parse(fileContent);
   } catch (error) {
     console.error(error);
     console.info(

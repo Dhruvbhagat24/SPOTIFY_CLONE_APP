@@ -12,4 +12,6 @@ export {
   getSavedShows,
   checkSavedAlbums,
   checkSavedTracks,
+  getLibrary,
+  type LibraryType,
 } from './user';

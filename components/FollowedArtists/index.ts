@@ -1,1 +1,0 @@
-export { FollowedArtists } from './FollowedArtists';

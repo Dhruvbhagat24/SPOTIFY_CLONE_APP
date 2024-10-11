@@ -1,16 +1,16 @@
 import axios from 'axios';
 
 import { SavedEpisodesResponseType } from '@config';
-import { parseToSavedShows } from '@utils';
-import { SavedShowModel } from '@models';
+import { parseFromSavedShowsToLibraryItem } from '@utils';
+import { LibraryItemModel } from '@models';
 
 import { getSessionToken } from './getSessionToken';
 import { fileSystemMiddleware } from './fileSystemMiddleware';
 
-const fetchSavedShows = async (
+export const fetchSavedShows = async (
   offset: number = 0,
   numberOfCalls: number = 0
-): Promise<SavedShowModel[]> => {
+): Promise<LibraryItemModel[]> => {
   try {
     const maxAllowedLimit = 50;
     const token = await getSessionToken();
@@ -30,7 +30,7 @@ const fetchSavedShows = async (
 
     const { total } = response.data;
     const numberOfMaxCalls = Math.ceil(total / maxAllowedLimit) - 1;
-    const result = parseToSavedShows(response.data.items);
+    const result = parseFromSavedShowsToLibraryItem(response.data.items);
     if (total / maxAllowedLimit <= 1 || numberOfCalls >= numberOfMaxCalls) {
       return result;
     }
@@ -50,7 +50,7 @@ const fetchSavedShows = async (
 };
 
 export const getSavedShows = async () =>
-  await fileSystemMiddleware<SavedShowModel[]>(
+  await fileSystemMiddleware<LibraryItemModel[]>(
     'user_saved_shows',
     fetchSavedShows
   );

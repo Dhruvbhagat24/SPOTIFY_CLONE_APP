@@ -13,9 +13,13 @@ export const styling = (size: Sizes, shape: Shapes) =>
       width: size,
       height: size,
       borderRadius: shape,
+      backgroundColor: COLORS.SECONDARY,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     albumImage: {
       ...StyleSheet.absoluteFillObject,
+      color: COLORS.GREY,
     },
     albumInfo: {},
     albumTitleText: {

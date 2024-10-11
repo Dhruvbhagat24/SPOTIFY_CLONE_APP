@@ -53,8 +53,8 @@ export const LoginScreen = () => {
       }
 
       router.replace('/home');
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.error(error);
     }
   };
 

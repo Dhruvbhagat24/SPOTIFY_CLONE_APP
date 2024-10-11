@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { ArtistModel } from '@models';
+import { LibraryItemModel } from '@models';
 import { UserFollowedArtistsResponseType } from '@config';
-import { parseToUserFollowedArtists } from '@utils';
+import { parseFromFollowedArtistsToLibraryItem } from '@utils';
 
 import { getSessionToken } from './getSessionToken';
 import { fileSystemMiddleware } from './fileSystemMiddleware';
@@ -10,7 +10,7 @@ import { fileSystemMiddleware } from './fileSystemMiddleware';
 export const fetchUserFollowedArtists = async (
   after: string = '',
   numberOfCalls: number = 0
-): Promise<ArtistModel[]> => {
+): Promise<LibraryItemModel[]> => {
   try {
     const maxAllowedLimit = 50;
     const token = await getSessionToken();
@@ -33,7 +33,9 @@ export const fetchUserFollowedArtists = async (
 
     const { total } = response.data.artists;
     const numberOfMaxCalls = Math.ceil(total / maxAllowedLimit) - 1;
-    const result = parseToUserFollowedArtists(response.data.artists.items);
+    const result = parseFromFollowedArtistsToLibraryItem(
+      response.data.artists.items
+    );
 
     if (total / maxAllowedLimit <= 1 || numberOfCalls >= numberOfMaxCalls) {
       return result;
@@ -54,7 +56,7 @@ export const fetchUserFollowedArtists = async (
 };
 
 export const getUserFollowedArtists = async () =>
-  await fileSystemMiddleware<ArtistModel[]>(
+  await fileSystemMiddleware<LibraryItemModel[]>(
     'user_followed_artists',
     fetchUserFollowedArtists
   );

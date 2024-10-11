@@ -1,0 +1,41 @@
+TODO: Remove the routes for saved-artists, saved-albums etc... and create in library index a component which renders all possible fetched items for library in a one array. by clicking on the buttons we should filter out the array and setting state to the filtered array - this will unblock further implementation of the appearing buttons for playlist, also will have a common unfiltered array of items to show on init view. All of this things should be stored (after fetching) under the same file.json in system files - which will be later on filtered on button click.
+
+TODO: After we store all types of "Album"s in one array, we should implement a logic on every album or artist click to go to that array.json in file system remove the item and add it to the beginning and save back to the file system. With this approach we will have the latest interaction of the user to show.
+
+TODO: add the fallback if needed
+
+```tsx
+const fallback = {
+  album: Array(1000).fill({
+    id: 'id',
+    type: 'album',
+    title: 'Album',
+    subtitle: 'Artist',
+    imageURL: '',
+  }) as LibraryItemModel[],
+  artist: Array(1000).fill({
+    id: 'id',
+    type: 'artist',
+    title: 'Artist',
+    imageURL: '',
+  }) as LibraryItemModel[],
+  show: Array(200).fill({
+    id: 'id',
+    type: 'show',
+    title: 'Artist',
+    subtitle: 'Show',
+    imageURL: '',
+  }) as LibraryItemModel[],
+  playlist: Array(200).fill({
+    id: 'id',
+    type: 'show',
+    title: 'Artist',
+    subtitle: 'Show',
+    imageURL: '',
+  }) as LibraryItemModel[],
+  downloaded: [] as LibraryItemModel[],
+  '': [] as LibraryItemModel[],
+};
+```
+
+TODO: add unit tests and fix current ones
