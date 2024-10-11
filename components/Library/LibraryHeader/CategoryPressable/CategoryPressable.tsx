@@ -2,59 +2,61 @@ import * as React from 'react';
 import { Pressable, Text } from 'react-native';
 import Animated, {
   interpolateColor,
+  SharedValue,
   useAnimatedStyle,
-  useSharedValue,
-  withTiming,
 } from 'react-native-reanimated';
 
-import { COLORS } from '@config';
+import { Categories, COLORS } from '@config';
+import { translations } from '@data';
 
 import { styles } from './styles';
 
 export type CategoryPressablePropsType = {
-  text: string;
-  isActive: boolean;
-  handlePress: () => void;
+  progress: SharedValue<number>;
+  currentCategory: Exclude<Categories, Categories.ALL>;
+  selectedCategory: Categories;
+  handleCategoryChange: (newCategory: Categories) => void;
 };
 
-export const CategoryPressable = ({
-  text,
-  isActive,
-  handlePress,
-}: CategoryPressablePropsType) => {
-  const progress = useSharedValue(isActive ? 1 : 0);
+const CategoryPressable = React.memo(
+  ({
+    progress,
+    currentCategory,
+    selectedCategory,
+    handleCategoryChange,
+  }: CategoryPressablePropsType) => {
+    const animatedPressableStyles = useAnimatedStyle(() => ({
+      backgroundColor: interpolateColor(
+        currentCategory === selectedCategory ? progress.value : 0,
+        [0, 1],
+        [COLORS.SECONDARY, COLORS.TINT]
+      ),
+    }));
 
-  React.useEffect(() => {
-    progress.value = withTiming(isActive ? 1 : 0, { duration: 150 });
-  }, [isActive, progress]);
+    const animatedTextStyles = useAnimatedStyle(() => ({
+      color: interpolateColor(
+        currentCategory === selectedCategory ? progress.value : 0,
+        [0, 0.2, 1],
+        [COLORS.WHITE, COLORS.PRIMARY, COLORS.PRIMARY]
+      ),
+    }));
 
-  const animatedPressableStyles = useAnimatedStyle(() => ({
-    backgroundColor: interpolateColor(
-      progress.value,
-      [0, 1],
-      [COLORS.SECONDARY, COLORS.TINT]
-    ),
-  }));
+    const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+    const AnimatedText = Animated.createAnimatedComponent(Text);
 
-  const animatedTextStyles = useAnimatedStyle(() => ({
-    color: interpolateColor(
-      progress.value,
-      [0, 1],
-      [COLORS.WHITE, COLORS.PRIMARY]
-    ),
-  }));
+    return (
+      <AnimatedPressable
+        style={[styles.category, animatedPressableStyles]}
+        onPress={() => handleCategoryChange(currentCategory)}
+      >
+        <AnimatedText style={[styles.categoryText, animatedTextStyles]}>
+          {translations.libraryCategories[currentCategory]}
+        </AnimatedText>
+      </AnimatedPressable>
+    );
+  }
+);
 
-  const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
-  const AnimatedText = Animated.createAnimatedComponent(Text);
+CategoryPressable.displayName = 'CategoryPressable';
 
-  return (
-    <AnimatedPressable
-      style={[styles.category, animatedPressableStyles]}
-      onPress={handlePress}
-    >
-      <AnimatedText style={[styles.categoryText, animatedTextStyles]}>
-        {text}
-      </AnimatedText>
-    </AnimatedPressable>
-  );
-};
+export { CategoryPressable };

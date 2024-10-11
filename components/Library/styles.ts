@@ -15,8 +15,8 @@ export const styles = StyleSheet.create({
     paddingBottom: BOTTOM_NAVIGATION_HEIGHT,
   },
   flatListColumnWrapper: {
-    justifyContent: 'space-between',
-    marginBottom: 10,
+    justifyContent: 'flex-start',
+    gap: 10,
   },
   category: {
     backgroundColor: COLORS.SECONDARY,

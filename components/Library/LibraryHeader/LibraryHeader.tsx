@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { ScrollView } from 'react-native-gesture-handler';
+import { SharedValue } from 'react-native-reanimated';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -16,13 +17,15 @@ import { getUserProfile } from '@api';
 import { styles } from './styles';
 
 export type LibraryHeaderPropsType = {
-  category: Categories | '';
+  selectedCategory: Categories;
   handleCategoryChange: (newCategory: Categories) => void;
+  progress: SharedValue<number>;
 };
 
 export const LibraryHeader = ({
-  category,
+  selectedCategory,
   handleCategoryChange,
+  progress,
 }: LibraryHeaderPropsType) => {
   const [data, setData] = React.useState<UserProfileModel | null>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
@@ -90,9 +93,10 @@ export const LibraryHeader = ({
             .map((currentCategory) => (
               <CategoryPressable
                 key={currentCategory}
-                isActive={currentCategory === category}
-                handlePress={() => handleCategoryChange(currentCategory)}
-                text={translations.libraryCategories[currentCategory]}
+                progress={progress}
+                currentCategory={currentCategory}
+                selectedCategory={selectedCategory}
+                handleCategoryChange={handleCategoryChange}
               />
             ))}
         </View>

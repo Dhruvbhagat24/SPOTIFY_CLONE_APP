@@ -22,7 +22,9 @@ import { styles } from './styles';
 
 export const Library = () => {
   const { width, height } = useApplicationDimensions();
-  const [category, setCategory] = React.useState<Categories>(Categories.ALL);
+  const [selectedCategory, setSelectedCategory] = React.useState<Categories>(
+    Categories.ALL
+  );
   const [data, setData] = React.useState<LibraryType | null>(null);
   const { top: safeAreaOffset } = useSafeAreaInsets();
 
@@ -31,7 +33,7 @@ export const Library = () => {
   const maxRenderPerBatchAmount = 15;
   const outsideOfVisibleAreKeptInMemoryAmount = 9;
 
-  const listOpacity = useSharedValue(1);
+  const progress = useSharedValue(1);
   const flatListRef = React.useRef<FlatList>(null);
 
   React.useEffect(() => {
@@ -49,15 +51,15 @@ export const Library = () => {
   const animatedStyle = useAnimatedStyle(() => {
     return {
       opacity: interpolate(
-        listOpacity.value,
-        [0, 0.8, 1],
-        [0, 1, 1],
+        progress.value,
+        [0, 0.2, 1],
+        [0, 0, 1],
         Extrapolation.CLAMP
       ),
       transform: [
         {
           translateY: interpolate(
-            listOpacity.value,
+            progress.value,
             [0, 1],
             [0, -20],
             Extrapolation.CLAMP
@@ -68,16 +70,16 @@ export const Library = () => {
   });
 
   const handleCategoryChange = (newCategory: Categories) => {
-    listOpacity.value = withTiming(0, { duration: 100 }, (isFinished) => {
+    progress.value = withTiming(0, { duration: 100 }, (isFinished) => {
       if (!isFinished) {
         return;
       }
 
-      runOnJS(setCategory)(
-        category === newCategory ? Categories.ALL : newCategory
+      runOnJS(setSelectedCategory)(
+        selectedCategory === newCategory ? Categories.ALL : newCategory
       );
 
-      listOpacity.value = withTiming(1, { duration: 1000 });
+      progress.value = withTiming(1, { duration: 1000 });
     });
 
     flatListRef.current?.scrollToOffset({ animated: false, offset: 0 });
@@ -114,13 +116,14 @@ export const Library = () => {
   return (
     <View style={[styles.container, { width, height }]}>
       <LibraryHeader
-        category={category}
+        selectedCategory={selectedCategory}
         handleCategoryChange={handleCategoryChange}
+        progress={progress}
       />
       <Animated.View style={[{ flex: 1 }, animatedStyle]}>
         <FlatList
           ref={flatListRef}
-          data={data[category]}
+          data={data[selectedCategory]}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           initialNumToRender={initRenderAmount}
