@@ -45,3 +45,5 @@ TODO: Handle the case, when a different user logs in - may be an error due to co
 TODO: Refactor api strategy
 
 TODO: get rid of white page on album click - probably a refactor is needed
+
+TODO: When switching from home to library there is a white screen (not when switching from search)
