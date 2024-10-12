@@ -1,101 +1,177 @@
 import * as React from 'react';
-import { useRouter } from 'expo-router';
-import { Pressable, Text, View } from 'react-native';
-import { Image } from 'expo-image';
-import Foundation from '@expo/vector-icons/Foundation';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { View, type ImageSourcePropType } from 'react-native';
+import Animated, {
+  Extrapolation,
+  interpolate,
+  useAnimatedRef,
+  useAnimatedStyle,
+  useScrollViewOffset,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Stack } from 'expo-router';
 
-import { COLORS, Shapes, Sizes } from '@config';
-import { styling } from './styles';
+import { BackgroundGradient as BackgroundOverlay } from '../BackgroundGradient';
+import { AlbumBackground } from './AlbumBackground';
+import { AlbumHeader } from './AlbumHeader';
+import { AlbumCover } from './AlbumCover';
+import { AlbumInfo } from './AlbumInfo';
+import { AlbumSummary } from './AlbumSummary';
+import { AlbumArtists } from './AlbumArtists';
+import { AlbumCopyrights } from './AlbumCopyrights';
+import { AlbumTracks } from './AlbumTracks';
+import { AlbumRecommendations } from './AlbumRecommendations';
+
+import { AlbumModel, ArtistModel } from '@models';
+import { useApplicationDimensions } from '@hooks';
+import { BOTTOM_NAVIGATION_HEIGHT, COLORS, SEPARATOR } from '@config';
+
+import { styles } from './styles';
 
 export type AlbumPropsType = {
-  id: string;
-  type: string;
-  imageURL?: string;
-  title?: string;
-  subtitle?: string;
-  size?: Sizes;
-  shape?: Shapes;
+  album: AlbumModel;
+  artists: ArtistModel[];
 };
 
-const Album = React.memo(
-  ({
-    id,
-    type,
-    title,
-    subtitle,
-    imageURL,
-    size = Sizes.BIG,
-    shape = Shapes.SQUARE,
-  }: AlbumPropsType) => {
-    const router = useRouter();
-    const styles = styling(size, shape);
+export const Album = ({ album, artists }: AlbumPropsType) => {
+  const { width, height } = useApplicationDimensions();
+  const { top: statusBarOffset } = useSafeAreaInsets();
 
-    const handlePress = React.useCallback(
-      (albumId: string) => {
-        router.push(`/albums/${albumId}`);
+  const imageHeight = 300;
+
+  const scrollRef = useAnimatedRef<Animated.ScrollView>();
+  const scrollOffset = useScrollViewOffset(scrollRef);
+  const progress = useSharedValue(Number(!!album.id));
+
+  const animatedGradientOverlay = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateY: interpolate(
+          scrollOffset.value,
+          [0, imageHeight, imageHeight * 2, imageHeight * 2 + 1],
+          [0, -imageHeight, -imageHeight * 2, 0],
+          Extrapolation.CLAMP
+        ),
       },
-      [router]
-    );
+    ],
+  }));
 
-    const renderIcon = React.useCallback(() => {
-      switch (type) {
-        case 'artist':
-          return (
-            <FontAwesome name="user" size={size * 0.7} color={COLORS.GREY} />
-          );
-        case 'album':
-        case 'playlist':
-          return <Foundation name="music" size={size} color={COLORS.GREY} />;
-        case 'show':
-        case 'episode':
-          return (
-            <FontAwesome name="podcast" size={size * 0.7} color={COLORS.GREY} />
-          );
-        default:
-          return (
-            <FontAwesome name="user" size={size * 0.7} color={COLORS.GREY} />
-          );
-      }
-    }, [type, size]);
+  const animatedContainer = useAnimatedStyle(() => ({
+    opacity: interpolate(
+      progress.value,
+      [0, 0.7, 1],
+      [0, 0, 1],
+      Extrapolation.CLAMP
+    ),
+    transform: [
+      {
+        translateY: interpolate(progress.value, [0, 1], [65, 0]),
+      },
+    ],
+  }));
 
-    return (
-      <Pressable
-        testID="album"
-        onPress={() => handlePress(id)}
-        style={styles.album}
-      >
-        <View style={styles.albumImageView}>
-          <React.Suspense fallback={renderIcon()}>
-            {imageURL ? (
-              <Image
-                testID="album-image"
-                style={styles.albumImage}
-                source={{ uri: imageURL }}
+  progress.value = withTiming(Number(!!album.id), { duration: 350 });
+
+  const artistsString = React.useMemo(
+    () =>
+      artists.length ? artists.map((a) => a.name).join(` ${SEPARATOR} `) : '',
+    [artists]
+  );
+
+  const totalDuration = React.useMemo(
+    () =>
+      album.tracks.items.length
+        ? album.tracks.items.reduce(
+            (acc, { durationMs }) => acc + durationMs,
+            0
+          )
+        : 0,
+    [album.tracks.items]
+  );
+
+  const releaseYear = React.useMemo(
+    () => album.releaseDate.split('-')[0],
+    [album.releaseDate]
+  );
+
+  const fallbackImageSource = React.useMemo(
+    () =>
+      (
+        ({
+          album: require(`@assets/covers/disc.png`),
+          single: require(`@assets/covers/note.png`),
+          artist: require(`@assets/covers/user.png`),
+          compilation: require(`@assets/covers/note.png`),
+          episode: require(`@assets/covers/radio.png`),
+          playlist: require(`@assets/covers/note.png`),
+          podcast: require(`@assets/covers/radio.png`),
+          show: require(`@assets/covers/radio.png`),
+        }) as unknown as { [key: string]: ImageSourcePropType }
+      )[album.type],
+    [album.type]
+  );
+
+  return (
+    <View style={[styles.container, { width }]}>
+      <Animated.View style={animatedContainer}>
+        <AlbumBackground
+          fallbackImageSource={fallbackImageSource}
+          imageURL={album.imageURL}
+          darkness={0.2}
+        />
+        <BackgroundOverlay
+          styles={[animatedGradientOverlay, styles.albumGradientOverlay]}
+          colors={['transparent', COLORS.PRIMARY]}
+          startY={imageHeight / 2}
+          endY={imageHeight + 70 + 90}
+          height={height}
+        />
+
+        <Stack.Screen
+          options={{
+            headerTransparent: true,
+            headerBackground: () => (
+              <AlbumHeader
+                headerTitle={album.name}
+                imageURL={album.imageURL}
+                fallbackImageSource={fallbackImageSource}
+                animatedValue={scrollOffset}
               />
-            ) : (
-              renderIcon()
-            )}
-          </React.Suspense>
-        </View>
-        {title && (
-          <Text
-            numberOfLines={2}
-            style={styles.albumTitleText}
-            testID="album-title"
-          >
-            {title}
-          </Text>
-        )}
-        {subtitle && (
-          <Text numberOfLines={1} style={styles.albumSubtitleText}>
-            {subtitle}
-          </Text>
-        )}
-      </Pressable>
-    );
-  }
-);
-Album.displayName = 'Album';
-
-export { Album };
+            ),
+          }}
+        />
+        <Animated.ScrollView
+          style={{
+            paddingTop: statusBarOffset,
+            marginBottom: BOTTOM_NAVIGATION_HEIGHT,
+          }}
+          scrollEventThrottle={16}
+          ref={scrollRef}
+        >
+          <AlbumCover
+            imageURL={album.imageURL}
+            fallbackImageSource={fallbackImageSource}
+            animatedValue={scrollOffset}
+          />
+          <AlbumInfo
+            id={album.id}
+            name={album.name}
+            artists={artistsString}
+            albumType={album.albumType}
+            releaseDate={releaseYear}
+          />
+          <AlbumTracks tracks={album.tracks.items} />
+          <AlbumSummary
+            releaseDate={album.releaseDate}
+            totalTracks={album.tracks.total}
+            totalDuration={totalDuration}
+          />
+          <AlbumArtists artists={artists} />
+          <AlbumRecommendations artists={artists} />
+          <AlbumCopyrights copyrights={album.copyrights} />
+        </Animated.ScrollView>
+      </Animated.View>
+    </View>
+  );
+};

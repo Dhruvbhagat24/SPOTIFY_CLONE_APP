@@ -1,8 +1,7 @@
 export {
-  parseToAlbums,
-  parseToPlaylist,
+  parseToRecommendedAlbums,
+  parseToAlbum,
   parseToArtist,
-  parseToSavedAlbums,
   parseToSavedEpisodes,
   parseToSavedShows,
   parseToUserProfile,

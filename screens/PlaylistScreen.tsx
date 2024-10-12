@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { Playlist } from '@components';
+import { Album } from '@components';
 import { getAlbum, getArtist } from '@api';
-import { PlaylistModel, ArtistModel } from '@models';
+import { AlbumModel, ArtistModel } from '@models';
 import { FALLBACK_ALBUM_ID } from '@data';
 import { AlbumFallback, ArtistFallback } from '@config';
 
@@ -13,7 +13,7 @@ export type AlbumScreenPropsType = {
 export const PlaylistScreen = ({
   albumId = FALLBACK_ALBUM_ID,
 }: AlbumScreenPropsType) => {
-  const [albumData, setAlbumData] = React.useState<PlaylistModel | null>(
+  const [albumData, setAlbumData] = React.useState<AlbumModel | null>(
     AlbumFallback
   );
   const [artistsData, setArtistsData] = React.useState<ArtistModel[] | null>(
@@ -42,5 +42,5 @@ export const PlaylistScreen = ({
     return null;
   }
 
-  return <Playlist album={albumData} artists={artistsData} />;
+  return <Album album={albumData} artists={artistsData} />;
 };

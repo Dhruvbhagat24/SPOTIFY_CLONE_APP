@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { LibraryItemModel } from '@models';
 import { AlbumsResponseType } from '@config';
-import { parseToAlbums } from '@utils';
+import { parseToRecommendedAlbums } from '@utils';
 
 import { getSessionlessToken } from './getSessionlessToken';
 
@@ -29,7 +29,7 @@ export const getArtistAlbums = async (
       }
     )) as { data: AlbumsResponseType };
 
-    return parseToAlbums(response.data);
+    return parseToRecommendedAlbums(response.data);
   } catch (error) {
     console.error(
       `Error fetching albums of artist with an ID: ${artistId}`,

@@ -10,7 +10,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { Album } from '../Album';
+import { Card } from '../Card';
 import { LibraryHeader } from './LibraryHeader';
 
 import { useApplicationDimensions } from '@hooks';
@@ -93,7 +93,7 @@ export const Library = () => {
       item: LibraryItemModel;
       index: number;
     }) => (
-      <Album
+      <Card
         key={index}
         id={id}
         type={type}

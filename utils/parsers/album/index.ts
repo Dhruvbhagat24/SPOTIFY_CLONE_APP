@@ -1,3 +1,2 @@
-export { parseToAlbums } from './parseToAlbums';
-export { parseToPlaylist } from './parseToPlaylist';
-export { parseToSavedAlbums } from './parseToSavedAlbums';
+export { parseToRecommendedAlbums } from './parseToRecommendedAlbums';
+export { parseToAlbum } from './parseToAlbum';

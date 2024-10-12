@@ -3,7 +3,7 @@ import { Pressable, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 // import { useRouter } from 'expo-router';
 
-import { Album } from '../Album';
+import { Card } from '../Card';
 
 import { translations } from '@data';
 import { Shapes, Sizes } from '@config';
@@ -54,7 +54,7 @@ export const Slider = ({
     >
       <View style={styles.scrollViewContainer}>
         {slides.map(({ id, type, title, subtitle, imageURL }) => (
-          <Album
+          <Card
             key={id}
             id={id}
             type={type}

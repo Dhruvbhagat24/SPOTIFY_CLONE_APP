@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-import { PlaylistModel } from '@models';
+import { AlbumModel } from '@models';
 import { AlbumResponseType } from '@config';
-import { parseToPlaylist } from '@utils';
+import { parseToAlbum } from '@utils';
 
 import { getSessionlessToken } from './getSessionlessToken';
 
-export const getAlbum = async (albumId: string): Promise<PlaylistModel> => {
+export const getAlbum = async (albumId: string): Promise<AlbumModel> => {
   try {
     const { token } = await getSessionlessToken();
 
@@ -19,7 +19,7 @@ export const getAlbum = async (albumId: string): Promise<PlaylistModel> => {
       }
     )) as { data: AlbumResponseType };
 
-    return parseToPlaylist(response.data);
+    return parseToAlbum(response.data);
   } catch (error) {
     console.error(`Error fetching album with an ID: ${albumId}`, error);
     throw error;

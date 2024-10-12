@@ -1,1 +1,0 @@
-export { PlaylistCopyrights } from './PlaylistCopyrights';
