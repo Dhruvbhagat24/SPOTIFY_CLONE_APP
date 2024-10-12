@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { type ImageSourcePropType, View } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -7,17 +7,19 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 
-import { styles } from './styles';
 import { PLAYLIST_IMAGE_SIZE } from '@config';
+import { styles } from './styles';
 
 export type PlaylistCoverPropsType = {
   imageURL: string;
   animatedValue: SharedValue<number>;
+  fallbackImageSource: ImageSourcePropType;
 };
 
 export const PlaylistCover = ({
   imageURL,
   animatedValue,
+  fallbackImageSource,
 }: PlaylistCoverPropsType) => {
   const animatedImageStyles = useAnimatedStyle(() => ({
     transform: [
@@ -54,7 +56,7 @@ export const PlaylistCover = ({
           { width: PLAYLIST_IMAGE_SIZE, height: PLAYLIST_IMAGE_SIZE },
           animatedImageStyles,
         ]}
-        source={{ uri: imageURL }}
+        source={imageURL ? { uri: imageURL } : fallbackImageSource}
         resizeMode="cover"
         testID="album-cover-image"
       />

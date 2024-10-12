@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
+import { type ImageSourcePropType, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, {
   Extrapolation,
@@ -18,12 +18,14 @@ import { styles } from './styles';
 export type PlaylistHeaderPropsType = {
   headerTitle: string;
   imageURL: string;
+  fallbackImageSource: ImageSourcePropType;
   animatedValue: SharedValue<number>;
 };
 
 export const PlaylistHeader = ({
   headerTitle,
   imageURL,
+  fallbackImageSource,
   animatedValue,
 }: PlaylistHeaderPropsType) => {
   const navigation = useNavigation<AppNavigationProps>();
@@ -85,7 +87,11 @@ export const PlaylistHeader = ({
           styles.albumHeaderContent,
         ]}
       >
-        <PlaylistBackground url={imageURL} darkness={0.4} />
+        <PlaylistBackground
+          fallbackImageSource={fallbackImageSource}
+          imageURL={imageURL}
+          darkness={0.4}
+        />
         <Animated.Text
           style={[animatedHeaderTextStyles, styles.albumHeaderTitleText]}
           testID="header-title-text"

@@ -22,6 +22,10 @@ export const PlaylistTracks = ({ tracks }: PlaylistTracksPropsType) => {
   const [savedTracks, setSavedTracks] = React.useState<boolean[] | null>(null);
 
   React.useEffect(() => {
+    if (tracks.some((track) => !track.id)) {
+      return;
+    }
+
     (async () => {
       try {
         const savedTracksArr = await checkSavedTracks(

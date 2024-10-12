@@ -21,6 +21,15 @@ export const PlaylistArtists = ({ artists }: PlaylistArtistsPropsType) => {
     [router]
   );
 
+  const checkArtistIDisEmpty = React.useMemo(
+    () => artists.some((artist) => !artist.id),
+    [artists]
+  );
+
+  if (checkArtistIDisEmpty) {
+    return null;
+  }
+
   return artists.map(({ id, imageURL, name }) => (
     <Pressable
       style={styles.link}

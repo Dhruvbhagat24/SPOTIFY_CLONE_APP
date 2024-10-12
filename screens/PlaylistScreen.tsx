@@ -4,6 +4,7 @@ import { Playlist } from '@components';
 import { getAlbum, getArtist } from '@api';
 import { PlaylistModel, ArtistModel } from '@models';
 import { FALLBACK_ALBUM_ID } from '@data';
+import { AlbumFallback, ArtistFallback } from '@config';
 
 export type AlbumScreenPropsType = {
   albumId: string;
@@ -12,9 +13,11 @@ export type AlbumScreenPropsType = {
 export const PlaylistScreen = ({
   albumId = FALLBACK_ALBUM_ID,
 }: AlbumScreenPropsType) => {
-  const [albumData, setAlbumData] = React.useState<PlaylistModel | null>(null);
+  const [albumData, setAlbumData] = React.useState<PlaylistModel | null>(
+    AlbumFallback
+  );
   const [artistsData, setArtistsData] = React.useState<ArtistModel[] | null>(
-    null
+    ArtistFallback
   );
 
   React.useEffect(() => {
@@ -34,6 +37,7 @@ export const PlaylistScreen = ({
     })();
   }, [albumId]);
 
+  // TODO: render an error page instead
   if (albumData === null || artistsData === null) {
     return null;
   }

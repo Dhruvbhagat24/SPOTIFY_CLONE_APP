@@ -27,6 +27,10 @@ export const PlaylistInfo = ({
   const [isSaved, setIsSaved] = React.useState<boolean>(false);
 
   React.useEffect(() => {
+    if (!id) {
+      return;
+    }
+
     (async () => {
       try {
         const savedAlbums = await checkSavedAlbums([id]);

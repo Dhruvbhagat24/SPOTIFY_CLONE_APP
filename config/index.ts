@@ -29,3 +29,5 @@ export {
   AlbumTypes,
   AuthResponse,
 } from './types';
+
+export { AlbumFallback, ArtistFallback } from './fallbacks';

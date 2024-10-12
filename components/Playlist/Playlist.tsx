@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { type ImageSourcePropType, View } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -76,9 +76,30 @@ export const Playlist = ({ album, artists }: PlaylistPropsType) => {
     [album.releaseDate]
   );
 
+  const fallbackImageSource = React.useMemo(
+    () =>
+      (
+        ({
+          album: require(`@assets/covers/disc.png`),
+          single: require(`@assets/covers/note.png`),
+          artist: require(`@assets/covers/user.png`),
+          compilation: require(`@assets/covers/note.png`),
+          episode: require(`@assets/covers/radio.png`),
+          playlist: require(`@assets/covers/note.png`),
+          podcast: require(`@assets/covers/radio.png`),
+          show: require(`@assets/covers/radio.png`),
+        }) as unknown as { [key: string]: ImageSourcePropType }
+      )[album.type],
+    [album.type]
+  );
+
   return (
-    <View style={{ width }}>
-      <PlaylistBackground url={album.imageURL} darkness={0.2} />
+    <View style={[styles.container, { width }]}>
+      <PlaylistBackground
+        fallbackImageSource={fallbackImageSource}
+        imageURL={album.imageURL}
+        darkness={0.2}
+      />
       <BackgroundOverlay
         styles={[animatedGradientOverlay, styles.albumGradientOverlay]}
         colors={['transparent', COLORS.PRIMARY]}
@@ -94,6 +115,7 @@ export const Playlist = ({ album, artists }: PlaylistPropsType) => {
             <PlaylistHeader
               headerTitle={album.name}
               imageURL={album.imageURL}
+              fallbackImageSource={fallbackImageSource}
               animatedValue={scrollOffset}
             />
           ),
@@ -107,7 +129,11 @@ export const Playlist = ({ album, artists }: PlaylistPropsType) => {
         scrollEventThrottle={16}
         ref={scrollRef}
       >
-        <PlaylistCover imageURL={album.imageURL} animatedValue={scrollOffset} />
+        <PlaylistCover
+          imageURL={album.imageURL}
+          fallbackImageSource={fallbackImageSource}
+          animatedValue={scrollOffset}
+        />
         <PlaylistInfo
           id={album.id}
           name={album.name}
@@ -123,7 +149,6 @@ export const Playlist = ({ album, artists }: PlaylistPropsType) => {
         />
         <PlaylistArtists artists={artists} />
         <PlaylistRecommendedAlbums artists={artists} />
-
         <PlaylistCopyrights copyrights={album.copyrights} />
       </Animated.ScrollView>
     </View>

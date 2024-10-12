@@ -24,6 +24,10 @@ export const PlaylistRecommendedAlbums = ({
   >(null);
 
   React.useEffect(() => {
+    if (artists.some((artist) => !artist.id)) {
+      return;
+    }
+
     (async () => {
       try {
         const artistsAlbumsData = (

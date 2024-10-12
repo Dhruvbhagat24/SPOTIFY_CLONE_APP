@@ -109,6 +109,7 @@ export const Library = () => {
     []
   );
 
+  // TODO: remove this and add instead a fallback data
   if (!data) {
     return null;
   }
