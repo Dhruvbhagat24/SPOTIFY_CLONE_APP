@@ -7,6 +7,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { styles } from './styles';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { useApplicationDimensions } from '@hooks';
 
 export type PlaylistSongPropsType = {
   name: string;
@@ -23,6 +24,9 @@ export const PlaylistTrack = ({
   isTrackSaved,
   isPlaying,
 }: PlaylistSongPropsType) => {
+  const { width } = useApplicationDimensions();
+  const maxWidth = width - 150;
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -32,7 +36,11 @@ export const PlaylistTrack = ({
           )}
           <Text
             numberOfLines={1}
-            style={[styles.nameText, isPlaying ? styles.nameTextActive : {}]}
+            style={[
+              styles.nameText,
+              { maxWidth },
+              isPlaying ? styles.nameTextActive : {},
+            ]}
           >
             {name}
           </Text>
@@ -47,7 +55,7 @@ export const PlaylistTrack = ({
               />
             </View>
           )}
-          <Text style={styles.artistNameText}>
+          <Text numberOfLines={1} style={[styles.artistNameText, { maxWidth }]}>
             {artists.map((a) => a.name).join(', ')}
           </Text>
         </View>

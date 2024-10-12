@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { type ImageSourcePropType, View } from 'react-native';
+import { View, type ImageSourcePropType } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
   useAnimatedRef,
   useAnimatedStyle,
   useScrollViewOffset,
+  useSharedValue,
+  withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Stack } from 'expo-router';
@@ -18,14 +20,14 @@ import { PlaylistInfo } from './PlaylistInfo';
 import { PlaylistSummary } from './PlaylistSummary';
 import { PlaylistArtists } from './PlaylistArtists';
 import { PlaylistCopyrights } from './PlaylistCopyrights';
+import { PlaylistTracks } from './PlaylistTracks';
+import { PlaylistRecommendedAlbums } from './PlaylistRecommendedAlbums';
 
 import { PlaylistModel, ArtistModel } from '@models';
 import { useApplicationDimensions } from '@hooks';
 import { BOTTOM_NAVIGATION_HEIGHT, COLORS, SEPARATOR } from '@config';
 
 import { styles } from './styles';
-import { PlaylistTracks } from './PlaylistTracks';
-import { PlaylistRecommendedAlbums } from './PlaylistRecommendedAlbums';
 
 export type PlaylistPropsType = {
   album: PlaylistModel;
@@ -40,6 +42,7 @@ export const Playlist = ({ album, artists }: PlaylistPropsType) => {
 
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
+  const progress = useSharedValue(Number(!!album.id));
 
   const animatedGradientOverlay = useAnimatedStyle(() => ({
     transform: [
@@ -53,6 +56,22 @@ export const Playlist = ({ album, artists }: PlaylistPropsType) => {
       },
     ],
   }));
+
+  const animatedContainer = useAnimatedStyle(() => ({
+    opacity: interpolate(
+      progress.value,
+      [0, 0.7, 1],
+      [0, 0, 1],
+      Extrapolation.CLAMP
+    ),
+    transform: [
+      {
+        translateY: interpolate(progress.value, [0, 1], [65, 0]),
+      },
+    ],
+  }));
+
+  progress.value = withTiming(Number(!!album.id), { duration: 350 });
 
   const artistsString = React.useMemo(
     () =>
@@ -95,62 +114,64 @@ export const Playlist = ({ album, artists }: PlaylistPropsType) => {
 
   return (
     <View style={[styles.container, { width }]}>
-      <PlaylistBackground
-        fallbackImageSource={fallbackImageSource}
-        imageURL={album.imageURL}
-        darkness={0.2}
-      />
-      <BackgroundOverlay
-        styles={[animatedGradientOverlay, styles.albumGradientOverlay]}
-        colors={['transparent', COLORS.PRIMARY]}
-        startY={imageHeight / 2}
-        endY={imageHeight + 70 + 90}
-        height={height}
-      />
-
-      <Stack.Screen
-        options={{
-          headerTransparent: true,
-          headerBackground: () => (
-            <PlaylistHeader
-              headerTitle={album.name}
-              imageURL={album.imageURL}
-              fallbackImageSource={fallbackImageSource}
-              animatedValue={scrollOffset}
-            />
-          ),
-        }}
-      />
-      <Animated.ScrollView
-        style={{
-          paddingTop: statusBarOffset,
-          marginBottom: BOTTOM_NAVIGATION_HEIGHT,
-        }}
-        scrollEventThrottle={16}
-        ref={scrollRef}
-      >
-        <PlaylistCover
-          imageURL={album.imageURL}
+      <Animated.View style={animatedContainer}>
+        <PlaylistBackground
           fallbackImageSource={fallbackImageSource}
-          animatedValue={scrollOffset}
+          imageURL={album.imageURL}
+          darkness={0.2}
         />
-        <PlaylistInfo
-          id={album.id}
-          name={album.name}
-          artists={artistsString}
-          albumType={album.albumType}
-          releaseDate={releaseYear}
+        <BackgroundOverlay
+          styles={[animatedGradientOverlay, styles.albumGradientOverlay]}
+          colors={['transparent', COLORS.PRIMARY]}
+          startY={imageHeight / 2}
+          endY={imageHeight + 70 + 90}
+          height={height}
         />
-        <PlaylistTracks tracks={album.tracks.items} />
-        <PlaylistSummary
-          releaseDate={album.releaseDate}
-          totalTracks={album.tracks.total}
-          totalDuration={totalDuration}
+
+        <Stack.Screen
+          options={{
+            headerTransparent: true,
+            headerBackground: () => (
+              <PlaylistHeader
+                headerTitle={album.name}
+                imageURL={album.imageURL}
+                fallbackImageSource={fallbackImageSource}
+                animatedValue={scrollOffset}
+              />
+            ),
+          }}
         />
-        <PlaylistArtists artists={artists} />
-        <PlaylistRecommendedAlbums artists={artists} />
-        <PlaylistCopyrights copyrights={album.copyrights} />
-      </Animated.ScrollView>
+        <Animated.ScrollView
+          style={{
+            paddingTop: statusBarOffset,
+            marginBottom: BOTTOM_NAVIGATION_HEIGHT,
+          }}
+          scrollEventThrottle={16}
+          ref={scrollRef}
+        >
+          <PlaylistCover
+            imageURL={album.imageURL}
+            fallbackImageSource={fallbackImageSource}
+            animatedValue={scrollOffset}
+          />
+          <PlaylistInfo
+            id={album.id}
+            name={album.name}
+            artists={artistsString}
+            albumType={album.albumType}
+            releaseDate={releaseYear}
+          />
+          <PlaylistTracks tracks={album.tracks.items} />
+          <PlaylistSummary
+            releaseDate={album.releaseDate}
+            totalTracks={album.tracks.total}
+            totalDuration={totalDuration}
+          />
+          <PlaylistArtists artists={artists} />
+          <PlaylistRecommendedAlbums artists={artists} />
+          <PlaylistCopyrights copyrights={album.copyrights} />
+        </Animated.ScrollView>
+      </Animated.View>
     </View>
   );
 };
