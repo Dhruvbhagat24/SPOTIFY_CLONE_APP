@@ -41,21 +41,18 @@ export type PlaylistPropsType = {
     artist: string;
     albums: AlbumModel[];
   }[];
-  isAlbumSaved: boolean;
 };
 
 export const Playlist = ({
   album,
   artists,
   artistsAlbums,
-  isAlbumSaved,
 }: PlaylistPropsType) => {
   const { width, height } = useApplicationDimensions();
   const { top: statusBarOffset } = useSafeAreaInsets();
 
-  // TODO: to be removed and replaced with API separate + call
-  const isDownloaded = false;
-  const { albumType, name, releaseDate, imageURL, tracks, copyrights } = album;
+  const { id, albumType, name, releaseDate, imageURL, tracks, copyrights } =
+    album;
 
   const imageHeight = 300;
 
@@ -108,12 +105,11 @@ export const Playlist = ({
       >
         <PlaylistCover imageURL={imageURL} animatedValue={scrollOffset} />
         <PlaylistInfo
+          id={id}
           name={name}
           artists={artists.map((a) => a.name).join(` ${SEPARATOR} `)}
           albumType={albumType}
           releaseDate={releaseDate.split('-')[0]}
-          isDownloaded={isDownloaded}
-          isSaved={isAlbumSaved}
         />
         <PlaylistTracks tracks={tracks.items} />
         <PlaylistSummary

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Playlist } from '@components';
-import { checkSavedAlbums, getAlbum, getArtist, getArtistAlbums } from '@api';
+import { getAlbum, getArtist, getArtistAlbums } from '@api';
 import { PlaylistModel, AlbumModel, ArtistModel } from '@models';
 import { FALLBACK_ALBUM_ID } from '@data';
 
@@ -23,7 +23,6 @@ export const PlaylistScreen = ({
       }[]
     | null
   >(null);
-  const [isAlbumSaved, setIsAlbumSaved] = React.useState<boolean | null>(null);
 
   React.useEffect(() => {
     (async () => {
@@ -45,12 +44,8 @@ export const PlaylistScreen = ({
           )
         ).map((albums, i) => ({ artist: artists[i].name, albums: albums }));
         setArtistsAlbums(artistAlbums);
-
-        const savedAlbums = await checkSavedAlbums([albumId]);
-        setIsAlbumSaved(savedAlbums[0]);
       } catch (error) {
         setAlbumData(null);
-        setIsAlbumSaved(null);
         console.error('Failed to get album data:', error);
       }
     })();
@@ -59,8 +54,7 @@ export const PlaylistScreen = ({
   if (
     albumData === null ||
     artistsData === null ||
-    artistsAlbumsData === null ||
-    isAlbumSaved === null
+    artistsAlbumsData === null
   ) {
     return null;
   }
@@ -70,7 +64,6 @@ export const PlaylistScreen = ({
       album={albumData}
       artists={artistsData}
       artistsAlbums={artistsAlbumsData}
-      isAlbumSaved={isAlbumSaved}
     />
   );
 };

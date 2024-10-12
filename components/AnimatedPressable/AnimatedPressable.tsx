@@ -27,6 +27,10 @@ export const AnimatedPressable = ({
 }: AnimatedPressablePropsType) => {
   const progress = useSharedValue(Number(isActive));
 
+  React.useEffect(() => {
+    progress.value = Number(isActive);
+  }, [isActive, progress]);
+
   const AnimatedIcon = Animated.createAnimatedComponent(FontAwesome5);
   const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -90,30 +94,10 @@ export const AnimatedPressable = ({
       onPress={handlePress}
     >
       <Animated.View style={[styles.view, animatedDefaultStyles]}>
-        <AnimatedIcon
-          name={defaultIcon}
-          size={14}
-          color={interpolateColor(
-            progress.value,
-            [0, 1],
-            isActive
-              ? [COLORS.PRIMARY, COLORS.GREY]
-              : [COLORS.GREY, COLORS.PRIMARY]
-          )}
-        />
+        <AnimatedIcon name={defaultIcon} size={14} color={COLORS.GREY} />
       </Animated.View>
       <Animated.View style={[styles.view, animatedActiveStyles]}>
-        <AnimatedIcon
-          name={activeIcon}
-          size={14}
-          color={interpolateColor(
-            progress.value,
-            [0, 1],
-            isActive
-              ? [COLORS.GREY, COLORS.PRIMARY]
-              : [COLORS.PRIMARY, COLORS.GREY]
-          )}
-        />
+        <AnimatedIcon name={activeIcon} size={14} color={COLORS.PRIMARY} />
       </Animated.View>
     </AnimatedPressable>
   );

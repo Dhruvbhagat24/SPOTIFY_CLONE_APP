@@ -30,7 +30,7 @@ export const PlaylistTracks = ({ tracks }: PlaylistTracksPropsType) => {
         setSavedTracks(savedTracksArr);
       } catch (error) {
         setSavedTracks(null);
-        console.error('Failed to get album data:', error);
+        console.error('Failed to check if array of tracks is saved:', error);
       }
     })();
   }, [tracks]);
@@ -42,6 +42,7 @@ export const PlaylistTracks = ({ tracks }: PlaylistTracksPropsType) => {
           key={index}
           name={name}
           artists={artists}
+          // TODO: removed this true value and check if tracks are downloaded instead
           isTrackDownloaded={true}
           isTrackSaved={savedTracks ? savedTracks[index] : false}
           // TODO: to be removed and replaced with handlePress logic on play
