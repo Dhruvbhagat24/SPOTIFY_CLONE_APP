@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { Home } from '@components';
 
 import { COLORS } from '@config';
 
@@ -15,7 +17,7 @@ export const HomeScreen = () => {
         height: '100%',
       }}
     >
-      <Text>Home Screen</Text>
+      <Home />
     </View>
   );
 };

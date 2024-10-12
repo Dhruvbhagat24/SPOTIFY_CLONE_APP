@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { AlbumModel } from '@models';
+import { LibraryItemModel } from '@models';
 import { AlbumsResponseType } from '@config';
 import { parseToAlbums } from '@utils';
 
@@ -11,7 +11,7 @@ export const getArtistAlbums = async (
   includeGroups: string = 'album,single,appears_on,compilation',
   limit: number = 6,
   offset: number = 0
-): Promise<AlbumModel[]> => {
+): Promise<LibraryItemModel[]> => {
   try {
     const { token } = await getSessionlessToken();
 

@@ -22,7 +22,9 @@ export const LoginScreen = () => {
     {
       clientId: clientID as string,
       scopes: [
+        'user-top-read',
         'user-library-read',
+        'user-read-playback-position',
         'user-read-private',
         'user-read-email',
         'user-follow-read',

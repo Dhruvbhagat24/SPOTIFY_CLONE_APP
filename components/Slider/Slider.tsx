@@ -6,14 +6,14 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Album } from '../Album';
 
 import { translations } from '@data';
-import { SEPARATOR, Shapes, Sizes } from '@config';
-import { AlbumModel } from '@models';
+import { Shapes, Sizes } from '@config';
+import { LibraryItemModel } from '@models';
 
 import { styles } from './styles';
 
 export type SliderPropsType = {
   title: string;
-  slides: AlbumModel[];
+  slides: LibraryItemModel[];
   size?: Sizes;
   shape?: Shapes;
   withShowAll: boolean;
@@ -53,15 +53,15 @@ export const Slider = ({
       testID="albums-scroll-view"
     >
       <View style={styles.scrollViewContainer}>
-        {slides.map(({ id, name, type, releaseDate, albumType, imageURL }) => (
+        {slides.map(({ id, type, title, subtitle, imageURL }) => (
           <Album
             key={id}
             id={id}
             type={type}
             shape={shape}
             size={size}
-            title={name}
-            subtitle={`${releaseDate} ${SEPARATOR} ${translations.type[albumType]}`}
+            title={title}
+            subtitle={subtitle}
             imageURL={imageURL}
           />
         ))}

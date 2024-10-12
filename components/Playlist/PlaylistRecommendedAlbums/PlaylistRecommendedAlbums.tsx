@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Slider } from '../../Slider';
 
-import { AlbumModel, ArtistModel } from '@models';
+import { ArtistModel, LibraryItemModel } from '@models';
 import { Shapes, Sizes } from '@config';
 import { translations } from '@data';
 
@@ -18,7 +18,7 @@ export const PlaylistRecommendedAlbums = ({
   const [artistsAlbums, setArtistsAlbums] = React.useState<
     | {
         artist: string;
-        albums: AlbumModel[];
+        albums: LibraryItemModel[];
       }[]
     | null
   >(null);
