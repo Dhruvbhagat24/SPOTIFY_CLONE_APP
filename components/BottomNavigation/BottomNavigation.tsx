@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { useRouter, useSegments } from 'expo-router';
+import { StyleSheet, Text, View } from 'react-native';
+import { useSegments, Link } from 'expo-router';
 
 import { BackgroundGradient } from '../BackgroundGradient';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -13,15 +13,7 @@ import { hexToRGB } from '@utils';
 import { styles } from './styles';
 
 export const BottomNavigation = () => {
-  const router = useRouter();
   const segments: string[] = useSegments();
-
-  const handlePress = React.useCallback(
-    (albumId: string) => {
-      router.push(`/albums/${albumId}`);
-    },
-    [router]
-  );
 
   if (!segments.length) {
     return null;
@@ -36,57 +28,59 @@ export const BottomNavigation = () => {
         styles={{ ...StyleSheet.absoluteFillObject }}
         height={BOTTOM_NAVIGATION_HEIGHT}
       />
-      <Pressable
-        style={styles.pressable}
-        onPress={() => handlePress(Pages.HOME)}
-        testID="home-pressable"
-      >
-        <AntDesign
-          style={[styles.icon, isActive(Pages.HOME) ? styles.active : {}]}
-          name="home"
-          size={22}
-        />
-        <Text
-          style={[styles.text, isActive(Pages.HOME) ? styles.active : {}]}
-          testID="home-text"
-        >
-          {translations.router[Pages.HOME]}
-        </Text>
-      </Pressable>
-      <Pressable
-        style={styles.pressable}
-        onPress={() => handlePress(Pages.SEARCH)}
+      <Link href={`/${Pages.HOME}`} style={styles.link} testID="home-pressable">
+        <View style={styles.linkContainer}>
+          <AntDesign
+            style={[styles.icon, isActive(Pages.HOME) ? styles.active : {}]}
+            name="home"
+            size={22}
+          />
+          <Text
+            style={[styles.text, isActive(Pages.HOME) ? styles.active : {}]}
+            testID="home-text"
+          >
+            {translations.router[Pages.HOME]}
+          </Text>
+        </View>
+      </Link>
+      <Link
+        href={`/${Pages.SEARCH}`}
+        style={styles.link}
         testID="search-pressable"
       >
-        <Ionicons
-          style={[styles.icon, isActive(Pages.SEARCH) ? styles.active : {}]}
-          name="search"
-          size={22}
-        />
-        <Text
-          style={[styles.text, isActive(Pages.SEARCH) ? styles.active : {}]}
-          testID="search-text"
-        >
-          {translations.router[Pages.SEARCH]}
-        </Text>
-      </Pressable>
-      <Pressable
-        style={styles.pressable}
-        onPress={() => handlePress(Pages.LIBRARY)}
+        <View style={styles.linkContainer}>
+          <Ionicons
+            style={[styles.icon, isActive(Pages.SEARCH) ? styles.active : {}]}
+            name="search"
+            size={22}
+          />
+          <Text
+            style={[styles.text, isActive(Pages.SEARCH) ? styles.active : {}]}
+            testID="search-text"
+          >
+            {translations.router[Pages.SEARCH]}
+          </Text>
+        </View>
+      </Link>
+      <Link
+        href={`/${Pages.LIBRARY}`}
+        style={styles.link}
         testID="library-pressable"
       >
-        <Ionicons
-          style={[styles.icon, isActive(Pages.LIBRARY) ? styles.active : {}]}
-          name="library"
-          size={22}
-        />
-        <Text
-          style={[styles.text, isActive(Pages.LIBRARY) ? styles.active : {}]}
-          testID="library-text"
-        >
-          {translations.router[Pages.LIBRARY]}
-        </Text>
-      </Pressable>
+        <View style={styles.linkContainer}>
+          <Ionicons
+            style={[styles.icon, isActive(Pages.LIBRARY) ? styles.active : {}]}
+            name="library"
+            size={22}
+          />
+          <Text
+            style={[styles.text, isActive(Pages.LIBRARY) ? styles.active : {}]}
+            testID="library-text"
+          >
+            {translations.router[Pages.LIBRARY]}
+          </Text>
+        </View>
+      </Link>
     </View>
   );
 };

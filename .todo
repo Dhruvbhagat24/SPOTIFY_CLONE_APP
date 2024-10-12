@@ -38,8 +38,6 @@ const fallback = {
 
 TODO: add unit tests and fix current ones
 
-TODO: Fix the bug when user logs in the error is thrown, but after refresh it's gone
-
 TODO: Handle the case, when there is a new user and there is no saved .json file in FileSystem.
 
 TODO: Handle the case, when a different user logs in - may be an error due to collision of naming .json files in FileSystem -> add there also the username

@@ -16,9 +16,11 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.7,
     shadowRadius: 20,
   },
-  pressable: {
+  link: {},
+  linkContainer: {
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   icon: {
     color: COLORS.GREY,
