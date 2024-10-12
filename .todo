@@ -1,5 +1,3 @@
-TODO: Remove the routes for saved-artists, saved-albums etc... and create in library index a component which renders all possible fetched items for library in a one array. by clicking on the buttons we should filter out the array and setting state to the filtered array - this will unblock further implementation of the appearing buttons for playlist, also will have a common unfiltered array of items to show on init view. All of this things should be stored (after fetching) under the same file.json in system files - which will be later on filtered on button click.
-
 TODO: After we store all types of "Album"s in one array, we should implement a logic on every album or artist click to go to that array.json in file system remove the item and add it to the beginning and save back to the file system. With this approach we will have the latest interaction of the user to show.
 
 TODO: add the fallback if needed
@@ -39,3 +37,11 @@ const fallback = {
 ```
 
 TODO: add unit tests and fix current ones
+
+TODO: Fix the bug when user logs in the error is thrown, but after refresh it's gone
+
+TODO: Handle the case, when there is a new user and there is no saved .json file in FileSystem.
+
+TODO: Handle the case, when a different user logs in - may be an error due to collision of naming .json files in FileSystem -> add there also the username
+
+TODO: Refactor api strategy
