@@ -1,11 +1,14 @@
-import { USER_PROFILE_SIZE_VARIANT, UserProfileResponseType } from '@config';
+import { UserProfileResponseType } from '@config';
 import { UserProfileModel } from '@models';
 
-export const parseToUserProfile = (
-  data: UserProfileResponseType
-): UserProfileModel => ({
-  id: data.id,
-  type: data.type as UserProfileModel['type'],
-  displayName: data.display_name,
-  imageURL: data.images[USER_PROFILE_SIZE_VARIANT].url,
+export const parseToUserProfile = ({
+  id,
+  type,
+  display_name,
+  images,
+}: UserProfileResponseType): UserProfileModel => ({
+  id: id,
+  type: type as UserProfileModel['type'],
+  displayName: display_name,
+  imageURL: images !== null ? images[0].url : '',
 });

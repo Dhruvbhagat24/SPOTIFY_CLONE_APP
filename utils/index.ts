@@ -10,5 +10,6 @@ export {
   parseFromFollowedArtistsToLibraryItem,
   parseFromSavedAlbumsToLibraryItem,
   parseFromSavedShowsToLibraryItem,
+  parseFromSavedPlaylistsToLibraryItem,
 } from './parsers';
 export { hexToRGB, getDisplayDate } from './common';

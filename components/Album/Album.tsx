@@ -45,6 +45,7 @@ const Album = React.memo(
             <FontAwesome name="user" size={size * 0.7} color={COLORS.GREY} />
           );
         case 'album':
+        case 'playlist':
           return <Foundation name="music" size={size} color={COLORS.GREY} />;
         case 'show':
         case 'episode':

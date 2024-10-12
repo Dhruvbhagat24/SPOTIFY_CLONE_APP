@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
   },
   flatListColumnWrapper: {
     justifyContent: 'flex-start',
-    gap: 10,
+    gap: 12,
   },
   category: {
     backgroundColor: COLORS.SECONDARY,

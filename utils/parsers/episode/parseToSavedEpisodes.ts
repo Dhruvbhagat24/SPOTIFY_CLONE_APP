@@ -1,7 +1,4 @@
-import {
-  LIBRARY_ALBUM_IMAGE_SIZE_VARIANT,
-  SavedEpisodesResponseType,
-} from '@config';
+import { SavedEpisodesResponseType } from '@config';
 import { SavedEpisodeModel } from '@models';
 
 export const parseToSavedEpisodes = (
@@ -13,6 +10,6 @@ export const parseToSavedEpisodes = (
     id: id,
     type: type,
     name: name,
-    imageURL: images[LIBRARY_ALBUM_IMAGE_SIZE_VARIANT].url,
+    imageURL: images !== null ? images[0].url : '',
     releaseDate: release_date,
   }));

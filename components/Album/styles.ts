@@ -23,10 +23,9 @@ export const styling = (size: Sizes, shape: Shapes) =>
     },
     albumInfo: {},
     albumTitleText: {
-      fontSize: 15,
-      lineHeight: 15,
+      fontSize: 13,
+      lineHeight: 13,
       fontFamily: 'SF-Bold',
-      fontWeight: '600',
       color: COLORS.WHITE,
       maxWidth: size,
       marginTop: 10,

@@ -1,10 +1,5 @@
 import { LibraryItemModel } from '@models';
-import {
-  AlbumTypes,
-  LIBRARY_ALBUM_IMAGE_SIZE_VARIANT,
-  SavedAlbumsResponseType,
-  SEPARATOR,
-} from '@config';
+import { AlbumTypes, SavedAlbumsResponseType, SEPARATOR } from '@config';
 import { translations } from '@data';
 
 export const parseFromSavedAlbumsToLibraryItem = (
@@ -23,6 +18,6 @@ export const parseFromSavedAlbumsToLibraryItem = (
         album_type === AlbumTypes.ALBUM
           ? artistsString
           : `${translations.type[album_type]} ${SEPARATOR} ${artistsString}`,
-      imageURL: images[LIBRARY_ALBUM_IMAGE_SIZE_VARIANT].url,
+      imageURL: images !== null ? images[0].url : '',
     };
   });

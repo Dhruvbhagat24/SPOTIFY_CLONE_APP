@@ -1,12 +1,12 @@
-import { ALBUM_IMAGE_SIZE_VARIANT, AlbumsResponseType } from '@config';
+import { AlbumsResponseType } from '@config';
 import { AlbumModel } from '@models';
 
 export const parseToAlbums = (data: AlbumsResponseType): AlbumModel[] =>
-  data.items.map((item) => ({
-    type: item.type,
-    albumType: item.album_type,
-    id: item.id,
-    name: item.name,
-    releaseDate: item.release_date.split('-')[0],
-    imageURL: item.images[ALBUM_IMAGE_SIZE_VARIANT].url,
+  data.items.map(({ type, album_type, id, name, release_date, images }) => ({
+    type: type,
+    albumType: album_type,
+    id: id,
+    name: name,
+    releaseDate: release_date.split('-')[0],
+    imageURL: images !== null ? images[0].url : '',
   }));

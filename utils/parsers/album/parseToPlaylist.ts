@@ -1,31 +1,52 @@
-import { ALBUM_IMAGE_SIZE_VARIANT, AlbumResponseType } from '@config';
+import { AlbumResponseType } from '@config';
 import { PlaylistModel } from '@models';
 
-export const parseToPlaylist = (data: AlbumResponseType): PlaylistModel => ({
-  id: data.id,
-  type: data.type,
-  albumType: data.album_type,
-  name: data.name,
-  imageURL: data.images[ALBUM_IMAGE_SIZE_VARIANT].url,
-  releaseDate: data.release_date,
-  artists: data.artists.map((artist) => ({
-    id: artist.id,
-    type: artist.type,
+export const parseToPlaylist = ({
+  id,
+  type,
+  album_type,
+  name,
+  images,
+  release_date,
+  artists,
+  tracks: { total, items },
+  copyrights,
+  genres,
+  label,
+}: AlbumResponseType): PlaylistModel => ({
+  id: id,
+  type: type,
+  albumType: album_type,
+  name: name,
+  imageURL: images !== null ? images[0].url : '',
+  releaseDate: release_date,
+  artists: artists.map(({ id: artistId, type: artistType }) => ({
+    id: artistId,
+    type: artistType,
   })),
   tracks: {
-    total: data.tracks.total,
-    items: data.tracks.items.map((item) => ({
-      id: item.id,
-      name: item.name,
-      type: item.type,
-      artists: item.artists.map((artist) => ({
-        name: artist.name,
-      })),
-      durationMs: item.duration_ms,
-      explicit: item.explicit,
-    })),
+    total: total,
+    items: items.map(
+      ({
+        id: trackId,
+        name: trackName,
+        type: trackType,
+        artists: trackArtists,
+        duration_ms,
+        explicit,
+      }) => ({
+        id: trackId,
+        name: trackName,
+        type: trackType,
+        artists: trackArtists.map(({ name: artistName }) => ({
+          name: artistName,
+        })),
+        durationMs: duration_ms,
+        explicit: explicit,
+      })
+    ),
   },
-  copyrights: data.copyrights,
-  genres: data.genres,
-  label: data.label,
+  copyrights: copyrights,
+  genres: genres,
+  label: label,
 });

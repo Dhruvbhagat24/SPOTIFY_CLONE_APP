@@ -6,4 +6,5 @@ export {
   parseFromFollowedArtistsToLibraryItem,
   parseFromSavedAlbumsToLibraryItem,
   parseFromSavedShowsToLibraryItem,
+  parseFromSavedPlaylistsToLibraryItem,
 } from './library';

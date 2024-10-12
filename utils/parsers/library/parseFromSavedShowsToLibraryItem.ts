@@ -1,8 +1,5 @@
 import { LibraryItemModel } from '@models';
-import {
-  LIBRARY_ALBUM_IMAGE_SIZE_VARIANT,
-  SavedEpisodesResponseType,
-} from '@config';
+import { SavedEpisodesResponseType } from '@config';
 import { translations } from '@data';
 import { getDisplayDate } from '../../common';
 
@@ -22,6 +19,6 @@ export const parseFromSavedShowsToLibraryItem = (
       id: id,
       title: name,
       subtitle: translations.released + getDisplayDate(release_date),
-      imageURL: images[LIBRARY_ALBUM_IMAGE_SIZE_VARIANT].url,
+      imageURL: images !== null ? images[0].url : '',
     })
   );

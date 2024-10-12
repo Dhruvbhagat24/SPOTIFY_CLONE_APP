@@ -10,6 +10,7 @@ export {
   getUserFollowedArtists,
   getSavedAlbums,
   getSavedShows,
+  getSavedPlaylists,
   checkSavedAlbums,
   checkSavedTracks,
   getLibrary,

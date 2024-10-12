@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-import { SavedEpisodesResponseType } from '@config';
-import { parseFromSavedShowsToLibraryItem } from '@utils';
+import { SavedPlaylistsResponseType } from '@config';
+import { parseFromSavedPlaylistsToLibraryItem } from '@utils';
 import { LibraryItemModel } from '@models';
 
 import { getSessionToken } from './getSessionToken';
 import { fileSystemMiddleware } from './fileSystemMiddleware';
 
-export const fetchSavedShows = async (
+export const fetchSavedPlaylists = async (
   offset: number = 0,
   numberOfCalls: number = 0
 ): Promise<LibraryItemModel[]> => {
@@ -16,7 +16,7 @@ export const fetchSavedShows = async (
     const token = await getSessionToken();
 
     const response = (await axios.get(
-      'https://api.spotify.com/v1/me/episodes',
+      'https://api.spotify.com/v1/me/playlists',
       {
         params: {
           limit: maxAllowedLimit,
@@ -26,31 +26,31 @@ export const fetchSavedShows = async (
           Authorization: `Bearer ${token}`,
         },
       }
-    )) as { data: SavedEpisodesResponseType };
+    )) as { data: SavedPlaylistsResponseType };
 
     const { total } = response.data;
     const numberOfMaxCalls = Math.ceil(total / maxAllowedLimit) - 1;
-    const result = parseFromSavedShowsToLibraryItem(response.data.items);
+    const result = parseFromSavedPlaylistsToLibraryItem(response.data.items);
     if (total / maxAllowedLimit <= 1 || numberOfCalls >= numberOfMaxCalls) {
       return result;
     }
 
     numberOfCalls++;
     offset += maxAllowedLimit;
-    const next = await fetchSavedShows(offset, numberOfCalls);
+    const next = await fetchSavedPlaylists(offset, numberOfCalls);
 
     return [...result, ...next];
   } catch (error) {
     console.error(
-      `Error fetching saved shows of currently logged in user`,
+      `Error fetching saved playlists of currently logged in user`,
       error
     );
     throw error;
   }
 };
 
-export const getSavedShows = async () =>
+export const getSavedPlaylists = async () =>
   await fileSystemMiddleware<LibraryItemModel[]>(
-    'user_saved_shows',
-    fetchSavedShows
+    'user_saved_playlists',
+    fetchSavedPlaylists
   );

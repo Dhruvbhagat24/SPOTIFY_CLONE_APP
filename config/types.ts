@@ -76,6 +76,22 @@ export type ArtistResponseType = {
   };
 };
 
+export type UserFollowedArtistsResponseType = {
+  artists: {
+    href: string;
+    limit: 1;
+    next: string;
+    cursors: { after: string };
+    total: number;
+    items: {
+      id: ArtistResponseType['id'];
+      type: ArtistResponseType['type'];
+      name: ArtistResponseType['name'];
+      images: ArtistResponseType['images'];
+    }[];
+  };
+};
+
 export type AlbumsResponseType = {
   href: string;
   limit: number;
@@ -159,6 +175,50 @@ export type SavedEpisodesResponseType = {
   }[];
 };
 
+export type PlaylistsResponseType = {
+  type: 'playlist';
+  id: string;
+  collaborative: boolean;
+  description: string;
+  href: string;
+  images: {
+    height: string | null;
+    url: string;
+    width: string | null;
+  }[];
+  name: string;
+  owner: {
+    display_name: string;
+    href: string;
+    id: string;
+    type: 'user';
+    uri: string;
+  };
+  primary_color: string | null;
+  public: boolean;
+  snapshot_id: string;
+  tracks: { total: 128 };
+  uri: string;
+};
+
+export type SavedPlaylistsResponseType = {
+  href: string;
+  limit: number;
+  next: string | null;
+  offset: number;
+  previous: string | null;
+  total: number;
+  items: {
+    id: PlaylistsResponseType['id'];
+    type: PlaylistsResponseType['type'];
+    name: PlaylistsResponseType['name'];
+    images: PlaylistsResponseType['images'];
+    owner: {
+      display_name: PlaylistsResponseType['owner']['display_name'];
+    };
+  }[];
+};
+
 export type UserProfileResponseType = {
   country: string;
   display_name: string;
@@ -184,17 +244,4 @@ export type UserProfileResponseType = {
   product: string;
   type: string;
   uri: string;
-};
-
-export type UserFollowedArtistsResponseType = {
-  artists: {
-    href: string;
-    limit: 1;
-    next: string;
-    cursors: {
-      after: string;
-    };
-    total: number;
-    items: ArtistResponseType[];
-  };
 };

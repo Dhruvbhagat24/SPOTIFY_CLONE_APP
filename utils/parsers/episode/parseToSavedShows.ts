@@ -1,7 +1,4 @@
-import {
-  LIBRARY_ALBUM_IMAGE_SIZE_VARIANT,
-  SavedEpisodesResponseType,
-} from '@config';
+import { SavedEpisodesResponseType } from '@config';
 import { SavedShowModel } from '@models';
 
 export const parseToSavedShows = (
@@ -9,10 +6,17 @@ export const parseToSavedShows = (
     episode: SavedEpisodesResponseType['items'][0]['episode'];
   }[]
 ): SavedShowModel[] =>
-  data.map(({ episode }) => ({
-    type: episode.show.type,
-    id: episode.show.id,
-    name: episode.show.name,
-    imageURL: episode.show.images[LIBRARY_ALBUM_IMAGE_SIZE_VARIANT].url,
-    releaseDate: episode.release_date,
-  }));
+  data.map(
+    ({
+      episode: {
+        show: { type, id, name, images },
+        release_date,
+      },
+    }) => ({
+      type: type,
+      id: id,
+      name: name,
+      imageURL: images !== null ? images[0].url : '',
+      releaseDate: release_date,
+    })
+  );
