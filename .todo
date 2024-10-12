@@ -43,3 +43,5 @@ TODO: Handle the case, when there is a new user and there is no saved .json file
 TODO: Handle the case, when a different user logs in - may be an error due to collision of naming .json files in FileSystem -> add there also the username
 
 TODO: Refactor api strategy
+
+TODO: get rid of white page on album click - probably a refactor is needed

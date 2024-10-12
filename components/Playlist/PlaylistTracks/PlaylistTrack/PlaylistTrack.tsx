@@ -6,10 +6,12 @@ import Entypo from '@expo/vector-icons/Entypo';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { styles } from './styles';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 export type PlaylistSongPropsType = {
   name: string;
   artists: { name: string }[];
+  isTrackDownloaded: boolean;
   isTrackSaved: boolean;
   isPlaying: boolean;
 };
@@ -17,6 +19,7 @@ export type PlaylistSongPropsType = {
 export const PlaylistTrack = ({
   name,
   artists,
+  isTrackDownloaded,
   isTrackSaved,
   isPlaying,
 }: PlaylistSongPropsType) => {
@@ -36,10 +39,10 @@ export const PlaylistTrack = ({
         </View>
 
         <View style={styles.artistNameView}>
-          {isTrackSaved && (
-            <View style={styles.isTrackSavedView}>
+          {isTrackDownloaded && (
+            <View style={styles.isTrackDownloadedView}>
               <MaterialCommunityIcons
-                style={styles.isTrackSavedIcon}
+                style={styles.isTrackDownloadedIcon}
                 name="arrow-down-bold"
               />
             </View>
@@ -50,6 +53,11 @@ export const PlaylistTrack = ({
         </View>
       </View>
 
+      {isTrackSaved && (
+        <Pressable style={styles.isTrackSavedPressable}>
+          <FontAwesome5 name="check" style={styles.isTrackSavedIcon} />
+        </Pressable>
+      )}
       <Pressable style={styles.morePressable}>
         <Entypo style={styles.moreIcon} name="dots-three-horizontal" />
       </Pressable>

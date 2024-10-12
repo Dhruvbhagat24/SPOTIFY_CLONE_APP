@@ -15,7 +15,6 @@ import { PlaylistBackground } from './PlaylistBackground';
 import { PlaylistHeader } from './PlaylistHeader';
 import { PlaylistCover } from './PlaylistCover';
 import { PlaylistInfo } from './PlaylistInfo';
-import { PlaylistTrack } from './PlaylistTrack';
 import { PlaylistSummary } from './PlaylistSummary';
 import { PlaylistArtists } from './PlaylistArtists';
 import { PlaylistCopyrights } from './PlaylistCopyrights';
@@ -33,6 +32,7 @@ import {
 
 import { styles } from './styles';
 import { Slider } from '../Slider';
+import { PlaylistTracks } from './PlaylistTracks';
 
 export type PlaylistPropsType = {
   album: PlaylistModel;
@@ -42,7 +42,6 @@ export type PlaylistPropsType = {
     albums: AlbumModel[];
   }[];
   isAlbumSaved: boolean;
-  savedTracks: boolean[];
 };
 
 export const Playlist = ({
@@ -50,7 +49,6 @@ export const Playlist = ({
   artists,
   artistsAlbums,
   isAlbumSaved,
-  savedTracks,
 }: PlaylistPropsType) => {
   const { width, height } = useApplicationDimensions();
   const { top: statusBarOffset } = useSafeAreaInsets();
@@ -117,18 +115,7 @@ export const Playlist = ({
           isDownloaded={isDownloaded}
           isSaved={isAlbumSaved}
         />
-        <View style={styles.albumTracks}>
-          {tracks.items.map((item, index) => (
-            <PlaylistTrack
-              key={index}
-              name={item.name}
-              artists={item.artists}
-              isTrackSaved={savedTracks[index]}
-              // TODO: to be removed and replaced with handlePress logic on play
-              isPlaying={false}
-            />
-          ))}
-        </View>
+        <PlaylistTracks tracks={tracks.items} />
         <PlaylistSummary
           releaseDate={releaseDate}
           totalTracks={tracks.total}

@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 2,
   },
-  isTrackSavedView: {
+  isTrackDownloadedView: {
     width: 13,
     height: 13,
     borderRadius: Shapes.CIRCLE,
@@ -47,12 +47,23 @@ export const styles = StyleSheet.create({
     position: 'relative',
     marginRight: 6,
   },
-  isTrackSavedIcon: {
+  isTrackDownloadedIcon: {
     ...StyleSheet.absoluteFillObject,
     top: 0.5,
     left: 0.5,
     color: COLORS.PRIMARY,
     fontSize: 12,
+  },
+  isTrackSavedPressable: {
+    borderRadius: Shapes.CIRCLE,
+    backgroundColor: COLORS.TINT,
+    position: 'relative',
+    marginRight: 25,
+    padding: 4,
+  },
+  isTrackSavedIcon: {
+    color: COLORS.PRIMARY,
+    fontSize: 9,
   },
   artistNameText: {
     color: COLORS.LIGHT_GREY,

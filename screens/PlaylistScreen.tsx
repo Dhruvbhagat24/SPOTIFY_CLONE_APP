@@ -1,13 +1,7 @@
 import * as React from 'react';
 
 import { Playlist } from '@components';
-import {
-  checkSavedAlbums,
-  checkSavedTracks,
-  getAlbum,
-  getArtist,
-  getArtistAlbums,
-} from '@api';
+import { checkSavedAlbums, getAlbum, getArtist, getArtistAlbums } from '@api';
 import { PlaylistModel, AlbumModel, ArtistModel } from '@models';
 import { FALLBACK_ALBUM_ID } from '@data';
 
@@ -30,7 +24,6 @@ export const PlaylistScreen = ({
     | null
   >(null);
   const [isAlbumSaved, setIsAlbumSaved] = React.useState<boolean | null>(null);
-  const [savedTracks, setSavedTracks] = React.useState<boolean[] | null>(null);
 
   React.useEffect(() => {
     (async () => {
@@ -55,22 +48,9 @@ export const PlaylistScreen = ({
 
         const savedAlbums = await checkSavedAlbums([albumId]);
         setIsAlbumSaved(savedAlbums[0]);
-
-        const tracksArr = album.tracks.items;
-
-        if (savedAlbums[0]) {
-          setSavedTracks([...Array(tracksArr.length).fill(true)]);
-          return;
-        }
-
-        const trackIdsArr = tracksArr.map((track) => track.id);
-        const savedTracksArr = await checkSavedTracks(trackIdsArr);
-
-        setSavedTracks(savedTracksArr);
       } catch (error) {
         setAlbumData(null);
         setIsAlbumSaved(null);
-        setSavedTracks(null);
         console.error('Failed to get album data:', error);
       }
     })();
@@ -80,8 +60,7 @@ export const PlaylistScreen = ({
     albumData === null ||
     artistsData === null ||
     artistsAlbumsData === null ||
-    isAlbumSaved === null ||
-    savedTracks === null
+    isAlbumSaved === null
   ) {
     return null;
   }
@@ -92,7 +71,6 @@ export const PlaylistScreen = ({
       artists={artistsData}
       artistsAlbums={artistsAlbumsData}
       isAlbumSaved={isAlbumSaved}
-      savedTracks={savedTracks}
     />
   );
 };
