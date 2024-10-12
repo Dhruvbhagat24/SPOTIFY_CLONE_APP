@@ -19,40 +19,22 @@ import { PlaylistSummary } from './PlaylistSummary';
 import { PlaylistArtists } from './PlaylistArtists';
 import { PlaylistCopyrights } from './PlaylistCopyrights';
 
-import { translations } from '@data';
-import { PlaylistModel, AlbumModel, ArtistModel } from '@models';
+import { PlaylistModel, ArtistModel } from '@models';
 import { useApplicationDimensions } from '@hooks';
-import {
-  BOTTOM_NAVIGATION_HEIGHT,
-  COLORS,
-  SEPARATOR,
-  Shapes,
-  Sizes,
-} from '@config';
+import { BOTTOM_NAVIGATION_HEIGHT, COLORS, SEPARATOR } from '@config';
 
 import { styles } from './styles';
-import { Slider } from '../Slider';
 import { PlaylistTracks } from './PlaylistTracks';
+import { PlaylistRecommendedAlbums } from './PlaylistRecommendedAlbums';
 
 export type PlaylistPropsType = {
   album: PlaylistModel;
   artists: ArtistModel[];
-  artistsAlbums: {
-    artist: string;
-    albums: AlbumModel[];
-  }[];
 };
 
-export const Playlist = ({
-  album,
-  artists,
-  artistsAlbums,
-}: PlaylistPropsType) => {
+export const Playlist = ({ album, artists }: PlaylistPropsType) => {
   const { width, height } = useApplicationDimensions();
   const { top: statusBarOffset } = useSafeAreaInsets();
-
-  const { id, albumType, name, releaseDate, imageURL, tracks, copyrights } =
-    album;
 
   const imageHeight = 300;
 
@@ -72,9 +54,31 @@ export const Playlist = ({
     ],
   }));
 
+  const artistsString = React.useMemo(
+    () =>
+      artists.length ? artists.map((a) => a.name).join(` ${SEPARATOR} `) : '',
+    [artists]
+  );
+
+  const totalDuration = React.useMemo(
+    () =>
+      album.tracks.items.length
+        ? album.tracks.items.reduce(
+            (acc, { durationMs }) => acc + durationMs,
+            0
+          )
+        : 0,
+    [album.tracks.items]
+  );
+
+  const releaseYear = React.useMemo(
+    () => album.releaseDate.split('-')[0],
+    [album.releaseDate]
+  );
+
   return (
     <View style={{ width }}>
-      <PlaylistBackground url={imageURL} darkness={0.2} />
+      <PlaylistBackground url={album.imageURL} darkness={0.2} />
       <BackgroundOverlay
         styles={[animatedGradientOverlay, styles.albumGradientOverlay]}
         colors={['transparent', COLORS.PRIMARY]}
@@ -88,8 +92,8 @@ export const Playlist = ({
           headerTransparent: true,
           headerBackground: () => (
             <PlaylistHeader
-              headerTitle={name}
-              imageURL={imageURL}
+              headerTitle={album.name}
+              imageURL={album.imageURL}
               animatedValue={scrollOffset}
             />
           ),
@@ -103,36 +107,24 @@ export const Playlist = ({
         scrollEventThrottle={16}
         ref={scrollRef}
       >
-        <PlaylistCover imageURL={imageURL} animatedValue={scrollOffset} />
+        <PlaylistCover imageURL={album.imageURL} animatedValue={scrollOffset} />
         <PlaylistInfo
-          id={id}
-          name={name}
-          artists={artists.map((a) => a.name).join(` ${SEPARATOR} `)}
-          albumType={albumType}
-          releaseDate={releaseDate.split('-')[0]}
+          id={album.id}
+          name={album.name}
+          artists={artistsString}
+          albumType={album.albumType}
+          releaseDate={releaseYear}
         />
-        <PlaylistTracks tracks={tracks.items} />
+        <PlaylistTracks tracks={album.tracks.items} />
         <PlaylistSummary
-          releaseDate={releaseDate}
-          totalTracks={tracks.total}
-          totalDuration={tracks.items.reduce(
-            (acc, { durationMs }) => acc + durationMs,
-            0
-          )}
+          releaseDate={album.releaseDate}
+          totalTracks={album.tracks.total}
+          totalDuration={totalDuration}
         />
         <PlaylistArtists artists={artists} />
-        {artistsAlbums.map(({ artist, albums }, index) => (
-          <Slider
-            key={index}
-            title={`${translations.moreOf} ${artist}`}
-            slides={albums}
-            size={Sizes.MEDIUM}
-            shape={Shapes.SQUARE_BORDER}
-            withShowAll={true}
-          />
-        ))}
+        <PlaylistRecommendedAlbums artists={artists} />
 
-        <PlaylistCopyrights copyrights={copyrights} />
+        <PlaylistCopyrights copyrights={album.copyrights} />
       </Animated.ScrollView>
     </View>
   );
