@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, type ImageSourcePropType } from 'react-native';
+import { View } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -13,19 +13,21 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Stack } from 'expo-router';
 
 import { BackgroundGradient as BackgroundOverlay } from '../BackgroundGradient';
-import { AlbumBackground } from './AlbumBackground';
-import { AlbumHeader } from './AlbumHeader';
-import { AlbumCover } from './AlbumCover';
+import { Background } from '../Background';
+import { Cover } from '../Cover';
+import { CommonHeader } from '../CommonHeader';
+import { Tracks } from '../Tracks';
+import { Summary } from '../Summary';
 import { AlbumInfo } from './AlbumInfo';
-import { AlbumSummary } from './AlbumSummary';
 import { AlbumArtists } from './AlbumArtists';
 import { AlbumCopyrights } from './AlbumCopyrights';
-import { AlbumTracks } from './AlbumTracks';
 import { AlbumRecommendations } from './AlbumRecommendations';
 
 import { AlbumModel, ArtistModel } from '@models';
 import { useApplicationDimensions } from '@hooks';
 import { BOTTOM_NAVIGATION_HEIGHT, COLORS, SEPARATOR } from '@config';
+import { getFallbackImage } from '@utils';
+import { translations } from '@data';
 
 import { styles } from './styles';
 
@@ -96,26 +98,14 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
   );
 
   const fallbackImageSource = React.useMemo(
-    () =>
-      (
-        ({
-          album: require(`@assets/covers/disc.png`),
-          single: require(`@assets/covers/note.png`),
-          artist: require(`@assets/covers/user.png`),
-          compilation: require(`@assets/covers/note.png`),
-          episode: require(`@assets/covers/radio.png`),
-          playlist: require(`@assets/covers/note.png`),
-          podcast: require(`@assets/covers/radio.png`),
-          show: require(`@assets/covers/radio.png`),
-        }) as unknown as { [key: string]: ImageSourcePropType }
-      )[album.type],
+    () => getFallbackImage(album.type),
     [album.type]
   );
 
   return (
     <View style={[styles.container, { width }]}>
       <Animated.View style={animatedContainer}>
-        <AlbumBackground
+        <Background
           fallbackImageSource={fallbackImageSource}
           imageURL={album.imageURL}
           darkness={0.2}
@@ -132,7 +122,7 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
           options={{
             headerTransparent: true,
             headerBackground: () => (
-              <AlbumHeader
+              <CommonHeader
                 headerTitle={album.name}
                 imageURL={album.imageURL}
                 fallbackImageSource={fallbackImageSource}
@@ -149,20 +139,20 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
           scrollEventThrottle={16}
           ref={scrollRef}
         >
-          <AlbumCover
+          <Cover
             imageURL={album.imageURL}
             fallbackImageSource={fallbackImageSource}
             animatedValue={scrollOffset}
           />
-          <AlbumInfo
+          <Summary
             id={album.id}
-            name={album.name}
-            artists={artistsString}
-            albumType={album.albumType}
-            releaseDate={releaseYear}
+            type="album"
+            title={album.name}
+            subtitle={artistsString}
+            info={`${translations.type[album.albumType]} ${SEPARATOR} ${releaseYear}`}
           />
-          <AlbumTracks tracks={album.tracks.items} />
-          <AlbumSummary
+          <Tracks tracks={album.tracks.items} />
+          <AlbumInfo
             releaseDate={album.releaseDate}
             totalTracks={album.tracks.total}
             totalDuration={totalDuration}

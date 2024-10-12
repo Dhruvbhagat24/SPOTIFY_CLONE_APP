@@ -11,4 +11,4 @@ export {
   parseFromSavedShowsToLibraryItem,
   parseFromSavedPlaylistsToLibraryItem,
 } from './parsers';
-export { hexToRGB, getDisplayDate } from './common';
+export { hexToRGB, getDisplayDate, getFallbackImage } from './common';

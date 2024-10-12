@@ -11,7 +11,7 @@ export {
   LIBRARY_HEADER_HEIGHT,
   SOUND_COPYRIGHT_SIGN,
   COPYRIGHT_SIGN,
-  PLAYLIST_IMAGE_SIZE,
+  COVER_SIZE,
 } from './constants';
 export { COLORS } from './colors';
 export {
