@@ -19,6 +19,6 @@ export const parseFromSavedShowsToLibraryItem = (
       id: id,
       title: name,
       subtitle: translations.released + getDisplayDate(release_date),
-      imageURL: images !== null ? images[0].url : '',
+      imageURL: images && images[0] && images[0].url ? images[0].url : '',
     })
   );

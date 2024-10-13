@@ -5,7 +5,7 @@ import { parseFromSavedShowsToLibraryItem } from '@utils';
 import { LibraryItemModel } from '@models';
 
 import { getSessionToken } from './getSessionToken';
-import { fileSystemMiddleware } from './fileSystemMiddleware';
+import { fileSystemMiddleware } from '../fileSystemMiddleware';
 
 export const fetchSavedShows = async (
   offset: number = 0,

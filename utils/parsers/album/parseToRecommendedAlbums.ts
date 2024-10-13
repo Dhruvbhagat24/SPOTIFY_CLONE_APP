@@ -10,5 +10,5 @@ export const parseToRecommendedAlbums = (
     type: type,
     title: name,
     subtitle: `${release_date.split('-')[0]} ${SEPARATOR} ${translations.type[album_type]}`,
-    imageURL: images !== null ? images[0].url : '',
+    imageURL: images && images[0] && images[0].url ? images[0].url : '',
   }));

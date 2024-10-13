@@ -7,6 +7,8 @@ export {
   parseFromSavedAlbumsToLibraryItem,
   parseFromSavedShowsToLibraryItem,
   parseFromSavedPlaylistsToLibraryItem,
+  parseFromTopArtistsToLibraryItem,
+  parseFromTopTracksToLibraryItem,
 } from './library';
 export { parseToPlaylist } from './playlist';
-export { parseToRecentlyPlayed } from './home';
+export { parseToRecentlyPlayed, parseFromSearchPlaylistToCard } from './home';

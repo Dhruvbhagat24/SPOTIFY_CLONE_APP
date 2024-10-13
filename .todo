@@ -44,8 +44,33 @@ TODO: Handle the case, when a different user logs in - may be an error due to co
 
 TODO: Refactor api strategy
 
-TODO: get rid of white page on album click - probably a refactor is needed
+TODO: fetch rest of the tracks in playlist
 
-TODO: When switching from home to library there is a white screen (not when switching from search)
+TODO: Recommendations -> top tracks + top artists
 
-TODO: create a Playlist/ and Album/ + if possible share components
+```tsx
+const seed_tracks = topTracks.items.map((item) => item.id).join(',');
+const seed_artists = topArtists.items.map((item) => item.id).join(',');
+
+topArtists.items
+  .map((item) => item.genres.slice(0, item.genres.length))
+  .reduce((prev, next) => prev.concat(next))
+  .splice(0, 5)
+  .join(',');
+```
+
+TODO: Get Category playlists
+
+TODO: Get Featured playlists
+
+TODO: Get top 1 Artist related Playlists (from search section) - after response:
+
+```tsx
+x.playlists.items.filter(
+  (item) =>
+    item.owner.display_name === 'Miły ATZ' ||
+    item.owner.display_name === 'Spotify'
+);
+```
+
+TODO: check if file exists in filesystem

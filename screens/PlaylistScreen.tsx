@@ -3,16 +3,13 @@ import * as React from 'react';
 import { Playlist } from '@components';
 import { getPlaylist } from '@api';
 import { PlaylistModel } from '@models';
-import { FALLBACK_ALBUM_ID } from '@data';
 import { PlaylistFallback } from '@config';
 
 export type AlbumScreenPropsType = {
   playlistId: string;
 };
 
-export const PlaylistScreen = ({
-  playlistId = FALLBACK_ALBUM_ID,
-}: AlbumScreenPropsType) => {
+export const PlaylistScreen = ({ playlistId }: AlbumScreenPropsType) => {
   const [playlistData, setPlaylistData] = React.useState<PlaylistModel | null>(
     PlaylistFallback
   );

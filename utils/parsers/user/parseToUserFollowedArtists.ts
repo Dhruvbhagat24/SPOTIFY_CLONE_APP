@@ -8,5 +8,5 @@ export const parseToUserFollowedArtists = (
     type: type,
     id: id,
     name: name,
-    imageURL: images !== null ? images[0].url : '',
+    imageURL: images && images[0] && images[0].url ? images[0].url : '',
   }));

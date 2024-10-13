@@ -8,7 +8,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { COLORS, Shapes, Sizes } from '@config';
 import { styling } from './styles';
 
-export type AlbumPropsType = {
+export type CardPropsType = {
   id: string;
   type: string;
   imageURL?: string;
@@ -27,7 +27,7 @@ const Card = React.memo(
     imageURL,
     size = Sizes.BIG,
     shape = Shapes.SQUARE,
-  }: AlbumPropsType) => {
+  }: CardPropsType) => {
     const router = useRouter();
     const styles = styling(size, shape);
 
@@ -61,16 +61,16 @@ const Card = React.memo(
 
     return (
       <Pressable
-        testID="album"
+        testID="card"
         onPress={() => handlePress(id)}
-        style={styles.album}
+        style={styles.card}
       >
-        <View style={styles.albumImageView}>
+        <View style={styles.cardImageView}>
           <React.Suspense fallback={renderIcon()}>
             {imageURL ? (
               <Image
-                testID="album-image"
-                style={styles.albumImage}
+                testID="image"
+                style={styles.cardImage}
                 source={{ uri: imageURL }}
               />
             ) : (
@@ -79,16 +79,12 @@ const Card = React.memo(
           </React.Suspense>
         </View>
         {title && (
-          <Text
-            numberOfLines={2}
-            style={styles.albumTitleText}
-            testID="album-title"
-          >
+          <Text numberOfLines={2} style={styles.cardTitleText} testID="title">
             {title}
           </Text>
         )}
         {subtitle && (
-          <Text numberOfLines={1} style={styles.albumSubtitleText}>
+          <Text numberOfLines={!title ? 2 : 1} style={styles.cardSubtitleText}>
             {subtitle}
           </Text>
         )}
@@ -96,6 +92,6 @@ const Card = React.memo(
     );
   }
 );
-Card.displayName = 'Album';
+Card.displayName = 'Card';
 
 export { Card };

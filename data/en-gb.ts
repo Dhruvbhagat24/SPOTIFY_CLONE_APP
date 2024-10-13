@@ -31,4 +31,11 @@ export const EN_GB = {
   tracks: 'tracks',
   saves: 'saves',
   yourPlaylist: 'Your Playlists',
+  madeForYou: 'Made For You',
+  yourTopArtists: (key: number) => `Your Recent Top ${key} Artists`,
+  yourTopAlbums: (key: number) => `Your Recent Top ${key} Albums`,
+  basedOnYourTopArtists: 'Based on your Top Artists',
+  basedOnYourTopGenres: 'Based on your Top Genres',
+  basedOnYourTopTracks: 'Based on your Top Tracks',
+  afterListening: (key: string) => `After listening ${key}`,
 };

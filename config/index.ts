@@ -5,6 +5,8 @@ export {
   Sizes,
   Shapes,
   Categories,
+  AlbumTypes,
+  AuthResponse,
   SEPARATOR,
   BOTTOM_NAVIGATION_HEIGHT,
   ALBUM_HEADER_HEIGHT,
@@ -13,6 +15,7 @@ export {
   COPYRIGHT_SIGN,
   COVER_SIZE,
   TRACK_COVER_SIZE,
+  RECENTLY_PLAYED_COVER_SIZE,
 } from './constants';
 export { COLORS } from './colors';
 export {
@@ -28,8 +31,10 @@ export {
   type UserProfileResponseType,
   type UserFollowedArtistsResponseType,
   type RecentlyPlayedResponseType,
-  AlbumTypes,
-  AuthResponse,
+  type SearchPlaylistResponseType,
+  type UserTopTracksResponseType,
+  type UserTopArtistsResponseType,
+  type RecommendationsResponseType,
 } from './types';
 
 export { AlbumFallback, ArtistFallback, PlaylistFallback } from './fallbacks';

@@ -5,7 +5,7 @@ import { UserFollowedArtistsResponseType } from '@config';
 import { parseFromFollowedArtistsToLibraryItem } from '@utils';
 
 import { getSessionToken } from './getSessionToken';
-import { fileSystemMiddleware } from './fileSystemMiddleware';
+import { fileSystemMiddleware } from '../fileSystemMiddleware';
 
 export const fetchUserFollowedArtists = async (
   after: string = '',

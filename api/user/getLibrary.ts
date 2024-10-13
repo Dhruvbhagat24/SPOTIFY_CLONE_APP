@@ -1,6 +1,6 @@
 import { LibraryItemModel } from '@models';
 
-import { fileSystemMiddleware } from './fileSystemMiddleware';
+import { fileSystemMiddleware } from '../fileSystemMiddleware';
 import { fetchUserFollowedArtists } from './getUserFollowedArtists';
 import { fetchSavedAlbums } from './getSavedAlbums';
 import { fetchSavedShows } from './getSavedShows';

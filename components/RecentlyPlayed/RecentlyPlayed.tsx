@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { Image } from 'expo-image';
+
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useApplicationDimensions } from '@hooks';
 import { getRecentlyPlayed } from '@api';
 import { RecentlyPlayedModel } from '@models';
-import { useApplicationDimensions } from '@hooks';
+import { RECENTLY_PLAYED_COVER_SIZE } from '@config';
 
 import { styles } from './styles';
-import { TRACK_COVER_SIZE } from '@config';
 
 export const RecentlyPlayed = () => {
   const [recentlyPlayedData, setRecentlyPlayedData] = React.useState<
@@ -52,15 +53,27 @@ export const RecentlyPlayed = () => {
             },
           ]}
         >
-          <View style={styles.imageView}>
+          <View
+            style={[
+              styles.imageView,
+              {
+                width: RECENTLY_PLAYED_COVER_SIZE,
+                height: RECENTLY_PLAYED_COVER_SIZE,
+              },
+            ]}
+          >
             <Image style={styles.image} source={{ uri: imageURL }} />
           </View>
           <Text
+            numberOfLines={2}
             style={[
               styles.text,
               {
                 width:
-                  width / 2 - paddingHorizontal - gap / 2 - TRACK_COVER_SIZE,
+                  width / 2 -
+                  paddingHorizontal -
+                  gap / 2 -
+                  RECENTLY_PLAYED_COVER_SIZE,
               },
             ]}
           >

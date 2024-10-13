@@ -18,7 +18,7 @@ export const parseToAlbum = ({
   type: type,
   albumType: album_type,
   name: name,
-  imageURL: images !== null ? images[0].url : '',
+  imageURL: images && images[0] && images[0].url ? images[0].url : '',
   releaseDate: release_date,
   artists: artists.map(({ id: artistId, type: artistType }) => ({
     id: artistId,

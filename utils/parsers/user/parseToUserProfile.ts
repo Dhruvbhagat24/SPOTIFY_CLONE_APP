@@ -10,5 +10,5 @@ export const parseToUserProfile = ({
   id: id,
   type: type as UserProfileModel['type'],
   displayName: display_name,
-  imageURL: images !== null ? images[0].url : '',
+  imageURL: images && images[0] && images[0].url ? images[0].url : '',
 });

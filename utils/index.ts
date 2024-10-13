@@ -12,6 +12,9 @@ export {
   parseFromSavedAlbumsToLibraryItem,
   parseFromSavedShowsToLibraryItem,
   parseFromSavedPlaylistsToLibraryItem,
+  parseFromSearchPlaylistToCard,
+  parseFromTopArtistsToLibraryItem,
+  parseFromTopTracksToLibraryItem,
 } from './parsers';
 export {
   hexToRGB,

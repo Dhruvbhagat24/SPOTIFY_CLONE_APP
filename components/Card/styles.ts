@@ -3,11 +3,11 @@ import { COLORS, Shapes, Sizes } from '@config';
 
 export const styling = (size: Sizes, shape: Shapes) =>
   StyleSheet.create({
-    album: {
+    card: {
       width: size,
       marginVertical: 8,
     },
-    albumImageView: {
+    cardImageView: {
       overflow: 'hidden',
       position: 'relative',
       width: size,
@@ -17,12 +17,12 @@ export const styling = (size: Sizes, shape: Shapes) =>
       justifyContent: 'center',
       alignItems: 'center',
     },
-    albumImage: {
+    cardImage: {
       ...StyleSheet.absoluteFillObject,
       color: COLORS.GREY,
     },
-    albumInfo: {},
-    albumTitleText: {
+    cardInfo: {},
+    cardTitleText: {
       fontSize: 13,
       lineHeight: 13,
       fontFamily: 'SF-Bold',
@@ -30,7 +30,7 @@ export const styling = (size: Sizes, shape: Shapes) =>
       maxWidth: size,
       marginTop: 10,
     },
-    albumSubtitleText: {
+    cardSubtitleText: {
       flexDirection: 'row',
       marginTop: 5,
       fontSize: 13,

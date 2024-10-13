@@ -4,7 +4,7 @@ import { UserProfileModel } from '@models';
 import { UserProfileResponseType } from '@config';
 import { parseToUserProfile } from '@utils';
 
-import { fileSystemMiddleware } from './fileSystemMiddleware';
+import { fileSystemMiddleware } from '../fileSystemMiddleware';
 import { getSessionToken } from './getSessionToken';
 
 export const fetchUserProfile = async (): Promise<UserProfileModel> => {

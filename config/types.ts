@@ -2,21 +2,6 @@ export type ExpoConfigType = {
   extra: { [key: string]: string };
 };
 
-export enum AuthResponse {
-  CANCEL = 'cancel',
-  DISMISS = 'dismiss',
-  OPENED = 'opened',
-  LOCKED = 'locked',
-  ERROR = 'error',
-  SUCCESS = 'success',
-}
-
-export enum AlbumTypes {
-  ALBUM = 'album',
-  SINGLE = 'single',
-  COMPILATION = 'compilation',
-}
-
 type ImageType = {
   url: string;
   height: number;
@@ -289,4 +274,64 @@ export type RecentlyPlayedResponseType = {
       };
     };
   }[];
+};
+
+export type SearchPlaylistResponseType = {
+  playlists: {
+    items: {
+      type: 'playlist';
+      id: string;
+      name: string;
+      description: string;
+      images: {
+        url: string | null;
+        width: string | null;
+        height: string | null;
+      }[];
+      owner: {
+        id: string;
+        uri: string;
+        display_name: string;
+      };
+    }[];
+  };
+};
+
+export type UserTopTracksResponseType = {
+  items: {
+    album: {
+      type: 'album';
+      id: string;
+      images: {
+        width: string | null;
+        height: string | null;
+        url: string | null;
+      }[];
+      name: string;
+      artists: {
+        type: 'artist';
+        id: string;
+        name: string;
+      }[];
+    };
+  }[];
+};
+
+export type UserTopArtistsResponseType = {
+  items: {
+    type: 'artist';
+    id: string;
+    name: string;
+    images: {
+      url: string | null;
+      width: string | null;
+      height: string | null;
+    }[];
+    genres: string[];
+  }[];
+};
+
+export type RecommendationsResponseType = {
+  seeds: { id: string }[];
+  tracks: UserTopTracksResponseType['items'];
 };

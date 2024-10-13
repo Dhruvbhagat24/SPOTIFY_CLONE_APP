@@ -16,5 +16,12 @@ export {
   checkSavedAlbums,
   checkSavedTracks,
   getLibrary,
+  getUserTopArtistsAndGenres,
+  getUserTopAlbums,
   type LibraryType,
 } from './user';
+
+export {
+  getRecommendationsFromArtistSeeds,
+  getRecommendationsFromTopArtistSeed,
+} from './recommendations';

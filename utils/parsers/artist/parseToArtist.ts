@@ -9,6 +9,6 @@ export const parseToArtist = ({
 }: ArtistResponseType): ArtistModel => ({
   type: type,
   id: id,
-  imageURL: images !== null ? images[0].url : '',
+  imageURL: images && images[0] && images[0].url ? images[0].url : '',
   name: name,
 });

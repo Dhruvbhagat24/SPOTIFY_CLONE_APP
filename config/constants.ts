@@ -35,6 +35,21 @@ export enum Categories {
   ALL = 'all',
 }
 
+export enum AuthResponse {
+  CANCEL = 'cancel',
+  DISMISS = 'dismiss',
+  OPENED = 'opened',
+  LOCKED = 'locked',
+  ERROR = 'error',
+  SUCCESS = 'success',
+}
+
+export enum AlbumTypes {
+  ALBUM = 'album',
+  SINGLE = 'single',
+  COMPILATION = 'compilation',
+}
+
 export const SEPARATOR = '\u2022';
 
 export const SOUND_COPYRIGHT_SIGN = '\u2117';
@@ -46,3 +61,4 @@ export const BOTTOM_NAVIGATION_HEIGHT = 90;
 
 export const COVER_SIZE = 300;
 export const TRACK_COVER_SIZE = 50;
+export const RECENTLY_PLAYED_COVER_SIZE = 55;

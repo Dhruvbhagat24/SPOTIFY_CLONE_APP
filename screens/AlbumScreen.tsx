@@ -3,16 +3,13 @@ import * as React from 'react';
 import { Album } from '@components';
 import { getAlbum, getArtist } from '@api';
 import { AlbumModel, ArtistModel } from '@models';
-import { FALLBACK_ALBUM_ID } from '@data';
 import { AlbumFallback, ArtistFallback } from '@config';
 
 export type AlbumScreenPropsType = {
   albumId: string;
 };
 
-export const AlbumScreen = ({
-  albumId = FALLBACK_ALBUM_ID,
-}: AlbumScreenPropsType) => {
+export const AlbumScreen = ({ albumId }: AlbumScreenPropsType) => {
   const [albumData, setAlbumData] = React.useState<AlbumModel | null>(
     AlbumFallback
   );

@@ -18,6 +18,6 @@ export const parseFromSavedAlbumsToLibraryItem = (
         album_type === AlbumTypes.ALBUM
           ? artistsString
           : `${translations.type[album_type]} ${SEPARATOR} ${artistsString}`,
-      imageURL: images !== null ? images[0].url : '',
+      imageURL: images && images[0] && images[0].url ? images[0].url : '',
     };
   });
