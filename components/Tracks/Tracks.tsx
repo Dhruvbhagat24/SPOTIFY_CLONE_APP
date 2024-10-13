@@ -6,23 +6,21 @@ import { Track } from './Track';
 import { checkSavedTracks } from '@api';
 
 export type TracksPropsType = {
+  type: 'album' | 'playlist';
   tracks: {
     id: string;
-    type: 'track';
-    name: string;
-    durationMs: number;
-    explicit: boolean;
-    artists: {
-      name: string;
-    }[];
+    title: string;
+    subtitle: string;
+    imageURL?: string;
+    explicit?: boolean;
   }[];
 };
 
-export const Tracks = ({ tracks }: TracksPropsType) => {
+export const Tracks = ({ tracks, type }: TracksPropsType) => {
   const [savedTracks, setSavedTracks] = React.useState<boolean[] | null>(null);
 
   React.useEffect(() => {
-    if (tracks.some((track) => !track.id)) {
+    if (tracks.some((track) => !track.id) || type === 'playlist') {
       return;
     }
 
@@ -37,15 +35,17 @@ export const Tracks = ({ tracks }: TracksPropsType) => {
         console.error('Failed to check if array of tracks is saved:', error);
       }
     })();
-  }, [tracks]);
+  }, [tracks, type]);
 
   return (
     <View style={styles.tracks}>
-      {tracks.map(({ name, artists }, index) => (
+      {tracks.map(({ title, subtitle, imageURL }, index) => (
         <Track
+          type={type}
           key={index}
-          name={name}
-          artists={artists}
+          title={title}
+          subtitle={subtitle}
+          imageURL={imageURL}
           // TODO: removed this true value and check if tracks are downloaded instead
           isTrackDownloaded={true}
           isTrackSaved={savedTracks ? savedTracks[index] : false}

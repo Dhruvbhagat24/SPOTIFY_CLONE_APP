@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.PRIMARY,
   },
-  albumGradientOverlay: {
+  gradientOverlay: {
     zIndex: -2,
   },
 });

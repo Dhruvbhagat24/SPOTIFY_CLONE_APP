@@ -1,6 +1,7 @@
 export {
   parseToRecommendedAlbums,
   parseToAlbum,
+  parseToPlaylist,
   parseToArtist,
   parseToSavedEpisodes,
   parseToSavedShows,
@@ -11,4 +12,9 @@ export {
   parseFromSavedShowsToLibraryItem,
   parseFromSavedPlaylistsToLibraryItem,
 } from './parsers';
-export { hexToRGB, getDisplayDate, getFallbackImage } from './common';
+export {
+  hexToRGB,
+  getDisplayDate,
+  getDisplayTime,
+  getFallbackImage,
+} from './common';

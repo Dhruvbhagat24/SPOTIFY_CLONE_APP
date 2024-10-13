@@ -22,6 +22,7 @@ import { AlbumInfo } from './AlbumInfo';
 import { AlbumArtists } from './AlbumArtists';
 import { AlbumCopyrights } from './AlbumCopyrights';
 import { AlbumRecommendations } from './AlbumRecommendations';
+import { EmptySection } from '../EmptySection';
 
 import { AlbumModel, ArtistModel } from '@models';
 import { useApplicationDimensions } from '@hooks';
@@ -81,17 +82,6 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
     [artists]
   );
 
-  const totalDuration = React.useMemo(
-    () =>
-      album.tracks.items.length
-        ? album.tracks.items.reduce(
-            (acc, { durationMs }) => acc + durationMs,
-            0
-          )
-        : 0,
-    [album.tracks.items]
-  );
-
   const releaseYear = React.useMemo(
     () => album.releaseDate.split('-')[0],
     [album.releaseDate]
@@ -111,7 +101,7 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
           darkness={0.2}
         />
         <BackgroundOverlay
-          styles={[animatedGradientOverlay, styles.albumGradientOverlay]}
+          styles={[animatedGradientOverlay, styles.gradientOverlay]}
           colors={['transparent', COLORS.PRIMARY]}
           startY={imageHeight / 2}
           endY={imageHeight + 70 + 90}
@@ -146,20 +136,21 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
           />
           <Summary
             id={album.id}
-            type="album"
+            type={album.type}
             title={album.name}
             subtitle={artistsString}
             info={`${translations.type[album.albumType]} ${SEPARATOR} ${releaseYear}`}
           />
-          <Tracks tracks={album.tracks.items} />
+          <Tracks type={album.type} tracks={album.tracks.items} />
           <AlbumInfo
             releaseDate={album.releaseDate}
             totalTracks={album.tracks.total}
-            totalDuration={totalDuration}
+            totalDuration={album.duration}
           />
           <AlbumArtists artists={artists} />
           <AlbumRecommendations artists={artists} />
           <AlbumCopyrights copyrights={album.copyrights} />
+          <EmptySection />
         </Animated.ScrollView>
       </Animated.View>
     </View>

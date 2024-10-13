@@ -16,7 +16,7 @@ export const AlbumArtists = ({ artists }: AlbumArtistsPropsType) => {
 
   const handlePress = React.useCallback(
     (albumId: string) => {
-      router.push(`/albums/${albumId}`);
+      router.push(`/album/${albumId}`);
     },
     [router]
   );

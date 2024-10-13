@@ -1,18 +1,21 @@
-import { COLORS, Shapes } from '@config';
+import { COLORS, Shapes, TRACK_COVER_SIZE } from '@config';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
     height: 58,
     paddingVertical: 8,
-    paddingHorizontal: 5,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  image: {
+    width: TRACK_COVER_SIZE,
+    height: TRACK_COVER_SIZE,
+    marginRight: 10,
   },
   content: {
     marginRight: 'auto',
   },
-
   nameView: {
     flexDirection: 'row',
     alignItems: 'center',

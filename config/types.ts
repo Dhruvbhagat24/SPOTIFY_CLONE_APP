@@ -175,7 +175,7 @@ export type SavedEpisodesResponseType = {
   }[];
 };
 
-export type PlaylistsResponseType = {
+export type PlaylistResponseType = {
   type: 'playlist';
   id: string;
   collaborative: boolean;
@@ -197,7 +197,31 @@ export type PlaylistsResponseType = {
   primary_color: string | null;
   public: boolean;
   snapshot_id: string;
-  tracks: { total: 128 };
+  followers: { total: number };
+  tracks: {
+    total: 128;
+    next: string;
+    items: {
+      track: {
+        album: {
+          images: {
+            width: string | null;
+            height: string | null;
+            url: string | null;
+          }[];
+        };
+        type: 'track';
+        id: string;
+        name: string;
+        duration_ms: number;
+        artists: {
+          type: 'artist';
+          name: string;
+          id: string;
+        }[];
+      };
+    }[];
+  };
   uri: string;
 };
 
@@ -209,12 +233,12 @@ export type SavedPlaylistsResponseType = {
   previous: string | null;
   total: number;
   items: {
-    id: PlaylistsResponseType['id'];
-    type: PlaylistsResponseType['type'];
-    name: PlaylistsResponseType['name'];
-    images: PlaylistsResponseType['images'];
+    id: PlaylistResponseType['id'];
+    type: PlaylistResponseType['type'];
+    name: PlaylistResponseType['name'];
+    images: PlaylistResponseType['images'];
     owner: {
-      display_name: PlaylistsResponseType['owner']['display_name'];
+      display_name: PlaylistResponseType['owner']['display_name'];
     };
   }[];
 };

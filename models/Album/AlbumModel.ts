@@ -10,13 +10,13 @@ export type AlbumModel = {
     total: number;
     items: {
       id: string;
-      type: 'track';
-      name: string;
-      durationMs: number;
-      explicit: boolean;
-      artists: { name: string }[];
+      title: string;
+      subtitle: string;
+      imageURL?: string;
+      explicit?: boolean;
     }[];
   };
+  duration: number;
   copyrights: { text: string; type: string }[];
   genres: string[];
   label: string;

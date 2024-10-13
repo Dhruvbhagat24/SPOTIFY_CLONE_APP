@@ -45,3 +45,4 @@ export const LIBRARY_HEADER_HEIGHT = 135;
 export const BOTTOM_NAVIGATION_HEIGHT = 90;
 
 export const COVER_SIZE = 300;
+export const TRACK_COVER_SIZE = 50;

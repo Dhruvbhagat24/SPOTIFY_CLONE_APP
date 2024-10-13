@@ -29,5 +29,6 @@ export const EN_GB = {
   released: 'Released: ',
   showAll: 'Show all',
   tracks: 'tracks',
+  saves: 'saves',
   yourPlaylist: 'Your Playlists',
 };

@@ -12,6 +12,7 @@ export {
   SOUND_COPYRIGHT_SIGN,
   COPYRIGHT_SIGN,
   COVER_SIZE,
+  TRACK_COVER_SIZE,
 } from './constants';
 export { COLORS } from './colors';
 export {
@@ -22,7 +23,7 @@ export {
   type SavedAlbumsResponseType,
   type EpisodeResponseType,
   type SavedEpisodesResponseType,
-  type PlaylistsResponseType,
+  type PlaylistResponseType,
   type SavedPlaylistsResponseType,
   type UserProfileResponseType,
   type UserFollowedArtistsResponseType,
@@ -30,4 +31,4 @@ export {
   AuthResponse,
 } from './types';
 
-export { AlbumFallback, ArtistFallback } from './fallbacks';
+export { AlbumFallback, ArtistFallback, PlaylistFallback } from './fallbacks';

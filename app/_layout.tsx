@@ -53,11 +53,15 @@ export default function RootLayout() {
             options={{ headerShown: false, animation: 'fade_from_bottom' }}
           />
           <Stack.Screen
-            name="albums"
+            name="album"
             options={{ headerShown: false, animation: 'default' }}
           />
           <Stack.Screen
-            name="artists"
+            name="playlist"
+            options={{ headerShown: false, animation: 'default' }}
+          />
+          <Stack.Screen
+            name="artist"
             options={{ headerShown: false, animation: 'default' }}
           />
           <Stack.Screen name="+not-found" />

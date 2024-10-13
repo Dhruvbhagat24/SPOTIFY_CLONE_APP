@@ -8,3 +8,4 @@ export {
   parseFromSavedShowsToLibraryItem,
   parseFromSavedPlaylistsToLibraryItem,
 } from './library';
+export { parseToPlaylist } from './playlist';

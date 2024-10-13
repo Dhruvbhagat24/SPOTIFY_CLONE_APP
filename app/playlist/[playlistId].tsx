@@ -6,5 +6,5 @@ import { PlaylistScreen } from '@screens';
 export default function Albums() {
   const local = useLocalSearchParams();
 
-  return <PlaylistScreen albumId={local.albumId as string} />;
+  return <PlaylistScreen playlistId={local.playlistId as string} />;
 }

@@ -1,4 +1,5 @@
 export { Album } from './Album';
+export { Playlist } from './Playlist';
 export { Library } from './Library';
 export { LibraryHeader } from './Library/LibraryHeader';
 export { BackgroundGradient } from './BackgroundGradient';

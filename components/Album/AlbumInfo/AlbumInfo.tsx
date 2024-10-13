@@ -4,26 +4,12 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 
 import { styles } from './styles';
-import { getDisplayDate } from '@utils';
+import { getDisplayDate, getDisplayTime } from '@utils';
 
 export type AlbumInfoPropsType = {
   releaseDate: string;
   totalTracks: number;
   totalDuration: number;
-};
-
-export const getDisplayTime = (totalDuration: number) => {
-  if (totalDuration / 1000 > 60) {
-    return `${Math.floor(totalDuration / 1000 / 60)}h ${Math.ceil(
-      (totalDuration / 1000) % 60
-    )}min`;
-  }
-
-  if ((totalDuration / 1000) % 60 === 0) {
-    return `${totalDuration / 1000 / 60}h`;
-  }
-
-  return `${totalDuration / 1000}min`;
 };
 
 export const AlbumInfo = ({

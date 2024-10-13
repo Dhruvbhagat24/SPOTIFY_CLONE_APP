@@ -6,7 +6,8 @@ declare global {
     search: undefined;
     albums: undefined;
     artists: undefined;
-    'albums/[albumId]': { albumId: string };
+    'album/[albumId]': { albumId: string };
+    'playlist/[playlistId]': { albumId: string };
     'artists/[artistId]': { artistId: string };
   };
 

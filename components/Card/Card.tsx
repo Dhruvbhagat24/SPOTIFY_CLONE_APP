@@ -32,10 +32,10 @@ const Card = React.memo(
     const styles = styling(size, shape);
 
     const handlePress = React.useCallback(
-      (albumId: string) => {
-        router.push(`/albums/${albumId}`);
+      (typeID: string) => {
+        router.push(`/${type as 'playlist' | 'album' | 'artist'}/${typeID}`);
       },
-      [router]
+      [router, type]
     );
 
     const renderIcon = React.useCallback(() => {
