@@ -10,7 +10,7 @@ export const parseToPlaylist = (data: PlaylistResponseType): PlaylistModel => ({
   description: data.description,
   subtitle: data.owner.display_name,
   ownerId: data.owner.id,
-  info: `${data.followers.total} ${translations.saves} ${SEPARATOR} ${getDisplayTime(data.tracks.items.reduce((a, b) => a + b.track.duration_ms, 0))}`,
+  info: `${data.followers.total.toLocaleString()} ${translations.saves} ${SEPARATOR} ${getDisplayTime(data.tracks.items.reduce((a, b) => a + b.track.duration_ms, 0))}`,
   imageURL: data.images !== null ? data.images[0].url : '',
   tracks: data.tracks.items.map((item) => ({
     id: item.track.id,
