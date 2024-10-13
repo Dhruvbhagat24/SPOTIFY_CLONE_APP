@@ -9,6 +9,7 @@ import { translations } from '@data';
 
 import { Shapes, Sizes } from '@config';
 import { styles } from './styles';
+import { RecentlyPlayed } from '../RecentlyPlayed';
 
 export const Home = () => {
   const [data, setData] = React.useState<LibraryItemModel[] | null>(null);
@@ -36,6 +37,7 @@ export const Home = () => {
 
   return (
     <View style={styles.container}>
+      <RecentlyPlayed />
       <Slider
         title={translations.yourPlaylist}
         slides={savedPlaylists}

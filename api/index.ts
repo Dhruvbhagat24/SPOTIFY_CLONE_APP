@@ -12,6 +12,7 @@ export {
   getSavedAlbums,
   getSavedShows,
   getSavedPlaylists,
+  getRecentlyPlayed,
   checkSavedAlbums,
   checkSavedTracks,
   getLibrary,

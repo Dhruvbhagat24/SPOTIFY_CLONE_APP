@@ -3,6 +3,7 @@ export {
   parseToAlbum,
   parseToPlaylist,
   parseToArtist,
+  parseToRecentlyPlayed,
   parseToSavedEpisodes,
   parseToSavedShows,
   parseToUserProfile,

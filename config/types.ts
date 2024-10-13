@@ -269,3 +269,24 @@ export type UserProfileResponseType = {
   type: string;
   uri: string;
 };
+
+export type RecentlyPlayedResponseType = {
+  cursor: { before: string; after: string };
+  limit: number;
+  next: string;
+  items: {
+    track: {
+      type: string;
+      id: string;
+      name: string;
+      album: {
+        images: {
+          width: string | '';
+          height: string | '';
+          url: string | '';
+        }[];
+        id: string;
+      };
+    };
+  }[];
+};

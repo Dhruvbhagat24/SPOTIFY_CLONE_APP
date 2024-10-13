@@ -27,6 +27,7 @@ export {
   type SavedPlaylistsResponseType,
   type UserProfileResponseType,
   type UserFollowedArtistsResponseType,
+  type RecentlyPlayedResponseType,
   AlbumTypes,
   AuthResponse,
 } from './types';
