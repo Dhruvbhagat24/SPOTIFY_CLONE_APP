@@ -38,4 +38,5 @@ export const EN_GB = {
   basedOnYourTopGenres: 'Based on your Top Genres',
   basedOnYourTopTracks: 'Based on your Top Tracks',
   afterListening: (key: string) => `After listening ${key}`,
+  recommendations: 'Recommendations',
 };

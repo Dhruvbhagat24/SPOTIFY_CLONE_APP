@@ -22,6 +22,7 @@ export {
 } from './user';
 
 export {
+  getRecommendations,
   getRecommendationsFromArtistSeeds,
   getRecommendationsFromTopArtistSeed,
 } from './recommendations';

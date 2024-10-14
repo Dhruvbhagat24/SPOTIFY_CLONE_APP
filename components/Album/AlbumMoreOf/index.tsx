@@ -39,7 +39,7 @@ export const AlbumMoreOf = ({ artists }: AlbumMoreOfPropsType) => {
         setArtistsAlbums(artistsAlbumsData);
       } catch (error) {
         setArtistsAlbums(null);
-        console.error('Failed to get album data:', error);
+        console.error("Failed to get artist's album data:", error);
       }
     })();
   }, [artists]);

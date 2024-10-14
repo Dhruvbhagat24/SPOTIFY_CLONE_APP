@@ -30,6 +30,7 @@ import { BOTTOM_NAVIGATION_HEIGHT, COLORS, SEPARATOR } from '@config';
 import { translations } from '@data';
 
 import { styles } from './styles';
+import { AlbumRecommendations } from './AlbumRecommendations';
 
 export type AlbumPropsType = {
   album: AlbumModel;
@@ -75,9 +76,14 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
 
   progress.value = withTiming(Number(!!album.id), { duration: 350 });
 
-  const artistsString = React.useMemo(
+  const artistNamesString = React.useMemo(
     () =>
       artists.length ? artists.map((a) => a.name).join(` ${SEPARATOR} `) : '',
+    [artists]
+  );
+
+  const artistIdsString = React.useMemo(
+    () => (artists.length ? artists.map((a) => a.id).join(`,`) : ''),
     [artists]
   );
 
@@ -132,7 +138,7 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
             id={album.id}
             type={album.type}
             title={album.name}
-            subtitle={artistsString}
+            subtitle={artistNamesString}
             info={`${translations.type[album.albumType]} ${SEPARATOR} ${releaseYear}`}
           />
           <Tracks type={album.type} tracks={album.tracks.items} />
@@ -143,6 +149,7 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
           />
           <AlbumArtists artists={artists} />
           <AlbumMoreOf artists={artists} />
+          <AlbumRecommendations artistSeed={artistIdsString} />
           <AlbumCopyrights copyrights={album.copyrights} />
           <EmptySection />
         </Animated.ScrollView>
