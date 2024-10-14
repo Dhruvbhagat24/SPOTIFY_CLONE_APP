@@ -1,6 +1,6 @@
 describe('BackgroundGradient', () => {
-  // TODO
-  it.skip('JUST TODO', () => {
+  // todo
+  it.skip('JUST todo', () => {
     expect(jest.fn()).toBe(jest.fn());
   });
 });

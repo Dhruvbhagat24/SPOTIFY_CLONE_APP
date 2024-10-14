@@ -1,6 +1,6 @@
 describe('Playlist', () => {
-  // TODO
-  it.skip('TODO', () => {
+  // todo
+  it.skip('todo', () => {
     expect(jest.fn()).toBe(jest.fn());
   });
 });
