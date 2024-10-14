@@ -3,11 +3,12 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import { Slider } from '../Slider';
 
-import { LibraryItemModel } from '@models';
+import { LibraryItemModel, UserProfileModel } from '@models';
 import {
   getRecommendationsFromArtistSeeds,
   getRecommendationsFromTopArtistSeed,
   getSavedPlaylists,
+  getUserProfile,
   getUserTopAlbums,
   getUserTopArtistsAndGenres,
 } from '@api';
@@ -19,7 +20,7 @@ import { RecentlyPlayed } from '../RecentlyPlayed';
 import { EmptySection } from '../EmptySection';
 
 export const Home = () => {
-  const [savedPlaylistsData, setDataSavedPlaylistsData] = React.useState<
+  const [savedPlaylists, setDataSavedPlaylists] = React.useState<
     LibraryItemModel[] | null
   >(null);
   const [topArtists, setTopArtists] = React.useState<LibraryItemModel[] | null>(
@@ -36,14 +37,29 @@ export const Home = () => {
       recommendations: LibraryItemModel[];
       artist: LibraryItemModel;
     } | null>(null);
+  const [userProfile, setUserProfile] = React.useState<UserProfileModel | null>(
+    null
+  );
 
   React.useEffect(() => {
     (async () => {
       try {
-        const savedPlaylists = await getSavedPlaylists();
-        setDataSavedPlaylistsData(savedPlaylists);
+        const userProfileData = await getUserProfile();
+        setUserProfile(userProfileData);
       } catch (error) {
-        setDataSavedPlaylistsData(null);
+        setUserProfile(null);
+        console.error(error);
+      }
+    })();
+  }, []);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const savedPlaylistsData = await getSavedPlaylists();
+        setDataSavedPlaylists(savedPlaylistsData);
+      } catch (error) {
+        setDataSavedPlaylists(null);
         console.error(error);
       }
     })();
@@ -99,14 +115,19 @@ export const Home = () => {
     })();
   }, []);
 
-  const savedPlaylists = React.useMemo(
-    () => (savedPlaylistsData ? savedPlaylistsData.splice(0, 10) : null),
-    [savedPlaylistsData]
+  const userPlaylists = React.useMemo(
+    () =>
+      savedPlaylists && userProfile
+        ? savedPlaylists.filter(
+            (savedPlaylist) => savedPlaylist.ownerId === userProfile.id
+          )
+        : null,
+    [userProfile, savedPlaylists]
   );
 
   // TODO: get rid of this
   if (
-    !savedPlaylists ||
+    !userPlaylists ||
     !topArtists ||
     !topAlbums ||
     !artistRecommendations ||
@@ -141,7 +162,7 @@ export const Home = () => {
       />
       <Slider
         title={translations.yourPlaylist}
-        slides={savedPlaylists}
+        slides={userPlaylists}
         size={Sizes.MEDIUM}
         shape={Shapes.SQUARE_BORDER}
         withShowAll={true}

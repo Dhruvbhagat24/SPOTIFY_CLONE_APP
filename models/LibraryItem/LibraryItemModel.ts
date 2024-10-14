@@ -4,4 +4,5 @@ export type LibraryItemModel = {
   title: string;
   imageURL: string;
   subtitle: string;
+  ownerId?: string;
 };

@@ -223,6 +223,7 @@ export type SavedPlaylistsResponseType = {
     name: PlaylistResponseType['name'];
     images: PlaylistResponseType['images'];
     owner: {
+      id: PlaylistResponseType['owner']['id'];
       display_name: PlaylistResponseType['owner']['display_name'];
     };
   }[];

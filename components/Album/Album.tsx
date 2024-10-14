@@ -18,11 +18,12 @@ import { Cover } from '../Cover';
 import { CommonHeader } from '../CommonHeader';
 import { Tracks } from '../Tracks';
 import { Summary } from '../Summary';
+import { EmptySection } from '../EmptySection';
+import { Recommendations } from '../Recommendations';
 import { AlbumInfo } from './AlbumInfo';
 import { AlbumArtists } from './AlbumArtists';
 import { AlbumCopyrights } from './AlbumCopyrights';
 import { AlbumMoreOf } from './AlbumMoreOf';
-import { EmptySection } from '../EmptySection';
 
 import { AlbumModel, ArtistModel } from '@models';
 import { useApplicationDimensions } from '@hooks';
@@ -30,7 +31,6 @@ import { BOTTOM_NAVIGATION_HEIGHT, COLORS, SEPARATOR } from '@config';
 import { translations } from '@data';
 
 import { styles } from './styles';
-import { AlbumRecommendations } from './AlbumRecommendations';
 
 export type AlbumPropsType = {
   album: AlbumModel;
@@ -82,7 +82,7 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
     [artists]
   );
 
-  const artistIdsString = React.useMemo(
+  const artistSeed = React.useMemo(
     () => (artists.length ? artists.map((a) => a.id).join(`,`) : ''),
     [artists]
   );
@@ -149,7 +149,7 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
           />
           <AlbumArtists artists={artists} />
           <AlbumMoreOf artists={artists} />
-          <AlbumRecommendations artistSeed={artistIdsString} />
+          <Recommendations type="artist" seed={artistSeed} />
           <AlbumCopyrights copyrights={album.copyrights} />
           <EmptySection />
         </Animated.ScrollView>

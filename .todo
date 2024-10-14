@@ -55,7 +55,7 @@ const seed_artists = topArtists.items.map((item) => item.id).join(',');
 topArtists.items
   .map((item) => item.genres.slice(0, item.genres.length))
   .reduce((prev, next) => prev.concat(next))
-  .splice(0, 5)
+  .slice(0, 5)
   .join(',');
 ```
 

@@ -2,30 +2,37 @@ import * as React from 'react';
 
 import { LibraryItemModel } from '@models';
 import { getRecommendations } from '@api';
-import { Slider } from '../../Slider';
+import { Slider } from '../Slider';
 import { translations } from '@data';
 import { Shapes, Sizes } from '@config';
 
-export type AlbumRecommendationsPropsType = {
-  artistSeed: string;
+export type RecommendationsPropsType = {
+  type: 'artist' | 'tracks';
+  seed: string;
+  size?: Sizes;
+  shape?: Shapes;
 };
 
-export const AlbumRecommendations = ({
-  artistSeed,
-}: AlbumRecommendationsPropsType) => {
+export const Recommendations = ({
+  type,
+  seed,
+  size = Sizes.MEDIUM,
+  shape = Shapes.SQUARE,
+}: RecommendationsPropsType) => {
   const [recommendedAlbums, setRecommendedAlbums] = React.useState<
     LibraryItemModel[] | null
   >(null);
 
   React.useEffect(() => {
-    if (!artistSeed) {
+    if (!seed) {
       return;
     }
 
     (async () => {
       try {
         const recommendedAlbumsData = await getRecommendations({
-          artistSeed,
+          ...(type === 'tracks' && { tracksSeed: seed }),
+          ...(type === 'artist' && { artistSeed: seed }),
         });
         setRecommendedAlbums(recommendedAlbumsData);
       } catch (error) {
@@ -33,7 +40,7 @@ export const AlbumRecommendations = ({
         console.error(error);
       }
     })();
-  }, [artistSeed]);
+  }, [type, seed]);
 
   // TODO: get rid of this
   if (!recommendedAlbums) {
@@ -44,8 +51,8 @@ export const AlbumRecommendations = ({
     <Slider
       title={translations.recommendations}
       slides={recommendedAlbums}
-      size={Sizes.MEDIUM}
-      shape={Shapes.SQUARE_BORDER}
+      size={size}
+      shape={shape}
       withShowAll={true}
     />
   );

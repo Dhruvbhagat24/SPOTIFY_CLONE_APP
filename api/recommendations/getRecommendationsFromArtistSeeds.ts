@@ -8,7 +8,7 @@ export const getRecommendationsFromArtistSeeds = async (): Promise<
   try {
     const artistSeed = (await getUserTopArtistsAndGenres()).artists
       .map((item) => item.id)
-      .splice(0, 5)
+      .slice(0, 5)
       .join(',');
 
     return await getRecommendations({ artistSeed });
