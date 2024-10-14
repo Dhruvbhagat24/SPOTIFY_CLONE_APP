@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { type ImageSourcePropType, View } from 'react-native';
+import { View } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -9,18 +9,15 @@ import Animated, {
 
 import { COVER_SIZE } from '@config';
 import { styles } from './styles';
+import { getFallbackImage } from '@utils';
 
 export type CoverPropsType = {
+  type: 'album' | 'playlist';
   imageURL: string;
   animatedValue: SharedValue<number>;
-  fallbackImageSource: ImageSourcePropType;
 };
 
-export const Cover = ({
-  imageURL,
-  animatedValue,
-  fallbackImageSource,
-}: CoverPropsType) => {
+export const Cover = ({ imageURL, animatedValue, type }: CoverPropsType) => {
   const animatedImageStyles = useAnimatedStyle(() => ({
     transform: [
       {
@@ -47,6 +44,11 @@ export const Cover = ({
       Extrapolation.CLAMP
     ),
   }));
+
+  const fallbackImageSource = React.useMemo(
+    () => getFallbackImage(type),
+    [type]
+  );
 
   return (
     <View style={styles.imageView} testID="cover">

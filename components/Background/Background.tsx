@@ -1,27 +1,27 @@
 import * as React from 'react';
-import {
-  Image,
-  View as Overlay,
-  View,
-  type ImageSourcePropType,
-} from 'react-native';
+import { Image, View as Overlay, View } from 'react-native';
 
-import { hexToRGB } from '@utils';
+import { getFallbackImage, hexToRGB } from '@utils';
 import { COLORS } from '@config';
 
 import { styles } from './styles';
 
 export type BackgroundPropsType = {
+  type: 'album' | 'playlist';
   imageURL: string;
   darkness?: number;
-  fallbackImageSource: ImageSourcePropType;
 };
 
 export const Background = ({
+  type,
   imageURL,
-  fallbackImageSource,
   darkness = 0,
 }: BackgroundPropsType) => {
+  const fallbackImageSource = React.useMemo(
+    () => getFallbackImage(type),
+    [type]
+  );
+
   return (
     <View style={styles.background} testID="background">
       <Overlay

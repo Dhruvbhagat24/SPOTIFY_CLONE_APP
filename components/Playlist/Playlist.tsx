@@ -23,7 +23,6 @@ import { EmptySection } from '../EmptySection';
 import { PlaylistModel } from '@models';
 import { useApplicationDimensions } from '@hooks';
 import { BOTTOM_NAVIGATION_HEIGHT, COLORS } from '@config';
-import { getFallbackImage } from '@utils';
 
 import { styles } from './styles';
 
@@ -70,16 +69,11 @@ export const Playlist = ({ playlist }: PlaylistPropsType) => {
 
   progress.value = withTiming(Number(!!playlist.id), { duration: 350 });
 
-  const fallbackImageSource = React.useMemo(
-    () => getFallbackImage(playlist.type),
-    [playlist.type]
-  );
-
   return (
     <View style={[styles.container, { width }]}>
       <Animated.View style={animatedContainer}>
         <Background
-          fallbackImageSource={fallbackImageSource}
+          type={playlist.type}
           imageURL={playlist.imageURL}
           darkness={0.2}
         />
@@ -96,9 +90,9 @@ export const Playlist = ({ playlist }: PlaylistPropsType) => {
             headerTransparent: true,
             headerBackground: () => (
               <CommonHeader
+                type={playlist.type}
                 headerTitle={playlist.title}
                 imageURL={playlist.imageURL}
-                fallbackImageSource={fallbackImageSource}
                 animatedValue={scrollOffset}
               />
             ),
@@ -113,8 +107,8 @@ export const Playlist = ({ playlist }: PlaylistPropsType) => {
           ref={scrollRef}
         >
           <Cover
+            type={playlist.type}
             imageURL={playlist.imageURL}
-            fallbackImageSource={fallbackImageSource}
             animatedValue={scrollOffset}
           />
           <Summary

@@ -8,13 +8,11 @@ import { translations } from '@data';
 
 import { getArtistAlbums } from '@api';
 
-export type AlbumRecommendationsPropsType = {
+export type AlbumMoreOfPropsType = {
   artists: ArtistModel[];
 };
 
-export const AlbumRecommendations = ({
-  artists,
-}: AlbumRecommendationsPropsType) => {
+export const AlbumMoreOf = ({ artists }: AlbumMoreOfPropsType) => {
   const [artistsAlbums, setArtistsAlbums] = React.useState<
     | {
         artist: string;

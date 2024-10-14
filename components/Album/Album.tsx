@@ -21,13 +21,12 @@ import { Summary } from '../Summary';
 import { AlbumInfo } from './AlbumInfo';
 import { AlbumArtists } from './AlbumArtists';
 import { AlbumCopyrights } from './AlbumCopyrights';
-import { AlbumRecommendations } from './AlbumRecommendations';
+import { AlbumMoreOf } from './AlbumMoreOf';
 import { EmptySection } from '../EmptySection';
 
 import { AlbumModel, ArtistModel } from '@models';
 import { useApplicationDimensions } from '@hooks';
 import { BOTTOM_NAVIGATION_HEIGHT, COLORS, SEPARATOR } from '@config';
-import { getFallbackImage } from '@utils';
 import { translations } from '@data';
 
 import { styles } from './styles';
@@ -87,16 +86,11 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
     [album.releaseDate]
   );
 
-  const fallbackImageSource = React.useMemo(
-    () => getFallbackImage(album.type),
-    [album.type]
-  );
-
   return (
     <View style={[styles.container, { width }]}>
       <Animated.View style={animatedContainer}>
         <Background
-          fallbackImageSource={fallbackImageSource}
+          type={album.type}
           imageURL={album.imageURL}
           darkness={0.2}
         />
@@ -113,9 +107,9 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
             headerTransparent: true,
             headerBackground: () => (
               <CommonHeader
+                type={album.type}
                 headerTitle={album.name}
                 imageURL={album.imageURL}
-                fallbackImageSource={fallbackImageSource}
                 animatedValue={scrollOffset}
               />
             ),
@@ -130,8 +124,8 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
           ref={scrollRef}
         >
           <Cover
+            type={album.type}
             imageURL={album.imageURL}
-            fallbackImageSource={fallbackImageSource}
             animatedValue={scrollOffset}
           />
           <Summary
@@ -148,7 +142,7 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
             totalDuration={album.duration}
           />
           <AlbumArtists artists={artists} />
-          <AlbumRecommendations artists={artists} />
+          <AlbumMoreOf artists={artists} />
           <AlbumCopyrights copyrights={album.copyrights} />
           <EmptySection />
         </Animated.ScrollView>
