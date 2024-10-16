@@ -38,19 +38,19 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen
             name="index"
-            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+            options={{ headerShown: false, animation: 'fade' }}
           />
           <Stack.Screen
             name="home"
-            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+            options={{ headerShown: false, animation: 'fade' }}
           />
           <Stack.Screen
             name="search"
-            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+            options={{ headerShown: false, animation: 'fade' }}
           />
           <Stack.Screen
             name="library"
-            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+            options={{ headerShown: false, animation: 'fade' }}
           />
           <Stack.Screen
             name="album"
