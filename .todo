@@ -59,18 +59,8 @@ topArtists.items
   .join(',');
 ```
 
-TODO: Get Category playlists
-
 TODO: Get Featured playlists
 
-TODO: Get top 1 Artist related Playlists (from search section) - after response:
-
-```tsx
-x.playlists.items.filter(
-  (item) =>
-    item.owner.display_name === 'Miły ATZ' ||
-    item.owner.display_name === 'Spotify'
-);
-```
-
 TODO: check if file exists in filesystem
+
+TODO: parametrize offset and limit values of playlist and album tracks fetch in order to fetch on scroll instead of fetching entire Playlist/Album before render
