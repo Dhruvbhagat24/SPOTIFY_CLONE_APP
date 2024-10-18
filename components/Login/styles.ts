@@ -9,6 +9,11 @@ export const styles = StyleSheet.create({
   backgroundImage: {
     ...StyleSheet.absoluteFillObject,
   },
+  logo: {
+    width: 53,
+    height: 53,
+    marginBottom: 20,
+  },
   container: {
     paddingHorizontal: 35,
     height: '100%',

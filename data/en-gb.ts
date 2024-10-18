@@ -39,4 +39,7 @@ export const EN_GB = {
   basedOnYourTopTracks: 'Based on your Top Tracks',
   afterListening: (key: string) => `After listening ${key}`,
   recommendations: 'Recommendations',
+  loginWelcome: 'Millions of Songs. \n Free on Spotify.',
+  loginButton: 'Sign in',
+  loginNote: "NOTE: You won't be sharing your credentials",
 };

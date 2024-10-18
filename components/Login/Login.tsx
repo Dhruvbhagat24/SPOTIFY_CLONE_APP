@@ -6,12 +6,14 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { Image } from 'expo-image';
+
 import { COLORS } from '@config';
+import { translations } from '@data';
 
 import { styles } from './styles';
-import { Image } from 'expo-image';
 
 export type LoginPropsType = {
   handlePress: () => void;
@@ -49,10 +51,14 @@ export const Login = ({ isPressableDisabled, handlePress }: LoginPropsType) => {
       />
 
       <View style={styles.container}>
+        <View style={styles.logo}>
+          <Image
+            style={styles.backgroundImage}
+            source={require('@assets/icons/logo.png')}
+          />
+        </View>
         <View style={styles.content}>
-          <Text style={styles.title}>
-            Millions of Songs. {'\n'} Free on Spotify.
-          </Text>
+          <Text style={styles.title}>{translations.loginWelcome}</Text>
         </View>
 
         <AnimatedPressable
@@ -67,13 +73,11 @@ export const Login = ({ isPressableDisabled, handlePress }: LoginPropsType) => {
           style={[styles.pressable, animatedPressableStyles]}
         >
           <AnimatedText style={[styles.text, animatedTextStyles]}>
-            Sign in
+            {translations.loginButton}
           </AnimatedText>
         </AnimatedPressable>
 
-        <Text style={styles.note}>
-          NOTE: You won't be sharing your credentials
-        </Text>
+        <Text style={styles.note}>{translations.loginNote}</Text>
       </View>
     </View>
   );
