@@ -6,8 +6,6 @@ import Animated, {
   useAnimatedRef,
   useAnimatedStyle,
   useScrollViewOffset,
-  useSharedValue,
-  withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Stack } from 'expo-router';
@@ -45,7 +43,6 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
 
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
-  const progress = useSharedValue(Number(!!album.id));
 
   const animatedGradientOverlay = useAnimatedStyle(() => ({
     transform: [
@@ -60,22 +57,6 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
     ],
   }));
 
-  const animatedContainer = useAnimatedStyle(() => ({
-    opacity: interpolate(
-      progress.value,
-      [0, 0.7, 1],
-      [0, 0, 1],
-      Extrapolation.CLAMP
-    ),
-    transform: [
-      {
-        translateY: interpolate(progress.value, [0, 1], [65, 0]),
-      },
-    ],
-  }));
-
-  progress.value = withTiming(Number(!!album.id), { duration: 350 });
-
   const artistNamesString = React.useMemo(
     () =>
       artists.length ? artists.map((a) => a.name).join(` ${SEPARATOR} `) : '',
@@ -83,7 +64,13 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
   );
 
   const artistSeed = React.useMemo(
-    () => (artists.length ? artists.map((a) => a.id).join(`,`) : ''),
+    () =>
+      artists.length
+        ? artists
+            .map((a) => a.id)
+            .slice(0, 5)
+            .join(`,`)
+        : '',
     [artists]
   );
 
@@ -94,7 +81,7 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
 
   return (
     <View style={[styles.container, { width }]}>
-      <Animated.View style={animatedContainer}>
+      <View>
         <Background
           type={album.type}
           imageURL={album.imageURL}
@@ -153,7 +140,7 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
           <AlbumCopyrights copyrights={album.copyrights} />
           <EmptySection />
         </Animated.ScrollView>
-      </Animated.View>
+      </View>
     </View>
   );
 };

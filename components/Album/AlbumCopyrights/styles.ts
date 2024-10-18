@@ -11,8 +11,9 @@ export const styles = StyleSheet.create({
   text: {
     marginTop: 5,
     fontSize: 13,
-    lineHeight: 14,
+    lineHeight: 13,
     fontFamily: 'SF-Regular',
     color: COLORS.WHITE,
+    minHeight: 13,
   },
 });

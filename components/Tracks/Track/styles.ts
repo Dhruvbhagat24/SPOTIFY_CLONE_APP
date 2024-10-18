@@ -32,6 +32,8 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'SF-Regular',
     fontSize: 17,
+    lineHeight: 17,
+    minHeight: 17,
   },
   nameTextActive: {
     color: COLORS.TINT,
@@ -73,6 +75,8 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'SF-Regular',
     fontSize: 14,
+    lineHeight: 14,
+    minHeight: 14,
   },
 
   likePressable: {

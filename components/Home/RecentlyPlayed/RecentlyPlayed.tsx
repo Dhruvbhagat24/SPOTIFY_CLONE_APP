@@ -8,17 +8,21 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useApplicationDimensions } from '@hooks';
 import { getRecentlyPlayed } from '@api';
 import { RecentlyPlayedModel } from '@models';
-import { RECENTLY_PLAYED_COVER_SIZE } from '@config';
+import { RECENTLY_PLAYED_COVER_SIZE, RecentlyPlayedFallback } from '@config';
+import { getFallbackImage } from '@utils';
 
 import { styles } from './styles';
 
 export const RecentlyPlayed = () => {
   const [recentlyPlayedData, setRecentlyPlayedData] = React.useState<
     RecentlyPlayedModel[] | null
-  >(null);
+  >(RecentlyPlayedFallback);
   const { width } = useApplicationDimensions();
   const { top: paddingTop } = useSafeAreaInsets();
   const router = useRouter();
+
+  const gap = 8;
+  const paddingHorizontal = 16;
 
   React.useEffect(() => {
     (async () => {
@@ -32,13 +36,15 @@ export const RecentlyPlayed = () => {
     })();
   }, []);
 
+  const fallbackImageSource = React.useMemo(
+    () => getFallbackImage('single'),
+    []
+  );
+
   // TODO: get rid of this
   if (!recentlyPlayedData) {
     return null;
   }
-
-  const gap = 8;
-  const paddingHorizontal = 16;
 
   return (
     <View style={[styles.container, { gap, paddingHorizontal, paddingTop }]}>
@@ -62,7 +68,10 @@ export const RecentlyPlayed = () => {
               },
             ]}
           >
-            <Image style={styles.image} source={{ uri: imageURL }} />
+            <Image
+              style={styles.image}
+              source={imageURL ? { uri: imageURL } : fallbackImageSource}
+            />
           </View>
           <Text
             numberOfLines={2}

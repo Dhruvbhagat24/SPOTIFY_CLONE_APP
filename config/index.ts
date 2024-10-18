@@ -37,4 +37,9 @@ export {
   type RecommendationsResponseType,
 } from './types';
 
-export { AlbumFallback, ArtistFallback, PlaylistFallback } from './fallbacks';
+export {
+  AlbumFallback,
+  ArtistFallback,
+  PlaylistFallback,
+  RecentlyPlayedFallback,
+} from './fallbacks';

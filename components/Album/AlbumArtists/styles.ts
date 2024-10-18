@@ -21,10 +21,11 @@ export const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   text: {
+    color: COLORS.WHITE,
+    fontFamily: 'SF-Regular',
     fontSize: 15,
     lineHeight: 15,
-    fontFamily: 'SF-Regular',
-    color: COLORS.WHITE,
+    minHeight: 15,
     marginLeft: 16,
   },
 });

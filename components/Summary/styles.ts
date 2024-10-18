@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     fontSize: 25,
     lineHeight: 25,
     marginRight: 'auto',
+    minHeight: 25,
   },
   subtitle: {
     color: COLORS.WHITE,
@@ -25,6 +26,7 @@ export const styles = StyleSheet.create({
     lineHeight: 14,
     marginTop: 13,
     marginRight: 'auto',
+    minHeight: 14,
   },
   info: {
     color: COLORS.LIGHT_GREY,
@@ -33,8 +35,8 @@ export const styles = StyleSheet.create({
     lineHeight: 13,
     marginTop: 9,
     textTransform: 'capitalize',
+    minHeight: 13,
   },
-
   pressablesView: {
     maxWidth: 120,
     flexDirection: 'row',

@@ -54,20 +54,6 @@ export const Playlist = ({ playlist }: PlaylistPropsType) => {
     ],
   }));
 
-  const animatedContainer = useAnimatedStyle(() => ({
-    opacity: interpolate(
-      progress.value,
-      [0, 0.7, 1],
-      [0, 0, 1],
-      Extrapolation.CLAMP
-    ),
-    transform: [
-      {
-        translateY: interpolate(progress.value, [0, 1], [65, 0]),
-      },
-    ],
-  }));
-
   progress.value = withTiming(Number(!!playlist.id), { duration: 350 });
 
   const tracksSeed = React.useMemo(() => {
@@ -89,7 +75,7 @@ export const Playlist = ({ playlist }: PlaylistPropsType) => {
 
   return (
     <View style={[styles.container, { width }]}>
-      <Animated.View style={animatedContainer}>
+      <View>
         <Background
           type={playlist.type}
           imageURL={playlist.imageURL}
@@ -140,7 +126,7 @@ export const Playlist = ({ playlist }: PlaylistPropsType) => {
           <Recommendations type="tracks" seed={tracksSeed} />
           <EmptySection />
         </Animated.ScrollView>
-      </Animated.View>
+      </View>
     </View>
   );
 };

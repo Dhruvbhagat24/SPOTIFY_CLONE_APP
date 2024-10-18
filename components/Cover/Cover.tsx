@@ -3,13 +3,17 @@ import { View } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
+  runOnJS,
   SharedValue,
   useAnimatedStyle,
+  useSharedValue,
+  withTiming,
 } from 'react-native-reanimated';
 
 import { COVER_SIZE } from '@config';
-import { styles } from './styles';
 import { getFallbackImage } from '@utils';
+
+import { styles } from './styles';
 
 export type CoverPropsType = {
   type: 'album' | 'playlist';
@@ -18,6 +22,20 @@ export type CoverPropsType = {
 };
 
 export const Cover = ({ imageURL, animatedValue, type }: CoverPropsType) => {
+  const [imageSource, setImageSource] = React.useState(getFallbackImage(type));
+  const progress = useSharedValue(1);
+
+  React.useEffect(() => {
+    if (!imageURL) {
+      return;
+    }
+
+    progress.value = withTiming(0, { duration: 250 }, () => {
+      runOnJS(setImageSource)({ uri: imageURL });
+      progress.value = withTiming(1, { duration: 250 });
+    });
+  }, [imageURL, progress]);
+
   const animatedImageStyles = useAnimatedStyle(() => ({
     transform: [
       {
@@ -45,9 +63,11 @@ export const Cover = ({ imageURL, animatedValue, type }: CoverPropsType) => {
     ),
   }));
 
-  const fallbackImageSource = React.useMemo(
-    () => getFallbackImage(type),
-    [type]
+  const animatedImageSwitchStyles = useAnimatedStyle(
+    () => ({
+      opacity: interpolate(progress.value, [0, 1], [0, 1], Extrapolation.CLAMP),
+    }),
+    [progress, imageURL]
   );
 
   return (
@@ -57,9 +77,10 @@ export const Cover = ({ imageURL, animatedValue, type }: CoverPropsType) => {
           styles.image,
           { width: COVER_SIZE, height: COVER_SIZE },
           animatedImageStyles,
+          animatedImageSwitchStyles,
         ]}
-        source={imageURL ? { uri: imageURL } : fallbackImageSource}
         resizeMode="cover"
+        source={imageSource}
         testID="cover-image"
       />
     </View>
