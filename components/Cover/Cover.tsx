@@ -9,11 +9,14 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
 
-import { COVER_SIZE } from '@config';
 import { getFallbackImage } from '@utils';
+import { COLORS, COVER_SIZE } from '@config';
 
 import { styles } from './styles';
+import { useApplicationDimensions } from '@hooks';
 
 export type CoverPropsType = {
   type: 'album' | 'playlist';
@@ -24,6 +27,8 @@ export type CoverPropsType = {
 export const Cover = ({ imageURL, animatedValue, type }: CoverPropsType) => {
   const [imageSource, setImageSource] = React.useState(getFallbackImage(type));
   const progress = useSharedValue(1);
+  const { width } = useApplicationDimensions();
+  const { top: statusBarOffset } = useSafeAreaInsets();
 
   React.useEffect(() => {
     if (!imageURL) {
@@ -71,18 +76,23 @@ export const Cover = ({ imageURL, animatedValue, type }: CoverPropsType) => {
   );
 
   return (
-    <View style={styles.imageView} testID="cover">
+    <View style={{ paddingTop: statusBarOffset }} testID="cover">
       <Animated.Image
-        style={[
-          styles.image,
-          { width: COVER_SIZE, height: COVER_SIZE },
-          animatedImageStyles,
-          animatedImageSwitchStyles,
-        ]}
-        resizeMode="cover"
+        blurRadius={100}
+        style={[styles.imageBg, animatedImageSwitchStyles]}
         source={imageSource}
-        testID="cover-image"
+        resizeMode="cover"
       />
+      <LinearGradient
+        colors={[COLORS.PRIMARY, 'transparent', COLORS.PRIMARY]}
+        style={styles.gradient}
+      />
+      <Animated.Image
+        style={[styles.image, animatedImageStyles, animatedImageSwitchStyles]}
+        source={imageSource}
+        resizeMode="cover"
+      />
+      <View style={[styles.overlay, { width: width + 40 * 2 }]} />
     </View>
   );
 };

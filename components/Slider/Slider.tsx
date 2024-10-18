@@ -36,7 +36,7 @@ export const Slider = ({
         {title}
       </Text>
       {withShowAll && (
-        <Pressable style={styles.headerPressable}>
+        <Pressable>
           <Text
             style={styles.headerPressableText}
             testID="header-pressable-text"

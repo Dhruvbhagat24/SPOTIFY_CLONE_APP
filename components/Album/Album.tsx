@@ -1,17 +1,11 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import Animated, {
-  Extrapolation,
-  interpolate,
   useAnimatedRef,
-  useAnimatedStyle,
   useScrollViewOffset,
 } from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Stack } from 'expo-router';
 
-import { BackgroundGradient as BackgroundOverlay } from '../BackgroundGradient';
-import { Background } from '../Background';
 import { Cover } from '../Cover';
 import { CommonHeader } from '../CommonHeader';
 import { Tracks } from '../Tracks';
@@ -25,10 +19,11 @@ import { AlbumMoreOf } from './AlbumMoreOf';
 
 import { AlbumModel, ArtistModel } from '@models';
 import { useApplicationDimensions } from '@hooks';
-import { BOTTOM_NAVIGATION_HEIGHT, COLORS, SEPARATOR } from '@config';
+import { SEPARATOR } from '@config';
 import { translations } from '@data';
 
 import { styles } from './styles';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export type AlbumPropsType = {
   album: AlbumModel;
@@ -36,26 +31,9 @@ export type AlbumPropsType = {
 };
 
 export const Album = ({ album, artists }: AlbumPropsType) => {
-  const { width, height } = useApplicationDimensions();
-  const { top: statusBarOffset } = useSafeAreaInsets();
-
-  const imageHeight = 300;
-
+  const { width } = useApplicationDimensions();
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
-
-  const animatedGradientOverlay = useAnimatedStyle(() => ({
-    transform: [
-      {
-        translateY: interpolate(
-          scrollOffset.value,
-          [0, imageHeight, imageHeight * 2, imageHeight * 2 + 1],
-          [0, -imageHeight, -imageHeight * 2, 0],
-          Extrapolation.CLAMP
-        ),
-      },
-    ],
-  }));
 
   const artistNamesString = React.useMemo(
     () =>
@@ -81,66 +59,48 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
 
   return (
     <View style={[styles.container, { width }]}>
-      <View>
-        <Background
+      <Stack.Screen
+        options={{
+          headerTransparent: true,
+          headerBackground: () => (
+            <CommonHeader
+              type={album.type}
+              headerTitle={album.name}
+              imageURL={album.imageURL}
+              animatedValue={scrollOffset}
+            />
+          ),
+        }}
+      />
+      <ScrollView
+        style={styles.scrollView}
+        scrollEventThrottle={16}
+        ref={scrollRef}
+      >
+        <Cover
           type={album.type}
           imageURL={album.imageURL}
-          darkness={0.2}
+          animatedValue={scrollOffset}
         />
-        <BackgroundOverlay
-          styles={[animatedGradientOverlay, styles.gradientOverlay]}
-          colors={['transparent', COLORS.PRIMARY]}
-          startY={imageHeight / 2}
-          endY={imageHeight + 70 + 90}
-          height={height}
+        <Summary
+          id={album.id}
+          type={album.type}
+          title={album.name}
+          subtitle={artistNamesString}
+          info={`${translations.type[album.albumType]} ${SEPARATOR} ${releaseYear}`}
         />
-
-        <Stack.Screen
-          options={{
-            headerTransparent: true,
-            headerBackground: () => (
-              <CommonHeader
-                type={album.type}
-                headerTitle={album.name}
-                imageURL={album.imageURL}
-                animatedValue={scrollOffset}
-              />
-            ),
-          }}
+        <Tracks type={album.type} tracks={album.tracks.items} />
+        <AlbumInfo
+          releaseDate={album.releaseDate}
+          totalTracks={album.tracks.total}
+          totalDuration={album.duration}
         />
-        <Animated.ScrollView
-          style={{
-            paddingTop: statusBarOffset,
-            marginBottom: BOTTOM_NAVIGATION_HEIGHT,
-          }}
-          scrollEventThrottle={16}
-          ref={scrollRef}
-        >
-          <Cover
-            type={album.type}
-            imageURL={album.imageURL}
-            animatedValue={scrollOffset}
-          />
-          <Summary
-            id={album.id}
-            type={album.type}
-            title={album.name}
-            subtitle={artistNamesString}
-            info={`${translations.type[album.albumType]} ${SEPARATOR} ${releaseYear}`}
-          />
-          <Tracks type={album.type} tracks={album.tracks.items} />
-          <AlbumInfo
-            releaseDate={album.releaseDate}
-            totalTracks={album.tracks.total}
-            totalDuration={album.duration}
-          />
-          <AlbumArtists artists={artists} />
-          <AlbumMoreOf artists={artists} />
-          <Recommendations type="artist" seed={artistSeed} />
-          <AlbumCopyrights copyrights={album.copyrights} />
-          <EmptySection />
-        </Animated.ScrollView>
-      </View>
+        <AlbumArtists artists={artists} />
+        <AlbumMoreOf artists={artists} />
+        <Recommendations type="artist" seed={artistSeed} />
+        <AlbumCopyrights copyrights={album.copyrights} />
+        <EmptySection />
+      </ScrollView>
     </View>
   );
 };

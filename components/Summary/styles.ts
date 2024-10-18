@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   summary: {
-    marginTop: 20,
+    paddingTop: 20,
     paddingHorizontal: 16,
     paddingBottom: 14,
   },

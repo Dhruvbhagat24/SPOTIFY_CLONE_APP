@@ -65,7 +65,7 @@ export const CommonHeader = ({
   }, [navigation]);
 
   return (
-    <View testID="header">
+    <View style={styles.container} testID="header">
       <Pressable
         style={[styles.goBackPressable, { top: useSafeAreaInsets().top }]}
         onPress={handlePress}

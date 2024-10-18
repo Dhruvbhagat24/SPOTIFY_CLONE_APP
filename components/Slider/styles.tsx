@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
     letterSpacing: -1.2,
     marginRight: 'auto',
   },
-  headerPressable: {},
   headerPressableText: {
     fontSize: 13,
     lineHeight: 13,

@@ -1,19 +1,12 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import Animated, {
-  Extrapolation,
-  interpolate,
   useAnimatedRef,
-  useAnimatedStyle,
   useScrollViewOffset,
-  useSharedValue,
-  withTiming,
 } from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ScrollView } from 'react-native-gesture-handler';
 import { Stack } from 'expo-router';
 
-import { BackgroundGradient as BackgroundOverlay } from '../BackgroundGradient';
-import { Background } from '../Background';
 import { Cover } from '../Cover';
 import { CommonHeader } from '../CommonHeader';
 import { Tracks } from '../Tracks';
@@ -23,7 +16,6 @@ import { EmptySection } from '../EmptySection';
 
 import { PlaylistModel } from '@models';
 import { useApplicationDimensions } from '@hooks';
-import { BOTTOM_NAVIGATION_HEIGHT, COLORS } from '@config';
 
 import { styles } from './styles';
 
@@ -32,29 +24,10 @@ export type PlaylistPropsType = {
 };
 
 export const Playlist = ({ playlist }: PlaylistPropsType) => {
-  const { width, height } = useApplicationDimensions();
-  const { top: statusBarOffset } = useSafeAreaInsets();
-
-  const imageHeight = 300;
+  const { width } = useApplicationDimensions();
 
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
-  const progress = useSharedValue(Number(!!playlist.id));
-
-  const animatedGradientOverlay = useAnimatedStyle(() => ({
-    transform: [
-      {
-        translateY: interpolate(
-          scrollOffset.value,
-          [0, imageHeight, imageHeight * 2, imageHeight * 2 + 1],
-          [0, -imageHeight, -imageHeight * 2, 0],
-          Extrapolation.CLAMP
-        ),
-      },
-    ],
-  }));
-
-  progress.value = withTiming(Number(!!playlist.id), { duration: 350 });
 
   const tracksSeed = React.useMemo(() => {
     const tracks = playlist.tracks;
@@ -75,58 +48,40 @@ export const Playlist = ({ playlist }: PlaylistPropsType) => {
 
   return (
     <View style={[styles.container, { width }]}>
-      <View>
-        <Background
+      <Stack.Screen
+        options={{
+          headerTransparent: true,
+          headerBackground: () => (
+            <CommonHeader
+              type={playlist.type}
+              headerTitle={playlist.title}
+              imageURL={playlist.imageURL}
+              animatedValue={scrollOffset}
+            />
+          ),
+        }}
+      />
+      <ScrollView
+        style={styles.scrollView}
+        scrollEventThrottle={16}
+        ref={scrollRef}
+      >
+        <Cover
           type={playlist.type}
           imageURL={playlist.imageURL}
-          darkness={0.2}
+          animatedValue={scrollOffset}
         />
-        <BackgroundOverlay
-          styles={[animatedGradientOverlay, styles.gradientOverlay]}
-          colors={['transparent', COLORS.PRIMARY]}
-          startY={imageHeight / 2}
-          endY={imageHeight + 70 + 90}
-          height={height}
+        <Summary
+          id={playlist.id}
+          type={playlist.type}
+          title={playlist.title}
+          subtitle={playlist.subtitle}
+          info={playlist.info}
         />
-
-        <Stack.Screen
-          options={{
-            headerTransparent: true,
-            headerBackground: () => (
-              <CommonHeader
-                type={playlist.type}
-                headerTitle={playlist.title}
-                imageURL={playlist.imageURL}
-                animatedValue={scrollOffset}
-              />
-            ),
-          }}
-        />
-        <Animated.ScrollView
-          style={{
-            paddingTop: statusBarOffset,
-            marginBottom: BOTTOM_NAVIGATION_HEIGHT,
-          }}
-          scrollEventThrottle={16}
-          ref={scrollRef}
-        >
-          <Cover
-            type={playlist.type}
-            imageURL={playlist.imageURL}
-            animatedValue={scrollOffset}
-          />
-          <Summary
-            id={playlist.id}
-            type={playlist.type}
-            title={playlist.title}
-            subtitle={playlist.subtitle}
-            info={playlist.info}
-          />
-          <Tracks type={playlist.type} tracks={playlist.tracks} />
-          <Recommendations type="tracks" seed={tracksSeed} />
-          <EmptySection />
-        </Animated.ScrollView>
-      </View>
+        <Tracks type={playlist.type} tracks={playlist.tracks} />
+        <Recommendations type="tracks" seed={tracksSeed} />
+        <EmptySection />
+      </ScrollView>
     </View>
   );
 };

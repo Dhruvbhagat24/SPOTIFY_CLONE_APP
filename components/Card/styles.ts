@@ -21,7 +21,6 @@ export const styling = (size: Sizes, shape: Shapes) =>
       ...StyleSheet.absoluteFillObject,
       color: COLORS.GREY,
     },
-    cardInfo: {},
     cardTitleText: {
       fontSize: 13,
       lineHeight: 13,

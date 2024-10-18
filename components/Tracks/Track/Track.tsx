@@ -79,7 +79,7 @@ export const Track = ({
           <FontAwesome5 name="check" style={styles.isTrackSavedIcon} />
         </Pressable>
       )}
-      <Pressable style={styles.morePressable}>
+      <Pressable>
         <Entypo style={styles.moreIcon} name="dots-three-horizontal" />
       </Pressable>
     </View>

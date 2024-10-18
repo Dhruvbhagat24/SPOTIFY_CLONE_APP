@@ -2,6 +2,9 @@ import { COLORS } from '@config';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  container: {
+    overflow: 'hidden',
+  },
   goBackPressable: {
     ...StyleSheet.absoluteFillObject,
     left: 6,

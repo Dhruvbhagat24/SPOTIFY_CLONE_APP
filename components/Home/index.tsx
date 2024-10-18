@@ -9,11 +9,9 @@ import { YourPlaylists } from './YourPlaylists';
 import { AfterListeningTopArtist } from './AfterListeningTopArtist';
 import { EmptySection } from '../EmptySection';
 
-import { styles } from './styles';
-
 export const Home = () => {
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <RecentlyPlayed />
       <TopAlbums />
       <TopArtists />

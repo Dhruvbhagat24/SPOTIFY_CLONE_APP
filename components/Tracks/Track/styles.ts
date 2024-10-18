@@ -90,7 +90,6 @@ export const styles = StyleSheet.create({
     color: COLORS.TINT,
   },
 
-  morePressable: {},
   moreIcon: {
     fontSize: 20,
     color: COLORS.LIGHTER_GREY,

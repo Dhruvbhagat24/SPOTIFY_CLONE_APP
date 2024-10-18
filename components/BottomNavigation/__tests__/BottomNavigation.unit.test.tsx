@@ -4,8 +4,6 @@ import { render, fireEvent, RenderResult } from '@testing-library/react-native';
 import { BottomNavigation } from '../BottomNavigation';
 import { COLORS } from '@config';
 
-jest.mock('../../BackgroundGradient');
-
 jest.mock('expo-router', () => ({
   useRouter: jest.fn(),
   useSegments: jest.fn(),
