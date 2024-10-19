@@ -4,7 +4,7 @@ TODO: add unit tests and fix current ones
 
 TODO: Handle the case, when there is a new user and there is no saved .json file in FileSystem - check if file exists in filesystem (Handle the case, when a different user logs in - may be an error due to collision of naming .json files in FileSystem -> add there also the username)
 
-TODO: Refactor api strategy - handle the fetch rate for recommendations!! (uncomment the components)
+TODO: Refactor api strategy - handle the fetch rate for recommendations!! (uncomment the components) - search for @API_RATE
 
 TODO: Get Featured playlists
 

@@ -10,7 +10,8 @@ import { Cover } from '../Cover';
 import { CommonHeader } from '../CommonHeader';
 import { Summary } from '../Summary';
 import { EmptySection } from '../EmptySection';
-import { Recommendations } from '../Recommendations';
+// @API_RATE
+// import { Recommendations } from '../Recommendations';
 import { AlbumInfo } from './AlbumInfo';
 import { AlbumArtists } from './AlbumArtists';
 import { AlbumCopyrights } from './AlbumCopyrights';
@@ -43,16 +44,17 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
     },
   });
 
-  const artistSeed = React.useMemo(
-    () =>
-      artists.length
-        ? artists
-            .map((a) => a.id)
-            .slice(0, 5)
-            .join(`,`)
-        : '',
-    [artists]
-  );
+  // @API_RATE
+  // const artistSeed = React.useMemo(
+  //   () =>
+  //     artists.length
+  //       ? artists
+  //           .map((a) => a.id)
+  //           .slice(0, 5)
+  //           .join(`,`)
+  //       : '',
+  //   [artists]
+  // );
   const id = React.useMemo(() => (album ? album.id : ''), [album]);
   const title = React.useMemo(() => (album ? album.name : ''), [album]);
   const subtitle = React.useMemo(
@@ -182,7 +184,8 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
             />
             <AlbumArtists artists={artists} />
             <AlbumMoreOf artists={artists} />
-            <Recommendations type="artist" seed={artistSeed} />
+            {/* @API_RATE */}
+            {/* <Recommendations type="artist" seed={artistSeed} /> */}
             <AlbumCopyrights copyrights={copyrights} />
             <EmptySection />
           </>

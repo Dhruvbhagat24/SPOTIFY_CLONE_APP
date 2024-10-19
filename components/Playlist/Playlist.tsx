@@ -10,7 +10,8 @@ import { Cover } from '../Cover';
 import { CommonHeader } from '../CommonHeader';
 import { Summary } from '../Summary';
 import { EmptySection } from '../EmptySection';
-import { PlaylistRecommendations } from './PlaylistRecommendations';
+// @API_RATE
+// import { PlaylistRecommendations } from './PlaylistRecommendations';
 import { Track } from '../Track';
 
 import { PlaylistModel } from '@models';
@@ -163,7 +164,8 @@ export const Playlist = ({ playlistId }: PlaylistPropsType) => {
         }
         ListFooterComponent={
           <>
-            <PlaylistRecommendations playlistId={playlistId} />
+            {/* @API_RATE */}
+            {/* <PlaylistRecommendations playlistId={playlistId} /> */}
             <EmptySection />
           </>
         }

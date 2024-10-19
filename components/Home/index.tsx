@@ -4,9 +4,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { RecentlyPlayed } from './RecentlyPlayed';
 import { TopAlbums } from './TopAlbums';
 import { TopArtists } from './TopArtists';
-import { BasedOnTopArtists } from './BasedOnTopArtists';
+// import { BasedOnTopArtists } from './BasedOnTopArtists';
 import { YourPlaylists } from './YourPlaylists';
-import { AfterListeningTopArtist } from './AfterListeningTopArtist';
+// import { AfterListeningTopArtist } from './AfterListeningTopArtist';
 import { EmptySection } from '../EmptySection';
 
 export const Home = () => {
@@ -15,9 +15,11 @@ export const Home = () => {
       <RecentlyPlayed />
       <TopAlbums />
       <TopArtists />
-      <BasedOnTopArtists />
+      {/* @API_RATE */}
+      {/* <BasedOnTopArtists /> */}
       <YourPlaylists />
-      <AfterListeningTopArtist />
+      {/* @API_RATE */}
+      {/* <AfterListeningTopArtist /> */}
       <EmptySection />
     </ScrollView>
   );
