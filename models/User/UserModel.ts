@@ -1,4 +1,4 @@
-export type UserProfileModel = {
+export type UserModel = {
   id: string;
   type: 'user';
   displayName: string;

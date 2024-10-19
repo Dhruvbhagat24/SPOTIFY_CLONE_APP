@@ -14,7 +14,7 @@ import { Card } from '../Card';
 import { LibraryHeader } from './LibraryHeader';
 
 import { useApplicationDimensions } from '@hooks';
-import { BOTTOM_NAVIGATION_HEIGHT, Categories, Shapes, Sizes } from '@config';
+import { Categories, Shapes, Sizes } from '@config';
 import { LibraryItemModel } from '@models';
 import { getLibrary, LibraryType } from '@api';
 
@@ -133,13 +133,7 @@ export const Library = () => {
           contentContainerStyle={styles.flatList}
           columnWrapperStyle={styles.flatListColumnWrapper}
           numColumns={numColumns}
-          style={[
-            styles.scrollView,
-            {
-              paddingTop: safeAreaOffset,
-              marginBottom: BOTTOM_NAVIGATION_HEIGHT,
-            },
-          ]}
+          style={[styles.scrollView, { paddingTop: safeAreaOffset }]}
         />
       </Animated.View>
     </View>

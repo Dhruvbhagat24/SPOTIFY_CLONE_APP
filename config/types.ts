@@ -220,7 +220,7 @@ export type SavedPlaylistsResponseType = {
   }[];
 };
 
-export type UserProfileResponseType = {
+export type UserResponseType = {
   country: string;
   display_name: string;
   email: string;

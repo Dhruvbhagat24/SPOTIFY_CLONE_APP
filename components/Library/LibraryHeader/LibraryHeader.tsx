@@ -9,10 +9,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CategoryPressable } from './CategoryPressable';
 import * as Icons from '@expo/vector-icons';
 
-import { UserProfileModel } from '@models';
+import { useUserData } from '@context';
 import { Categories, LIBRARY_HEADER_HEIGHT } from '@config';
 import { translations } from '@data';
-import { getUserProfile } from '@api';
 
 import { styles } from './styles';
 
@@ -27,27 +26,8 @@ export const LibraryHeader = ({
   handleCategoryChange,
   progress,
 }: LibraryHeaderPropsType) => {
-  const [data, setData] = React.useState<UserProfileModel | null>(null);
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [isError, setIsError] = React.useState<boolean>(false);
   const { top: statusBarOffset } = useSafeAreaInsets();
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        setIsLoading(true);
-        const userProfile = await getUserProfile();
-        setData(userProfile);
-        setIsError(false);
-      } catch (error) {
-        setIsError(true);
-        setData(null);
-        console.error('ERROR: ', error);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, []);
+  const { userData } = useUserData();
 
   const handleProfilePress = () => {
     // TODO: open menu logic
@@ -65,14 +45,10 @@ export const LibraryHeader = ({
     >
       <View style={styles.content}>
         <Pressable style={styles.profile} onPress={handleProfilePress}>
-          {isLoading && <Text>Loading</Text>}
-          {isError && <Text>Error</Text>}
-          {!isLoading && !isError && data && (
-            <Image
-              style={styles.profileImage}
-              source={{ uri: data.imageURL }}
-            />
-          )}
+          <Image
+            style={styles.profileImage}
+            source={{ uri: userData.imageURL }}
+          />
         </Pressable>
         <Text style={styles.titleText}>{translations.router.library}</Text>
         <Pressable>

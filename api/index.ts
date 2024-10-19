@@ -8,7 +8,7 @@ export { getArtistAlbums } from './getArtistAlbums';
 
 export {
   getSessionToken,
-  getUserProfile,
+  getUser,
   getUserFollowedArtists,
   getSavedAlbums,
   getSavedShows,

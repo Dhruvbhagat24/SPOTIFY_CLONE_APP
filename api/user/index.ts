@@ -1,5 +1,5 @@
 export { getSessionToken } from './getSessionToken';
-export { getUserProfile } from './getUserProfile';
+export { getUser } from './getUser';
 export { getUserFollowedArtists } from './getUserFollowedArtists';
 export { getSavedAlbums } from './getSavedAlbums';
 export { getSavedShows } from './getSavedShows';

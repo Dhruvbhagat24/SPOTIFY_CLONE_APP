@@ -28,7 +28,7 @@ export {
   type SavedEpisodesResponseType,
   type PlaylistResponseType,
   type SavedPlaylistsResponseType,
-  type UserProfileResponseType,
+  type UserResponseType,
   type UserFollowedArtistsResponseType,
   type RecentlyPlayedResponseType,
   type SearchPlaylistResponseType,

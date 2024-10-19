@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import { getSavedPlaylists, getUserProfile } from '@api';
-import { LibraryItemModel, UserProfileModel } from '@models';
+import { getSavedPlaylists } from '@api';
+import { LibraryItemModel } from '@models';
+import { useUserData } from '@context';
 import { Shapes, Sizes } from '@config';
 import { translations } from '@data';
 
@@ -11,21 +12,7 @@ export const YourPlaylists = () => {
   const [savedPlaylists, setDataSavedPlaylists] = React.useState<
     LibraryItemModel[] | null
   >(null);
-  const [userProfile, setUserProfile] = React.useState<UserProfileModel | null>(
-    null
-  );
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        const userProfileData = await getUserProfile();
-        setUserProfile(userProfileData);
-      } catch (error) {
-        setUserProfile(null);
-        console.error(error);
-      }
-    })();
-  }, []);
+  const { userData } = useUserData();
 
   React.useEffect(() => {
     (async () => {
@@ -41,12 +28,12 @@ export const YourPlaylists = () => {
 
   const userPlaylists = React.useMemo(
     () =>
-      savedPlaylists && userProfile
+      savedPlaylists && userData
         ? savedPlaylists.filter(
-            (savedPlaylist) => savedPlaylist.ownerId === userProfile.id
+            (savedPlaylist) => savedPlaylist.ownerId === userData.id
           )
         : null,
-    [userProfile, savedPlaylists]
+    [userData, savedPlaylists]
   );
 
   // TODO: get rid of this

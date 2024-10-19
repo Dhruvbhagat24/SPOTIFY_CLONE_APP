@@ -6,7 +6,7 @@ export {
   parseToRecentlyPlayed,
   parseToSavedEpisodes,
   parseToSavedShows,
-  parseToUserProfile,
+  parseToUser,
   parseToUserFollowedArtists,
   parseFromFollowedArtistsToLibraryItem,
   parseFromSavedAlbumsToLibraryItem,

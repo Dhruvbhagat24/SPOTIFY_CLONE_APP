@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: COLORS.PRIMARY,
     paddingHorizontal: 16,
+    marginBottom: BOTTOM_NAVIGATION_HEIGHT,
   },
   flatList: {
     paddingBottom: BOTTOM_NAVIGATION_HEIGHT,

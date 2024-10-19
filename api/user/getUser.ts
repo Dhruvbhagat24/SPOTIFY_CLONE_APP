@@ -1,22 +1,22 @@
 import axios from 'axios';
 
-import { UserProfileModel } from '@models';
-import { UserProfileResponseType } from '@config';
-import { parseToUserProfile } from '@utils';
+import { UserModel } from '@models';
+import { UserResponseType } from '@config';
+import { parseToUser } from '@utils';
 
 import { fileSystemMiddleware } from '../fileSystemMiddleware';
 import { getSessionToken } from './getSessionToken';
 
-export const fetchUserProfile = async (): Promise<UserProfileModel> => {
+export const fetchUser = async (): Promise<UserModel> => {
   try {
     const token = await getSessionToken();
     const response = (await axios.get('https://api.spotify.com/v1/me', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    })) as { data: UserProfileResponseType };
+    })) as { data: UserResponseType };
 
-    return parseToUserProfile(response.data);
+    return parseToUser(response.data);
   } catch (error) {
     console.error(
       `Error fetching saved albums of currently logged in user`,
@@ -26,8 +26,5 @@ export const fetchUserProfile = async (): Promise<UserProfileModel> => {
   }
 };
 
-export const getUserProfile = async () =>
-  await fileSystemMiddleware<UserProfileModel>(
-    'user_profile',
-    fetchUserProfile
-  );
+export const getUser = async () =>
+  await fileSystemMiddleware<UserModel>('user_profile', fetchUser);
