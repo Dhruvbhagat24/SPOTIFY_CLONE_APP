@@ -1,9 +1,4 @@
-import {
-  AlbumModel,
-  ArtistModel,
-  PlaylistModel,
-  RecentlyPlayedModel,
-} from '@models';
+import { AlbumModel, ArtistModel, RecentlyPlayedModel } from '@models';
 
 export const AlbumFallback = {
   id: '',
@@ -34,23 +29,6 @@ export const ArtistFallback = Array(1).fill({
   name: '',
   imageURL: '',
 }) as ArtistModel[];
-
-export const PlaylistFallback = {
-  type: 'playlist',
-  id: '',
-  title: '',
-  subtitle: '',
-  ownerId: '',
-  info: '',
-  description: '',
-  imageURL: '',
-  tracks: Array(10).fill({
-    id: '',
-    title: '',
-    subtitle: '',
-    imageURL: '',
-  }),
-} as PlaylistModel;
 
 export const RecentlyPlayedFallback = Array(8).fill({
   id: '',

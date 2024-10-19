@@ -3,5 +3,5 @@ export type { SavedEpisodeModel, SavedShowModel } from './Podcast';
 export type { ArtistModel } from './Artist';
 export type { UserProfileModel } from './User';
 export type { LibraryItemModel } from './LibraryItem';
-export type { PlaylistModel } from './Playlist';
+export type { PlaylistModel, PlaylistTrackModel } from './Playlist';
 export type { RecentlyPlayedModel } from './Home';

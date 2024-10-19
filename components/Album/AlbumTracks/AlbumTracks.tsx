@@ -2,10 +2,10 @@ import * as React from 'react';
 import { View } from 'react-native';
 
 import { styles } from './styles';
-import { Track } from './Track';
+import { Track } from '../../Track';
 import { checkSavedTracks } from '@api';
 
-export type TracksPropsType = {
+export type AlbumTracksPropsType = {
   type: 'album' | 'playlist';
   tracks: {
     id: string;
@@ -16,23 +16,25 @@ export type TracksPropsType = {
   }[];
 };
 
-export const Tracks = ({ tracks, type }: TracksPropsType) => {
-  const [savedTracks, setSavedTracks] = React.useState<boolean[] | null>(null);
+export const AlbumTracks = ({ tracks, type }: AlbumTracksPropsType) => {
+  const [savedAlbumTracks, setSavedAlbumTracks] = React.useState<
+    boolean[] | null
+  >(null);
 
   React.useEffect(() => {
-    if (tracks.some((track) => !track.id) || type === 'playlist') {
+    if (!tracks.length || type === 'playlist') {
       return;
     }
 
     (async () => {
       try {
-        const savedTracksArr = await checkSavedTracks(
+        const savedAlbumTracksArr = await checkSavedTracks(
           tracks.map((track) => track.id)
         );
-        setSavedTracks(savedTracksArr);
+        setSavedAlbumTracks(savedAlbumTracksArr);
       } catch (error) {
-        setSavedTracks(null);
-        console.error('Failed to check if array of tracks is saved:', error);
+        setSavedAlbumTracks(null);
+        console.error('Failed to check if array of tracks are saved:', error);
       }
     })();
   }, [tracks, type]);
@@ -48,7 +50,7 @@ export const Tracks = ({ tracks, type }: TracksPropsType) => {
           imageURL={imageURL}
           // TODO: removed this true value and check if tracks are downloaded instead
           isTrackDownloaded={true}
-          isTrackSaved={savedTracks ? savedTracks[index] : false}
+          isTrackSaved={savedAlbumTracks ? savedAlbumTracks[index] : false}
           // TODO: to be removed and replaced with handlePress logic on play
           isPlaying={false}
         />

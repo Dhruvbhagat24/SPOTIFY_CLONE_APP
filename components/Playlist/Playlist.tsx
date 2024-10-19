@@ -1,50 +1,122 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import Animated, {
-  useAnimatedRef,
-  useScrollViewOffset,
+  useAnimatedScrollHandler,
+  useSharedValue,
 } from 'react-native-reanimated';
-import { ScrollView } from 'react-native-gesture-handler';
 import { Stack } from 'expo-router';
 
 import { Cover } from '../Cover';
 import { CommonHeader } from '../CommonHeader';
-import { Tracks } from '../Tracks';
 import { Summary } from '../Summary';
-import { Recommendations } from '../Recommendations';
 import { EmptySection } from '../EmptySection';
+import { PlaylistRecommendations } from './PlaylistRecommendations';
+import { Track } from '../Track';
 
 import { PlaylistModel } from '@models';
+import { getPlaylist, getPlaylistItems } from '@api';
 import { useApplicationDimensions } from '@hooks';
+import { PlaylistItemResponseType } from '@config';
 
 import { styles } from './styles';
 
 export type PlaylistPropsType = {
-  playlist: PlaylistModel;
+  playlistId: string;
 };
 
-export const Playlist = ({ playlist }: PlaylistPropsType) => {
+export const Playlist = ({ playlistId }: PlaylistPropsType) => {
+  const [playlist, setPlaylist] = React.useState<PlaylistModel | null>(null);
+  const [tracks, setTracks] = React.useState<PlaylistItemResponseType[]>([]);
+  const [offset, setOffset] = React.useState(0);
+  const [limit] = React.useState(50);
+  const scrollOffset = useSharedValue(0);
   const { width } = useApplicationDimensions();
 
-  const scrollRef = useAnimatedRef<Animated.ScrollView>();
-  const scrollOffset = useScrollViewOffset(scrollRef);
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      scrollOffset.value = event.contentOffset.y;
+    },
+  });
 
-  const tracksSeed = React.useMemo(() => {
-    const tracks = playlist.tracks;
-    const lastIndex = tracks.length - 1;
+  const fetchTracks = async () => {
+    if (!playlistId) {
+      return;
+    }
+    try {
+      const newItems = await getPlaylistItems({ playlistId, limit, offset });
+      setTracks((prevItems) => [...prevItems, ...newItems]);
+      setOffset((prevOffset) => prevOffset + limit);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    const ids = [
-      ...new Set([
-        tracks[0].id,
-        tracks[lastIndex].id,
-        tracks[Math.floor(lastIndex / 2)].id,
-        tracks[Math.floor(lastIndex / 2 / 2)].id,
-        tracks[lastIndex - Math.floor((lastIndex - 1) / 2 / 2)].id,
-      ]),
-    ];
+  React.useEffect(() => {
+    fetchTracks();
+    //eslint-disable-next-line
+  }, [playlistId]);
 
-    return ids.length ? ids.join(',') : '';
-  }, [playlist.tracks]);
+  React.useEffect(() => {
+    if (!playlistId) {
+      return;
+    }
+
+    (async () => {
+      try {
+        const playlistData = await getPlaylist(playlistId);
+        setPlaylist(playlistData);
+      } catch (error) {
+        setPlaylist(null);
+        console.error('Failed to get playlist data:', error);
+      }
+    })();
+  }, [playlistId]);
+
+  const id = React.useMemo(() => (playlist ? playlist.id : ''), [playlist]);
+  const title = React.useMemo(
+    () => (playlist ? playlist.title : ''),
+    [playlist]
+  );
+  const subtitle = React.useMemo(
+    () => (playlist ? playlist.subtitle : ''),
+    [playlist]
+  );
+  const info = React.useMemo(() => (playlist ? playlist.info : ''), [playlist]);
+  const imageURL = React.useMemo(
+    () => (playlist ? playlist.imageURL : ''),
+    [playlist]
+  );
+
+  const renderItem = React.useCallback(
+    ({
+      item: {
+        track: {
+          name,
+          artists,
+          album: { images },
+        },
+      },
+      index,
+    }: {
+      item: PlaylistItemResponseType;
+      index: number;
+    }) => (
+      <Track
+        type="playlist"
+        key={index}
+        title={name}
+        subtitle={artists.map((a) => a.name).join(', ')}
+        imageURL={images[0].url || ''}
+        // TODO: removed this true value and check if tracks are downloaded instead
+        isTrackDownloaded={true}
+        // TODO: check if track is saved when playlist owner is not current user
+        isTrackSaved={false}
+        // TODO: to be removed and replaced with handlePress logic on play
+        isPlaying={false}
+      />
+    ),
+    []
+  );
 
   return (
     <View style={[styles.container, { width }]}>
@@ -53,35 +125,49 @@ export const Playlist = ({ playlist }: PlaylistPropsType) => {
           headerTransparent: true,
           headerBackground: () => (
             <CommonHeader
-              type={playlist.type}
-              headerTitle={playlist.title}
-              imageURL={playlist.imageURL}
+              type="playlist"
+              title={title}
+              imageURL={imageURL}
               animatedValue={scrollOffset}
             />
           ),
         }}
       />
-      <ScrollView
-        style={styles.scrollView}
+
+      <Animated.FlatList
+        style={styles.flatList}
+        contentContainerStyle={styles.flatListContentContainer}
+        data={tracks}
+        keyExtractor={(item, index) => item.track.id + index}
+        renderItem={renderItem}
+        disableScrollViewPanResponder
+        onStartReached={fetchTracks}
+        onStartReachedThreshold={1}
         scrollEventThrottle={16}
-        ref={scrollRef}
-      >
-        <Cover
-          type={playlist.type}
-          imageURL={playlist.imageURL}
-          animatedValue={scrollOffset}
-        />
-        <Summary
-          id={playlist.id}
-          type={playlist.type}
-          title={playlist.title}
-          subtitle={playlist.subtitle}
-          info={playlist.info}
-        />
-        <Tracks type={playlist.type} tracks={playlist.tracks} />
-        <Recommendations type="tracks" seed={tracksSeed} />
-        <EmptySection />
-      </ScrollView>
+        onScroll={scrollHandler}
+        ListHeaderComponent={
+          <>
+            <Cover
+              type="playlist"
+              imageURL={imageURL}
+              animatedValue={scrollOffset}
+            />
+            <Summary
+              type="playlist"
+              id={id}
+              title={title}
+              subtitle={subtitle}
+              info={info}
+            />
+          </>
+        }
+        ListFooterComponent={
+          <>
+            <PlaylistRecommendations playlistId={playlistId} />
+            <EmptySection />
+          </>
+        }
+      />
     </View>
   );
 };

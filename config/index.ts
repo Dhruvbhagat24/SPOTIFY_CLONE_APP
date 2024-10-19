@@ -35,11 +35,11 @@ export {
   type UserTopTracksResponseType,
   type UserTopArtistsResponseType,
   type RecommendationsResponseType,
+  type PlaylistItemResponseType,
 } from './types';
 
 export {
   AlbumFallback,
   ArtistFallback,
-  PlaylistFallback,
   RecentlyPlayedFallback,
 } from './fallbacks';

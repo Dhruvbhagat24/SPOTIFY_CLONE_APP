@@ -15,6 +15,8 @@ export const getRecommendations = async ({
   tracksSeed?: string;
   genresSeed?: string;
 }): Promise<LibraryItemModel[]> => {
+  //TODO: Remove this and instead handle the rate limit case
+  throw new Error('Temp error');
   try {
     const { token } = await getSessionlessToken();
 
@@ -24,9 +26,8 @@ export const getRecommendations = async ({
         params: {
           seed_artists: artistSeed,
           seed_tracks: tracksSeed,
-          seed_genres: encodeURIComponent(
-            !artistSeed && !tracksSeed && !genresSeed ? 'Rap' : genresSeed
-          ),
+          seed_genres:
+            !artistSeed && !tracksSeed && !genresSeed ? 'Rap' : genresSeed,
           limit: 100,
           offset: 0,
         },

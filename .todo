@@ -1,66 +1,13 @@
 TODO: After we store all types of "Album"s in one array, we should implement a logic on every album or artist click to go to that array.json in file system remove the item and add it to the beginning and save back to the file system. With this approach we will have the latest interaction of the user to show.
 
-TODO: add the fallback if needed
-
-```tsx
-const fallback = {
-  album: Array(1000).fill({
-    id: 'id',
-    type: 'album',
-    title: 'Album',
-    subtitle: 'Artist',
-    imageURL: '',
-  }) as LibraryItemModel[],
-  artist: Array(1000).fill({
-    id: 'id',
-    type: 'artist',
-    title: 'Artist',
-    imageURL: '',
-  }) as LibraryItemModel[],
-  show: Array(200).fill({
-    id: 'id',
-    type: 'show',
-    title: 'Artist',
-    subtitle: 'Show',
-    imageURL: '',
-  }) as LibraryItemModel[],
-  playlist: Array(200).fill({
-    id: 'id',
-    type: 'show',
-    title: 'Artist',
-    subtitle: 'Show',
-    imageURL: '',
-  }) as LibraryItemModel[],
-  downloaded: [] as LibraryItemModel[],
-  '': [] as LibraryItemModel[],
-};
-```
-
 TODO: add unit tests and fix current ones
 
-TODO: Handle the case, when there is a new user and there is no saved .json file in FileSystem.
+TODO: Handle the case, when there is a new user and there is no saved .json file in FileSystem - check if file exists in filesystem (Handle the case, when a different user logs in - may be an error due to collision of naming .json files in FileSystem -> add there also the username)
 
-TODO: Handle the case, when a different user logs in - may be an error due to collision of naming .json files in FileSystem -> add there also the username
-
-TODO: Refactor api strategy
-
-TODO: fetch rest of the tracks in playlist
-
-TODO: Recommendations -> top tracks + top artists
-
-```tsx
-const seed_tracks = topTracks.items.map((item) => item.id).join(',');
-const seed_artists = topArtists.items.map((item) => item.id).join(',');
-
-topArtists.items
-  .map((item) => item.genres.slice(0, item.genres.length))
-  .reduce((prev, next) => prev.concat(next))
-  .slice(0, 5)
-  .join(',');
-```
+TODO: Refactor api strategy - handle the fetch rate for recommendations!! (uncomment the components)
 
 TODO: Get Featured playlists
 
-TODO: check if file exists in filesystem
+TODO: merge playlist and album into common container
 
-TODO: parametrize offset and limit values of playlist and album tracks fetch in order to fetch on scroll instead of fetching entire Playlist/Album before render
+TODO: get rid of TODOs in the project

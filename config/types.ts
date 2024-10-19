@@ -160,6 +160,16 @@ export type SavedEpisodesResponseType = {
   }[];
 };
 
+export type PlaylistItemResponseType = {
+  track: {
+    album: { images: { url: string | null }[] };
+    id: string;
+    name: string;
+    artists: { name: string }[];
+    explicity: boolean;
+  };
+};
+
 export type PlaylistResponseType = {
   type: 'playlist';
   id: string;
@@ -186,26 +196,7 @@ export type PlaylistResponseType = {
   tracks: {
     total: 128;
     next: string;
-    items: {
-      track: {
-        album: {
-          images: {
-            width: string | null;
-            height: string | null;
-            url: string | null;
-          }[];
-        };
-        type: 'track';
-        id: string;
-        name: string;
-        duration_ms: number;
-        artists: {
-          type: 'artist';
-          name: string;
-          id: string;
-        }[];
-      };
-    }[];
+    items: PlaylistItemResponseType[];
   };
   uri: string;
 };

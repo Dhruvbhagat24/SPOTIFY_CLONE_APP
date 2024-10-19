@@ -18,14 +18,14 @@ import { styles } from './styles';
 
 export type CommonHeaderPropsType = {
   type: 'album' | 'playlist';
-  headerTitle: string;
+  title: string;
   imageURL: string;
   animatedValue: SharedValue<number>;
 };
 
 export const CommonHeader = ({
   type,
-  headerTitle,
+  title,
   imageURL,
   animatedValue,
 }: CommonHeaderPropsType) => {
@@ -86,7 +86,7 @@ export const CommonHeader = ({
           style={[animatedHeaderTextStyles, styles.titleText]}
           testID="header-title-text"
         >
-          {headerTitle}
+          {title}
         </Animated.Text>
       </Animated.View>
     </View>

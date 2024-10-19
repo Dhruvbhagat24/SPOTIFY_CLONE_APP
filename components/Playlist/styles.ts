@@ -5,8 +5,13 @@ export const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.PRIMARY,
   },
-  scrollView: {
+  flatList: {
     marginBottom: BOTTOM_NAVIGATION_HEIGHT,
+  },
+  flatListContentContainer: {
+    backgroundColor: COLORS.PRIMARY,
+    paddingHorizontal: 16,
+    gap: 6,
   },
   gradientOverlay: {
     zIndex: -2,

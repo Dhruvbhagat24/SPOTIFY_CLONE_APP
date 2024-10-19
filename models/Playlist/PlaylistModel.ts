@@ -7,10 +7,4 @@ export type PlaylistModel = {
   info: string;
   description: string;
   imageURL: string | '';
-  tracks: {
-    id: string;
-    title: string;
-    subtitle: string;
-    imageURL: string | '';
-  }[];
 };

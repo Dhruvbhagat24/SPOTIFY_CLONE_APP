@@ -8,8 +8,8 @@ import { getDisplayDate, getDisplayTime } from '@utils';
 
 export type AlbumInfoPropsType = {
   releaseDate: string;
-  totalTracks: number;
-  totalDuration: number;
+  totalTracks: number | '';
+  totalDuration: number | '';
 };
 
 export const AlbumInfo = ({
@@ -28,7 +28,7 @@ export const AlbumInfo = ({
       >{`${totalTracks} ${translations.tracks}`}</Text>
       <Text style={styles.separator}>{SEPARATOR}</Text>
       <Text style={styles.totalDurationText} testID="total-duration-text">
-        {getDisplayTime(totalDuration)}
+        {totalDuration && getDisplayTime(totalDuration)}
       </Text>
     </View>
   </View>

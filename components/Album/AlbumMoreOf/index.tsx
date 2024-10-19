@@ -21,8 +21,13 @@ export const AlbumMoreOf = ({ artists }: AlbumMoreOfPropsType) => {
     | null
   >(null);
 
+  const checkArtistIDisEmpty = React.useMemo(
+    () => artists.some((artist) => !artist.id),
+    [artists]
+  );
+
   React.useEffect(() => {
-    if (artists.some((artist) => !artist.id)) {
+    if (checkArtistIDisEmpty) {
       return;
     }
 
@@ -42,7 +47,7 @@ export const AlbumMoreOf = ({ artists }: AlbumMoreOfPropsType) => {
         console.error("Failed to get artist's album data:", error);
       }
     })();
-  }, [artists]);
+  }, [checkArtistIDisEmpty, artists]);
 
   // TODO: add fallback albums
   if (!artistsAlbums) {

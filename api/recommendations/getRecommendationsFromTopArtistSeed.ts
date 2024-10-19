@@ -10,10 +10,9 @@ export const getRecommendationsFromTopArtistSeed = async (): Promise<{
     const topArtistAndTopGenres = await getUserTopArtistsAndGenres();
     const artist = topArtistAndTopGenres.artists[0];
     const artistSeed = artist.id;
-    const genresSeed = topArtistAndTopGenres.genres[0];
 
     return {
-      recommendations: await getRecommendations({ artistSeed, genresSeed }),
+      recommendations: await getRecommendations({ artistSeed }),
       artist,
     };
   } catch (error) {
