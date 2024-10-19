@@ -10,7 +10,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useFonts } from 'expo-font';
 
 import { BottomNavigation } from '@components';
-import { UserDataProvider } from '@context';
+import { LibrarySelectedCategoryProvider, UserDataProvider } from '@context';
 
 import 'react-native-reanimated';
 
@@ -36,41 +36,43 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <UserDataProvider>
-        <GestureHandlerRootView style={styles.gestureHandlerRootView}>
-          <Stack>
-            <Stack.Screen
-              name="index"
-              options={{ headerShown: false, animation: 'fade' }}
-            />
-            <Stack.Screen
-              name="home"
-              options={{ headerShown: false, animation: 'fade' }}
-            />
-            <Stack.Screen
-              name="search"
-              options={{ headerShown: false, animation: 'fade' }}
-            />
-            <Stack.Screen
-              name="library"
-              options={{ headerShown: false, animation: 'fade' }}
-            />
-            <Stack.Screen
-              name="album"
-              options={{ headerShown: false, animation: 'default' }}
-            />
-            <Stack.Screen
-              name="playlist"
-              options={{ headerShown: false, animation: 'default' }}
-            />
-            <Stack.Screen
-              name="artist"
-              options={{ headerShown: false, animation: 'default' }}
-            />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-          <StatusBar style="light" />
-          <BottomNavigation />
-        </GestureHandlerRootView>
+        <LibrarySelectedCategoryProvider>
+          <GestureHandlerRootView style={styles.gestureHandlerRootView}>
+            <Stack>
+              <Stack.Screen
+                name="index"
+                options={{ headerShown: false, animation: 'fade' }}
+              />
+              <Stack.Screen
+                name="home"
+                options={{ headerShown: false, animation: 'fade' }}
+              />
+              <Stack.Screen
+                name="search"
+                options={{ headerShown: false, animation: 'fade' }}
+              />
+              <Stack.Screen
+                name="library"
+                options={{ headerShown: false, animation: 'fade' }}
+              />
+              <Stack.Screen
+                name="album"
+                options={{ headerShown: false, animation: 'default' }}
+              />
+              <Stack.Screen
+                name="playlist"
+                options={{ headerShown: false, animation: 'default' }}
+              />
+              <Stack.Screen
+                name="artist"
+                options={{ headerShown: false, animation: 'default' }}
+              />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+            <StatusBar style="light" />
+            <BottomNavigation />
+          </GestureHandlerRootView>
+        </LibrarySelectedCategoryProvider>
       </UserDataProvider>
     </SafeAreaProvider>
   );

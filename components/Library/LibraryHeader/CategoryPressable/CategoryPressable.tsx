@@ -2,32 +2,51 @@ import * as React from 'react';
 import { Pressable, Text } from 'react-native';
 import Animated, {
   interpolateColor,
-  SharedValue,
+  runOnJS,
   useAnimatedStyle,
+  withTiming,
 } from 'react-native-reanimated';
 
+import { useLibrarySelectedCategory } from '@context';
 import { Categories, COLORS } from '@config';
 import { translations } from '@data';
 
 import { styles } from './styles';
 
 export type CategoryPressablePropsType = {
-  progress: SharedValue<number>;
   currentCategory: Exclude<Categories, Categories.ALL>;
-  selectedCategory: Categories;
-  handleCategoryChange: (newCategory: Categories) => void;
 };
 
 const CategoryPressable = React.memo(
-  ({
-    progress,
-    currentCategory,
-    selectedCategory,
-    handleCategoryChange,
-  }: CategoryPressablePropsType) => {
+  ({ currentCategory }: CategoryPressablePropsType) => {
+    const {
+      librarySelectedCategory,
+      setLibrarySelectedCategory,
+      animatedValue,
+    } = useLibrarySelectedCategory();
+
+    const handleCategoryChange = React.useCallback(
+      (newCategory: Categories) => {
+        animatedValue.value = withTiming(0, { duration: 100 }, (isFinished) => {
+          if (!isFinished) {
+            return;
+          }
+
+          runOnJS(setLibrarySelectedCategory)(
+            librarySelectedCategory === newCategory
+              ? Categories.ALL
+              : newCategory
+          );
+
+          animatedValue.value = withTiming(1, { duration: 1000 });
+        });
+      },
+      [animatedValue, librarySelectedCategory, setLibrarySelectedCategory]
+    );
+
     const animatedPressableStyles = useAnimatedStyle(() => ({
       backgroundColor: interpolateColor(
-        currentCategory === selectedCategory ? progress.value : 0,
+        currentCategory === librarySelectedCategory ? animatedValue.value : 0,
         [0, 1],
         [COLORS.SECONDARY, COLORS.TINT]
       ),
@@ -35,7 +54,7 @@ const CategoryPressable = React.memo(
 
     const animatedTextStyles = useAnimatedStyle(() => ({
       color: interpolateColor(
-        currentCategory === selectedCategory ? progress.value : 0,
+        currentCategory === librarySelectedCategory ? animatedValue.value : 0,
         [0, 0.2, 1],
         [COLORS.WHITE, COLORS.PRIMARY, COLORS.PRIMARY]
       ),

@@ -4,10 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, {
   Extrapolation,
   interpolate,
-  runOnJS,
   useAnimatedStyle,
-  useSharedValue,
-  withTiming,
 } from 'react-native-reanimated';
 
 import { Card } from '../Card';
@@ -19,13 +16,13 @@ import { LibraryItemModel } from '@models';
 import { getLibrary, LibraryType } from '@api';
 
 import { styles } from './styles';
+import { useLibrarySelectedCategory } from '@context';
 
 export const Library = () => {
-  const { width, height } = useApplicationDimensions();
-  const [selectedCategory, setSelectedCategory] = React.useState<Categories>(
-    Categories.ALL
-  );
   const [data, setData] = React.useState<LibraryType | null>(null);
+  const { librarySelectedCategory, animatedValue } =
+    useLibrarySelectedCategory();
+  const { width, height } = useApplicationDimensions();
   const { top: safeAreaOffset } = useSafeAreaInsets();
 
   const numColumns = 3;
@@ -33,7 +30,6 @@ export const Library = () => {
   const maxRenderPerBatchAmount = 15;
   const outsideOfVisibleAreKeptInMemoryAmount = 9;
 
-  const progress = useSharedValue(1);
   const flatListRef = React.useRef<FlatList>(null);
 
   React.useEffect(() => {
@@ -51,7 +47,7 @@ export const Library = () => {
   const animatedStyle = useAnimatedStyle(() => {
     return {
       opacity: interpolate(
-        progress.value,
+        animatedValue.value,
         [0, 0.2, 1],
         [0, 0, 1],
         Extrapolation.CLAMP
@@ -59,7 +55,7 @@ export const Library = () => {
       transform: [
         {
           translateY: interpolate(
-            progress.value,
+            animatedValue.value,
             [0, 1],
             [0, -20],
             Extrapolation.CLAMP
@@ -68,22 +64,6 @@ export const Library = () => {
       ],
     };
   });
-
-  const handleCategoryChange = (newCategory: Categories) => {
-    progress.value = withTiming(0, { duration: 100 }, (isFinished) => {
-      if (!isFinished) {
-        return;
-      }
-
-      runOnJS(setSelectedCategory)(
-        selectedCategory === newCategory ? Categories.ALL : newCategory
-      );
-
-      progress.value = withTiming(1, { duration: 1000 });
-    });
-
-    flatListRef.current?.scrollToOffset({ animated: false, offset: 0 });
-  };
 
   const renderItem = React.useCallback(
     ({
@@ -109,22 +89,24 @@ export const Library = () => {
     []
   );
 
+  React.useEffect(() => {
+    flatListRef.current?.scrollToOffset({ animated: false, offset: 0 });
+  }, [librarySelectedCategory]);
+
   // TODO: remove this and add instead a fallback data
   if (!data) {
     return null;
   }
 
+  console.log(animatedValue.value);
+
   return (
     <View style={[styles.container, { width, height }]}>
-      <LibraryHeader
-        selectedCategory={selectedCategory}
-        handleCategoryChange={handleCategoryChange}
-        progress={progress}
-      />
+      <LibraryHeader />
       <Animated.View style={[{ flex: 1 }, animatedStyle]}>
         <FlatList
           ref={flatListRef}
-          data={data[selectedCategory]}
+          data={data[librarySelectedCategory]}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           initialNumToRender={initRenderAmount}

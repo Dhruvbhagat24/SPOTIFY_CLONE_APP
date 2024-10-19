@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { Image } from 'expo-image';
 import { ScrollView } from 'react-native-gesture-handler';
-import { SharedValue } from 'react-native-reanimated';
 
+import { Image } from 'expo-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { CategoryPressable } from './CategoryPressable';
@@ -15,17 +14,7 @@ import { translations } from '@data';
 
 import { styles } from './styles';
 
-export type LibraryHeaderPropsType = {
-  selectedCategory: Categories;
-  handleCategoryChange: (newCategory: Categories) => void;
-  progress: SharedValue<number>;
-};
-
-export const LibraryHeader = ({
-  selectedCategory,
-  handleCategoryChange,
-  progress,
-}: LibraryHeaderPropsType) => {
+export const LibraryHeader = () => {
   const { top: statusBarOffset } = useSafeAreaInsets();
   const { userData } = useUserData();
 
@@ -69,10 +58,7 @@ export const LibraryHeader = ({
             .map((currentCategory) => (
               <CategoryPressable
                 key={currentCategory}
-                progress={progress}
                 currentCategory={currentCategory}
-                selectedCategory={selectedCategory}
-                handleCategoryChange={handleCategoryChange}
               />
             ))}
         </View>
