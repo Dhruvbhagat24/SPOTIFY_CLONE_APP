@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { FlatList, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -8,7 +7,6 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { Card } from '../Card';
-import { LibraryHeader } from './LibraryHeader';
 
 import { useApplicationDimensions } from '@hooks';
 import { Categories, Shapes, Sizes } from '@config';
@@ -22,8 +20,7 @@ export const Library = () => {
   const [data, setData] = React.useState<LibraryType | null>(null);
   const { librarySelectedCategory, animatedValue } =
     useLibrarySelectedCategory();
-  const { width, height } = useApplicationDimensions();
-  const { top: safeAreaOffset } = useSafeAreaInsets();
+  const { width } = useApplicationDimensions();
 
   const numColumns = 3;
   const initRenderAmount = 15;
@@ -57,7 +54,7 @@ export const Library = () => {
           translateY: interpolate(
             animatedValue.value,
             [0, 1],
-            [0, -20],
+            [+20, 0],
             Extrapolation.CLAMP
           ),
         },
@@ -98,11 +95,8 @@ export const Library = () => {
     return null;
   }
 
-  console.log(animatedValue.value);
-
   return (
-    <View style={[styles.container, { width, height }]}>
-      <LibraryHeader />
+    <View style={[styles.container, { width }]}>
       <Animated.View style={[{ flex: 1 }, animatedStyle]}>
         <FlatList
           ref={flatListRef}
@@ -115,7 +109,7 @@ export const Library = () => {
           contentContainerStyle={styles.flatList}
           columnWrapperStyle={styles.flatListColumnWrapper}
           numColumns={numColumns}
-          style={[styles.scrollView, { paddingTop: safeAreaOffset }]}
+          style={styles.scrollView}
         />
       </Animated.View>
     </View>

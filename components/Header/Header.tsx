@@ -9,18 +9,25 @@ import { CategoryPressable } from './CategoryPressable';
 import * as Icons from '@expo/vector-icons';
 
 import { useUserData } from '@context';
-import { Categories, LIBRARY_HEADER_HEIGHT } from '@config';
+import { Categories, HEADER_HEIGHT } from '@config';
 import { translations } from '@data';
 
 import { styles } from './styles';
+import { useSegments } from 'expo-router';
 
-export const LibraryHeader = () => {
+export const Header = () => {
   const { top: statusBarOffset } = useSafeAreaInsets();
   const { userData } = useUserData();
+  const pathname = useSegments()[0];
+  const ALLOWED_ROUTES = ['home', 'search', 'library'];
 
   const handleProfilePress = () => {
     // TODO: open menu logic
   };
+
+  if (!ALLOWED_ROUTES.includes(pathname)) {
+    return null;
+  }
 
   return (
     <View
@@ -28,7 +35,7 @@ export const LibraryHeader = () => {
         styles.container,
         {
           paddingTop: statusBarOffset,
-          height: LIBRARY_HEADER_HEIGHT + statusBarOffset,
+          height: HEADER_HEIGHT + statusBarOffset,
         },
       ]}
     >

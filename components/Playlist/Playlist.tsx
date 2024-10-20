@@ -136,7 +136,6 @@ export const Playlist = ({ playlistId }: PlaylistPropsType) => {
       />
 
       <Animated.FlatList
-        style={styles.flatList}
         contentContainerStyle={styles.flatListContentContainer}
         data={tracks}
         keyExtractor={(item, index) => item.track.id + index}

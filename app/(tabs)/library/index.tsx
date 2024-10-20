@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { LibraryScreen } from '@screens';
 
-export default function Home() {
+export default function Library() {
   return <LibraryScreen />;
 }

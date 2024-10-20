@@ -151,7 +151,6 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
         }}
       />
       <Animated.FlatList
-        style={styles.flatList}
         contentContainerStyle={styles.flatListContentContainer}
         data={tracks}
         keyExtractor={({ id }, index) => id + index}

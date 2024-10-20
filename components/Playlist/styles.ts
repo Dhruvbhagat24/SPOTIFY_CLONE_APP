@@ -1,12 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { BOTTOM_NAVIGATION_HEIGHT, COLORS } from '@config';
+import { COLORS } from '@config';
 
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.PRIMARY,
-  },
-  flatList: {
-    marginBottom: BOTTOM_NAVIGATION_HEIGHT,
   },
   flatListContentContainer: {
     backgroundColor: COLORS.PRIMARY,

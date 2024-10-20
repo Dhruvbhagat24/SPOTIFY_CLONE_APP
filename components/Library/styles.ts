@@ -1,38 +1,24 @@
 import { StyleSheet } from 'react-native';
-import { BOTTOM_NAVIGATION_HEIGHT, COLORS, Shapes } from '@config';
+import { COLORS } from '@config';
 
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.PRIMARY,
+    height: '100%',
   },
   scrollView: {
+    height: '100%',
     flex: 1,
     flexDirection: 'column',
     backgroundColor: COLORS.PRIMARY,
     paddingHorizontal: 16,
-    marginBottom: BOTTOM_NAVIGATION_HEIGHT,
   },
   flatList: {
-    paddingBottom: BOTTOM_NAVIGATION_HEIGHT,
+    paddingVertical: 26,
   },
   flatListColumnWrapper: {
+    alignItems: 'flex-start',
     justifyContent: 'flex-start',
     gap: 12,
-  },
-  category: {
-    backgroundColor: COLORS.SECONDARY,
-    paddingVertical: 8,
-    paddingHorizontal: 14,
-    borderRadius: Shapes.CIRCLE,
-  },
-  categoryText: {
-    color: COLORS.WHITE,
-  },
-  scrollViewContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 10,
-    paddingHorizontal: 16,
   },
 });

@@ -9,7 +9,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { useFonts } from 'expo-font';
 
-import { BottomNavigation } from '@components';
+import { Header } from '@components';
+// import { Header, BottomNavigation } from '@components';
 import { LibrarySelectedCategoryProvider, UserDataProvider } from '@context';
 
 import 'react-native-reanimated';
@@ -38,39 +39,23 @@ export default function RootLayout() {
       <UserDataProvider>
         <LibrarySelectedCategoryProvider>
           <GestureHandlerRootView style={styles.gestureHandlerRootView}>
-            <Stack>
+            <Header />
+            <Stack screenOptions={{ headerShown: false }}>
               <Stack.Screen
                 name="index"
                 options={{ headerShown: false, animation: 'fade' }}
               />
               <Stack.Screen
-                name="home"
+                name="(tabs)"
                 options={{ headerShown: false, animation: 'fade' }}
               />
               <Stack.Screen
-                name="search"
+                name="+not-found"
                 options={{ headerShown: false, animation: 'fade' }}
               />
-              <Stack.Screen
-                name="library"
-                options={{ headerShown: false, animation: 'fade' }}
-              />
-              <Stack.Screen
-                name="album"
-                options={{ headerShown: false, animation: 'default' }}
-              />
-              <Stack.Screen
-                name="playlist"
-                options={{ headerShown: false, animation: 'default' }}
-              />
-              <Stack.Screen
-                name="artist"
-                options={{ headerShown: false, animation: 'default' }}
-              />
-              <Stack.Screen name="+not-found" />
             </Stack>
             <StatusBar style="light" />
-            <BottomNavigation />
+            {/* <BottomNavigation /> */}
           </GestureHandlerRootView>
         </LibrarySelectedCategoryProvider>
       </UserDataProvider>

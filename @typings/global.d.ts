@@ -4,11 +4,9 @@ declare global {
     home: undefined;
     library: undefined;
     search: undefined;
-    albums: undefined;
-    artists: undefined;
-    'album/[albumId]': { albumId: string };
-    'playlist/[playlistId]': { albumId: string };
-    'artists/[artistId]': { artistId: string };
+    'album/[id]': { albumId: string };
+    'playlist/[id]': { albumId: string };
+    'artists/[id]': { artistId: string };
   };
 
   type AppNavigationProps = StackNavigationProp<RootStackParamList>;

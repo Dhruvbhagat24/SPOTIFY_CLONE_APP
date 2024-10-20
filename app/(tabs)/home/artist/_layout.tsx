@@ -1,10 +1,10 @@
 import React from 'react';
 import { Stack } from 'expo-router';
 
-export default function Layout() {
+export default function HomeArtistLayout() {
   return (
     <Stack screenOptions={{ headerShown: false, headerShadowVisible: false }}>
-      <Stack.Screen name="[artistId]" />
+      <Stack.Screen name="[id]" />
     </Stack>
   );
 }

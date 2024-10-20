@@ -1,22 +1,32 @@
 import * as React from 'react';
 import { Redirect } from 'expo-router';
 
-import { LoginScreen } from '@screens';
 import { getSessionToken } from '@api';
 
 export default function App() {
+  const [isLoading, setIsLoading] = React.useState(true);
   const [token, setToken] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     (async () => {
-      const storedToken = await getSessionToken();
-      setToken(storedToken);
+      try {
+        const storedToken = await getSessionToken();
+        setToken(storedToken);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
     })();
   }, [token]);
+
+  if (isLoading) {
+    return null;
+  }
 
   if (token) {
     return <Redirect href={{ pathname: '/home', params: {} }} />;
   }
 
-  return <LoginScreen />;
+  return <Redirect href={{ pathname: '/login', params: {} }} />;
 }

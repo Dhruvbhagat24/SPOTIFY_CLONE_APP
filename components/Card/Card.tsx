@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRouter } from 'expo-router';
+import { useRouter, useSegments } from 'expo-router';
 import { Pressable, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import Foundation from '@expo/vector-icons/Foundation';
@@ -30,12 +30,15 @@ const Card = React.memo(
   }: CardPropsType) => {
     const router = useRouter();
     const styles = styling(size, shape);
+    const segments: string[] = useSegments();
 
     const handlePress = React.useCallback(
       (typeID: string) => {
-        router.push(`/${type as 'playlist' | 'album' | 'artist'}/${typeID}`);
+        router.push(
+          `/${segments[1]}/${type as 'playlist' | 'album' | 'artist'}/${typeID}`
+        );
       },
-      [router, type]
+      [router, type, segments]
     );
 
     const renderIcon = React.useCallback(() => {
