@@ -11,6 +11,7 @@ import { RECENTLY_PLAYED_COVER_SIZE } from '@config';
 import { getFallbackImage } from '@utils';
 
 import { styles } from './styles';
+import { ErrorBox } from '../../ErrorBox';
 
 export const RecentlyPlayed = () => {
   const [recentlyPlayedData, setRecentlyPlayedData] = React.useState<
@@ -49,55 +50,57 @@ export const RecentlyPlayed = () => {
     []
   );
 
-  // @ERROR: show error message
-  if (!recentlyPlayedData) {
-    return null;
-  }
-
   return (
     <View style={[styles.container, { gap, paddingHorizontal }]}>
-      {recentlyPlayedData.map(({ id, title, imageURL }, index) => (
-        <Pressable
-          onPress={() => router.push(`/${pathname}/album/${id}`)}
-          key={index}
-          style={[
-            styles.link,
-            {
-              width: width / 2 - paddingHorizontal - gap / 2,
-            },
-          ]}
-        >
-          <View
+      {!recentlyPlayedData ? (
+        <ErrorBox
+          message="Failed to fetch recently played tracks"
+          size={[width - paddingHorizontal * 2, RECENTLY_PLAYED_COVER_SIZE * 4]}
+        />
+      ) : (
+        recentlyPlayedData.map(({ id, title, imageURL }, index) => (
+          <Pressable
+            onPress={() => router.push(`/${pathname}/album/${id}`)}
+            key={index}
             style={[
-              styles.imageView,
+              styles.link,
               {
-                width: RECENTLY_PLAYED_COVER_SIZE,
-                height: RECENTLY_PLAYED_COVER_SIZE,
+                width: width / 2 - paddingHorizontal - gap / 2,
               },
             ]}
           >
-            <Image
-              style={styles.image}
-              source={imageURL ? { uri: imageURL } : fallbackImageSource}
-            />
-          </View>
-          <Text
-            numberOfLines={2}
-            style={[
-              styles.text,
-              {
-                width:
-                  width / 2 -
-                  paddingHorizontal -
-                  gap / 2 -
-                  RECENTLY_PLAYED_COVER_SIZE,
-              },
-            ]}
-          >
-            {title}
-          </Text>
-        </Pressable>
-      ))}
+            <View
+              style={[
+                styles.imageView,
+                {
+                  width: RECENTLY_PLAYED_COVER_SIZE,
+                  height: RECENTLY_PLAYED_COVER_SIZE,
+                },
+              ]}
+            >
+              <Image
+                style={styles.image}
+                source={imageURL ? { uri: imageURL } : fallbackImageSource}
+              />
+            </View>
+            <Text
+              numberOfLines={2}
+              style={[
+                styles.text,
+                {
+                  width:
+                    width / 2 -
+                    paddingHorizontal -
+                    gap / 2 -
+                    RECENTLY_PLAYED_COVER_SIZE,
+                },
+              ]}
+            >
+              {title}
+            </Text>
+          </Pressable>
+        ))
+      )}
     </View>
   );
 };

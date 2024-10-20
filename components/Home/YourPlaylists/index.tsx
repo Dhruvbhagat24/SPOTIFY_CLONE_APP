@@ -36,11 +36,13 @@ export const YourPlaylists = () => {
 
   const userPlaylists = React.useMemo(
     () =>
-      savedPlaylists && userData
-        ? savedPlaylists.filter(
-            (savedPlaylist) => savedPlaylist.ownerId === userData.id
-          )
-        : null,
+      !userData
+        ? null
+        : savedPlaylists
+          ? savedPlaylists.filter(
+              (savedPlaylist) => savedPlaylist.ownerId === userData.id
+            )
+          : null,
     [userData, savedPlaylists]
   );
 

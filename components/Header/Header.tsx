@@ -80,7 +80,7 @@ export const Header = ({ tab }: HeaderPropsType) => {
         <Pressable style={styles.profile} onPress={handleProfilePress}>
           <Image
             style={styles.profileImage}
-            source={{ uri: userData.imageURL }}
+            source={{ uri: userData.imageURL || '' }}
           />
         </Pressable>
         {title && <Text style={styles.titleText}>{title}</Text>}

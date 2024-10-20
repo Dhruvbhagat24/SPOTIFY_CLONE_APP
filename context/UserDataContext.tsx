@@ -31,7 +31,6 @@ export const UserDataProvider = ({ children }: UserDataProviderPropsType) => {
         const user = await getUser();
         setUserData(user);
       } catch (error) {
-        // @ERROR: show error message
         console.error('ERROR: ', error);
       }
     })();
