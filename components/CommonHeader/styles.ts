@@ -1,9 +1,13 @@
-import { COLORS } from '@config';
+import { COLORS, COMMON_HEADER_HEIGHT } from '@config';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 99,
     overflow: 'hidden',
+    height: COMMON_HEADER_HEIGHT,
+    backgroundColor: 'transparent',
   },
   goBackPressable: {
     ...StyleSheet.absoluteFillObject,
@@ -24,6 +28,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 8,
     paddingHorizontal: 16,
+    height: '100%',
   },
   titleText: {
     color: COLORS.WHITE,

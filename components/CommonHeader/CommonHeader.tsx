@@ -12,7 +12,7 @@ import { useNavigation } from 'expo-router';
 import { Background } from '../Background';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { ALBUM_HEADER_HEIGHT, COVER_SIZE } from '@config';
+import { COVER_SIZE } from '@config';
 
 import { styles } from './styles';
 
@@ -78,7 +78,7 @@ export const CommonHeader = ({
       <Animated.View
         style={[
           animatedHeaderStyles,
-          { height: ALBUM_HEADER_HEIGHT, paddingTop: topOffset },
+          { paddingTop: topOffset },
           styles.content,
         ]}
       >

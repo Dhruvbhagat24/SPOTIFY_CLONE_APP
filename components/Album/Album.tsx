@@ -4,7 +4,6 @@ import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated';
-import { Stack } from 'expo-router';
 
 import { Cover } from '../Cover';
 import { CommonHeader } from '../CommonHeader';
@@ -20,7 +19,7 @@ import { AlbumMoreOf } from './AlbumMoreOf';
 import { checkSavedTracks } from '@api';
 import { AlbumModel, ArtistModel } from '@models';
 import { useApplicationDimensions } from '@hooks';
-import { SEPARATOR } from '@config';
+import { BOTTOM_NAVIGATION_HEIGHT, SEPARATOR } from '@config';
 import { translations } from '@data';
 
 import { styles } from './styles';
@@ -35,7 +34,7 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
   const [savedAlbumTracks, setSavedAlbumTracks] = React.useState<
     boolean[] | null
   >(null);
-  const { width } = useApplicationDimensions();
+  const { width, height } = useApplicationDimensions();
   const scrollOffset = useSharedValue(0);
 
   const scrollHandler = useAnimatedScrollHandler({
@@ -137,21 +136,17 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
 
   return (
     <View style={[styles.container, { width }]}>
-      <Stack.Screen
-        options={{
-          headerTransparent: true,
-          headerBackground: () => (
-            <CommonHeader
-              type="album"
-              title={title}
-              imageURL={imageURL}
-              animatedValue={scrollOffset}
-            />
-          ),
-        }}
+      <CommonHeader
+        type="album"
+        title={title}
+        imageURL={imageURL}
+        animatedValue={scrollOffset}
       />
       <Animated.FlatList
         contentContainerStyle={styles.flatListContentContainer}
+        style={{
+          height: height - BOTTOM_NAVIGATION_HEIGHT,
+        }}
         data={tracks}
         keyExtractor={({ id }, index) => id + index}
         renderItem={renderItem}

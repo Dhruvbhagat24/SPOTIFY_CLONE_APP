@@ -4,7 +4,6 @@ import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated';
-import { Stack } from 'expo-router';
 
 import { Cover } from '../Cover';
 import { CommonHeader } from '../CommonHeader';
@@ -121,23 +120,17 @@ export const Playlist = ({ playlistId }: PlaylistPropsType) => {
 
   return (
     <View style={[styles.container, { width }]}>
-      <Stack.Screen
-        options={{
-          headerTransparent: true,
-          headerBackground: () => (
-            <CommonHeader
-              type="playlist"
-              title={title}
-              imageURL={imageURL}
-              animatedValue={scrollOffset}
-            />
-          ),
-        }}
+      <CommonHeader
+        type="playlist"
+        title={title}
+        imageURL={imageURL}
+        animatedValue={scrollOffset}
       />
-
       <Animated.FlatList
         contentContainerStyle={styles.flatListContentContainer}
-        style={{ height: height - BOTTOM_NAVIGATION_HEIGHT }}
+        style={{
+          height: height - BOTTOM_NAVIGATION_HEIGHT,
+        }}
         data={tracks}
         keyExtractor={(item, index) => item.track.id + index}
         renderItem={renderItem}
