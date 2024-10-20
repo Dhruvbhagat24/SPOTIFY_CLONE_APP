@@ -9,8 +9,6 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { useFonts } from 'expo-font';
 
-import { Header } from '@components';
-// import { Header, BottomNavigation } from '@components';
 import { LibrarySelectedCategoryProvider, UserDataProvider } from '@context';
 
 import 'react-native-reanimated';
@@ -39,7 +37,6 @@ export default function RootLayout() {
       <UserDataProvider>
         <LibrarySelectedCategoryProvider>
           <GestureHandlerRootView style={styles.gestureHandlerRootView}>
-            <Header />
             <Stack screenOptions={{ headerShown: false }}>
               <Stack.Screen
                 name="index"
@@ -55,7 +52,6 @@ export default function RootLayout() {
               />
             </Stack>
             <StatusBar style="light" />
-            {/* <BottomNavigation /> */}
           </GestureHandlerRootView>
         </LibrarySelectedCategoryProvider>
       </UserDataProvider>

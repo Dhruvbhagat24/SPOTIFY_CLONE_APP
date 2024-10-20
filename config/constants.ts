@@ -57,6 +57,7 @@ export const COPYRIGHT_SIGN = '\u00A9';
 
 export const ALBUM_HEADER_HEIGHT = 100;
 export const HEADER_HEIGHT = 135;
+export const HEADER_CATEGORIES_HEIGHT = 50;
 export const BOTTOM_NAVIGATION_HEIGHT = 90;
 
 export const COVER_SIZE = 300;

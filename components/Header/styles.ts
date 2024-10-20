@@ -46,14 +46,4 @@ export const styles = StyleSheet.create({
     color: COLORS.WHITE,
     marginLeft: 16,
   },
-  scrollView: {
-    marginTop: 16,
-  },
-  scrollViewContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 10,
-    paddingHorizontal: 16,
-  },
 });

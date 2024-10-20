@@ -8,19 +8,36 @@ import { TopArtists } from './TopArtists';
 import { YourPlaylists } from './YourPlaylists';
 // import { AfterListeningTopArtist } from './AfterListeningTopArtist';
 import { EmptySection } from '../EmptySection';
+import { BOTTOM_NAVIGATION_HEIGHT, COLORS, HEADER_HEIGHT } from '@config';
+import { View } from 'react-native';
+import { useApplicationDimensions } from '@hooks';
 
 export const Home = () => {
+  const { height } = useApplicationDimensions();
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <RecentlyPlayed />
-      <TopAlbums />
-      <TopArtists />
-      {/* @API_RATE */}
-      {/* <BasedOnTopArtists /> */}
-      <YourPlaylists />
-      {/* @API_RATE */}
-      {/* <AfterListeningTopArtist /> */}
-      <EmptySection />
-    </ScrollView>
+    <View
+      style={{
+        backgroundColor: COLORS.PRIMARY,
+        height: height - BOTTOM_NAVIGATION_HEIGHT - HEADER_HEIGHT,
+      }}
+    >
+      <ScrollView
+        // showsVerticalScrollIndicator={false}
+        style={{
+          paddingVertical: 16,
+          // marginBottom: BOTTOM_NAVIGATION_HEIGHT,
+        }}
+      >
+        <RecentlyPlayed />
+        <TopAlbums />
+        <TopArtists />
+        {/* @API_RATE */}
+        {/* <BasedOnTopArtists /> */}
+        <YourPlaylists />
+        {/* @API_RATE */}
+        {/* <AfterListeningTopArtist /> */}
+        <EmptySection />
+      </ScrollView>
+    </View>
   );
 };

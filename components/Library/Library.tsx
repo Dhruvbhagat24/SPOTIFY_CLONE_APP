@@ -9,7 +9,14 @@ import Animated, {
 import { Card } from '../Card';
 
 import { useApplicationDimensions } from '@hooks';
-import { Categories, Shapes, Sizes } from '@config';
+import {
+  BOTTOM_NAVIGATION_HEIGHT,
+  Categories,
+  HEADER_CATEGORIES_HEIGHT,
+  HEADER_HEIGHT,
+  Shapes,
+  Sizes,
+} from '@config';
 import { LibraryItemModel } from '@models';
 import { getLibrary, LibraryType } from '@api';
 
@@ -20,7 +27,7 @@ export const Library = () => {
   const [data, setData] = React.useState<LibraryType | null>(null);
   const { librarySelectedCategory, animatedValue } =
     useLibrarySelectedCategory();
-  const { width } = useApplicationDimensions();
+  const { width, height } = useApplicationDimensions();
 
   const numColumns = 3;
   const initRenderAmount = 15;
@@ -96,7 +103,19 @@ export const Library = () => {
   }
 
   return (
-    <View style={[styles.container, { width }]}>
+    <View
+      style={[
+        styles.container,
+        {
+          width,
+          height:
+            height -
+            BOTTOM_NAVIGATION_HEIGHT -
+            HEADER_HEIGHT -
+            HEADER_CATEGORIES_HEIGHT,
+        },
+      ]}
+    >
       <Animated.View style={[{ flex: 1 }, animatedStyle]}>
         <FlatList
           ref={flatListRef}

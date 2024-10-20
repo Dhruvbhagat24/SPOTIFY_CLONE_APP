@@ -3,7 +3,6 @@ import { Pressable, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 
 import { useRouter } from 'expo-router';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useApplicationDimensions } from '@hooks';
 import { getRecentlyPlayed } from '@api';
@@ -18,7 +17,6 @@ export const RecentlyPlayed = () => {
     RecentlyPlayedModel[] | null
   >(RecentlyPlayedFallback);
   const { width } = useApplicationDimensions();
-  const { top: paddingTop } = useSafeAreaInsets();
   const router = useRouter();
 
   const gap = 8;
@@ -47,7 +45,7 @@ export const RecentlyPlayed = () => {
   }
 
   return (
-    <View style={[styles.container, { gap, paddingHorizontal, paddingTop }]}>
+    <View style={[styles.container, { gap, paddingHorizontal }]}>
       {recentlyPlayedData.map(({ id, title, imageURL }, index) => (
         <Pressable
           onPress={() => router.push(`/album/${id}`)}

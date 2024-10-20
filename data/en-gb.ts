@@ -1,4 +1,9 @@
 export const EN_GB = {
+  header: {
+    home: 'Home',
+    search: 'Search',
+    library: 'Your Library',
+  },
   router: {
     home: 'Home',
     search: 'Search',
