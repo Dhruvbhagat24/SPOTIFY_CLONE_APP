@@ -10,7 +10,7 @@ import { styling } from './styles';
 
 export type CardPropsType = {
   id: string;
-  type: string;
+  type: 'playlist' | 'album' | 'artist' | 'show' | 'episode';
   imageURL?: string;
   title?: string;
   subtitle?: string;
@@ -30,15 +30,16 @@ const Card = React.memo(
   }: CardPropsType) => {
     const router = useRouter();
     const styles = styling(size, shape);
-    const segments: string[] = useSegments();
+    const pathname = useSegments().join('/') as
+      | '(tabs)/home'
+      | '(tabs)/search'
+      | '(tabs)/library';
 
     const handlePress = React.useCallback(
       (typeID: string) => {
-        router.push(
-          `/${segments[1]}/${type as 'playlist' | 'album' | 'artist'}/${typeID}`
-        );
+        router.push(`/${pathname}/${type}/${typeID}`);
       },
-      [router, type, segments]
+      [router, type, pathname]
     );
 
     const renderIcon = React.useCallback(() => {

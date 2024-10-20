@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 
-import { useRouter } from 'expo-router';
+import { useRouter, useSegments } from 'expo-router';
 
 import { useApplicationDimensions } from '@hooks';
 import { getRecentlyPlayed } from '@api';
@@ -16,6 +16,10 @@ export const RecentlyPlayed = () => {
   const [recentlyPlayedData, setRecentlyPlayedData] = React.useState<
     RecentlyPlayedModel[] | null
   >(RecentlyPlayedFallback);
+  const pathname = useSegments().join('/') as
+    | '(tabs)/home'
+    | '(tabs)/search'
+    | '(tabs)/library';
   const { width } = useApplicationDimensions();
   const router = useRouter();
 
@@ -48,7 +52,7 @@ export const RecentlyPlayed = () => {
     <View style={[styles.container, { gap, paddingHorizontal }]}>
       {recentlyPlayedData.map(({ id, title, imageURL }, index) => (
         <Pressable
-          onPress={() => router.push(`/album/${id}`)}
+          onPress={() => router.push(`/${pathname}/album/${id}`)}
           key={index}
           style={[
             styles.link,

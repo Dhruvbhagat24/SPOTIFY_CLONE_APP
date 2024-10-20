@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { Image } from 'expo-image';
-import { useRouter } from 'expo-router';
+import { useRouter, useSegments } from 'expo-router';
 
 import { ArtistModel } from '@models';
 
@@ -13,12 +13,16 @@ export type AlbumArtistsPropsType = {
 
 export const AlbumArtists = ({ artists }: AlbumArtistsPropsType) => {
   const router = useRouter();
+  const pathname = useSegments().join('/') as
+    | '(tabs)/home'
+    | '(tabs)/search'
+    | '(tabs)/library';
 
   const handlePress = React.useCallback(
     (albumId: string) => {
-      router.push(`/album/${albumId}`);
+      router.push(`/${pathname}/album/${albumId}`);
     },
-    [router]
+    [router, pathname]
   );
 
   const checkArtistIDisEmpty = React.useMemo(

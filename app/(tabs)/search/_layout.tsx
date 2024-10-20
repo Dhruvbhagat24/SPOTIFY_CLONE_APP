@@ -19,6 +19,14 @@ export default function SearchLayout() {
         name="artist"
         options={{ headerShown: false, animation: 'default' }}
       />
+      <Stack.Screen
+        name="episode"
+        options={{ headerShown: false, animation: 'default' }}
+      />
+      <Stack.Screen
+        name="show"
+        options={{ headerShown: false, animation: 'default' }}
+      />
     </Stack>
   );
 }
