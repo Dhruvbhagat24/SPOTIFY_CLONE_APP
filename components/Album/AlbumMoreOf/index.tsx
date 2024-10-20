@@ -9,25 +9,35 @@ import { translations } from '@data';
 import { getArtistAlbums } from '@api';
 
 export type AlbumMoreOfPropsType = {
-  artists: ArtistModel[];
+  artists: ArtistModel[] | null;
 };
 
 export const AlbumMoreOf = ({ artists }: AlbumMoreOfPropsType) => {
   const [artistsAlbums, setArtistsAlbums] = React.useState<
-    | {
-        artist: string;
-        albums: LibraryItemModel[];
-      }[]
-    | null
-  >(null);
+    {
+      artist: string;
+      albums: LibraryItemModel[] | null;
+    }[]
+  >([
+    {
+      artist: '',
+      albums: Array(3).fill({
+        id: '',
+        type: 'album',
+        title: '',
+        imageURL: '',
+        subtitle: '',
+      }),
+    },
+  ]);
 
   const checkArtistIDisEmpty = React.useMemo(
-    () => artists.some((artist) => !artist.id),
+    () => artists && artists.some((artist) => !artist.id),
     [artists]
   );
 
   React.useEffect(() => {
-    if (checkArtistIDisEmpty) {
+    if (!artists || checkArtistIDisEmpty) {
       return;
     }
 
@@ -43,16 +53,11 @@ export const AlbumMoreOf = ({ artists }: AlbumMoreOfPropsType) => {
         ).map((albums, i) => ({ artist: artists[i].name, albums: albums }));
         setArtistsAlbums(artistsAlbumsData);
       } catch (error) {
-        setArtistsAlbums(null);
+        setArtistsAlbums([{ artist: '', albums: null }]);
         console.error("Failed to get artist's album data:", error);
       }
     })();
   }, [checkArtistIDisEmpty, artists]);
-
-  // TODO: add fallback albums
-  if (!artistsAlbums) {
-    return null;
-  }
 
   return artistsAlbums.map(({ artist, albums }, index) => (
     <Slider

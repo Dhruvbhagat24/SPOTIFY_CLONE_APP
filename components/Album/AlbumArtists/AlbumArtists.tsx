@@ -8,7 +8,7 @@ import { ArtistModel } from '@models';
 import { styles } from './styles';
 
 export type AlbumArtistsPropsType = {
-  artists: ArtistModel[];
+  artists: ArtistModel[] | null;
 };
 
 export const AlbumArtists = ({ artists }: AlbumArtistsPropsType) => {
@@ -26,11 +26,11 @@ export const AlbumArtists = ({ artists }: AlbumArtistsPropsType) => {
   );
 
   const checkArtistIDisEmpty = React.useMemo(
-    () => artists.some((artist) => !artist.id),
+    () => artists && artists.some((artist) => !artist.id),
     [artists]
   );
 
-  if (checkArtistIDisEmpty) {
+  if (!artists || checkArtistIDisEmpty) {
     return null;
   }
 

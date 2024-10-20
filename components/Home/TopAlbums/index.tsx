@@ -11,7 +11,13 @@ export type TopAlbumsPropsType = {};
 
 export const TopAlbums = () => {
   const [topAlbums, setTopAlbums] = React.useState<LibraryItemModel[] | null>(
-    null
+    Array(3).fill({
+      id: '',
+      type: 'album',
+      title: '',
+      imageURL: '',
+      subtitle: '',
+    })
   );
 
   React.useEffect(() => {
@@ -26,14 +32,9 @@ export const TopAlbums = () => {
     })();
   }, []);
 
-  // TODO: get rid of this
-  if (!topAlbums) {
-    return null;
-  }
-
   return (
     <Slider
-      title={translations.yourTopAlbums(topAlbums.length)}
+      title={translations.yourTopAlbums(topAlbums?.length || '')}
       slides={topAlbums}
       size={Sizes.MEDIUM}
       shape={Shapes.SQUARE_BORDER}

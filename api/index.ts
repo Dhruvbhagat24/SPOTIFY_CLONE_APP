@@ -16,6 +16,7 @@ export {
   getRecentlyPlayed,
   checkSavedAlbums,
   checkSavedTracks,
+  checkSavedPlaylists,
   getLibrary,
   getUserTopArtistsAndGenres,
   getUserTopAlbums,

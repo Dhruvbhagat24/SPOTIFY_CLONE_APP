@@ -26,8 +26,8 @@ import { styles } from './styles';
 import { Track } from '../Track';
 
 export type AlbumPropsType = {
-  album: AlbumModel;
-  artists: ArtistModel[];
+  album: AlbumModel | null;
+  artists: ArtistModel[] | null;
 };
 
 export const Album = ({ album, artists }: AlbumPropsType) => {
@@ -58,7 +58,9 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
   const title = React.useMemo(() => (album ? album.name : ''), [album]);
   const subtitle = React.useMemo(
     () =>
-      artists.length ? artists.map((a) => a.name).join(` ${SEPARATOR} `) : '',
+      artists && artists.length
+        ? artists.map((a) => a.name).join(` ${SEPARATOR} `)
+        : '',
     [artists]
   );
   const imageURL = React.useMemo(() => (album ? album.imageURL : ''), [album]);

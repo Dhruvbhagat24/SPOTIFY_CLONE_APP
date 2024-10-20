@@ -39,8 +39,4 @@ export {
   type PlaylistItemResponseType,
 } from './types';
 
-export {
-  AlbumFallback,
-  ArtistFallback,
-  RecentlyPlayedFallback,
-} from './fallbacks';
+export { AlbumFallback, ArtistFallback } from './fallbacks';

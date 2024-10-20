@@ -13,7 +13,7 @@ import { styles } from './styles';
 
 export type SliderPropsType = {
   title: string;
-  slides: LibraryItemModel[];
+  slides: LibraryItemModel[] | null;
   size?: Sizes;
   shape?: Shapes;
   withShowAll: boolean;
@@ -53,18 +53,19 @@ export const Slider = ({
       testID="albums-scroll-view"
     >
       <View style={styles.scrollViewContainer}>
-        {slides.map(({ id, type, title, subtitle, imageURL }) => (
-          <Card
-            key={id}
-            id={id}
-            type={type}
-            shape={shape}
-            size={size}
-            title={title}
-            subtitle={subtitle}
-            imageURL={imageURL}
-          />
-        ))}
+        {slides && //TODO: @ERROR: show error message
+          slides.map(({ id, type, title, subtitle, imageURL }) => (
+            <Card
+              key={id}
+              id={id}
+              type={type}
+              shape={shape}
+              size={size}
+              title={title}
+              subtitle={subtitle}
+              imageURL={imageURL}
+            />
+          ))}
       </View>
     </ScrollView>
   </View>

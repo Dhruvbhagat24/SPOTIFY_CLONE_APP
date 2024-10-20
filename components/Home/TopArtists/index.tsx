@@ -11,7 +11,13 @@ export type TopArtistsPropsType = {};
 
 export const TopArtists = () => {
   const [topArtists, setTopArtists] = React.useState<LibraryItemModel[] | null>(
-    null
+    Array(3).fill({
+      id: '',
+      type: 'artist',
+      title: '',
+      imageURL: '',
+      subtitle: '',
+    })
   );
 
   React.useEffect(() => {
@@ -26,14 +32,9 @@ export const TopArtists = () => {
     })();
   }, []);
 
-  // TODO: get rid of this
-  if (!topArtists) {
-    return null;
-  }
-
   return (
     <Slider
-      title={translations.yourTopArtists(topArtists.length)}
+      title={translations.yourTopArtists(topArtists?.length || '')}
       slides={topArtists}
       size={Sizes.MEDIUM}
       shape={Shapes.CIRCLE}

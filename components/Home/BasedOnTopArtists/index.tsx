@@ -10,7 +10,15 @@ import { translations } from '@data';
 export const BasedOnTopArtists = () => {
   const [albumsBasedOnTopArtists, setAlbumsBasedOnTopArtists] = React.useState<
     LibraryItemModel[] | null
-  >(null);
+  >(
+    Array(3).fill({
+      id: '',
+      type: 'album',
+      title: '',
+      imageURL: '',
+      subtitle: '',
+    })
+  );
 
   React.useEffect(() => {
     (async () => {
@@ -24,11 +32,6 @@ export const BasedOnTopArtists = () => {
       }
     })();
   }, []);
-
-  // TODO: get rid of this
-  if (!albumsBasedOnTopArtists) {
-    return null;
-  }
 
   return (
     <Slider

@@ -97,11 +97,6 @@ export const Library = () => {
     flatListRef.current?.scrollToOffset({ animated: false, offset: 0 });
   }, [librarySelectedCategory]);
 
-  // TODO: remove this and add instead a fallback data
-  if (!data) {
-    return null;
-  }
-
   return (
     <View
       style={[
@@ -117,19 +112,21 @@ export const Library = () => {
       ]}
     >
       <Animated.View style={[{ flex: 1 }, animatedStyle]}>
-        <FlatList
-          ref={flatListRef}
-          data={data[librarySelectedCategory]}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          initialNumToRender={initRenderAmount}
-          maxToRenderPerBatch={maxRenderPerBatchAmount}
-          windowSize={outsideOfVisibleAreKeptInMemoryAmount}
-          contentContainerStyle={styles.flatList}
-          columnWrapperStyle={styles.flatListColumnWrapper}
-          numColumns={numColumns}
-          style={styles.scrollView}
-        />
+        {data && (
+          <FlatList
+            ref={flatListRef}
+            data={data[librarySelectedCategory]}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            initialNumToRender={initRenderAmount}
+            maxToRenderPerBatch={maxRenderPerBatchAmount}
+            windowSize={outsideOfVisibleAreKeptInMemoryAmount}
+            contentContainerStyle={styles.flatList}
+            columnWrapperStyle={styles.flatListColumnWrapper}
+            numColumns={numColumns}
+            style={styles.scrollView}
+          />
+        )}
       </Animated.View>
     </View>
   );

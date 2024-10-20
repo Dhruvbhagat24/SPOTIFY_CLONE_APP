@@ -4,7 +4,7 @@ import { Entypo } from '@expo/vector-icons';
 
 import { AnimatedPressable } from '../AnimatedPressable';
 import { styles } from './styles';
-import { checkSavedAlbums } from '@api';
+import { checkSavedAlbums, checkSavedPlaylists } from '@api';
 
 export type SummaryPropsType = {
   id: string;
@@ -31,7 +31,10 @@ export const Summary = ({
     (async () => {
       try {
         const savedAlbums =
-          type === 'album' ? await checkSavedAlbums([id]) : [true]; // TODO: instead of true check if playlist is saved
+          type === 'album'
+            ? await checkSavedAlbums([id])
+            : await checkSavedPlaylists([id]);
+
         setIsSaved(savedAlbums[0]);
       } catch (error) {
         setIsSaved(false);

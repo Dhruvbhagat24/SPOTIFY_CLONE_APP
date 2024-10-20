@@ -7,7 +7,7 @@ import { useRouter, useSegments } from 'expo-router';
 import { useApplicationDimensions } from '@hooks';
 import { getRecentlyPlayed } from '@api';
 import { RecentlyPlayedModel } from '@models';
-import { RECENTLY_PLAYED_COVER_SIZE, RecentlyPlayedFallback } from '@config';
+import { RECENTLY_PLAYED_COVER_SIZE } from '@config';
 import { getFallbackImage } from '@utils';
 
 import { styles } from './styles';
@@ -15,7 +15,13 @@ import { styles } from './styles';
 export const RecentlyPlayed = () => {
   const [recentlyPlayedData, setRecentlyPlayedData] = React.useState<
     RecentlyPlayedModel[] | null
-  >(RecentlyPlayedFallback);
+  >(
+    Array(8).fill({
+      id: '',
+      title: '',
+      imageURL: '',
+    })
+  );
   const pathname = useSegments().join('/') as
     | '(tabs)/home'
     | '(tabs)/search'
@@ -43,7 +49,7 @@ export const RecentlyPlayed = () => {
     []
   );
 
-  // TODO: get rid of this
+  // @ERROR: show error message
   if (!recentlyPlayedData) {
     return null;
   }

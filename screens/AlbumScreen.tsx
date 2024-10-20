@@ -10,34 +10,28 @@ export type AlbumScreenPropsType = {
 };
 
 export const AlbumScreen = ({ albumId }: AlbumScreenPropsType) => {
-  const [albumData, setAlbumData] = React.useState<AlbumModel | null>(
-    AlbumFallback
-  );
-  const [artistsData, setArtistsData] = React.useState<ArtistModel[] | null>(
+  const [album, setAlbum] = React.useState<AlbumModel | null>(AlbumFallback);
+  const [artists, setArtists] = React.useState<ArtistModel[] | null>(
     ArtistFallback
   );
 
   React.useEffect(() => {
     (async () => {
       try {
-        const album = await getAlbum(albumId);
-        setAlbumData(album);
+        const albumData = await getAlbum(albumId);
+        setAlbum(albumData);
 
-        const artists = await Promise.all(
-          album.artists.map(async ({ id }) => await getArtist(id))
+        const artistsData = await Promise.all(
+          albumData.artists.map(async ({ id }) => await getArtist(id))
         );
-        setArtistsData(artists);
+        setArtists(artistsData);
       } catch (error) {
-        setAlbumData(null);
+        setAlbum(null);
+        setArtists(null);
         console.error('Failed to get album data:', error);
       }
     })();
   }, [albumId]);
 
-  // TODO: render an error page instead
-  if (albumData === null || artistsData === null) {
-    return null;
-  }
-
-  return <Album album={albumData} artists={artistsData} />;
+  return <Album album={album} artists={artists} />;
 };

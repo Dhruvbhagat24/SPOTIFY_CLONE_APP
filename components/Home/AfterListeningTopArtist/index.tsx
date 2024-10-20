@@ -10,9 +10,24 @@ import { translations } from '@data';
 export const AfterListeningTopArtist = () => {
   const [topArtistRecommendations, setTopArtistRecommendations] =
     React.useState<{
-      recommendations: LibraryItemModel[];
-      artist: LibraryItemModel;
-    } | null>(null);
+      recommendations: LibraryItemModel[] | null;
+      artist: LibraryItemModel | null;
+    }>({
+      recommendations: Array(3).fill({
+        id: '',
+        type: 'album',
+        title: '',
+        imageURL: '',
+        subtitle: '',
+      }),
+      artist: {
+        id: '',
+        type: 'album',
+        title: '',
+        imageURL: '',
+        subtitle: '',
+      },
+    });
 
   React.useEffect(() => {
     (async () => {
@@ -21,20 +36,17 @@ export const AfterListeningTopArtist = () => {
           await getRecommendationsFromTopArtistSeed();
         setTopArtistRecommendations(topArtistRecommendationsData);
       } catch (error) {
-        setTopArtistRecommendations(null);
+        setTopArtistRecommendations({ recommendations: null, artist: null });
         console.error(error);
       }
     })();
   }, []);
 
-  // TODO: get rid of this
-  if (!topArtistRecommendations) {
-    return;
-  }
-
   return (
     <Slider
-      title={translations.afterListening(topArtistRecommendations.artist.title)}
+      title={translations.afterListening(
+        topArtistRecommendations.artist?.title || ''
+      )}
       slides={topArtistRecommendations.recommendations}
       size={Sizes.MEDIUM}
       shape={Shapes.SQUARE}

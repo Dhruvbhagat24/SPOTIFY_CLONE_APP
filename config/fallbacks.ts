@@ -1,10 +1,10 @@
-import { AlbumModel, ArtistModel, RecentlyPlayedModel } from '@models';
+import { AlbumModel, ArtistModel } from '@models';
 
 export const AlbumFallback = {
   id: '',
-  type: 'album', //TODO: to be changed to get this value from props
-  albumType: 'album', //TODO: to be changed to get this value from props
-  name: '', //TODO: this init value will be based on "type" and "albumType" (for example "Album" or "Compilation" or even "Playlist")
+  type: 'album',
+  albumType: 'album',
+  name: '',
   imageURL: '',
   artists: [{ id: '', type: 'artist' }],
   releaseDate: '2024',
@@ -29,11 +29,3 @@ export const ArtistFallback = Array(1).fill({
   name: '',
   imageURL: '',
 }) as ArtistModel[];
-
-export const RecentlyPlayedFallback = Array(8).fill({
-  id: '',
-  title: '',
-  imageURL: '',
-}) as RecentlyPlayedModel[];
-
-export const SliderFallback = Array(6).fill({});

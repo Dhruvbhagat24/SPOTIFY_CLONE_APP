@@ -31,16 +31,11 @@ export const UserDataProvider = ({ children }: UserDataProviderPropsType) => {
         const user = await getUser();
         setUserData(user);
       } catch (error) {
-        setUserData(null);
+        // @ERROR: show error message
         console.error('ERROR: ', error);
       }
     })();
   }, []);
-
-  // TODO: Get rid of this
-  if (!userData) {
-    return null;
-  }
 
   return (
     <UserDataContext.Provider value={{ userData }}>

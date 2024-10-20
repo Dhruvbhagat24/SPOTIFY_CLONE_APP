@@ -42,11 +42,6 @@ export const Recommendations = ({
     })();
   }, [type, seed]);
 
-  // TODO: get rid of this
-  if (!recommendedAlbums) {
-    return null;
-  }
-
   return (
     <Slider
       title={translations.recommendations}

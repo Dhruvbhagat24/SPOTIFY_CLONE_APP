@@ -5,6 +5,7 @@ export { getSavedAlbums } from './getSavedAlbums';
 export { getSavedShows } from './getSavedShows';
 export { getSavedPlaylists } from './getSavedPlaylists';
 export { checkSavedAlbums } from './checkSavedAlbums';
+export { checkSavedPlaylists } from './checkSavedPlaylists';
 export { checkSavedTracks } from './checkSavedTracks';
 export { getLibrary, type LibraryType } from './getLibrary';
 export { getRecentlyPlayed } from './getRecentlyPlayed';
