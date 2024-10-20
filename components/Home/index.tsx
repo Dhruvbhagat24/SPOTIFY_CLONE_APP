@@ -21,13 +21,7 @@ export const Home = () => {
         height: height - BOTTOM_NAVIGATION_HEIGHT - HEADER_HEIGHT,
       }}
     >
-      <ScrollView
-        // showsVerticalScrollIndicator={false}
-        style={{
-          paddingVertical: 16,
-          // marginBottom: BOTTOM_NAVIGATION_HEIGHT,
-        }}
-      >
+      <ScrollView style={{ paddingVertical: 16 }}>
         <RecentlyPlayed />
         <TopAlbums />
         <TopArtists />

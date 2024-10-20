@@ -95,7 +95,7 @@ export const Album = ({ album, artists }: AlbumPropsType) => {
   const total = React.useMemo(() => (album ? album.tracks.total : ''), [album]);
 
   React.useEffect(() => {
-    if (!tracks.length) {
+    if (!tracks.length || tracks.some((track) => !track.id)) {
       return;
     }
 

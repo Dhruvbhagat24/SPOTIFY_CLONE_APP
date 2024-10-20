@@ -10,6 +10,8 @@ import { Shapes, Sizes } from '@config';
 import { LibraryItemModel } from '@models';
 
 import { styles } from './styles';
+import { ErrorBox } from '../ErrorBox';
+import { useApplicationDimensions } from '@hooks';
 
 export type SliderPropsType = {
   title: string;
@@ -25,48 +27,64 @@ export const Slider = ({
   size = Sizes.BIG,
   shape = Shapes.SQUARE,
   withShowAll = false,
-}: SliderPropsType) => (
-  <View style={styles.container} testID="recommended-albums-section">
-    <View style={styles.header}>
-      <Text
-        numberOfLines={1}
-        style={styles.headerTitleText}
-        testID="header-title-text"
-      >
-        {title}
-      </Text>
-      {withShowAll && (
-        <Pressable>
-          <Text
-            style={styles.headerPressableText}
-            testID="header-pressable-text"
-          >
-            {translations.showAll}
-          </Text>
-        </Pressable>
-      )}
-    </View>
-    <ScrollView
-      style={styles.scrollView}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      testID="albums-scroll-view"
-    >
-      <View style={styles.scrollViewContainer}>
-        {slides && //TODO: @ERROR: show error message
-          slides.map(({ id, type, title, subtitle, imageURL }) => (
-            <Card
-              key={id}
-              id={id}
-              type={type}
-              shape={shape}
-              size={size}
-              title={title}
-              subtitle={subtitle}
-              imageURL={imageURL}
-            />
-          ))}
+}: SliderPropsType) => {
+  const { width } = useApplicationDimensions();
+  const horizontalOffset = 16;
+
+  return (
+    <View style={styles.container} testID="recommended-albums-section">
+      <View style={[styles.header, { paddingHorizontal: horizontalOffset }]}>
+        <Text
+          numberOfLines={1}
+          style={styles.headerTitleText}
+          testID="header-title-text"
+        >
+          {title}
+        </Text>
+        {withShowAll && (
+          <Pressable>
+            <Text
+              style={styles.headerPressableText}
+              testID="header-pressable-text"
+            >
+              {translations.showAll}
+            </Text>
+          </Pressable>
+        )}
       </View>
-    </ScrollView>
-  </View>
-);
+      <ScrollView
+        style={styles.scrollView}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        testID="albums-scroll-view"
+      >
+        <View
+          style={[
+            styles.scrollViewContainer,
+            { marginHorizontal: horizontalOffset },
+          ]}
+        >
+          {!slides ? (
+            <ErrorBox
+              message={`Failed to fetch data`}
+              size={[width - horizontalOffset * 2, size]}
+            />
+          ) : (
+            slides.map(({ id, type, title, subtitle, imageURL }, index) => (
+              <Card
+                key={index}
+                id={id}
+                type={type}
+                shape={shape}
+                size={size}
+                title={title}
+                subtitle={subtitle}
+                imageURL={imageURL}
+              />
+            ))
+          )}
+        </View>
+      </ScrollView>
+    </View>
+  );
+};

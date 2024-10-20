@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
     paddingTop: 35,
   },
   header: {
-    paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-between',
@@ -34,7 +33,6 @@ export const styles = StyleSheet.create({
   scrollViewContainer: {
     flexDirection: 'row',
     gap: 16,
-    marginHorizontal: 16,
   },
   album: {
     padding: 8,
