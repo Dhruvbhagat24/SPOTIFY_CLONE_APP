@@ -17,7 +17,7 @@ import { Track } from '../Track';
 import { PlaylistModel } from '@models';
 import { getPlaylist, getPlaylistItems } from '@api';
 import { useApplicationDimensions } from '@hooks';
-import { PlaylistItemResponseType } from '@config';
+import { BOTTOM_NAVIGATION_HEIGHT, PlaylistItemResponseType } from '@config';
 
 import { styles } from './styles';
 
@@ -31,7 +31,7 @@ export const Playlist = ({ playlistId }: PlaylistPropsType) => {
   const [offset, setOffset] = React.useState(0);
   const [limit] = React.useState(50);
   const scrollOffset = useSharedValue(0);
-  const { width } = useApplicationDimensions();
+  const { width, height } = useApplicationDimensions();
 
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: (event) => {
@@ -137,6 +137,7 @@ export const Playlist = ({ playlistId }: PlaylistPropsType) => {
 
       <Animated.FlatList
         contentContainerStyle={styles.flatListContentContainer}
+        style={{ height: height - BOTTOM_NAVIGATION_HEIGHT }}
         data={tracks}
         keyExtractor={(item, index) => item.track.id + index}
         renderItem={renderItem}

@@ -31,6 +31,7 @@ export const CommonHeader = ({
 }: CommonHeaderPropsType) => {
   const navigation = useNavigation<AppNavigationProps>();
   const scrollYOnHeaderAppear = COVER_SIZE + COVER_SIZE * 0.05;
+  const { top: topOffset } = useSafeAreaInsets();
 
   const animatedHeaderStyles = useAnimatedStyle(() => ({
     opacity: interpolate(
@@ -67,7 +68,7 @@ export const CommonHeader = ({
   return (
     <View style={styles.container} testID="header">
       <Pressable
-        style={[styles.goBackPressable, { top: useSafeAreaInsets().top }]}
+        style={[styles.goBackPressable, { top: topOffset }]}
         onPress={handlePress}
         testID="header-go-back-pressable"
       >
@@ -77,7 +78,7 @@ export const CommonHeader = ({
       <Animated.View
         style={[
           animatedHeaderStyles,
-          { height: ALBUM_HEADER_HEIGHT, paddingTop: useSafeAreaInsets().top },
+          { height: ALBUM_HEADER_HEIGHT, paddingTop: topOffset },
           styles.content,
         ]}
       >

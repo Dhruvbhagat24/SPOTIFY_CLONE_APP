@@ -13,3 +13,5 @@ TODO: merge playlist and album into common container
 TODO: get rid of TODOs in the project
 
 TODO: fix all link/pressable hrefs or router.push'es after redesigning routing
+
+TODO: fix scroll issue in playlist and album - THIS HAPPENS BECAUSE OF HAVING COMMON HEADER INSIDE STACK!!!!!!!

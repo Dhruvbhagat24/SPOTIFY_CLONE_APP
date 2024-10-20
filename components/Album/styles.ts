@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
   },
   flatListContentContainer: {
     backgroundColor: COLORS.PRIMARY,
-    paddingHorizontal: 16,
     gap: 6,
   },
   gradientOverlay: {
