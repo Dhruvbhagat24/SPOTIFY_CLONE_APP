@@ -28,6 +28,7 @@ export const Playlist = ({ playlistId }: PlaylistPropsType) => {
   const [playlist, setPlaylist] = React.useState<PlaylistModel | null>(null);
   const [tracks, setTracks] = React.useState<PlaylistItemResponseType[]>([]);
   const [offset, setOffset] = React.useState(0);
+  const [total, setTotal] = React.useState<null | number>(null);
   const [limit] = React.useState(50);
   const scrollOffset = useSharedValue(0);
   const { width, height } = useApplicationDimensions();
@@ -42,10 +43,20 @@ export const Playlist = ({ playlistId }: PlaylistPropsType) => {
     if (!playlistId) {
       return;
     }
+
+    if (total && !(total - offset)) {
+      return;
+    }
+
     try {
-      const newItems = await getPlaylistItems({ playlistId, limit, offset });
+      const { items: newItems, total: totalItems } = await getPlaylistItems({
+        playlistId,
+        limit,
+        offset,
+      });
       setTracks((prevItems) => [...prevItems, ...newItems]);
       setOffset((prevOffset) => prevOffset + limit);
+      setTotal(totalItems);
     } catch (error) {
       console.error(error);
     }

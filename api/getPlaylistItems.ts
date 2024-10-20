@@ -6,7 +6,7 @@ import { getSessionlessToken } from './getSessionlessToken';
 
 export const getPlaylistItems = async ({
   playlistId,
-  fields = 'items.track(id, name, artists(name), album.images(url), explicit)',
+  fields = 'items.total, items.track(id, name, artists(name), album.images(url), explicit)',
   limit,
   offset,
 }: {
@@ -14,7 +14,7 @@ export const getPlaylistItems = async ({
   fields?: string;
   limit: number;
   offset: number;
-}): Promise<PlaylistItemResponseType[]> => {
+}): Promise<{ items: PlaylistItemResponseType[]; total: number }> => {
   try {
     const { token } = await getSessionlessToken();
 
@@ -30,9 +30,9 @@ export const getPlaylistItems = async ({
           Authorization: `Bearer ${token}`,
         },
       }
-    )) as { data: { items: PlaylistItemResponseType[] } };
+    )) as { data: { items: PlaylistItemResponseType[]; total: number } };
 
-    return response.data.items;
+    return response.data;
   } catch (error) {
     console.error(`Error fetching playlist with an ID: ${playlistId}`, error);
     throw error;
