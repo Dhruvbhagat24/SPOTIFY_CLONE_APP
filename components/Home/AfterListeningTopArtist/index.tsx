@@ -13,13 +13,15 @@ export const AfterListeningTopArtist = () => {
       recommendations: LibraryItemModel[] | null;
       artist: LibraryItemModel | null;
     }>({
-      recommendations: Array(3).fill({
-        id: '',
-        type: 'album',
-        title: '',
-        imageURL: '',
-        subtitle: '',
-      }),
+      recommendations: [
+        ...Array(3).fill({
+          id: '',
+          type: 'album',
+          title: '',
+          imageURL: '',
+          subtitle: '',
+        }),
+      ],
       artist: {
         id: '',
         type: 'album',

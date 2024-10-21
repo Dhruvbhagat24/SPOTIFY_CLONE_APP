@@ -17,3 +17,5 @@ TODO: track explicity UI
 TODO: replace track isDownloaded prop with a real one
 
 TODO: replace track isPlaying prop with a real one
+
+TODO: get app view width in library and divide responsively the cover sizes

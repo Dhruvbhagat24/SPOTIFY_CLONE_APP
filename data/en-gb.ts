@@ -47,4 +47,5 @@ export const EN_GB = {
   loginWelcome: 'Millions of Songs. \n Free on Spotify.',
   loginButton: 'Sign in',
   loginNote: "NOTE: You won't be sharing your credentials",
+  browseAll: 'Browse all',
 };

@@ -12,3 +12,4 @@ export {
 } from './library';
 export { parseToPlaylist, parseFromPlaylistItemsToTracks } from './playlist';
 export { parseToRecentlyPlayed, parseFromSearchPlaylistToCard } from './home';
+export { parseToBrowseCategories } from './search';

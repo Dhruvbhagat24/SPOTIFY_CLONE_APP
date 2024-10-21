@@ -94,16 +94,18 @@ export const AlbumScreen = ({ albumId }: AlbumScreenPropsType) => {
     () =>
       album
         ? album.tracks.items
-        : Array(1).fill({
-            id: '',
-            title: '',
-            subtitle: '',
-            imageURL: '',
-            isSaved: false,
-            isPlaying: false,
-            isDownloaded: false,
-            explicity: false,
-          }),
+        : [
+            ...Array(1).fill({
+              id: '',
+              title: '',
+              subtitle: '',
+              imageURL: '',
+              isSaved: false,
+              isPlaying: false,
+              isDownloaded: false,
+              explicity: false,
+            }),
+          ],
     [album]
   ) as TrackModel[];
   const infoTexts = React.useMemo(

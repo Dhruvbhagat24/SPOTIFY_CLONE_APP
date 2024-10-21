@@ -11,15 +11,15 @@ import { Slider } from '../../Slider';
 export const YourPlaylists = () => {
   const [savedPlaylists, setDataSavedPlaylists] = React.useState<
     LibraryItemModel[] | null
-  >(
-    Array(3).fill({
+  >([
+    ...Array(3).fill({
       id: '',
       type: 'playlist',
       title: '',
       imageURL: '',
       subtitle: '',
-    })
-  );
+    }),
+  ]);
   const { userData } = useUserData();
 
   React.useEffect(() => {

@@ -21,13 +21,15 @@ export const MoreOf = ({ artists }: MoreOfPropsType) => {
   >([
     {
       artist: '',
-      albums: Array(3).fill({
-        id: '',
-        type: 'album',
-        title: '',
-        imageURL: '',
-        subtitle: '',
-      }),
+      albums: [
+        ...Array(3).fill({
+          id: '',
+          type: 'album',
+          title: '',
+          imageURL: '',
+          subtitle: '',
+        }),
+      ],
     },
   ]);
 

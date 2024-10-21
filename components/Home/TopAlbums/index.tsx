@@ -10,15 +10,15 @@ import { translations } from '@data';
 export type TopAlbumsPropsType = {};
 
 export const TopAlbums = () => {
-  const [topAlbums, setTopAlbums] = React.useState<LibraryItemModel[] | null>(
-    Array(3).fill({
+  const [topAlbums, setTopAlbums] = React.useState<LibraryItemModel[] | null>([
+    ...Array(3).fill({
       id: '',
       type: 'album',
       title: '',
       imageURL: '',
       subtitle: '',
-    })
-  );
+    }),
+  ]);
 
   React.useEffect(() => {
     (async () => {

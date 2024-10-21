@@ -16,6 +16,7 @@ export {
   parseFromTopArtistsToLibraryItem,
   parseFromTopTracksToLibraryItem,
   parseFromPlaylistItemsToTracks,
+  parseToBrowseCategories,
 } from './parsers';
 export {
   hexToRGB,
@@ -23,4 +24,5 @@ export {
   getDisplayTime,
   getDisplayCopyrightText,
   getFallbackImage,
+  getRandomColor,
 } from './common';

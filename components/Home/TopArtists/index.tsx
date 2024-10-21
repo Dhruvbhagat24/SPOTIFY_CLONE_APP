@@ -11,13 +11,15 @@ export type TopArtistsPropsType = {};
 
 export const TopArtists = () => {
   const [topArtists, setTopArtists] = React.useState<LibraryItemModel[] | null>(
-    Array(3).fill({
-      id: '',
-      type: 'artist',
-      title: '',
-      imageURL: '',
-      subtitle: '',
-    })
+    [
+      ...Array(3).fill({
+        id: '',
+        type: 'artist',
+        title: '',
+        imageURL: '',
+        subtitle: '',
+      }),
+    ]
   );
 
   React.useEffect(() => {

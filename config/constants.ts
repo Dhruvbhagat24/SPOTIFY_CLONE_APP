@@ -16,12 +16,13 @@ export enum Sizes {
   BIG = 152,
   MEDIUM = 140,
   SMALL = 120,
-  VER_SMALL = 100,
+  VERY_SMALL = 100,
 }
 
 export enum Shapes {
   SQUARE = 0,
   SQUARE_BORDER = 4,
+  EDGED_BORDER = 8,
   OVAL = 20,
   CIRCLE = 9999,
 }
@@ -63,3 +64,5 @@ export const BOTTOM_NAVIGATION_HEIGHT = 90;
 export const COVER_SIZE = 300;
 export const TRACK_COVER_SIZE = 50;
 export const RECENTLY_PLAYED_COVER_SIZE = 55;
+export const BROWSE_CATEGORY_IMAGE_SIZE = 75;
+export const BROWSE_CATEGORY_HEIGHT = 55;

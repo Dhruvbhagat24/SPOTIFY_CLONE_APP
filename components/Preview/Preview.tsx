@@ -27,7 +27,7 @@ import { useUserData } from '@context';
 export type PreviewPropsType = {
   type: 'playlist' | 'album';
   id: string;
-  ownerId: string;
+  ownerId?: string;
   imageURL: string;
   headerTitle: string;
   summaryTitle: string;

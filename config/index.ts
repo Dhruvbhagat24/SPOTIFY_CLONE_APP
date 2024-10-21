@@ -17,8 +17,9 @@ export {
   COVER_SIZE,
   TRACK_COVER_SIZE,
   RECENTLY_PLAYED_COVER_SIZE,
+  BROWSE_CATEGORY_IMAGE_SIZE,
 } from './constants';
-export { COLORS } from './colors';
+export { COLORS, BROWSE_CATEGORIES_COLORS } from './colors';
 export {
   type ExpoConfigType,
   type AlbumResponseType,
@@ -37,6 +38,7 @@ export {
   type UserTopArtistsResponseType,
   type RecommendationsResponseType,
   type PlaylistItemResponseType,
+  type BrowseCategoriesResponseType,
 } from './types';
 
 export { AlbumFallback, ArtistFallback } from './fallbacks';

@@ -328,3 +328,16 @@ export type RecommendationsResponseType = {
   seeds: { id: string }[];
   tracks: UserTopTracksResponseType['items'];
 };
+
+export type BrowseCategoriesResponseType = {
+  total: number;
+  items: {
+    id: string;
+    name: string;
+    icons: {
+      url: string;
+      width: number;
+      height: number;
+    }[];
+  }[];
+};

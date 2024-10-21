@@ -16,13 +16,13 @@ import { ErrorBox } from '../../ErrorBox';
 export const RecentlyPlayed = () => {
   const [recentlyPlayedData, setRecentlyPlayedData] = React.useState<
     RecentlyPlayedModel[] | null
-  >(
-    Array(8).fill({
+  >([
+    ...Array(8).fill({
       id: '',
       title: '',
       imageURL: '',
-    })
-  );
+    }),
+  ]);
   const pathname = useSegments().join('/') as
     | '(tabs)/home'
     | '(tabs)/search'

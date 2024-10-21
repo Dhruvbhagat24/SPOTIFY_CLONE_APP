@@ -10,15 +10,15 @@ import { translations } from '@data';
 export const BasedOnTopArtists = () => {
   const [albumsBasedOnTopArtists, setAlbumsBasedOnTopArtists] = React.useState<
     LibraryItemModel[] | null
-  >(
-    Array(3).fill({
+  >([
+    ...Array(3).fill({
       id: '',
       type: 'album',
       title: '',
       imageURL: '',
       subtitle: '',
-    })
-  );
+    }),
+  ]);
 
   React.useEffect(() => {
     (async () => {

@@ -28,3 +28,5 @@ export {
   getRecommendationsFromArtistSeeds,
   getRecommendationsFromTopArtistSeed,
 } from './recommendations';
+
+export { getBrowseCategories } from './search';
