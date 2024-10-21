@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useRouter, useSegments } from 'expo-router';
 import { render, fireEvent, RenderResult } from '@testing-library/react-native';
-import { BottomNavigation } from '../BottomNavigation';
+import { BottomNavigation } from '../BottomTabBar';
 import { COLORS } from '@config';
 
 jest.mock('expo-router', () => ({

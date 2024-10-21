@@ -11,6 +11,7 @@
       "@data": ["./data/index.ts"],
       "@hooks": ["./hooks/index.ts"],
       "@models": ["./models/index.ts"],
+      "@navigators": ["./navigators/index.ts"],
       "@screens": ["./screens/index.ts"],
       "@services": ["./services/index.ts"],
       "@utils": ["./utils/index.ts"]

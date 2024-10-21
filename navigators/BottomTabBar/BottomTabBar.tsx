@@ -56,7 +56,7 @@ const renderPressableContent = (name: string, isActive: boolean) => {
   }
 };
 
-export const BottomNavigation = ({
+export const BottomTabBar = ({
   state,
   descriptors,
   navigation,
