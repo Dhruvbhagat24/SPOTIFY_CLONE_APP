@@ -1,5 +1,4 @@
-export { Album } from './Album';
-export { Playlist } from './Playlist';
+export { Preview } from './Preview';
 export { Library } from './Library';
 export { Header } from './Header';
 export { BottomNavigation } from './BottomNavigation';

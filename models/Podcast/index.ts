@@ -1,2 +1,2 @@
-export { SavedEpisodeModel } from './SavedEpisodeModel';
-export { SavedShowModel } from './SavedShowModel';
+export type { SavedEpisodeModel } from './SavedEpisodeModel';
+export type { SavedShowModel } from './SavedShowModel';

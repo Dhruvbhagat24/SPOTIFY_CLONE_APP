@@ -167,6 +167,7 @@ export type PlaylistItemResponseType = {
     name: string;
     artists: { name: string }[];
     explicity: boolean;
+    duration_ms: number;
   };
 };
 

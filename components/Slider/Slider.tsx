@@ -32,21 +32,14 @@ export const Slider = ({
   const horizontalOffset = 16;
 
   return (
-    <View style={styles.container} testID="recommended-albums-section">
+    <View style={styles.container}>
       <View style={[styles.header, { paddingHorizontal: horizontalOffset }]}>
-        <Text
-          numberOfLines={1}
-          style={styles.headerTitleText}
-          testID="header-title-text"
-        >
+        <Text numberOfLines={1} style={styles.headerTitleText}>
           {title}
         </Text>
         {withShowAll && (
           <Pressable>
-            <Text
-              style={styles.headerPressableText}
-              testID="header-pressable-text"
-            >
+            <Text style={styles.headerPressableText}>
               {translations.showAll}
             </Text>
           </Pressable>
@@ -56,7 +49,6 @@ export const Slider = ({
         style={styles.scrollView}
         horizontal
         showsHorizontalScrollIndicator={false}
-        testID="albums-scroll-view"
       >
         <View
           style={[

@@ -1,4 +1,7 @@
-export const getDisplayTime = (totalDuration: number) => {
+export const getDisplayTime = (totalDuration: number | '') => {
+  if (!totalDuration) {
+    return '';
+  }
   const durationM = totalDuration / 1000 / 60;
 
   if (durationM > 60) {

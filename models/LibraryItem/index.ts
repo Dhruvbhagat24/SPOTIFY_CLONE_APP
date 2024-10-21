@@ -1,1 +1,1 @@
-export { LibraryItemModel } from './LibraryItemModel';
+export type { LibraryItemModel } from './LibraryItemModel';

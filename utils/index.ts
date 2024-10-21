@@ -15,10 +15,12 @@ export {
   parseFromSearchPlaylistToCard,
   parseFromTopArtistsToLibraryItem,
   parseFromTopTracksToLibraryItem,
+  parseFromPlaylistItemsToTracks,
 } from './parsers';
 export {
   hexToRGB,
   getDisplayDate,
   getDisplayTime,
+  getDisplayCopyrightText,
   getFallbackImage,
 } from './common';

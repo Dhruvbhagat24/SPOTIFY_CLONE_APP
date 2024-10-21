@@ -64,26 +64,18 @@ const Card = React.memo(
     }, [type, size]);
 
     return (
-      <Pressable
-        testID="card"
-        onPress={() => handlePress(id)}
-        style={styles.card}
-      >
+      <Pressable onPress={() => handlePress(id)} style={styles.card}>
         <View style={styles.cardImageView}>
           <React.Suspense fallback={renderIcon()}>
             {imageURL ? (
-              <Image
-                testID="image"
-                style={styles.cardImage}
-                source={{ uri: imageURL }}
-              />
+              <Image style={styles.cardImage} source={{ uri: imageURL }} />
             ) : (
               renderIcon()
             )}
           </React.Suspense>
         </View>
         {title && (
-          <Text numberOfLines={2} style={styles.cardTitleText} testID="title">
+          <Text numberOfLines={2} style={styles.cardTitleText}>
             {title}
           </Text>
         )}

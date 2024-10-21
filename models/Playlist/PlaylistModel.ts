@@ -7,4 +7,5 @@ export type PlaylistModel = {
   info: string;
   description: string;
   imageURL: string | '';
+  tracks: { total: number };
 };

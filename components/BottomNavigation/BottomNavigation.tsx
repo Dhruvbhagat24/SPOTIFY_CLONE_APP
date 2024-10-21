@@ -22,10 +22,7 @@ const renderPressableContent = (name: string, isActive: boolean) => {
             name="search"
             size={22}
           />
-          <Text
-            style={[styles.text, isActive ? styles.active : {}]}
-            testID="search-text"
-          >
+          <Text style={[styles.text, isActive ? styles.active : {}]}>
             {translations.router[Pages.SEARCH]}
           </Text>
         </View>
@@ -38,10 +35,7 @@ const renderPressableContent = (name: string, isActive: boolean) => {
             name="library"
             size={22}
           />
-          <Text
-            style={[styles.text, isActive ? styles.active : {}]}
-            testID="library-text"
-          >
+          <Text style={[styles.text, isActive ? styles.active : {}]}>
             {translations.router[Pages.LIBRARY]}
           </Text>
         </View>
@@ -54,10 +48,7 @@ const renderPressableContent = (name: string, isActive: boolean) => {
             name="home"
             size={22}
           />
-          <Text
-            style={[styles.text, isActive ? styles.active : {}]}
-            testID="home-text"
-          >
+          <Text style={[styles.text, isActive ? styles.active : {}]}>
             {translations.router[Pages.HOME]}
           </Text>
         </View>

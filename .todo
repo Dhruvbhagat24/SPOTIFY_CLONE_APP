@@ -11,3 +11,9 @@ TODO: Get Featured playlists
 TODO: merge playlist and album into common container
 
 TODO: get rid of TODOs in the project
+
+TODO: track explicity UI
+
+TODO: replace track isDownloaded prop with a real one
+
+TODO: replace track isPlaying prop with a real one

@@ -23,13 +23,12 @@ export const Background = ({
   );
 
   return (
-    <View style={styles.background} testID="background">
+    <View style={styles.background}>
       <Overlay
         style={[
           styles.backgroundDarkOverlay,
           { backgroundColor: hexToRGB(COLORS.PRIMARY, darkness) },
         ]}
-        testID="background-overlay"
       />
       {imageURL && (
         <Image
@@ -37,7 +36,6 @@ export const Background = ({
           style={styles.backgroundBlurredImage}
           source={imageURL ? { uri: imageURL } : fallbackImageSource}
           resizeMode="cover"
-          testID="background-image"
         />
       )}
     </View>

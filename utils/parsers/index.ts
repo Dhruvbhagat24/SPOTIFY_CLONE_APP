@@ -10,5 +10,5 @@ export {
   parseFromTopArtistsToLibraryItem,
   parseFromTopTracksToLibraryItem,
 } from './library';
-export { parseToPlaylist } from './playlist';
+export { parseToPlaylist, parseFromPlaylistItemsToTracks } from './playlist';
 export { parseToRecentlyPlayed, parseFromSearchPlaylistToCard } from './home';

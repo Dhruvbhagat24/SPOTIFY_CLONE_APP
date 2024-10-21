@@ -1,1 +1,1 @@
-export { RecentlyPlayedModel } from './RecentlyPlayedModel';
+export type { RecentlyPlayedModel } from './RecentlyPlayedModel';

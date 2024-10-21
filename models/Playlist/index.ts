@@ -1,2 +1,2 @@
-export { PlaylistModel } from './PlaylistModel';
-export { PlaylistTrackModel } from './PlaylistTrackModel';
+export type { PlaylistModel } from './PlaylistModel';
+export type { PlaylistTrackModel } from './PlaylistTrackModel';

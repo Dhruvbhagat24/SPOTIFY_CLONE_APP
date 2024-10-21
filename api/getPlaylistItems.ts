@@ -1,12 +1,14 @@
 import axios from 'axios';
 
-import { PlaylistItemResponseType } from '@config';
-
 import { getSessionlessToken } from './getSessionlessToken';
+
+import { TrackModel } from '@models';
+import { PlaylistItemResponseType } from '@config';
+import { parseFromPlaylistItemsToTracks } from '@utils';
 
 export const getPlaylistItems = async ({
   playlistId,
-  fields = 'items.total, items.track(id, name, artists(name), album.images(url), explicit)',
+  fields = 'items.track(id, name, artists(name), album.images(url), explicit)',
   limit,
   offset,
 }: {
@@ -14,7 +16,7 @@ export const getPlaylistItems = async ({
   fields?: string;
   limit: number;
   offset: number;
-}): Promise<{ items: PlaylistItemResponseType[]; total: number }> => {
+}): Promise<TrackModel[]> => {
   try {
     const { token } = await getSessionlessToken();
 
@@ -32,7 +34,7 @@ export const getPlaylistItems = async ({
       }
     )) as { data: { items: PlaylistItemResponseType[]; total: number } };
 
-    return response.data;
+    return parseFromPlaylistItemsToTracks(response.data.items);
   } catch (error) {
     console.error(`Error fetching playlist with an ID: ${playlistId}`, error);
     throw error;
