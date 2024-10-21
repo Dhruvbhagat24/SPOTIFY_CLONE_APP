@@ -11,6 +11,7 @@ import { hexToRGB } from '@utils';
 
 import { styles } from './styles';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { useApplicationDimensions } from '@hooks';
 
 const renderPressableContent = (name: string, isActive: boolean) => {
   switch (name) {
@@ -61,6 +62,7 @@ export const BottomTabBar = ({
   descriptors,
   navigation,
 }: BottomTabBarProps) => {
+  const { width } = useApplicationDimensions();
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -90,6 +92,7 @@ export const BottomTabBar = ({
             accessibilityState={isActive ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             onPress={onPress}
+            style={[styles.pressable, { width: width / 3 }]}
           >
             {renderPressableContent(route.name, isActive)}
           </Pressable>

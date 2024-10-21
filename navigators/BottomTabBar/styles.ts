@@ -19,6 +19,11 @@ export const styles = StyleSheet.create({
   gradient: {
     ...StyleSheet.absoluteFillObject,
   },
+  pressable: {
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   linkContainer: {
     flexDirection: 'column',
     alignItems: 'center',
