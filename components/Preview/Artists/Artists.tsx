@@ -13,7 +13,7 @@ export type ArtistsPropsType = {
 
 export const Artists = ({ artists }: ArtistsPropsType) => {
   const router = useRouter();
-  const pathname = useSegments().join('/') as
+  const pathname = useSegments().slice(0, 2).join('/') as
     | '(tabs)/home'
     | '(tabs)/search'
     | '(tabs)/library';

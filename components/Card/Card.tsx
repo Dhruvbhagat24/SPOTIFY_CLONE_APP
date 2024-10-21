@@ -30,7 +30,7 @@ const Card = React.memo(
   }: CardPropsType) => {
     const router = useRouter();
     const styles = styling(size, shape);
-    const pathname = useSegments().join('/') as
+    const pathname = useSegments().slice(0, 2).join('/') as
       | '(tabs)/home'
       | '(tabs)/search'
       | '(tabs)/library';

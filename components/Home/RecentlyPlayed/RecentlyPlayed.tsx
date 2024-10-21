@@ -23,7 +23,7 @@ export const RecentlyPlayed = () => {
       imageURL: '',
     }),
   ]);
-  const pathname = useSegments().join('/') as
+  const pathname = useSegments().slice(0, 2).join('/') as
     | '(tabs)/home'
     | '(tabs)/search'
     | '(tabs)/library';
