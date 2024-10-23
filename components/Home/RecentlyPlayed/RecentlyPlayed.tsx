@@ -5,7 +5,7 @@ import { Image } from 'expo-image';
 import { useRouter, useSegments } from 'expo-router';
 
 import { useApplicationDimensions } from '@hooks';
-import { getRecentlyPlayed } from '@api';
+import { getRecentlyPlayed, updateRecentlyPlayed } from '@api';
 import { RecentlyPlayedModel } from '@models';
 import { RECENTLY_PLAYED_COVER_SIZE } from '@config';
 import { getFallbackImage } from '@utils';
@@ -44,6 +44,16 @@ export const RecentlyPlayed = () => {
       }
     })();
   }, []);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        await updateRecentlyPlayed();
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  });
 
   const fallbackImageSource = React.useMemo(
     () => getFallbackImage('single'),

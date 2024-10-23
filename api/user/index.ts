@@ -8,6 +8,6 @@ export { checkSavedAlbums } from './checkSavedAlbums';
 export { checkSavedPlaylists } from './checkSavedPlaylists';
 export { checkSavedTracks } from './checkSavedTracks';
 export { getLibrary, type LibraryType } from './getLibrary';
-export { getRecentlyPlayed } from './getRecentlyPlayed';
+export { getRecentlyPlayed, updateRecentlyPlayed } from './getRecentlyPlayed';
 export { getUserTopArtistsAndGenres } from './getUserTopArtistsAndGenres';
 export { getUserTopAlbums } from './getUserTopAlbums';
