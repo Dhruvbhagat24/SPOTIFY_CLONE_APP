@@ -4,17 +4,17 @@ module.exports = {
     slug: 'spotify-clone',
     version: '1.0.0',
     orientation: 'portrait',
-    icon: './assets/icons/icon.png',
+    icon: './assets/images/logo.png',
     scheme: 'acme',
     plugins: ['expo-router'],
     splash: {
-      image: './assets/icons/splash.png',
+      image: './assets/images/splash.png',
       resizeMode: 'contain',
       backgroundColor: '#ffffff',
     },
     web: {
       bundler: 'metro',
-      favicon: './assets/icons/favicon.png',
+      favicon: './assets/images/logo.png',
     },
     experiments: {
       typedRoutes: true,

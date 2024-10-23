@@ -54,7 +54,7 @@ export const Login = ({ isPressableDisabled, handlePress }: LoginPropsType) => {
         <View style={styles.logo}>
           <Image
             style={styles.backgroundImage}
-            source={require('@assets/icons/logo.png')}
+            source={require('@assets/images/logo.png')}
           />
         </View>
         <View style={styles.content}>
