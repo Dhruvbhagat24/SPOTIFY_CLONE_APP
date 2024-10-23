@@ -5,7 +5,7 @@ import { RecentlyPlayedModel } from '@models';
 import { RecentlyPlayedResponseType } from '@config';
 import { parseToRecentlyPlayed } from '@utils';
 
-import { getSessionToken } from './getSessionToken';
+import { getSessionToken } from '../utils/getSessionToken';
 
 const fetchRecentlyPlayed = async (): Promise<RecentlyPlayedModel[]> => {
   try {

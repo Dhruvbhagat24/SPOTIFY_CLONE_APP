@@ -4,7 +4,7 @@ import { ArtistModel } from '@models';
 import { ArtistResponseType } from '@config';
 import { parseToArtist } from '@utils';
 
-import { getSessionlessToken } from './getSessionlessToken';
+import { getSessionlessToken } from '../utils/getSessionlessToken';
 
 export const getArtist = async (artistId: string): Promise<ArtistModel> => {
   try {

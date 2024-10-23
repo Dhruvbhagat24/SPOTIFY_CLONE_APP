@@ -1,12 +1,12 @@
 import { LibraryItemModel } from '@models';
 import { getRecommendations } from './getRecommendations';
-import { getUserTopArtistsAndGenres } from '../user';
+import { getUserTopArtists } from '../artists';
 
 export const getRecommendationsFromArtistSeeds = async (): Promise<
   LibraryItemModel[]
 > => {
   try {
-    const artistSeed = (await getUserTopArtistsAndGenres()).artists
+    const artistSeed = (await getUserTopArtists())
       .map((item) => item.id)
       .slice(0, 5)
       .join(',');

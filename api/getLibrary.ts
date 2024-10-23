@@ -1,11 +1,11 @@
-import { LibraryItemModel } from '@models';
+import { getUserFollowedArtists } from './artists';
+import { getSavedAlbums } from './albums';
+import { getSavedShows } from './shows';
+import { getSavedPlaylists } from './playlists';
 
-import { fileSystemMiddleware } from '../fileSystemMiddleware';
-import { fetchUserFollowedArtists } from './getUserFollowedArtists';
-import { fetchSavedAlbums } from './getSavedAlbums';
-import { fetchSavedShows } from './getSavedShows';
+import { fileSystemMiddleware } from './utils';
+import { LibraryItemModel } from '@models';
 import { Categories } from '@config';
-import { fetchSavedPlaylists } from './getSavedPlaylists';
 
 export type LibraryType = {
   [Categories.FOLLOWED_ARTISTS]: LibraryItemModel[];
@@ -20,10 +20,10 @@ export const getAllLibrarySections = async (): Promise<LibraryType> => {
   try {
     const [followedArtists, savedAlbums, savedShows, savedPlaylists] =
       await Promise.all([
-        await fetchUserFollowedArtists(),
-        await fetchSavedAlbums(),
-        await fetchSavedShows(),
-        await fetchSavedPlaylists(),
+        await getUserFollowedArtists(),
+        await getSavedAlbums(),
+        await getSavedShows(),
+        await getSavedPlaylists(),
       ]);
 
     return {

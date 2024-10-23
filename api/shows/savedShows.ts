@@ -4,10 +4,10 @@ import { SavedEpisodesResponseType } from '@config';
 import { parseFromSavedShowsToLibraryItem } from '@utils';
 import { LibraryItemModel } from '@models';
 
-import { getSessionToken } from './getSessionToken';
-import { fileSystemMiddleware } from '../fileSystemMiddleware';
+import { getSessionToken } from '../utils/getSessionToken';
+import { fileSystemMiddleware } from '../utils/fileSystemMiddleware';
 
-export const fetchSavedShows = async (
+export const getSavedShows = async (
   offset: number = 0,
   numberOfCalls: number = 0
 ): Promise<LibraryItemModel[]> => {
@@ -37,7 +37,7 @@ export const fetchSavedShows = async (
 
     numberOfCalls++;
     offset += maxAllowedLimit;
-    const next = await fetchSavedShows(offset, numberOfCalls);
+    const next = await getSavedShows(offset, numberOfCalls);
 
     return [...result, ...next];
   } catch (error) {
@@ -49,8 +49,9 @@ export const fetchSavedShows = async (
   }
 };
 
-export const getSavedShows = async () =>
+// eslint-disable-next-line
+const getSavedShowsFromFileSystem = async () =>
   await fileSystemMiddleware<LibraryItemModel[]>(
     'user_saved_shows',
-    fetchSavedShows
+    getSavedShows
   );

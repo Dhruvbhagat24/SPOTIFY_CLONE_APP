@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Slider } from '../../Slider';
 
-import { getUserTopArtistsAndGenres } from '@api';
+import { getUserTopArtists } from '@api';
 import { LibraryItemModel } from '@models';
 import { Shapes, Sizes } from '@config';
 import { translations } from '@data';
@@ -25,8 +25,8 @@ export const TopArtists = () => {
   React.useEffect(() => {
     (async () => {
       try {
-        const topArtistsData = await getUserTopArtistsAndGenres();
-        setTopArtists(topArtistsData.artists);
+        const topArtistsData = await getUserTopArtists();
+        setTopArtists(topArtistsData);
       } catch (error) {
         setTopArtists(null);
         console.error(error);

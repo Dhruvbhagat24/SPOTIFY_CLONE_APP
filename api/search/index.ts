@@ -1,1 +1,1 @@
-export { getBrowseCategories } from './getBrowseCategories';
+export { getBrowseCategories } from './browseCategories';

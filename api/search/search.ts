@@ -12,7 +12,7 @@ import {
   parseToArtist,
 } from '@utils';
 
-import { getSessionlessToken } from '../getSessionlessToken';
+import { getSessionlessToken } from '../utils/getSessionlessToken';
 
 type ResponseType = {
   album: AlbumResponseType;

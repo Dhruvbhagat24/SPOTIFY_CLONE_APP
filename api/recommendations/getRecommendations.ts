@@ -4,7 +4,7 @@ import { LibraryItemModel } from '@models';
 import { RecommendationsResponseType } from '@config';
 import { parseFromTopTracksToLibraryItem } from '@utils';
 
-import { getSessionlessToken } from '../getSessionlessToken';
+import { getSessionlessToken } from '../utils/getSessionlessToken';
 
 export const getRecommendations = async ({
   artistSeed = '',

@@ -1,10 +1,32 @@
 import axios from 'axios';
 
-import { getSessionlessToken } from './getSessionlessToken';
+import { PlaylistModel, TrackModel } from '@models';
+import { PlaylistItemResponseType, PlaylistResponseType } from '@config';
+import { parseFromPlaylistItemsToTracks, parseToPlaylist } from '@utils';
 
-import { TrackModel } from '@models';
-import { PlaylistItemResponseType } from '@config';
-import { parseFromPlaylistItemsToTracks } from '@utils';
+import { getSessionlessToken } from '../utils';
+
+export const getPlaylist = async (
+  playlistId: string
+): Promise<PlaylistModel> => {
+  try {
+    const { token } = await getSessionlessToken();
+
+    const response = (await axios.get(
+      `https://api.spotify.com/v1/playlists/${playlistId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )) as { data: PlaylistResponseType };
+
+    return parseToPlaylist(response.data);
+  } catch (error) {
+    console.error(`Error fetching playlist with an ID: ${playlistId}`, error);
+    throw error;
+  }
+};
 
 export const getPlaylistItems = async ({
   playlistId,

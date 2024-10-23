@@ -1,7 +1,7 @@
 import Constants from 'expo-constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const setToken = async (
+export const setSessionToken = async (
   token: string,
   refreshToken: string,
   expiresIn: string

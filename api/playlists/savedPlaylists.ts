@@ -4,10 +4,37 @@ import { SavedPlaylistsResponseType } from '@config';
 import { parseFromSavedPlaylistsToLibraryItem } from '@utils';
 import { LibraryItemModel } from '@models';
 
-import { getSessionToken } from './getSessionToken';
-import { fileSystemMiddleware } from '../fileSystemMiddleware';
+import { getSessionToken, fileSystemMiddleware } from '../utils';
 
-export const fetchSavedPlaylists = async (
+export const checkSavedPlaylists = async (
+  playlistIds: string[]
+): Promise<boolean[]> => {
+  try {
+    const token = await getSessionToken();
+
+    if (playlistIds.length > 50) {
+      throw new Error('Cannot check more than 50 playlist IDs at once.');
+    }
+
+    const encodedIds = encodeURIComponent(playlistIds.join(','));
+
+    const response = (await axios.get(
+      `https://api.spotify.com/v1/playlists/${encodedIds}/followers/contains`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )) as { data: boolean[] };
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching saved playlists data:', error);
+    throw error;
+  }
+};
+
+export const getSavedPlaylists = async (
   offset: number = 0,
   numberOfCalls: number = 0
 ): Promise<LibraryItemModel[]> => {
@@ -37,7 +64,7 @@ export const fetchSavedPlaylists = async (
 
     numberOfCalls++;
     offset += maxAllowedLimit;
-    const next = await fetchSavedPlaylists(offset, numberOfCalls);
+    const next = await getSavedPlaylists(offset, numberOfCalls);
 
     return [...result, ...next];
   } catch (error) {
@@ -49,8 +76,9 @@ export const fetchSavedPlaylists = async (
   }
 };
 
-export const getSavedPlaylists = async () =>
+// eslint-disable-next-line
+const getSavedPlaylistsFileSystem = async () =>
   await fileSystemMiddleware<LibraryItemModel[]>(
     'user_saved_playlists',
-    fetchSavedPlaylists
+    getSavedPlaylists
   );

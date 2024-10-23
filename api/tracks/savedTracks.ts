@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getSessionToken } from './getSessionToken';
+import { getSessionToken } from '../utils/getSessionToken';
 
 export const checkSavedTracks = async (
   trackIds: string[]

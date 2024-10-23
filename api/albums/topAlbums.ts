@@ -4,7 +4,7 @@ import { LibraryItemModel } from '@models';
 import { UserTopTracksResponseType } from '@config';
 import { parseFromTopTracksToLibraryItem } from '@utils';
 
-import { getSessionToken } from './getSessionToken';
+import { getSessionToken } from '../utils/getSessionToken';
 
 export const getUserTopAlbums = async (): Promise<LibraryItemModel[]> => {
   try {

@@ -4,7 +4,7 @@ import { AlbumModel } from '@models';
 import { AlbumResponseType } from '@config';
 import { parseToAlbum } from '@utils';
 
-import { getSessionlessToken } from './getSessionlessToken';
+import { getSessionlessToken } from '../utils';
 
 export const getAlbum = async (albumId: string): Promise<AlbumModel> => {
   try {

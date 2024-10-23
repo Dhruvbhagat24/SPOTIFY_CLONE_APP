@@ -4,7 +4,7 @@ import { BrowseCategoryModel } from '@models';
 import { BrowseCategoriesResponseType } from '@config';
 import { parseToBrowseCategories } from '@utils';
 
-import { getSessionlessToken } from '../getSessionlessToken';
+import { getSessionlessToken } from '../utils/getSessionlessToken';
 
 export const getBrowseCategories = async (
   limit: number = 50,

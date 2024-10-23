@@ -1,33 +1,39 @@
-export { getSessionlessToken } from './getSessionlessToken';
-export { setToken } from './setToken';
-export { getAlbum } from './getAlbum';
-export { getPlaylist } from './getPlaylist';
-export { getPlaylistItems } from './getPlaylistItems';
-export { getArtist } from './getArtist';
-export { getArtistAlbums } from './getArtistAlbums';
-
 export {
-  getSessionToken,
-  getUser,
-  getUserFollowedArtists,
-  getSavedAlbums,
-  getSavedShows,
-  getSavedPlaylists,
+  getAlbum,
   getRecentlyPlayed,
   updateRecentlyPlayed,
+  getSavedAlbums,
   checkSavedAlbums,
-  checkSavedTracks,
-  checkSavedPlaylists,
-  getLibrary,
-  getUserTopArtistsAndGenres,
   getUserTopAlbums,
-  type LibraryType,
-} from './user';
+} from './albums';
 
 export {
-  getRecommendations,
+  getArtist,
+  getUserTopArtists,
+  getUserFollowedArtists,
+} from './artists';
+
+export {
+  getPlaylist,
+  getPlaylistItems,
+  getSavedPlaylists,
+  checkSavedPlaylists,
+} from './playlists';
+
+export {
   getRecommendationsFromArtistSeeds,
   getRecommendationsFromTopArtistSeed,
+  getRecommendations,
 } from './recommendations';
 
 export { getBrowseCategories } from './search';
+
+export { getSavedShows } from './shows';
+
+export { checkSavedTracks } from './tracks';
+
+export { getUser } from './user';
+
+export { getSessionToken, setSessionToken } from './utils';
+
+export { getLibrary } from './getLibrary';

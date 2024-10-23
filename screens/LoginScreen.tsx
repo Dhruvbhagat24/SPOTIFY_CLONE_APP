@@ -7,7 +7,7 @@ import {
 import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
 
-import { setToken } from '@api';
+import { setSessionToken } from '@api';
 import { AuthResponse, ExpoConfigType } from '@config';
 import { Login } from '@components';
 
@@ -43,7 +43,7 @@ export const LoginScreen = () => {
   React.useEffect(() => {
     if (response?.type === 'success') {
       const { access_token, refresh_token, expires_in } = response.params;
-      setToken(access_token, refresh_token, expires_in);
+      setSessionToken(access_token, refresh_token, expires_in);
     }
   }, [response]);
 

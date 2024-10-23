@@ -1,14 +1,14 @@
 import { LibraryItemModel } from '@models';
 import { getRecommendations } from './getRecommendations';
-import { getUserTopArtistsAndGenres } from '../user';
+import { getUserTopArtists } from '../artists';
 
 export const getRecommendationsFromTopArtistSeed = async (): Promise<{
   recommendations: LibraryItemModel[];
   artist: LibraryItemModel;
 }> => {
   try {
-    const topArtistAndTopGenres = await getUserTopArtistsAndGenres();
-    const artist = topArtistAndTopGenres.artists[0];
+    const topArtistAndTopGenres = await getUserTopArtists();
+    const artist = topArtistAndTopGenres[0];
     const artistSeed = artist.id;
 
     return {

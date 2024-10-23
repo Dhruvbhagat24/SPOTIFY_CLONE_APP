@@ -4,7 +4,7 @@ import { LibraryItemModel } from '@models';
 import { AlbumsResponseType } from '@config';
 import { parseToRecommendedAlbums } from '@utils';
 
-import { getSessionlessToken } from './getSessionlessToken';
+import { getSessionlessToken } from '../utils';
 
 export const getArtistAlbums = async (
   artistId: string,

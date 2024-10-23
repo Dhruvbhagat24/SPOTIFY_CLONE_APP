@@ -4,12 +4,9 @@ import { LibraryItemModel } from '@models';
 import { UserTopArtistsResponseType } from '@config';
 import { parseFromTopArtistsToLibraryItem } from '@utils';
 
-import { getSessionToken } from './getSessionToken';
+import { getSessionToken } from '../utils/getSessionToken';
 
-export const getUserTopArtistsAndGenres = async (): Promise<{
-  artists: LibraryItemModel[];
-  genres: string[];
-}> => {
+export const getUserTopArtists = async (): Promise<LibraryItemModel[]> => {
   try {
     const token = await getSessionToken();
     const response = (await axios.get(
@@ -26,12 +23,7 @@ export const getUserTopArtistsAndGenres = async (): Promise<{
       }
     )) as { data: UserTopArtistsResponseType };
 
-    return {
-      artists: parseFromTopArtistsToLibraryItem(response.data),
-      genres: response.data.items
-        .map((item) => item.genres.slice(0, item.genres.length))
-        .reduce((prev, next) => prev.concat(next)),
-    };
+    return parseFromTopArtistsToLibraryItem(response.data);
   } catch (error) {
     console.error(
       `Error fetching top artists of currently logged in user`,
