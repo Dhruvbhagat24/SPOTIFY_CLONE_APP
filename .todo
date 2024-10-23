@@ -2,8 +2,6 @@ TODO: add unit tests and fix current ones
 
 TODO: uncomment the recommendation components - search for @API_RATE
 
-TODO: merge playlist and album into common container
-
 TODO: get rid of TODOs in the project
 
 TODO: replace track isDownloaded prop with a real one

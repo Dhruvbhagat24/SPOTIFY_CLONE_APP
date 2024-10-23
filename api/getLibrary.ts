@@ -16,7 +16,7 @@ export type LibraryType = {
   [Categories.ALL]: LibraryItemModel[];
 };
 
-export const getAllLibrarySections = async (): Promise<LibraryType> => {
+export const getLibrary = async (): Promise<LibraryType> => {
   try {
     const [followedArtists, savedAlbums, savedShows, savedPlaylists] =
       await Promise.all([
@@ -45,8 +45,6 @@ export const getAllLibrarySections = async (): Promise<LibraryType> => {
   }
 };
 
-export const getLibrary = async () =>
-  await fileSystemMiddleware<LibraryType>(
-    'user_library',
-    getAllLibrarySections
-  );
+// eslint-disable-next-line
+const getLibraryFromFileSystem = async () =>
+  await fileSystemMiddleware<LibraryType>('user_library', getLibrary);
