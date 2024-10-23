@@ -22,6 +22,7 @@ export enum Sizes {
 export enum Shapes {
   SQUARE = 0,
   SQUARE_BORDER = 4,
+  SQUARE_BORDER_SMALL = 2,
   EDGED_BORDER = 8,
   OVAL = 20,
   CIRCLE = 9999,
@@ -52,6 +53,7 @@ export enum AlbumTypes {
 }
 
 export const SEPARATOR = '\u2022';
+export const explicit_SIGN = 'E';
 
 export const SOUND_COPYRIGHT_SIGN = '\u2117';
 export const COPYRIGHT_SIGN = '\u00A9';

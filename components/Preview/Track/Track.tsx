@@ -8,7 +8,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import { useApplicationDimensions } from '@hooks';
-import { TRACK_COVER_SIZE } from '@config';
+import { explicit_SIGN, TRACK_COVER_SIZE } from '@config';
 import { getFallbackImage } from '@utils';
 
 import { styles } from './styles';
@@ -21,6 +21,7 @@ export type TrackPropsType = {
   isDownloaded: boolean;
   isSaved: boolean;
   isPlaying: boolean;
+  explicit: boolean;
   forceDisableSaveIcon?: boolean;
 };
 
@@ -32,6 +33,7 @@ export const Track = ({
   isDownloaded,
   isSaved,
   isPlaying,
+  explicit,
   forceDisableSaveIcon,
 }: TrackPropsType) => {
   const { width } = useApplicationDimensions();
@@ -80,6 +82,11 @@ export const Track = ({
                 style={styles.isTrackDownloadedIcon}
                 name="arrow-down-bold"
               />
+            </View>
+          )}
+          {explicit && (
+            <View style={styles.explicitView}>
+              <Text style={styles.explicitText}>{explicit_SIGN}</Text>
             </View>
           )}
           <Text numberOfLines={1} style={[styles.artistNameText, { maxWidth }]}>

@@ -6,5 +6,5 @@ export type TrackModel = {
   isSaved?: boolean;
   isDownloaded?: boolean;
   isPlaying?: boolean;
-  explicity?: boolean;
+  explicit?: boolean;
 };

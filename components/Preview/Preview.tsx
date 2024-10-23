@@ -79,6 +79,7 @@ export const Preview = ({
         isDownloaded={!!item.isDownloaded}
         isSaved={!!item.isSaved}
         isPlaying={!!item.isPlaying}
+        explicit={!!item.explicit}
         forceDisableSaveIcon={!!(ownerId && ownerId === userData.id)}
       />
     ),

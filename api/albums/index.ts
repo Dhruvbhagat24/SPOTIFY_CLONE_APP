@@ -1,4 +1,5 @@
 export { getAlbum } from './album';
+export { getArtistAlbums } from './artistAlbums';
 export {
   getRecentlyPlayed,
   updateRecentlyPlayed,

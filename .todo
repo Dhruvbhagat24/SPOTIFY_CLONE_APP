@@ -1,16 +1,10 @@
-TODO: After we store all types of "Album"s in one array, we should implement a logic on every album or artist click to go to that array.json in file system remove the item and add it to the beginning and save back to the file system. With this approach we will have the latest interaction of the user to show.
-
 TODO: add unit tests and fix current ones
-
-TODO: Handle the case, when there is a new user and there is no saved .json file in FileSystem - check if file exists in filesystem (Handle the case, when a different user logs in - may be an error due to collision of naming .json files in FileSystem -> add there also the username)
 
 TODO: uncomment the recommendation components - search for @API_RATE
 
 TODO: merge playlist and album into common container
 
 TODO: get rid of TODOs in the project
-
-TODO: track explicity UI
 
 TODO: replace track isDownloaded prop with a real one
 

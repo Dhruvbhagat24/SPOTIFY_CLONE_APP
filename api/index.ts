@@ -1,5 +1,6 @@
 export {
   getAlbum,
+  getArtistAlbums,
   getRecentlyPlayed,
   updateRecentlyPlayed,
   getSavedAlbums,

@@ -103,7 +103,7 @@ export const AlbumScreen = ({ albumId }: AlbumScreenPropsType) => {
               isSaved: false,
               isPlaying: false,
               isDownloaded: false,
-              explicity: false,
+              explicit: false,
             }),
           ],
     [album]
