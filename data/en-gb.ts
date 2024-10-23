@@ -48,4 +48,5 @@ export const EN_GB = {
   loginButton: 'Sign in',
   loginNote: "NOTE: You won't be sharing your credentials",
   browseAll: 'Browse all',
+  featuredPlaylists: 'Popular Playlists',
 };

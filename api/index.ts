@@ -18,6 +18,7 @@ export {
   getPlaylistItems,
   getSavedPlaylists,
   checkSavedPlaylists,
+  getFeaturedPlaylists,
 } from './playlists';
 
 export {

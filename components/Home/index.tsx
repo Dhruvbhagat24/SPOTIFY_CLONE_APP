@@ -6,6 +6,7 @@ import { TopAlbums } from './TopAlbums';
 import { TopArtists } from './TopArtists';
 // import { BasedOnTopArtists } from './BasedOnTopArtists';
 import { YourPlaylists } from './YourPlaylists';
+import { FeaturedPlaylists } from './FeaturedPlaylists';
 // import { AfterListeningTopArtist } from './AfterListeningTopArtist';
 import { EmptySection } from '../EmptySection';
 import { BOTTOM_NAVIGATION_HEIGHT, COLORS, HEADER_HEIGHT } from '@config';
@@ -28,6 +29,7 @@ export const Home = () => {
         {/* @API_RATE */}
         {/* <BasedOnTopArtists /> */}
         <YourPlaylists />
+        <FeaturedPlaylists />
         {/* @API_RATE */}
         {/* <AfterListeningTopArtist /> */}
         <EmptySection />
