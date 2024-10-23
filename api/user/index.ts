@@ -4,13 +4,12 @@ import { UserModel } from '@models';
 import { UserResponseType } from '@config';
 import { parseToUser } from '@utils';
 
-import { fileSystemMiddleware } from '../utils/fileSystemMiddleware';
-import { getSessionToken } from '../utils/getSessionToken';
+import { BASE_URL, fileSystemMiddleware, getSessionToken } from '../config';
 
 export const getUser = async (): Promise<UserModel> => {
   try {
     const token = await getSessionToken();
-    const response = (await axios.get('https://api.spotify.com/v1/me', {
+    const response = (await axios.get(`${BASE_URL}/me`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

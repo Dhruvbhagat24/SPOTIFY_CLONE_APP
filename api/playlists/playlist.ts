@@ -4,7 +4,7 @@ import { PlaylistModel, TrackModel } from '@models';
 import { PlaylistItemResponseType, PlaylistResponseType } from '@config';
 import { parseFromPlaylistItemsToTracks, parseToPlaylist } from '@utils';
 
-import { getSessionlessToken } from '../utils';
+import { BASE_URL, getSessionlessToken } from '../config';
 
 export const getPlaylist = async (
   playlistId: string
@@ -12,14 +12,11 @@ export const getPlaylist = async (
   try {
     const { token } = await getSessionlessToken();
 
-    const response = (await axios.get(
-      `https://api.spotify.com/v1/playlists/${playlistId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )) as { data: PlaylistResponseType };
+    const response = (await axios.get(`${BASE_URL}/playlists/${playlistId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })) as { data: PlaylistResponseType };
 
     return parseToPlaylist(response.data);
   } catch (error) {
@@ -43,7 +40,7 @@ export const getPlaylistItems = async ({
     const { token } = await getSessionlessToken();
 
     const response = (await axios.get(
-      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+      `${BASE_URL}/playlists/${playlistId}/tracks`,
       {
         params: {
           limit,

@@ -4,8 +4,7 @@ import { SavedAlbumsResponseType } from '@config';
 import { parseFromSavedAlbumsToLibraryItem } from '@utils';
 import { LibraryItemModel } from '@models';
 
-import { getSessionToken } from '../utils/getSessionToken';
-import { fileSystemMiddleware } from '../utils/fileSystemMiddleware';
+import { BASE_URL, getSessionToken, fileSystemMiddleware } from '../config';
 
 export const checkSavedAlbums = async (
   albumIds: string[]
@@ -20,7 +19,7 @@ export const checkSavedAlbums = async (
     const encodedIds = encodeURIComponent(albumIds.join(','));
 
     const response = (await axios.get(
-      `https://api.spotify.com/v1/me/albums/contains?ids=${encodedIds}`,
+      `${BASE_URL}/me/albums/contains?ids=${encodedIds}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -43,7 +42,7 @@ export const getSavedAlbums = async (
     const maxAllowedLimit = 50;
     const token = await getSessionToken();
 
-    const response = (await axios.get('https://api.spotify.com/v1/me/albums', {
+    const response = (await axios.get(`${BASE_URL}/me/albums`, {
       params: {
         limit: maxAllowedLimit,
         offset: offset,

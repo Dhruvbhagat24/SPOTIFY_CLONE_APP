@@ -21,5 +21,3 @@ TODO: replace track isPlaying prop with a real one
 TODO: get app view width in library and divide responsively the cover sizes
 
 TODO: move get library into context for whole app
-
-TODO: use baseURL in api

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getSessionToken } from '../utils/getSessionToken';
+import { BASE_URL, getSessionToken } from '../config';
 
 export const checkSavedTracks = async (
   trackIds: string[]
@@ -14,7 +14,7 @@ export const checkSavedTracks = async (
     const encodedIds = encodeURIComponent(trackIds.join(','));
 
     const response = (await axios.get(
-      `https://api.spotify.com/v1/me/tracks/contains?ids=${encodedIds}`,
+      `${BASE_URL}/me/tracks/contains?ids=${encodedIds}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

@@ -5,22 +5,19 @@ import { RecentlyPlayedModel } from '@models';
 import { RecentlyPlayedResponseType } from '@config';
 import { parseToRecentlyPlayed } from '@utils';
 
-import { getSessionToken } from '../utils/getSessionToken';
+import { BASE_URL, getSessionToken } from '../config';
 
 const fetchRecentlyPlayed = async (): Promise<RecentlyPlayedModel[]> => {
   try {
     const token = await getSessionToken();
-    const response = (await axios.get(
-      'https://api.spotify.com/v1/me/player/recently-played',
-      {
-        params: {
-          limit: 8,
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )) as { data: RecentlyPlayedResponseType };
+    const response = (await axios.get(`${BASE_URL}/me/player/recently-played`, {
+      params: {
+        limit: 8,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })) as { data: RecentlyPlayedResponseType };
 
     return parseToRecentlyPlayed(response.data);
   } catch (error) {

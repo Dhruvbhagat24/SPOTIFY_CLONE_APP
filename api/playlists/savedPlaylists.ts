@@ -4,7 +4,7 @@ import { SavedPlaylistsResponseType } from '@config';
 import { parseFromSavedPlaylistsToLibraryItem } from '@utils';
 import { LibraryItemModel } from '@models';
 
-import { getSessionToken, fileSystemMiddleware } from '../utils';
+import { BASE_URL, getSessionToken, fileSystemMiddleware } from '../config';
 
 export const checkSavedPlaylists = async (
   playlistIds: string[]
@@ -19,7 +19,7 @@ export const checkSavedPlaylists = async (
     const encodedIds = encodeURIComponent(playlistIds.join(','));
 
     const response = (await axios.get(
-      `https://api.spotify.com/v1/playlists/${encodedIds}/followers/contains`,
+      `${BASE_URL}/playlists/${encodedIds}/followers/contains`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -42,18 +42,15 @@ export const getSavedPlaylists = async (
     const maxAllowedLimit = 50;
     const token = await getSessionToken();
 
-    const response = (await axios.get(
-      'https://api.spotify.com/v1/me/playlists',
-      {
-        params: {
-          limit: maxAllowedLimit,
-          offset: offset,
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )) as { data: SavedPlaylistsResponseType };
+    const response = (await axios.get(`${BASE_URL}/me/playlists`, {
+      params: {
+        limit: maxAllowedLimit,
+        offset: offset,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })) as { data: SavedPlaylistsResponseType };
 
     const { total } = response.data;
     const numberOfMaxCalls = Math.ceil(total / maxAllowedLimit) - 1;

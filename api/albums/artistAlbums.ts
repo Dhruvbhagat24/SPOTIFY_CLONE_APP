@@ -4,7 +4,7 @@ import { LibraryItemModel } from '@models';
 import { AlbumsResponseType } from '@config';
 import { parseToRecommendedAlbums } from '@utils';
 
-import { getSessionlessToken } from '../utils';
+import { BASE_URL, getSessionlessToken } from '../config';
 
 export const getArtistAlbums = async (
   artistId: string,
@@ -16,7 +16,7 @@ export const getArtistAlbums = async (
     const { token } = await getSessionlessToken();
 
     const response = (await axios.get(
-      `https://api.spotify.com/v1/artists/${artistId}/albums`,
+      `${BASE_URL}/artists/${artistId}/albums`,
       {
         params: {
           include_groups: includeGroups,

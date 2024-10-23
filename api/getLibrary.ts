@@ -3,7 +3,7 @@ import { getSavedAlbums } from './albums';
 import { getSavedShows } from './shows';
 import { getSavedPlaylists } from './playlists';
 
-import { fileSystemMiddleware } from './utils';
+import { fileSystemMiddleware } from './config';
 import { LibraryItemModel } from '@models';
 import { Categories } from '@config';
 
@@ -40,7 +40,7 @@ export const getAllLibrarySections = async (): Promise<LibraryType> => {
       ],
     };
   } catch (error) {
-    console.error(`Error fetching all library sections`, error);
+    console.error(`Error fetching library sections`, error);
     throw error;
   }
 };

@@ -4,8 +4,7 @@ import { SavedEpisodesResponseType } from '@config';
 import { parseFromSavedShowsToLibraryItem } from '@utils';
 import { LibraryItemModel } from '@models';
 
-import { getSessionToken } from '../utils/getSessionToken';
-import { fileSystemMiddleware } from '../utils/fileSystemMiddleware';
+import { BASE_URL, fileSystemMiddleware, getSessionToken } from '../config';
 
 export const getSavedShows = async (
   offset: number = 0,
@@ -15,18 +14,15 @@ export const getSavedShows = async (
     const maxAllowedLimit = 50;
     const token = await getSessionToken();
 
-    const response = (await axios.get(
-      'https://api.spotify.com/v1/me/episodes',
-      {
-        params: {
-          limit: maxAllowedLimit,
-          offset: offset,
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )) as { data: SavedEpisodesResponseType };
+    const response = (await axios.get(`${BASE_URL}/me/episodes`, {
+      params: {
+        limit: maxAllowedLimit,
+        offset: offset,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })) as { data: SavedEpisodesResponseType };
 
     const { total } = response.data;
     const numberOfMaxCalls = Math.ceil(total / maxAllowedLimit) - 1;

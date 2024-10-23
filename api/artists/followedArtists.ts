@@ -4,8 +4,7 @@ import { LibraryItemModel } from '@models';
 import { UserFollowedArtistsResponseType } from '@config';
 import { parseFromFollowedArtistsToLibraryItem } from '@utils';
 
-import { getSessionToken } from '../utils/getSessionToken';
-import { fileSystemMiddleware } from '../utils/fileSystemMiddleware';
+import { BASE_URL, fileSystemMiddleware, getSessionToken } from '../config';
 
 export const getUserFollowedArtists = async (
   after: string = '',
@@ -15,19 +14,16 @@ export const getUserFollowedArtists = async (
     const maxAllowedLimit = 50;
     const token = await getSessionToken();
 
-    const response = (await axios.get(
-      'https://api.spotify.com/v1/me/following',
-      {
-        params: {
-          type: 'artist',
-          limit: maxAllowedLimit,
-          ...(after ? { after } : {}),
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )) as {
+    const response = (await axios.get(`${BASE_URL}/me/following`, {
+      params: {
+        type: 'artist',
+        limit: maxAllowedLimit,
+        ...(after ? { after } : {}),
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })) as {
       data: UserFollowedArtistsResponseType;
     };
 

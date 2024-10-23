@@ -12,7 +12,7 @@ import {
   parseToArtist,
 } from '@utils';
 
-import { getSessionlessToken } from '../utils/getSessionlessToken';
+import { BASE_URL, getSessionlessToken } from '../config';
 
 type ResponseType = {
   album: AlbumResponseType;
@@ -42,7 +42,7 @@ export const search = async ({
   try {
     const { token } = await getSessionlessToken();
 
-    const response = await axios.get(`https://api.spotify.com/v1/search`, {
+    const response = await axios.get(`${BASE_URL}/search`, {
       params: { q, type, limit, offset },
       headers: { Authorization: `Bearer ${token}` },
     });

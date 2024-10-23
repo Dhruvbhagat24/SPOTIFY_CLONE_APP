@@ -34,6 +34,6 @@ export { checkSavedTracks } from './tracks';
 
 export { getUser } from './user';
 
-export { getSessionToken, setSessionToken } from './utils';
+export { getSessionToken, setSessionToken } from './config';
 
 export { getLibrary } from './getLibrary';

@@ -4,7 +4,7 @@ import { BrowseCategoryModel } from '@models';
 import { BrowseCategoriesResponseType } from '@config';
 import { parseToBrowseCategories } from '@utils';
 
-import { getSessionlessToken } from '../utils/getSessionlessToken';
+import { BASE_URL, getSessionlessToken } from '../config';
 
 export const getBrowseCategories = async (
   limit: number = 50,
@@ -13,15 +13,12 @@ export const getBrowseCategories = async (
   try {
     const { token } = await getSessionlessToken();
 
-    const response = (await axios.get(
-      'https://api.spotify.com/v1/browse/categories',
-      {
-        params: { limit, offset },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )) as { data: { categories: BrowseCategoriesResponseType } };
+    const response = (await axios.get(`${BASE_URL}/browse/categories`, {
+      params: { limit, offset },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })) as { data: { categories: BrowseCategoriesResponseType } };
 
     return parseToBrowseCategories(response.data.categories.items);
   } catch (error) {
