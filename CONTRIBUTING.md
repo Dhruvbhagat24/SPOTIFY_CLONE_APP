@@ -8,7 +8,7 @@ Thank you for your interest in contributing to the Spotify Clone project! We wel
 2. **Clone your forked repository**: Use the following command to clone the repository locally:
 
    ```bash
-   git clone https://github.com/your-username/spotify-clone.git
+   git clone https://github.com/dhunanyan/spotify-clone.git
    cd spotify-clone
 3. Local run:
 ```bash
