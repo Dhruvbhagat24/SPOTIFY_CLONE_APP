@@ -2,15 +2,13 @@
 
 Welcome to the **Spotify Clone React Native App**! This project is a feature-rich, cross-platform Spotify clone designed to provide an experience similar to the official Spotify app. With seamless navigation, music streaming, and user library management, the app offers music lovers a familiar and fully functional way to explore songs, artists, and playlists.
 
-![Logo](./docs/logo.png 'Logo')
-
-# Quick preview
-
 https://github.com/user-attachments/assets/0a1f764f-d0ce-465b-973d-4e58f1cc02db
 
 ## 📖 About
 
 This clone is powered by React Native and Expo Go, leveraging the Spotify API to deliver real-time music data, playback features, and account-specific interactions. Whether browsing for new music, creating playlists, or diving into curated collections, this app mirrors Spotify's functionality in a mobile-friendly environment.
+
+![Logo](./docs/logo.png 'Logo')
 
 ## ✨ Features
 
