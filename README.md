@@ -24,13 +24,13 @@ This clone is powered by React Native and Expo Go, leveraging the Spotify API to
 Clone the project simply by running:
 
 ```bash
-git clone https://github.com/dhunanyan/spotify-clone.git
+git clone https://github.com/Dhruvbhagat24/SPOTIFY_CLONE_APP.git
 ```
 
 OR
 
 ```bash
-git clone git@github.com:dhunanyan/spotify-clone.git
+git clone git@github.com/Dhruvbhagat24/SPOTIFY_CLONE_APP.git
 ```
 
 # How to install project dependencies?
